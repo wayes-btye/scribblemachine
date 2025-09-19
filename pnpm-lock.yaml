@@ -162,13 +162,13 @@ importers:
         specifier: workspace:*
         version: link:../../packages/types
       '@google/generative-ai':
-        specifier: ^0.2.1
-        version: 0.2.1
+        specifier: ^0.21.0
+        version: 0.21.0
       '@supabase/supabase-js':
         specifier: ^2.39.3
         version: 2.57.4
       dotenv:
-        specifier: ^16.3.1
+        specifier: ^16.6.1
         version: 16.6.1
       pdfkit:
         specifier: ^0.14.0
@@ -177,26 +177,26 @@ importers:
         specifier: ^9.0.3
         version: 9.0.3
       sharp:
-        specifier: ^0.33.2
+        specifier: ^0.33.5
         version: 0.33.5
       zod:
         specifier: ^3.22.4
         version: 3.25.76
     devDependencies:
       '@types/node':
-        specifier: ^20.11.0
+        specifier: ^20.19.17
         version: 20.19.17
       '@types/pdfkit':
-        specifier: ^0.12.12
-        version: 0.12.12
+        specifier: ^0.13.9
+        version: 0.13.9
       '@types/pg':
         specifier: ^8.10.9
         version: 8.15.5
       tsx:
-        specifier: ^4.7.0
+        specifier: ^4.20.5
         version: 4.20.5
       typescript:
-        specifier: ^5.3.3
+        specifier: ^5.9.2
         version: 5.9.2
 
 packages:
@@ -845,8 +845,8 @@ packages:
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
     dev: false
 
-  /@google/generative-ai@0.2.1:
-    resolution: {integrity: sha512-gNmMFadfwi7qf/6M9gImgyGJXY1jKQ/de8vGOqgJ0PPYgQ7WwzZDavbKrIuXS2zdqZZaYtxW3EFN6aG9x5wtFw==}
+  /@google/generative-ai@0.21.0:
+    resolution: {integrity: sha512-7XhUbtnlkSEZK15kN3t+tzIMxsbKm/dSkKBFalj+20NvPKe1kBY7mR2P7vuijEn+f06z5+A8bVGKO0v39cr6Wg==}
     engines: {node: '>=18.0.0'}
     dev: false
 
@@ -2129,8 +2129,8 @@ packages:
     dependencies:
       undici-types: 6.21.0
 
-  /@types/pdfkit@0.12.12:
-    resolution: {integrity: sha512-plkfKdaPSVIndcsg2qFmQ/qazRivTyHALEiKufsTI6qn4hbXbFVm0n9RuY0RQpoBxM2NNK5SudCfpisDzIdXoA==}
+  /@types/pdfkit@0.13.9:
+    resolution: {integrity: sha512-RDG8Yb1zT7I01FfpwK7nMSA433XWpblMqSCtA5vJlSyavWZb303HUYPCel6JTiDDFqwGLvtAnYbH8N/e0Cb89g==}
     dependencies:
       '@types/node': 20.19.17
     dev: true

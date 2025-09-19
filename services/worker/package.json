@@ -7,6 +7,10 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
+    "test:gemini": "tsx src/test-gemini.ts",
+    "test:gemini:image": "tsx src/test-gemini-image.ts",
+    "test:edge": "tsx src/test-edge-detection.ts",
+    "test:pdf": "tsx src/test-pdf.ts",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist .turbo"
   },
@@ -14,19 +18,19 @@
     "@coloringpage/config": "workspace:*",
     "@coloringpage/database": "workspace:*",
     "@coloringpage/types": "workspace:*",
-    "@google/generative-ai": "^0.2.1",
+    "@google/generative-ai": "^0.21.0",
     "@supabase/supabase-js": "^2.39.3",
-    "dotenv": "^16.3.1",
-    "pg-boss": "^9.0.3",
+    "dotenv": "^16.6.1",
     "pdfkit": "^0.14.0",
-    "sharp": "^0.33.2",
+    "pg-boss": "^9.0.3",
+    "sharp": "^0.33.5",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/node": "^20.11.0",
+    "@types/node": "^20.19.17",
+    "@types/pdfkit": "^0.13.9",
     "@types/pg": "^8.10.9",
-    "@types/pdfkit": "^0.12.12",
-    "tsx": "^4.7.0",
-    "typescript": "^5.3.3"
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
   }
 }
