@@ -109,11 +109,46 @@ Key types defined in `packages/types/src/index.ts`:
 5. **Graceful Shutdown**: SIGINT handling for clean worker shutdown
 
 ## Work Log & Scratchpad
-Use `docs/work_log.md` as a development scratchpad to track:
-- Current session progress and completed tasks
-- Issues encountered and their solutions
-- Ideas and reminders for future development
-- Quick notes and debugging information
+**IMPORTANT**: Always maintain `docs/work_log.md` following the tasklog-instructions format:
+
+### Usage Rules
+- **NEVER create new log/summary files** - always use `docs/work_log.md`
+- **After any meaningful action** (code change, command, file creation, major decision), append an entry at the END
+- **Always keep entries in chronological order** (oldest at top, newest at bottom)
+- **Update "Last 5 Entries" section** at the top by copying the most recent 5 entries verbatim
+
+### Entry Templates
+Use one of two templates:
+
+**SESSION SUMMARY:**
+```
+### [<ISO8601 timestamp with timezone>] — Session Summary
+**Focus:** <one-liner>
+**Done:**
+- <up to 3 bullets>
+**Next:**
+- <1–2 bullets>
+**Decisions:**
+- <0–2 bullets>
+**Notes:**
+- <optional>
+```
+
+**TASK/EVENT:**
+```
+### [<ISO8601 timestamp with timezone>] — Task/Event
+**Context:** <short one-liner>
+**What changed:**
+- <1–3 bullets>
+**Leftover:**
+- <1–2 bullets>
+```
+
+### Constraints
+- Max 3 bullets per list
+- Do not paste large code or logs; link to diffs/PRs/issues instead
+- Do not overwrite existing entries; append only
+- Every time you update, refresh the "Last 5 Entries" section at the top
 
 ## MCP Server Usage
 
