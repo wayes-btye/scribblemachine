@@ -1,0 +1,87 @@
+name: Deploy Worker Service
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'services/worker/**'
+      - 'packages/**'
+      - '.github/workflows/deploy-worker.yml'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: coloringpage-worker
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./services/worker/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      # Example deployment to Railway (adjust for your hosting provider)
+      - name: Deploy to Railway
+        if: env.RAILWAY_TOKEN != ''
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          npm install -g @railway/cli
+          railway login --token $RAILWAY_TOKEN
+          railway up --service worker --detach
+
+      # Alternative: Deploy to Fly.io
+      # - name: Deploy to Fly.io
+      #   if: env.FLY_API_TOKEN != ''
+      #   uses: superfly/flyctl-actions/setup-flyctl@master
+      #   env:
+      #     FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      #   with:
+      #     version: latest
+      # - run: flyctl deploy --config services/worker/fly.toml
+
+      - name: Update deployment status
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ job.status }}' === 'success' ? 'success' : 'failure';
+            const description = status === 'success' ? 'Worker deployment successful' : 'Worker deployment failed';
+
+            github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: status,
+              description: description,
+              context: 'deploy/worker'
+            });

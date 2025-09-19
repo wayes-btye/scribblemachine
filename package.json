@@ -1,0 +1,29 @@
+{
+  "name": "coloringpage-generator",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Children's Coloring Page Generator - Monorepo",
+  "scripts": {
+    "dev": "pnpm --parallel -r run dev",
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "lint": "pnpm -r run lint",
+    "type-check": "pnpm -r run type-check",
+    "clean": "pnpm -r run clean",
+    "web:dev": "pnpm --filter @coloringpage/web run dev",
+    "worker:dev": "pnpm --filter @coloringpage/worker run dev",
+    "web:build": "pnpm --filter @coloringpage/web run build",
+    "worker:build": "pnpm --filter @coloringpage/worker run build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "prettier": "^3.2.4",
+    "shadcn": "^3.3.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.1"
+}
