@@ -1,0 +1,10 @@
+Error Details:
+[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent: [500 Internal Server Error] Internal error encountered.
+
+Stack:
+Error: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent: [500 Internal Server Error] Internal error encountered.
+    at handleResponseNotOk (C:\ColoringGenerator\node_modules\.pnpm\@google+generative-ai@0.21.0\node_modules\@google\generative-ai\dist\index.js:414:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async makeRequest (C:\ColoringGenerator\node_modules\.pnpm\@google+generative-ai@0.21.0\node_modules\@google\generative-ai\dist\index.js:387:9)
+    at async generateContent (C:\ColoringGenerator\node_modules\.pnpm\@google+generative-ai@0.21.0\node_modules\@google\generative-ai\dist\index.js:832:22)
+    at async testGeminiImageGeneration (C:\ColoringGenerator\services\worker\src\test-gemini-image-generation.ts:113:26)

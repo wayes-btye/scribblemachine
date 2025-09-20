@@ -1,0 +1,7 @@
+Test Image: fathers-day.png
+Prompt Type: Simple-Coloring
+Response Time: 9950ms
+Prompt: Transform this image into a simple black and white coloring page for children ages 4-8. Create clean, bold black outlines on a white background. Remove all colors, shading, and textures. Simplify complex details into basic shapes that are easy for small children to color within. The lines should be thick (2-3px) and the shapes should be large enough for crayons. Make it a fun, cartoon-like version suitable for coloring books.
+
+Text Response:
+Here's your coloring page:

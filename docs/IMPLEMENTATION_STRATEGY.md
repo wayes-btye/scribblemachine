@@ -93,7 +93,7 @@ Based on the analysis, the recommended approach is **API-First Development** wit
 - Create proxy endpoint for zero-retention
 - Implement prompt engineering for different complexity levels
 - Add rate limiting and quota management
-- Set up fallback to edge detection if Gemini fails
+- Implement robust error handling and retry logic for API failures
 
 #### 3.4 PDF Export Pipeline
 - Integrate PDF generation with job results
@@ -212,11 +212,11 @@ This approach:
 4. **Storage Costs**: Calculate actual costs for image storage with TTLs
 5. **Stripe Compliance**: Verify business entity requirements
 
-### Fallback Plans
-- **If Gemini fails**: OpenCV edge detection as immediate fallback
+### Risk Mitigation Plans
+- **If Gemini fails**: Robust error messages and retry logic, queue system for temporary failures
 - **If PDF generation is slow**: Pre-generate common formats
 - **If storage costs spike**: Aggressive TTL reduction
-- **If rate limits hit**: Queue system with user notifications
+- **If rate limits hit**: Queue system with user notifications and graceful degradation
 
 ## Technology Implementation Order
 

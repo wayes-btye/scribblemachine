@@ -9,7 +9,7 @@
     "start": "node dist/index.js",
     "test:gemini": "tsx src/test-gemini.ts",
     "test:gemini:image": "tsx src/test-gemini-image.ts",
-    "test:edge": "tsx src/test-edge-detection.ts",
+    "test:gemini:generate": "tsx src/test-gemini-image-generation.ts",
     "test:pdf": "tsx src/test-pdf.ts",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist .turbo"
