@@ -146,7 +146,16 @@ Based on the analysis, the recommended approach is **API-First Development** wit
   - Title input field
 - Progress indicators and loading states
 
-#### 4.3 Mobile Optimization
+#### 4.3 Parameter Examples Gallery
+**Critical UX Requirement**: Provide visual examples to prevent user surprises
+- **Example Gallery Component**: Show sample outputs for each parameter combination
+- **Before Generation**: Allow users to preview what Simple/Standard/Detailed complexity looks like
+- **Line Thickness Preview**: Visual examples of Thin/Medium/Thick line weights
+- **Age Group Guidance**: Clear labeling (Ages 4-6, 6-10, 8-12) with sample outputs
+- **Implementation**: Static example gallery or dynamic preview generation
+- **Purpose**: Ensure paid users understand exactly what they'll receive before generation
+
+#### 4.4 Mobile Optimization
 - Responsive grid layouts
 - Sheet component for mobile controls
 - Touch-friendly interactions

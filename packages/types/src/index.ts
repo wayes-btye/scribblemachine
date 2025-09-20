@@ -4,7 +4,7 @@ export type JobStatus = 'queued' | 'running' | 'succeeded' | 'failed';
 
 export type AssetKind = 'original' | 'preprocessed' | 'edge_map' | 'pdf';
 
-export type Complexity = 'simple' | 'moderate' | 'detailed';
+export type Complexity = 'simple' | 'standard' | 'detailed';
 
 export type LineThickness = 'thin' | 'medium' | 'thick';
 

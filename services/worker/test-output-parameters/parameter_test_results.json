@@ -1,0 +1,108 @@
+{
+  "timestamp": "2025-09-20T06:16:56.811Z",
+  "summary": {
+    "total": 12,
+    "successful": 12,
+    "failed": 0,
+    "avgResponseTime": 10256.833333333334,
+    "totalCost": 0.4679999999999999
+  },
+  "results": [
+    {
+      "image": "blue-girl-smile.jpg",
+      "complexity": "simple",
+      "lineThickness": "thick",
+      "success": true,
+      "responseTime": 6974,
+      "cost": 0.039
+    },
+    {
+      "image": "blue-girl-smile.jpg",
+      "complexity": "simple",
+      "lineThickness": "medium",
+      "success": true,
+      "responseTime": 6942,
+      "cost": 0.039
+    },
+    {
+      "image": "blue-girl-smile.jpg",
+      "complexity": "standard",
+      "lineThickness": "medium",
+      "success": true,
+      "responseTime": 11056,
+      "cost": 0.039
+    },
+    {
+      "image": "blue-girl-smile.jpg",
+      "complexity": "standard",
+      "lineThickness": "thin",
+      "success": true,
+      "responseTime": 7810,
+      "cost": 0.039
+    },
+    {
+      "image": "blue-girl-smile.jpg",
+      "complexity": "detailed",
+      "lineThickness": "thin",
+      "success": true,
+      "responseTime": 12840,
+      "cost": 0.039
+    },
+    {
+      "image": "blue-girl-smile.jpg",
+      "complexity": "detailed",
+      "lineThickness": "medium",
+      "success": true,
+      "responseTime": 10870,
+      "cost": 0.039
+    },
+    {
+      "image": "fathers-day.png",
+      "complexity": "simple",
+      "lineThickness": "thick",
+      "success": true,
+      "responseTime": 6938,
+      "cost": 0.039
+    },
+    {
+      "image": "fathers-day.png",
+      "complexity": "simple",
+      "lineThickness": "medium",
+      "success": true,
+      "responseTime": 13179,
+      "cost": 0.039
+    },
+    {
+      "image": "fathers-day.png",
+      "complexity": "standard",
+      "lineThickness": "medium",
+      "success": true,
+      "responseTime": 10930,
+      "cost": 0.039
+    },
+    {
+      "image": "fathers-day.png",
+      "complexity": "standard",
+      "lineThickness": "thin",
+      "success": true,
+      "responseTime": 12725,
+      "cost": 0.039
+    },
+    {
+      "image": "fathers-day.png",
+      "complexity": "detailed",
+      "lineThickness": "thin",
+      "success": true,
+      "responseTime": 11024,
+      "cost": 0.039
+    },
+    {
+      "image": "fathers-day.png",
+      "complexity": "detailed",
+      "lineThickness": "medium",
+      "success": true,
+      "responseTime": 11794,
+      "cost": 0.039
+    }
+  ]
+}

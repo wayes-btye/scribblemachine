@@ -1,10 +1,8 @@
 import PgBoss from 'pg-boss';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { Database } from '@coloringpage/database';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { JobParams } from '@coloringpage/types';
-import { config } from '@coloringpage/config';
-import sharp from 'sharp';
+import { createGeminiService, GenerationRequest } from '../services/gemini-service';
 
 interface GenerationJobData {
   job_id: string;
@@ -17,13 +15,14 @@ export async function setupGenerationWorker(
   boss: PgBoss,
   supabase: SupabaseClient<Database>
 ) {
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+  // Initialize production Gemini service
+  const geminiService = createGeminiService(process.env.GEMINI_API_KEY!);
 
-  await boss.work('image-generation', { teamSize: 1 }, async (job) => {
+  await boss.work('image-generation', { teamSize: 3 }, async (job) => {
     const { job_id, user_id, asset_id, params } = job.data as GenerationJobData;
 
     try {
-      console.log(`🎨 Starting generation for job ${job_id}`);
+      console.log(`🎨 Starting generation for job ${job_id} (Gemini 2.5 Flash Image)`);
 
       // Update job status
       await supabase
@@ -31,74 +30,53 @@ export async function setupGenerationWorker(
         .update({ status: 'running', started_at: new Date().toISOString() })
         .eq('id', job_id);
 
-      // Get preprocessed image
-      const { data: assets } = await supabase
+      // Get original asset directly (not preprocessed since Gemini service handles that)
+      const { data: asset } = await supabase
         .from('assets')
         .select('storage_path')
-        .eq('user_id', user_id)
-        .eq('kind', 'preprocessed')
-        .order('created_at', { ascending: false })
-        .limit(1);
+        .eq('id', asset_id)
+        .eq('kind', 'original')
+        .single();
 
-      if (!assets || assets.length === 0) {
-        throw new Error('No preprocessed image found');
+      if (!asset) {
+        throw new Error('Original asset not found');
       }
 
+      // Download original image
       const { data: imageData } = await supabase.storage
-        .from('intermediates')
-        .download(assets[0].storage_path);
+        .from('assets')
+        .download(asset.storage_path);
 
       if (!imageData) {
-        throw new Error('Failed to download preprocessed image');
+        throw new Error('Failed to download original image');
       }
 
-      // Convert to base64 for Gemini API
+      // Convert to base64 for Gemini service
       const buffer = Buffer.from(await imageData.arrayBuffer());
       const base64Image = buffer.toString('base64');
 
-      // Prepare prompt based on complexity
-      const complexityPrompt = config.generation.complexityLevels[params.complexity];
-      const prompt = `Convert this image to a coloring page with ${complexityPrompt}.
-        Create clear, bold outlines suitable for coloring.
-        Remove all color and create black lines on white background.
-        Line thickness should be ${params.line_thickness}.
-        Make it suitable for children to color.`;
+      // Create Gemini generation request
+      const geminiRequest: GenerationRequest = {
+        imageBase64: base64Image,
+        mimeType: 'image/jpeg',
+        complexity: params.complexity,
+        lineThickness: params.line_thickness
+      };
 
-      // Call Gemini API
-      const model = genAI.getGenerativeModel({ model: 'gemini-pro-vision' });
-      const result = await model.generateContent([
-        prompt,
-        {
-          inlineData: {
-            data: base64Image,
-            mimeType: 'image/jpeg',
-          },
-        },
-      ]);
+      // Generate coloring page with production Gemini service
+      const result = await geminiService.generateColoringPage(geminiRequest);
 
-      // Note: This is a placeholder - actual Gemini API for image generation
-      // would need different implementation based on the actual API
-      const response = await result.response;
-      const generatedImageData = response.text(); // This would be different for actual image output
-
-      // For now, create a simple edge detection as fallback
-      const edgeMap = await sharp(buffer)
-        .greyscale()
-        .normalise()
-        .convolve({
-          width: 3,
-          height: 3,
-          kernel: [-1, -1, -1, -1, 8, -1, -1, -1, -1],
-        })
-        .threshold(128)
-        .png()
-        .toBuffer();
+      if (!result.success || !result.imageBase64) {
+        throw new Error(result.error?.message || 'Generation failed');
+      }
 
       // Upload generated edge map
-      const edgeMapPath = `${user_id}/${job_id}/edge_map.png`;
+      const edgeMapBuffer = Buffer.from(result.imageBase64, 'base64');
+      const edgeMapPath = `intermediates/${user_id}/${job_id}/edge.png`;
+
       const { error: uploadError } = await supabase.storage
-        .from('intermediates')
-        .upload(edgeMapPath, edgeMap, {
+        .from('assets')
+        .upload(edgeMapPath, edgeMapBuffer, {
           contentType: 'image/png',
           upsert: true,
         });
@@ -108,23 +86,32 @@ export async function setupGenerationWorker(
       }
 
       // Create edge map asset record
+      const edgeAssetId = `${job_id}-edge_map`;
       await supabase.from('assets').insert({
+        id: edgeAssetId,
         user_id,
         kind: 'edge_map',
         storage_path: edgeMapPath,
-        bytes: edgeMap.length,
+        bytes: edgeMapBuffer.length,
+        created_at: new Date().toISOString()
       });
 
-      // Update job as completed
+      // Update job as completed with metadata
       await supabase
         .from('jobs')
         .update({
           status: 'succeeded',
           ended_at: new Date().toISOString(),
+          model: result.metadata.model,
+          cost_cents: Math.round(result.metadata.cost * 100)
         })
         .eq('id', job_id);
 
       console.log(`✅ Generation completed for job ${job_id}`);
+      console.log(`   Model: ${result.metadata.model}`);
+      console.log(`   Response time: ${result.metadata.responseTimeMs}ms`);
+      console.log(`   Cost: $${result.metadata.cost.toFixed(3)}`);
+
     } catch (error) {
       console.error(`❌ Generation failed for job ${job_id}:`, error);
 
@@ -142,5 +129,5 @@ export async function setupGenerationWorker(
     }
   });
 
-  console.log('🎨 Image generation worker registered');
+  console.log('🎨 Image generation worker registered (Gemini 2.5 Flash Image)');
 }
