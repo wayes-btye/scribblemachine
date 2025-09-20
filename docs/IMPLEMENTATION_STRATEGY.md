@@ -74,8 +74,32 @@ Based on the analysis, the recommended approach is **API-First Development** wit
 
 **Why This Order**: Foundation must be solid before building features. Authentication and data persistence enable all subsequent features.
 
-### Phase 3: Core Processing Pipeline (Days 6-8)
-**Goal**: Build the end-to-end image processing workflow.
+### **PLAN CHANGE**: Gemini API Implementation (Immediate - Before Phase 2)
+**Goal**: Implement production Gemini API service while Phase 1 knowledge is fresh.
+
+#### Immediate Implementation Tasks:
+1. **Core Gemini Service** (1-2 hours)
+   - Extract validated code from `test-gemini-image-generation.ts`
+   - Create `services/worker/src/services/gemini-service.ts`
+   - Add TypeScript interfaces from Phase 1 assessment
+   - Implement retry logic: exponential backoff (1s, 2s, 4s)
+   - Add error categorization: QUOTA_EXCEEDED, TEMPORARY_FAILURE, INVALID_INPUT, MODEL_ERROR
+
+2. **Job Processor Integration** (1 hour)
+   - Create `services/worker/src/workers/generation-worker.ts`
+   - Integrate with pg-boss for async job processing
+   - Add job state management: pending → processing → completed/failed
+   - Include cost tracking and performance metrics
+
+3. **Testing & Validation** (30 minutes)
+   - Unit tests for Gemini service error handling
+   - Integration tests for job processing flow
+   - Performance benchmarking against Phase 1 results
+
+**Rationale**: Phase 1 validation provides exact requirements. Implementing now avoids context switching later and provides working API for Phase 2 integration.
+
+### Phase 3: Core Processing Pipeline (Days 6-8) - UPDATED
+**Goal**: Complete remaining backend infrastructure with Gemini service already working.
 
 #### 3.1 Image Upload & Processing
 - Client-side image validation and resizing
@@ -83,25 +107,25 @@ Based on the analysis, the recommended approach is **API-First Development** wit
 - Upload to Supabase Storage with progress tracking
 - Image preprocessing worker setup
 
-#### 3.2 Job Queue System
-- Implement pg-boss for job management
-- Create job orchestration logic
+#### 3.2 Job Queue System Enhancement
+- ✅ Basic pg-boss integration (completed with Gemini service)
 - Add idempotency keys for duplicate prevention
-- Set up retry logic with exponential backoff
+- Enhance monitoring and queue management
+- Add job prioritization and throttling
 
-#### 3.3 Gemini API Integration
-- Create proxy endpoint for zero-retention
-- Implement prompt engineering for different complexity levels
-- Add rate limiting and quota management
-- Implement robust error handling and retry logic for API failures
-
-#### 3.4 PDF Export Pipeline
+#### 3.3 PDF Export Pipeline
+- ✅ PDF generation validated in Phase 1
 - Integrate PDF generation with job results
 - Add watermark logic for free tier
 - Implement title injection into coloring pages
-- Test print quality across different printers
 
-**Why This Order**: This creates the minimum viable product loop - upload → process → export.
+#### 3.4 Rate Limiting & User Management
+- Per-user quota enforcement
+- API rate limiting middleware
+- Cost tracking and billing integration
+- Usage analytics and reporting
+
+**Updated Focus**: With core Gemini service complete, focus shifts to file handling, user management, and business logic.
 
 ### Phase 4: User Interface (Days 9-11)
 **Goal**: Build the user-facing application using shadcn/ui components.

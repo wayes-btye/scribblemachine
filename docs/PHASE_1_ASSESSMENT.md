@@ -78,37 +78,133 @@ All critical path components validated and working.
 
 ---
 
-## 🚀 Ready for Phase 2: Foundation & Infrastructure
+## 🚀 **PLAN CHANGE**: Implement Backend API Immediately
 
-### Phase 1 Blockers Resolved
-- ✅ Image generation quality confirmed
-- ✅ PDF output quality confirmed
-- ✅ Performance within acceptable ranges
-- ✅ Cost structure understood
+### Rationale for Timeline Adjustment
+Based on Phase 1 validation, we should implement the production Gemini API service **immediately** before moving to Phase 2. This change is justified because:
 
-### Next Phase Prerequisites Met
-- API integration patterns established
-- Error handling strategies defined
-- Quality standards validated
-- Technical architecture proven
+1. **Knowledge is Fresh**: We just validated exact model, prompts, and error patterns
+2. **Clear Requirements**: Test results define exact production needs
+3. **Reduces Context Switching**: Avoids re-learning API details later
+4. **Enables Parallel Development**: Database/frontend can integrate with working API
+
+### Immediate Next Steps (Before Phase 2)
+
+#### 🎯 **Production Gemini API Service Implementation**
+
+**Location**: `services/worker/src/services/gemini-service.ts`
+
+**Core Requirements**:
+```typescript
+interface GeminiServiceConfig {
+  model: 'gemini-2.5-flash-image-preview'
+  maxRetries: 3
+  retryDelayMs: 1000
+  timeoutMs: 30000
+}
+
+interface GenerationRequest {
+  imageBase64: string
+  mimeType: string
+  promptType: 'simple' | 'detailed' | 'cartoon'
+  customPrompt?: string
+}
+
+interface GenerationResult {
+  success: boolean
+  imageBase64?: string
+  error?: GeminiError
+  metadata: {
+    responseTimeMs: number
+    tokensUsed?: number
+    cost: number
+  }
+}
+```
+
+**Error Handling Categories**:
+- `QUOTA_EXCEEDED` - Billing/rate limits
+- `TEMPORARY_FAILURE` - Network/API issues
+- `INVALID_INPUT` - Bad image data
+- `MODEL_ERROR` - Gemini service issues
+
+**Retry Logic**:
+- Exponential backoff: 1s, 2s, 4s
+- Retry only on `TEMPORARY_FAILURE`
+- Fail fast on `QUOTA_EXCEEDED` and `INVALID_INPUT`
+
+#### 🔄 **Job Processor Integration**
+
+**Location**: `services/worker/src/workers/generation-worker.ts`
+
+**Job Flow**:
+1. Receive job from pg-boss queue
+2. Download image from Supabase storage
+3. Call Gemini service with retry logic
+4. Upload result to Supabase storage
+5. Update job status with metadata
+
+**Job States**:
+- `pending` → `processing` → `completed`/`failed`
+- Include cost tracking and performance metrics
+
+#### 📊 **Monitoring & Metrics**
+
+**Key Metrics to Track**:
+- Generation success rate
+- Average response time
+- Cost per generation
+- Error rates by category
+- Queue depth and processing time
+
+### Updated Phase 2 Priorities
+
+After backend API implementation, Phase 2 becomes:
+
+1. **Database Schema** - Job states and user management
+2. **File Upload/Storage** - Supabase storage integration
+3. **Authentication** - User accounts and sessions
+4. **Rate Limiting** - Per-user quota management
+
+### Success Criteria for Backend API
+- ✅ Production Gemini service with proper error handling
+- ✅ Job processor handling async generation
+- ✅ Comprehensive test coverage
+- ✅ Performance metrics and monitoring
+- ✅ Cost tracking per generation
+- ✅ Ready for frontend integration
 
 ---
 
-## 📋 Recommended Phase 2 Priorities
+## 📋 Detailed Implementation Plan
 
-Based on Phase 1 results, Phase 2 should focus on:
+### Step 1: Core Gemini Service (1-2 hours)
+- Extract working code from `test-gemini-image-generation.ts`
+- Add proper TypeScript interfaces
+- Implement retry logic with exponential backoff
+- Add comprehensive error categorization
+- Include cost and performance tracking
 
-1. **Database Schema & Storage** (Critical for MVP)
-2. **Authentication System** (Required for user management)
-3. **Job Queue System** (Essential for async processing)
-4. **Rate Limiting & Quota Management** (Critical due to API costs)
+### Step 2: Job Processor (1 hour)
+- Create pg-boss worker for generation jobs
+- Integrate with Gemini service
+- Add job state management
+- Include error handling and retries
 
-### Phase 2 Success Criteria
-- Supabase database with RLS policies
-- User authentication working
-- Background job processing with pg-boss
-- API proxy with rate limiting
-- File upload and storage working
+### Step 3: Testing (30 minutes)
+- Unit tests for Gemini service
+- Integration tests for job processor
+- Error scenario testing
+- Performance benchmarking
+
+### Step 4: Documentation (15 minutes)
+- API service documentation
+- Error handling guide
+- Monitoring setup instructions
+
+**Total Estimated Time**: 3-4 hours
+
+**Status**: Ready to implement immediately with clear requirements
 
 ---
 
