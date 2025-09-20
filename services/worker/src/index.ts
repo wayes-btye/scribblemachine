@@ -19,9 +19,12 @@ async function main() {
     );
     console.log('✅ Supabase client initialized');
 
-    // Initialize job queue
+    // Initialize job queue with Supabase pooler connection
+    const projectId = env.NEXT_PUBLIC_SUPABASE_URL.replace('https://', '').replace('.supabase.co', '');
+    const connectionString = `postgresql://postgres.${projectId}:${env.SUPABASE_SERVICE_ROLE_KEY}@aws-0-eu-north-1.pooler.supabase.com:6543/postgres`;
+
     const boss = new PgBoss({
-      connectionString: `${env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/rpc/postgres_fdw_handler`,
+      connectionString,
       retryLimit: 2,
       retryDelay: 1000,
       expireInHours: 1,

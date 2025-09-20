@@ -115,6 +115,34 @@ export async function setupGenerationWorker(
     } catch (error) {
       console.error(`❌ Generation failed for job ${job_id}:`, error);
 
+      // Refund credit to user on failure
+      try {
+        const { error: creditError } = await supabase
+          .from('credits')
+          .update({
+            balance: supabase.sql`balance + 1`,
+            updated_at: new Date().toISOString()
+          })
+          .eq('user_id', user_id);
+
+        if (creditError) {
+          console.error(`Failed to refund credit for job ${job_id}:`, creditError);
+        } else {
+          // Record credit refund event
+          await supabase
+            .from('credit_events')
+            .insert({
+              user_id,
+              delta: 1,
+              reason: 'generation_failed',
+            });
+
+          console.log(`💰 Refunded 1 credit to user ${user_id} for failed job ${job_id}`);
+        }
+      } catch (refundError) {
+        console.error(`❌ Credit refund failed for job ${job_id}:`, refundError);
+      }
+
       // Update job as failed
       await supabase
         .from('jobs')

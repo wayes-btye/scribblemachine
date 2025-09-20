@@ -3,6 +3,7 @@ import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import type { Database } from '@coloringpage/types'
 import { nanoid } from 'nanoid'
+// import { enqueueGenerationJob } from '@/lib/queue' // Temporarily disabled for testing
 
 interface CreateJobRequest {
   assetId: string
@@ -84,13 +85,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Create job with parameters
+    // Create job with parameters (use consistent naming with types)
     const jobId = nanoid()
     const jobParams = {
-      assetId,
+      asset_id: assetId,
       complexity,
-      lineThickness,
-      customPrompt,
+      line_thickness: lineThickness,
+      custom_prompt: customPrompt,
     }
 
     const { data: job, error: jobError } = await supabase
@@ -132,8 +133,10 @@ export async function POST(request: NextRequest) {
         reason: 'generation_queued',
       })
 
-    // TODO: Trigger background job processing
-    // This would connect to the existing pg-boss queue system from Phase 1
+    // Job is created in database with 'queued' status
+    // Simple worker will poll for jobs with this status
+    console.log(`Job ${job.id} created and ready for worker processing`);
+    console.log(`Parameters: ${complexity}, ${lineThickness}`);
 
     return NextResponse.json({
       jobId: job.id,
