@@ -24,6 +24,10 @@
 ### Objective
 Build a complete user interface on top of the working API foundation, prioritizing **backend compatibility** over design perfection.
 
+**Design Reference**: Use AI-generated designs in `docs/images/UI-Design-Images/` as starting point for visual direction. Follow the recommended approach in `docs/initial_documents/ui_plan_shadcn_ui.md` as a guide (not definitive) for component selection and layout patterns.
+
+**Important**: The AI-generated designs contain typos and spelling errors - use them as visual guidelines only, not for exact text content. Include subtle animations, especially for background icons and interactive elements, to enhance user experience.Hello! 
+
 ### Critical Principle: Backend-First Approach
 **Priority**: Adapt frontend to match working backend rather than modifying backend to match UI designs.
 
@@ -45,6 +49,37 @@ Build a complete user interface on top of the working API foundation, prioritizi
 - **React Hook Form + Zod**: Form validation
 - **Framer Motion**: Subtle animations
 - **react-dropzone**: File upload handling
+
+## Brand Assets & Visual Identity
+
+### Asset Source Location
+**IMPORTANT**: Brand assets are available in `docs/images/Suggested-Assets/` for reference and implementation.
+
+### Asset Integration Requirements
+- **Examine Assets**: AI must examine each asset file to understand its purpose and content before using
+- **Proper Migration**: Move assets from `Suggested-Assets` folder to appropriate production locations
+- **Asset Analysis**: Determine which assets are suitable for different UI elements based on their content
+- **File Format Selection**: Choose appropriate formats (SVG vs PNG) based on usage requirements
+
+### Visual Design Context
+- Use the provided assets to establish brand identity and visual hierarchy
+- Extract color schemes and design patterns from the asset files
+- Implement responsive design that works with the chosen assets
+
+## Iterative Development & Quality Assurance
+
+### Multi-Agent Collaboration Approach
+**CRITICAL**: Use a collaborative agent approach for iterative development and validation:
+
+1. **Frontend Developer Agent** (`frontend-developer`): Primary implementation of React components, state management, and responsive design
+2. **UI Designer Agent** (`ui-designer`): Visual design refinement, component styling, and design system consistency  
+3. **UX Reviewer Agent** (`ux-reviewer`): Comprehensive UX analysis using Playwright MCP to capture screenshots and provide actionable feedback
+
+### Development Workflow
+- **Build** → **Review** → **Refine** → **Validate** cycle
+- Use Playwright MCP to capture screenshots at each iteration
+- Apply UX feedback to improve user experience
+- Continue until all agents confirm quality standards are met
 
 ## Backend API Reality (Adapt UI to This)
 

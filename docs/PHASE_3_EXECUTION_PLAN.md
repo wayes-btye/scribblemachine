@@ -76,6 +76,11 @@ Build intuitive user interface on top of working API foundation.
 - Phase 3A backend integration completed and tested
 - UI designs/wireframes provided
 
+### Asset Preparation
+- Examine all assets in `docs/images/Suggested-Assets/`
+- Move appropriate assets to production locations
+- Organize assets according to best practices
+
 ### Core Components
 
 #### 1. Authentication Flow
