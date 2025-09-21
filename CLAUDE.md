@@ -62,11 +62,14 @@ This is a Children's Coloring Page Generator web application that converts image
 
 ## 🔴 CRITICAL: Port 3000 Dependency
 
-**Web app MUST run on port 3000** - Supabase auth hardcoded to this port. If port 3000 occupied, clear it before starting:
+**Web app MUST run on port 3000** - Supabase auth hardcoded to this port. Before starting:
 
 ```bash
+# Check if port 3000 is available
 netstat -ano | findstr ":3000"
+# If occupied by other process, kill it:
 taskkill /PID <process_id> /F
+# If already running our app, test: curl -I http://localhost:3000
 pnpm dev
 ```
 
