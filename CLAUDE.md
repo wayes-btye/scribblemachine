@@ -49,6 +49,29 @@ This is a Children's Coloring Page Generator web application that converts image
 
 **Normal code changes** (React components, pages, styles) use hot reload - no restart needed.
 
+## ⚠️ CRITICAL WARNING: Process Killing
+
+**NEVER USE `taskkill /F /IM node.exe`** - This will kill Claude Code itself!
+
+**Safe process management:**
+- Use Ctrl+C to stop individual services
+- Use `pnpm dev` to restart cleanly
+- Check specific ports with `netstat -ano | findstr :3000`
+- Kill background processes: Use KillShell tool with shell ID
+- **Alternative**: `taskkill /PID <process_id> /F` (may fail in Git Bash)
+
+## 🔴 CRITICAL: Port 3000 Dependency
+
+**Web app MUST run on port 3000** - Supabase auth hardcoded to this port. If port 3000 occupied, clear it before starting:
+
+```bash
+netstat -ano | findstr ":3000"
+taskkill /PID <process_id> /F
+pnpm dev
+```
+
+Port migration = authentication broken. Always verify `http://localhost:3000` responds.
+
 ## Key Commands
 
 ### Development

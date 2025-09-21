@@ -4,6 +4,30 @@ This file serves as a development scratchpad for tracking progress, notes, and d
 
 ## Last 5 Entries
 
+### [2025-09-21T11:30:00Z] — Task/Event
+**Context:** Resolved web app startup issue and process conflicts
+**What changed:**
+- Killed all conflicting Node.js processes preventing clean startup
+- Added critical warning to CLAUDE.md about never using `taskkill /F /IM node.exe`
+- Successfully restarted both web app (port 3000) and worker service with clean state
+**Leftover:**
+- Ready to begin Session 2: Core Workspace implementation
+- Browser cache clearing recommended for complete cookie issue resolution
+
+### [2025-09-21T11:45:00Z] — Session Summary
+**Focus:** Investigate recurring "startup issue" pattern and create prevention strategy
+**Done:**
+- Analyzed root cause: False positive diagnosis of normal development behavior
+- Identified Claude Code misinterprets port migration, compilation time, and warning messages as blocking issues
+- Created comprehensive investigation report (docs/STARTUP_ISSUE_INVESTIGATION.md)
+**Next:**
+- Implement CLAUDE.md improvements with mandatory verification protocol
+- Use HTTP testing before declaring any startup failures
+**Decisions:**
+- Most "startup issues" are misdiagnosed - services actually work fine
+- Need verification protocol: wait 10s + HTTP test before intervention
+- Process management anti-patterns cause real problems (killing Claude Code itself)
+
 ### [2025-09-21T11:10:00Z] — Session Summary
 **Focus:** Critical fixes and testing strategy preparation for Session 2
 **Done:**
@@ -370,3 +394,27 @@ This file serves as a development scratchpad for tracking progress, notes, and d
 - Worker service now successfully starts with polling every 5 seconds
 - Testing strategy document created at docs/TESTING_STRATEGY.md
 - No TypeScript compilation errors in web app, startup issue appears to be environment-related
+
+### [2025-09-21T11:30:00Z] — Task/Event
+**Context:** Resolved web app startup issue and process conflicts
+**What changed:**
+- Killed all conflicting Node.js processes preventing clean startup
+- Added critical warning to CLAUDE.md about never using `taskkill /F /IM node.exe`
+- Successfully restarted both web app (port 3000) and worker service with clean state
+**Leftover:**
+- Ready to begin Session 2: Core Workspace implementation
+- Browser cache clearing recommended for complete cookie issue resolution
+
+### [2025-09-21T11:45:00Z] — Session Summary
+**Focus:** Investigate recurring "startup issue" pattern and create prevention strategy
+**Done:**
+- Analyzed root cause: False positive diagnosis of normal development behavior
+- Identified Claude Code misinterprets port migration, compilation time, and warning messages as blocking issues
+- Created comprehensive investigation report (docs/STARTUP_ISSUE_INVESTIGATION.md)
+**Next:**
+- Implement CLAUDE.md improvements with mandatory verification protocol
+- Use HTTP testing before declaring any startup failures
+**Decisions:**
+- Most "startup issues" are misdiagnosed - services actually work fine
+- Need verification protocol: wait 10s + HTTP test before intervention
+- Process management anti-patterns cause real problems (killing Claude Code itself)
