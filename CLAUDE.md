@@ -30,6 +30,25 @@ This is a Children's Coloring Page Generator web application that converts image
 └── supabase/                   # Database migrations and setup
 ```
 
+## ⚠️ Process Management: Restart Only When Necessary
+
+**RESTART WEB APP (`pnpm web:dev`) ONLY when:**
+- Environment changes (.env files)
+- Config changes (next.config.js, package.json)
+- New dependencies installed
+- Port conflicts or server errors
+
+**RESTART WORKER (`pnpm worker:dev`) ONLY when:**
+- Database schema changes
+- Worker code changes (src/index.ts, job handlers)
+- Environment changes affecting database/AI APIs
+
+**RESTART BOTH (`pnpm dev`) ONLY when:**
+- First time starting development
+- Major dependency or config changes
+
+**Normal code changes** (React components, pages, styles) use hot reload - no restart needed.
+
 ## Key Commands
 
 ### Development
@@ -172,3 +191,4 @@ The project is configured to work with these MCP servers:
   - Test payment flows when Stripe integration is added
   - Screenshot comparison for UI regression testing
 - **When to use**: After implementing new UI features or before production deployments
+
