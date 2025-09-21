@@ -92,10 +92,10 @@ async function testGenerationWorker() {
       .toBuffer();
 
     const assetId = `test-asset-${Date.now()}`;
-    const storagePath = `originals/${testUserId}/${assetId}.jpg`;
+    const storagePath = `${testUserId}/${assetId}.jpg`;
 
     const { error: uploadError } = await supabase.storage
-      .from('assets')
+      .from('originals')
       .upload(storagePath, processedImage, {
         contentType: 'image/jpeg'
       });

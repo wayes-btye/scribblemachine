@@ -1,0 +1,7 @@
+Test Image: purple-car.jpg
+Prompt Type: Detailed-LineArt
+Response Time: 9162ms
+Prompt: Convert this photograph into a detailed black and white line art coloring page. Create precise black outlines that capture the main features and important details. Remove all colors and convert to clean line drawings on white background. The result should look like professional coloring book artwork - black outlines only, no shading or fills. Suitable for children ages 8-12 who can handle more detailed coloring.
+
+Text Response:
+Here is the black and white line art coloring page based on your photograph!

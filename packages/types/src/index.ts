@@ -65,10 +65,10 @@ export interface CreditEvent {
 }
 
 export interface GenerationRequest {
-  asset_id: string;
+  assetId: string;
   complexity: Complexity;
-  line_thickness: LineThickness;
-  idempotency_key?: string;
+  lineThickness: LineThickness;
+  customPrompt?: string;
 }
 
 export interface PDFExportRequest {

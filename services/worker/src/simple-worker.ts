@@ -108,7 +108,7 @@ async function processGenerationJob(job: Job, supabase: any, geminiService: any)
 
     // Download original image
     const { data: imageData, error: downloadError } = await supabase.storage
-      .from('assets')
+      .from('originals')
       .download(asset.storage_path);
 
     if (downloadError || !imageData) {
@@ -138,10 +138,10 @@ async function processGenerationJob(job: Job, supabase: any, geminiService: any)
 
     // Upload generated edge map
     const edgeMapBuffer = Buffer.from(result.imageBase64, 'base64');
-    const edgeMapPath = `intermediates/${job.user_id}/${job.id}/edge.png`;
+    const edgeMapPath = `${job.user_id}/${job.id}/edge.png`;
 
     const { error: uploadError } = await supabase.storage
-      .from('assets')
+      .from('intermediates')
       .upload(edgeMapPath, edgeMapBuffer, {
         contentType: 'image/png',
         upsert: true,

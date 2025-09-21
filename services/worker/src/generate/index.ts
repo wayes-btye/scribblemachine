@@ -44,7 +44,7 @@ export async function setupGenerationWorker(
 
       // Download original image
       const { data: imageData } = await supabase.storage
-        .from('assets')
+        .from('originals')
         .download(asset.storage_path);
 
       if (!imageData) {
@@ -72,10 +72,10 @@ export async function setupGenerationWorker(
 
       // Upload generated edge map
       const edgeMapBuffer = Buffer.from(result.imageBase64, 'base64');
-      const edgeMapPath = `intermediates/${user_id}/${job_id}/edge.png`;
+      const edgeMapPath = `${user_id}/${job_id}/edge.png`;
 
       const { error: uploadError } = await supabase.storage
-        .from('assets')
+        .from('intermediates')
         .upload(edgeMapPath, edgeMapBuffer, {
           contentType: 'image/png',
           upsert: true,

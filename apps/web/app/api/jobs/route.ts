@@ -1,8 +1,8 @@
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
+import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import type { Database } from '@coloringpage/types'
-import { nanoid } from 'nanoid'
+import { randomUUID } from 'crypto'
 // import { enqueueGenerationJob } from '@/lib/queue' // Temporarily disabled for testing
 
 interface CreateJobRequest {
@@ -44,7 +44,28 @@ export async function POST(request: NextRequest) {
     }
 
     const cookieStore = cookies()
-    const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore })
+    const supabase = createServerClient<Database>(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return cookieStore.getAll()
+          },
+          setAll(cookiesToSet) {
+            try {
+              cookiesToSet.forEach(({ name, value, options }) =>
+                cookieStore.set(name, value, options)
+              )
+            } catch {
+              // The `setAll` method was called from a Server Component.
+              // This can be ignored if you have middleware refreshing
+              // user sessions.
+            }
+          },
+        },
+      }
+    )
 
     // Check authentication
     const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -86,7 +107,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create job with parameters (use consistent naming with types)
-    const jobId = nanoid()
+    const jobId = randomUUID()
     const jobParams = {
       asset_id: assetId,
       complexity,
@@ -139,9 +160,17 @@ export async function POST(request: NextRequest) {
     console.log(`Parameters: ${complexity}, ${lineThickness}`);
 
     return NextResponse.json({
-      jobId: job.id,
+      id: job.id,
+      user_id: job.user_id,
       status: job.status,
-      message: 'Job created successfully and queued for processing',
+      params_json: job.params_json,
+      cost_cents: job.cost_cents,
+      model: job.model,
+      started_at: job.started_at,
+      ended_at: job.ended_at,
+      error: job.error,
+      created_at: job.created_at,
+      updated_at: job.updated_at,
     })
   } catch (error) {
     console.error('Create job API error:', error)

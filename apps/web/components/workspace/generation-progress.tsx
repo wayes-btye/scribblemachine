@@ -48,10 +48,24 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
   const [startTime] = useState(Date.now())
   const [elapsedTime, setElapsedTime] = useState(0)
 
+  // Early return if job is invalid
+  if (!job || !job.id) {
+    return (
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertDescription>
+          Invalid job data received. Please try again.
+        </AlertDescription>
+      </Alert>
+    )
+  }
+
   // Poll for job status updates
   useEffect(() => {
-    if (job.status === 'succeeded' || job.status === 'failed') {
-      onComplete(job)
+    if (!job.id || job.status === 'succeeded' || job.status === 'failed') {
+      if (job.status === 'succeeded' || job.status === 'failed') {
+        onComplete(job)
+      }
       return
     }
 
@@ -78,7 +92,7 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
 
   // Update elapsed time
   useEffect(() => {
-    if (job.status === 'succeeded' || job.status === 'failed') {
+    if (!job.id || job.status === 'succeeded' || job.status === 'failed') {
       return
     }
 
@@ -87,9 +101,9 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [startTime, job.status])
+  }, [startTime, job.status, job.id])
 
-  const config = statusConfig[job.status]
+  const config = statusConfig[job.status] || statusConfig.queued
   const Icon = config.icon
   const formattedTime = Math.floor(elapsedTime / 1000)
 
@@ -132,13 +146,13 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
           <div>
             <span className="text-gray-600">Job ID:</span>
             <br />
-            <span className="font-mono text-xs">{job.id.slice(0, 8)}...</span>
+            <span className="font-mono text-xs">{job.id?.slice(0, 8) || 'Unknown'}...</span>
           </div>
           <div>
             <span className="text-gray-600">Parameters:</span>
             <br />
             <span className="capitalize">
-              {job.params_json.complexity} • {job.params_json.line_thickness}
+              {job.params_json?.complexity || 'Unknown'} • {job.params_json?.line_thickness || 'Unknown'}
             </span>
           </div>
         </div>

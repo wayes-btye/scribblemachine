@@ -15,7 +15,7 @@ import type { Complexity, LineThickness, Job, GenerationRequest } from '@colorin
 
 const formSchema = z.object({
   complexity: z.enum(['simple', 'standard', 'detailed'] as const),
-  line_thickness: z.enum(['thin', 'medium', 'thick'] as const)
+  lineThickness: z.enum(['thin', 'medium', 'thick'] as const)
 })
 
 type FormData = z.infer<typeof formSchema>
@@ -78,7 +78,7 @@ export function ParameterForm({ assetId, onGenerationStart, disabled }: Paramete
     resolver: zodResolver(formSchema),
     defaultValues: {
       complexity: 'standard',
-      line_thickness: 'medium'
+      lineThickness: 'medium'
     }
   })
 
@@ -87,10 +87,9 @@ export function ParameterForm({ assetId, onGenerationStart, disabled }: Paramete
       setGenerating(true)
 
       const request: GenerationRequest = {
-        asset_id: assetId,
+        assetId: assetId,
         complexity: data.complexity,
-        line_thickness: data.line_thickness,
-        idempotency_key: `${assetId}-${Date.now()}`
+        lineThickness: data.lineThickness
       }
 
       const response = await fetch('/api/jobs', {
@@ -128,7 +127,7 @@ export function ParameterForm({ assetId, onGenerationStart, disabled }: Paramete
   }
 
   const selectedComplexity = form.watch('complexity')
-  const selectedThickness = form.watch('line_thickness')
+  const selectedThickness = form.watch('lineThickness')
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -196,7 +195,7 @@ export function ParameterForm({ assetId, onGenerationStart, disabled }: Paramete
 
         <RadioGroup
           value={selectedThickness}
-          onValueChange={(value) => form.setValue('line_thickness', value as LineThickness)}
+          onValueChange={(value) => form.setValue('lineThickness', value as LineThickness)}
           className="space-y-3"
           data-testid="thickness-selection"
         >

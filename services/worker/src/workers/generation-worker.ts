@@ -304,11 +304,11 @@ export class GenerationWorker {
     kind: Asset['kind']
   ): Promise<string> {
     const imageBuffer = Buffer.from(imageBase64, 'base64');
-    const storagePath = `intermediates/${userId}/${jobId}/edge.png`;
+    const storagePath = `${userId}/${jobId}/edge.png`;
 
     // Upload to storage
     const { error: uploadError } = await this.supabase.storage
-      .from('assets')
+      .from('intermediates')
       .upload(storagePath, imageBuffer, {
         contentType: 'image/png',
         upsert: true

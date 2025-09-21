@@ -1,4 +1,4 @@
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
+import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import type { Database } from '@coloringpage/types'
@@ -15,7 +15,28 @@ export async function POST(request: NextRequest) {
   try {
     // Apply rate limiting
     const cookieStore = cookies()
-    const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore })
+    const supabase = createServerClient<Database>(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return cookieStore.getAll()
+          },
+          setAll(cookiesToSet) {
+            try {
+              cookiesToSet.forEach(({ name, value, options }) =>
+                cookieStore.set(name, value, options)
+              )
+            } catch {
+              // The `setAll` method was called from a Server Component.
+              // This can be ignored if you have middleware refreshing
+              // user sessions.
+            }
+          },
+        },
+      }
+    )
     const { data: { user } } = await supabase.auth.getUser()
 
     const identifier = user ? `user:${user.id}` : `ip:${getClientIP(request)}`
@@ -74,10 +95,10 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Generate unique asset ID and storage path
-    const assetId = nanoid()
+    // Generate unique storage path with nanoid for filename
+    const fileId = nanoid()
     const fileExtension = filename.split('.').pop()
-    const storagePath = `${user.id}/${assetId}.${fileExtension}`
+    const storagePath = `${user.id}/${fileId}.${fileExtension}`
 
     // Create signed upload URL
     const { data: uploadData, error: uploadError } = await supabase.storage
@@ -94,11 +115,10 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Create asset record in database
-    const { error: assetError } = await supabase
+    // Create asset record in database (let DB auto-generate UUID)
+    const { data: asset, error: assetError } = await supabase
       .from('assets')
       .insert({
-        id: assetId,
         user_id: user.id,
         kind: 'original',
         storage_path: storagePath,
@@ -116,7 +136,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({
-      assetId,
+      assetId: asset.id,
       uploadUrl: uploadData.signedUrl,
       storagePath,
     })
