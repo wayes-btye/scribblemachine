@@ -9,16 +9,20 @@ export async function GET(request: NextRequest) {
 
   if (code) {
     const cookieStore = cookies()
-    const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore })
+    const supabase = createRouteHandlerClient<Database>({
+      cookies: () => cookieStore
+    })
 
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
-
-    if (error) {
-      console.error('Auth callback error:', error)
-      return NextResponse.redirect(`${requestUrl.origin}/auth/error`)
+    try {
+      // Exchange the code for a session
+      await supabase.auth.exchangeCodeForSession(code)
+    } catch (error) {
+      console.error('Error exchanging code for session:', error)
+      // Redirect to home with error
+      return NextResponse.redirect(`${requestUrl.origin}/?error=auth_error`)
     }
   }
 
-  // Redirect to the app after successful authentication
-  return NextResponse.redirect(`${requestUrl.origin}/app`)
+  // Redirect to home page after successful authentication
+  return NextResponse.redirect(requestUrl.origin)
 }
