@@ -95,7 +95,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create asset record in database
-    const { data: asset, error: assetError } = await supabase
+    const { error: assetError } = await supabase
       .from('assets')
       .insert({
         id: assetId,

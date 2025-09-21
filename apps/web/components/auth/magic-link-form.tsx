@@ -1,0 +1,159 @@
+'use client'
+
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { useToast } from '@/hooks/use-toast'
+import { useAuth } from '@/lib/auth/auth-provider'
+import { Mail, Loader2 } from 'lucide-react'
+
+const emailSchema = z.object({
+  email: z.string().email('Please enter a valid email address'),
+})
+
+type EmailFormData = z.infer<typeof emailSchema>
+
+interface MagicLinkFormProps {
+  onSuccess?: () => void
+  redirectTo?: string
+}
+
+export function MagicLinkForm({ onSuccess }: MagicLinkFormProps) {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [emailSent, setEmailSent] = useState(false)
+  const { signInWithEmail } = useAuth()
+  const { toast } = useToast()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<EmailFormData>({
+    resolver: zodResolver(emailSchema),
+  })
+
+  const onSubmit = async (data: EmailFormData) => {
+    setIsSubmitting(true)
+
+    try {
+      const { error } = await signInWithEmail(data.email)
+
+      if (error) {
+        toast({
+          variant: 'destructive',
+          title: 'Error sending magic link',
+          description: error.message || 'Something went wrong. Please try again.',
+        })
+      } else {
+        setEmailSent(true)
+        toast({
+          title: 'Magic link sent!',
+          description: 'Check your email for a link to sign in.',
+        })
+        onSuccess?.()
+      }
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Something went wrong. Please try again.',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  if (emailSent) {
+    return (
+      <Card className="w-full max-w-md mx-auto">
+        <CardHeader className="text-center">
+          <div className="mx-auto mb-4 w-12 h-12 bg-brand-warm-blue/10 rounded-full flex items-center justify-center">
+            <Mail className="w-6 h-6 text-brand-warm-blue" />
+          </div>
+          <CardTitle className="text-xl">Check your email</CardTitle>
+          <CardDescription>
+            We&apos;ve sent a magic link to <span className="font-semibold">{getValues('email')}</span>
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Alert>
+            <AlertDescription>
+              Click the link in your email to sign in. You can close this tab.
+            </AlertDescription>
+          </Alert>
+          <Button
+            variant="outline"
+            className="w-full mt-4"
+            onClick={() => {
+              setEmailSent(false)
+            }}
+          >
+            Use a different email
+          </Button>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  return (
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader className="text-center">
+        <div className="mx-auto mb-4 w-12 h-12 bg-brand-warm-blue/10 rounded-full flex items-center justify-center">
+          <Mail className="w-6 h-6 text-brand-warm-blue" />
+        </div>
+        <CardTitle className="text-xl">Sign in to Scribble Machine</CardTitle>
+        <CardDescription>
+          Enter your email to receive a magic link for secure sign-in
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="email">Email address</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              disabled={isSubmitting}
+              {...register('email')}
+            />
+            {errors.email && (
+              <p className="text-sm text-destructive">{errors.email.message}</p>
+            )}
+          </div>
+
+          <Button
+            type="submit"
+            className="w-full bg-brand-warm-blue hover:bg-brand-warm-blue/90"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Sending magic link...
+              </>
+            ) : (
+              <>
+                <Mail className="mr-2 h-4 w-4" />
+                Send magic link
+              </>
+            )}
+          </Button>
+        </form>
+
+        <div className="mt-6 text-center">
+          <p className="text-sm text-muted-foreground">
+            No password required. We&apos;ll email you a secure link to sign in.
+          </p>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}

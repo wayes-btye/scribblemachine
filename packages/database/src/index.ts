@@ -29,6 +29,21 @@ export type Database = {
         Insert: Omit<CreditEvent, 'id' | 'created_at'>;
         Update: never;
       };
+      rate_limits: {
+        Row: {
+          id: string;
+          count: number;
+          window_start: string;
+        };
+        Insert: {
+          id: string;
+          count: number;
+          window_start: string;
+        };
+        Update: {
+          count: number;
+        };
+      };
     };
   };
 };

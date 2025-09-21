@@ -48,7 +48,7 @@ export async function enqueueGenerationJob(data: GenerationJobData): Promise<str
   const queue = await getJobQueue();
 
   // Create idempotency key to prevent duplicate jobs
-  const idempotencyKey = `${data.userId}-${data.assetId}-${JSON.stringify(data.params)}`;
+  const idempotencyKey = `${data.user_id}-${data.asset_id}-${JSON.stringify(data.params)}`;
 
   const jobId = await queue.send('image-generation', data, {
     singletonKey: idempotencyKey, // Prevents duplicate jobs
