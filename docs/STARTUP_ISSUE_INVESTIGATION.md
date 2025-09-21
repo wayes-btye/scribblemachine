@@ -136,6 +136,28 @@ netstat -ano | findstr ":3000"
 curl -f http://localhost:3000
 ```
 
+**CORRECTED: Proper Process Killing Commands**
+
+❌ **These commands FAIL in Git Bash:**
+```bash
+taskkill /PID <process_id> /F    # Fails in Git Bash environment
+```
+
+✅ **These commands WORK reliably:**
+```bash
+# Find process using port 3000
+netstat -ano | findstr ":3000"
+
+# Kill using PowerShell (works in Git Bash)
+powershell "Stop-Process -Id <PID> -Force"
+
+# Alternative: CMD wrapper
+cmd /c "taskkill /PID <PID> /F"
+
+# Verify port is free
+netstat -ano | findstr ":3000"  # Should return nothing
+```
+
 ### 3. **Warning vs. Error Classification**
 
 **Supabase Cookie Parsing Errors**:

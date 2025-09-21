@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/lib/auth/auth-provider'
 import { Upload, Sparkles } from 'lucide-react'
+import Link from 'next/link'
 
 export default function Home() {
   const { user } = useAuth()
@@ -28,13 +29,15 @@ export default function Home() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Button
-              size="lg"
-              className="bg-brand-soft-blue hover:bg-brand-soft-blue/90 text-white text-lg px-8 py-4 rounded-2xl shadow-lg"
-            >
-              <Upload className="mr-2 h-5 w-5" />
-              Upload Photo - It&apos;s FREE!
-            </Button>
+            <Link href="/create">
+              <Button
+                size="lg"
+                className="bg-brand-soft-blue hover:bg-brand-soft-blue/90 text-white text-lg px-8 py-4 rounded-2xl shadow-lg"
+              >
+                <Upload className="mr-2 h-5 w-5" />
+                Upload Photo - It&apos;s FREE!
+              </Button>
+            </Link>
             <Button
               variant="outline"
               size="lg"

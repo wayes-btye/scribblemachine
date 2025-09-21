@@ -56,21 +56,37 @@ This is a Children's Coloring Page Generator web application that converts image
 **Safe process management:**
 - Use Ctrl+C to stop individual services
 - Use `pnpm dev` to restart cleanly
-- Check specific ports with `netstat -ano | findstr :3000`
-- Kill background processes: Use KillShell tool with shell ID
-- **Alternative**: `taskkill /PID <process_id> /F` (may fail in Git Bash)
+- Use KillShell tool with shell ID for background processes
 
-## 🔴 CRITICAL: Port 3000 Dependency
+## 🔴 CRITICAL: Port 3000 Dependency & Process Management
 
-**Web app MUST run on port 3000** - Supabase auth hardcoded to this port. Before starting:
+**Web app MUST run on port 3000** - Supabase auth hardcoded to this port.
+
+**To kill process using port 3000 (WORKING COMMANDS):**
 
 ```bash
-# Check if port 3000 is available
+# 1. Find process using port 3000
 netstat -ano | findstr ":3000"
-# If occupied by other process, kill it:
-taskkill /PID <process_id> /F
-# If already running our app, test: curl -I http://localhost:3000
+
+# 2. Kill process using PowerShell (RELIABLE - works in Git Bash)
+powershell "Stop-Process -Id <PID> -Force"
+
+# 3. Alternative: CMD wrapper (if PowerShell not available)
+cmd /c "taskkill /PID <PID> /F"
+
+# 4. Verify port is free
+netstat -ano | findstr ":3000"
+# Should return nothing if successful
+
+# 5. Start services
 pnpm dev
+```
+
+**Example workflow:**
+```bash
+netstat -ano | findstr ":3000"        # Find PID (e.g., 31460)
+powershell "Stop-Process -Id 31460 -Force"    # Kill process
+pnpm dev                               # Start services
 ```
 
 Port migration = authentication broken. Always verify `http://localhost:3000` responds.
