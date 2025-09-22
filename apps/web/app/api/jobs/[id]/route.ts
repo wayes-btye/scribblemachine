@@ -68,15 +68,16 @@ export async function GET(
     // Get related assets if job is completed
     let assets = null
     if (job.status === 'succeeded') {
+      // Get assets created for this specific job by matching storage path pattern
+      // The worker creates paths like: userId/jobId/edge.png
       const { data: jobAssets, error: assetsError } = await supabase
         .from('assets')
         .select('*')
         .eq('user_id', user.id)
         .in('kind', ['edge_map', 'pdf'])
+        .like('storage_path', `%/${jobId}/%`)
 
-      if (!assetsError) {
-        // Filter assets that belong to this job (by matching creation time or job reference)
-        // Note: In production, you might want to add a job_id field to assets table
+      if (!assetsError && jobAssets) {
         assets = jobAssets
       }
     }

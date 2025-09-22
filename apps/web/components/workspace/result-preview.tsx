@@ -9,8 +9,17 @@ import { FileImage, FileText, RotateCcw, Share2, Printer, AlertCircle } from 'lu
 import { toast } from '@/components/ui/use-toast'
 import type { Job } from '@coloringpage/types'
 
+// Extended job type that includes download URLs from API
+interface JobWithDownloads extends Job {
+  download_urls?: {
+    edge_map?: string
+    pdf?: string
+    [key: string]: string | undefined
+  }
+}
+
 interface ResultPreviewProps {
-  job: Job
+  job: JobWithDownloads
   onReset: () => void
 }
 
@@ -19,16 +28,15 @@ export function ResultPreview({ job, onReset }: ResultPreviewProps) {
   const [exporting, setExporting] = useState(false)
   const [imageError, setImageError] = useState(false)
 
-  // Get the download URL from job - this should be set by the worker
+  // Get the download URL from job data
   const getDownloadUrl = () => {
-    // In a real implementation, this would be a URL to the generated coloring page
-    // For now, we'll construct it based on the job ID
-    return `/api/jobs/${job.id}/download`
+    // Use the actual download URL from the job if available
+    return job.download_urls?.edge_map || `/api/jobs/${job.id}/download`
   }
 
   const getImagePreviewUrl = () => {
-    // Construct preview URL for the generated image
-    return getDownloadUrl()
+    // Use the edge_map URL for preview
+    return job.download_urls?.edge_map || null
   }
 
   const handleDownloadImage = async () => {
@@ -134,17 +142,20 @@ export function ResultPreview({ job, onReset }: ResultPreviewProps) {
         </div>
 
         <div className="bg-white p-4 rounded-lg border">
-          {imageError ? (
+          {imageError || !getImagePreviewUrl() ? (
             <Alert>
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
-                Image preview temporarily unavailable. You can still download the file.
+                {!getImagePreviewUrl()
+                  ? "Image preview is being generated. You can download the file below."
+                  : "Image preview temporarily unavailable. You can still download the file."
+                }
               </AlertDescription>
             </Alert>
           ) : (
             <div className="aspect-square bg-gray-50 rounded-lg overflow-hidden">
               <img
-                src={getImagePreviewUrl()}
+                src={getImagePreviewUrl()!}
                 alt="Generated coloring page"
                 className="w-full h-full object-contain"
                 onError={handleImageError}

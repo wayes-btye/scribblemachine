@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { v4 as uuidv4 } from 'uuid';
 import { validateEnv } from '@coloringpage/config';
 import { createSupabaseAdminClient } from '@coloringpage/database';
 import { createGeminiService, GenerationRequest } from './services/gemini-service';
@@ -151,9 +152,9 @@ async function processGenerationJob(job: Job, supabase: any, geminiService: any)
       throw new Error(`Failed to upload edge map: ${uploadError.message}`);
     }
 
-    // Create edge map asset record
-    const edgeAssetId = `${job.id}-edge_map`;
-    await supabase.from('assets').insert({
+    // Create edge map asset record with proper UUID
+    const edgeAssetId = uuidv4();
+    const { error: insertError } = await supabase.from('assets').insert({
       id: edgeAssetId,
       user_id: job.user_id,
       kind: 'edge_map',
@@ -161,6 +162,13 @@ async function processGenerationJob(job: Job, supabase: any, geminiService: any)
       bytes: edgeMapBuffer.length,
       created_at: new Date().toISOString()
     });
+
+    if (insertError) {
+      console.error('Failed to create edge_map asset record:', insertError);
+      throw new Error(`Failed to create edge_map asset: ${insertError.message}`);
+    }
+
+    console.log(`  ✅ Created edge_map asset: ${edgeAssetId}`);
 
     // Update job as completed with metadata
     await supabase
