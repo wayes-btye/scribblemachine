@@ -4,6 +4,15 @@ This file serves as a development scratchpad for tracking progress, notes, and d
 
 ## Last 5 Entries
 
+### [2025-09-22T15:30:00Z] — Task/Event
+**Context:** Backend test cost optimization to prevent expensive API usage
+**What changed:**
+- Created test-gemini-single-image.ts (1 API call vs 18 in full test)
+- Updated CLAUDE.md with cost warnings and test recommendations
+- Added npm scripts for cost-effective testing
+**Leftover:**
+- AI agents now default to single-image test for routine validation
+
 ### [2025-09-22T12:45:00Z] — Session Summary
 **Focus:** Playwright Staging Scripts Implementation - Clean Screenshot Management
 **Done:**

@@ -179,7 +179,7 @@ After backend API implementation, Phase 2 becomes:
 ## 📋 Detailed Implementation Plan
 
 ### Step 1: Core Gemini Service (1-2 hours)
-- Extract working code from `test-gemini-image-generation.ts`
+- Extract working code from `test-gemini-single-image.ts` (cost-effective, 1 API call vs 18)
 - Add proper TypeScript interfaces
 - Implement retry logic with exponential backoff
 - Add comprehensive error categorization

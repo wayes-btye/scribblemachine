@@ -110,6 +110,20 @@ Port migration = authentication broken. Always verify `http://localhost:3000` re
 - `pnpm test` - Run all tests across packages
 - `pnpm --filter @coloringpage/types test` - Test specific package
 
+#### Backend/Worker Testing (Gemini API)
+⚠️ **API Cost Warning**: Always use cost-effective tests for routine validation
+
+**RECOMMENDED (Cost-Effective):**
+- `pnpm --filter @coloringpage/worker test:gemini:single` - Single image test (1 API call)
+
+**USE SPARINGLY (Expensive):**
+- `pnpm --filter @coloringpage/worker test:gemini:generate` - Full test suite (18 API calls)
+- `pnpm --filter @coloringpage/worker test:gemini:generate:full` - Same as above
+
+**Other Worker Tests:**
+- `pnpm --filter @coloringpage/worker test:gemini` - Basic Gemini connectivity
+- `pnpm --filter @coloringpage/worker test:pdf` - PDF generation testing
+
 ## Architecture Details
 
 ### Web App (`apps/web`)

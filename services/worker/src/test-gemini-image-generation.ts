@@ -4,6 +4,28 @@ import * as path from 'path';
 import sharp from 'sharp';
 import dotenv from 'dotenv';
 
+/**
+ * 🚨 **HIGH COST COMPREHENSIVE TEST** 🚨
+ *
+ * ⚠️ **API COST WARNING**:
+ * This test uses 6 images × 3 prompts = 18 Gemini API calls!
+ * This can be expensive and is NOT recommended for routine testing.
+ *
+ * 💰 **For cost-effective testing**, use test-gemini-single-image.ts instead
+ * (1 image × 1 prompt = 1 API call = 95% cost reduction)
+ *
+ * 🎯 **Only use this test when**:
+ * - Comprehensive validation of all test images is needed
+ * - Testing multiple prompt variations
+ * - Validating complete prompt matrix
+ * - You understand and accept the API costs
+ *
+ * 🏷️ **Aliases**:
+ * - `pnpm test:gemini:generate` (this file)
+ * - `pnpm test:gemini:generate:full` (this file)
+ * - `pnpm test:gemini:single` (cost-effective alternative)
+ */
+
 // Load environment variables
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 

@@ -97,7 +97,8 @@ export class GeminiService {
   }
 
   private buildPrompt(promptType: string, customPrompt?: string): string {
-    // Extract validated prompts from test-gemini-image-generation.ts
+    // Extract validated prompts from test-gemini-single-image.ts (cost-effective)
+    // For comprehensive prompt matrix, see test-gemini-image-generation.ts (18 API calls)
   }
 
   private categorizeError(error: any): GeminiError {
@@ -325,7 +326,7 @@ LOG_LEVEL=info
 
 ### Step 1: Core Service (1-2 hours)
 - [ ] Create `services/gemini-service.ts` with interfaces
-- [ ] Extract working code from `test-gemini-image-generation.ts`
+- [ ] Extract working code from `test-gemini-single-image.ts` (cost-effective reference)
 - [ ] Implement retry logic with exponential backoff
 - [ ] Add error categorization based on Phase 1 patterns
 - [ ] Include cost and performance tracking
