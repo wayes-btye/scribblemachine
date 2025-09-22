@@ -27,7 +27,7 @@ interface MagicLinkFormProps {
 export function MagicLinkForm({ onSuccess }: MagicLinkFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
-  const { signInWithEmail } = useAuth()
+  const { signInWithEmail, devBypassAuth } = useAuth()
   const { toast } = useToast()
 
   const {
@@ -153,6 +153,38 @@ export function MagicLinkForm({ onSuccess }: MagicLinkFormProps) {
             No password required. We&apos;ll email you a secure link to sign in.
           </p>
         </div>
+
+        {/* Development bypass button - only shown in development mode */}
+        {process.env.NODE_ENV === 'development' && devBypassAuth && (
+          <div className="mt-4 border-t pt-4">
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full text-xs"
+              onClick={async () => {
+                try {
+                  await devBypassAuth()
+                  toast({
+                    title: 'Development bypass activated',
+                    description: 'Signed in as test user for development.',
+                  })
+                  onSuccess?.()
+                } catch (error) {
+                  toast({
+                    title: 'Authentication failed',
+                    description: 'Could not sign in test user. Check console for details.',
+                    variant: 'destructive',
+                  })
+                }
+              }}
+            >
+              🧪 Dev Bypass (wayes.appsmate@gmail.com)
+            </Button>
+            <p className="text-xs text-muted-foreground mt-2 text-center">
+              Development only - bypasses magic link authentication
+            </p>
+          </div>
+        )}
       </CardContent>
     </Card>
   )

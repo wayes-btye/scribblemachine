@@ -22,6 +22,18 @@
       ],
       "env": {}
     },
+    "playwright-extension": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@playwright/mcp@latest",
+        "--extension"
+      ],
+      "env": {}
+    },
     "shadcn": {
       "command": "npx",
       "args": [

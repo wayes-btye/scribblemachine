@@ -227,8 +227,14 @@ The project is configured to work with these MCP servers:
 
 ### Playwright MCP
 - **Use for**: End-to-end testing and user flow validation
+- **Authentication**: Use development bypass for authenticated testing:
+  1. Navigate to `http://localhost:3000`
+  2. Click "Upload Photo - It's FREE!" to trigger sign-in
+  3. Click "Sign In" button to open auth dialog
+  4. Click "🧪 Dev Bypass (wayes.appsmate@gmail.com)" for instant authentication
+  5. User now has full access with 50 credits for testing
 - **Best practice**:
-  - Test critical user flows (upload → generate → download)
+  - Test complete authenticated workflows (upload → generate → download)
   - Validate responsive design across different screen sizes
   - Test payment flows when Stripe integration is added
   - Screenshot comparison for UI regression testing

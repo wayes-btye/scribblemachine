@@ -10,6 +10,8 @@ interface AuthContextType {
   loading: boolean
   signOut: () => Promise<void>
   signInWithEmail: (email: string) => Promise<{ error: any }>
+  // Development bypass for testing
+  devBypassAuth?: () => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -66,12 +68,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await supabase.auth.signOut()
   }
 
+  // Development bypass for testing (only in dev mode)
+  const devBypassAuth = async () => {
+    if (process.env.NODE_ENV !== 'development') return
+
+    try {
+      // Use real authentication with actual credentials
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: 'wayes.appsmate@gmail.com',
+        password: 'Test_123!'
+      })
+
+      if (error) {
+        console.error('Dev bypass auth error:', error)
+        throw error
+      }
+
+      // Authentication successful - session is automatically set by Supabase
+      console.log('Dev bypass successful:', data.user?.email)
+    } catch (error) {
+      console.error('Failed to authenticate test user:', error)
+      throw error
+    }
+  }
+
   const value = {
     user,
     session,
     loading,
     signOut,
     signInWithEmail,
+    devBypassAuth: process.env.NODE_ENV === 'development' ? devBypassAuth : undefined,
   }
 
   return (

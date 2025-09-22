@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@supabase/supabase-js':
+        specifier: ^2.39.3
+        version: 2.57.4
     devDependencies:
       '@types/node':
         specifier: ^20.11.0
