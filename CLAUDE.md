@@ -227,6 +227,12 @@ The project is configured to work with these MCP servers:
 
 ### Playwright MCP
 - **Use for**: End-to-end testing and user flow validation
+- **UI Staging Scripts Available**: Use these BEFORE manual Playwright MCP testing
+  - `node scripts/staging/auth-bypass.js` - Get to authenticated home page (< 30s)
+  - `node scripts/staging/upload-ready.js` - Get to upload interface with image (< 60s)
+  - `node scripts/staging/generation-complete.js` - Test full workflow with error capture (< 90s)
+  - **Benefits**: Faster than manual MCP, handles authentication/upload barriers, captures errors
+  - **Screenshots**: Saved to `scripts/screenshots/` (can be cleaned with `rm scripts/screenshots/*.png`)
 - **Authentication**: Use development bypass for authenticated testing:
   1. Navigate to `http://localhost:3000`
   2. Click "Upload Photo - It's FREE!" to trigger sign-in
@@ -234,9 +240,12 @@ The project is configured to work with these MCP servers:
   4. Click "🧪 Dev Bypass (wayes.appsmate@gmail.com)" for instant authentication
   5. User now has full access with 50 credits for testing
 - **Best practice**:
+  - **START with staging scripts** to quickly reach desired application state
+  - If staging fails, fall back to manual MCP commands following the steps above
   - Test complete authenticated workflows (upload → generate → download)
   - Validate responsive design across different screen sizes
   - Test payment flows when Stripe integration is added
   - Screenshot comparison for UI regression testing
+  - Clean up screenshots: `rm scripts/screenshots/*.png` after analysis
 - **When to use**: After implementing new UI features or before production deployments
 

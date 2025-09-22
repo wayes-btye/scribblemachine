@@ -45,6 +45,7 @@ supabase/.temp
 
 # Playwright
 .playwright-mcp/
+scripts/screenshots/
 
 # Temporary files
 tmp/

@@ -8,6 +8,30 @@
 
 This document provides staging instructions that get AI agents to specific points in the Coloring Page Generator application. The key areas where AI agents need Playwright MCP support are **authentication** and **file upload** - these are difficult for AI to handle manually. Once past these critical stages, the AI agent regains full autonomy to analyze, decide, and take further actions as needed.
 
+## 🚀 Quick Start - Playwright Scripts (NEW - 2025-09-22)
+
+**Fast staging scripts for AI agents:**
+
+```bash
+# Get to authenticated home page (< 30 seconds)
+node scripts/staging/auth-bypass.js
+
+# Get to upload interface with image ready (< 60 seconds)
+node scripts/staging/upload-ready.js
+
+# Test complete generation workflow with error capture (< 90 seconds)
+node scripts/staging/generation-complete.js
+```
+
+**Benefits:**
+- ✅ **Faster than MCP instructions** - Direct Playwright execution
+- ✅ **Self-contained** - No manual steps required
+- ✅ **Error handling** - Captures failures with screenshots
+- ✅ **Modular** - Can be run independently or imported by other scripts
+- ✅ **AI-friendly** - Returns structured data for analysis
+
+**See**: `scripts/README.md` for detailed documentation
+
 ## Prerequisites
 
 ### 1. Test User Setup - REAL USER AUTHENTICATION (2025-09-22)
@@ -32,13 +56,18 @@ This document provides staging instructions that get AI agents to specific point
 
 ## Staging Instructions
 
-### Stage 1: Authenticated Home Page - WORKING SOLUTION (2025-09-22)
+### Stage 1: Authenticated Home Page - ✅ WORKING (2025-09-22)
 **Purpose**: Get to the authenticated home page state
 **Critical Stage**: ✅ **AI needs Playwright support for authentication**
 
-**WORKING APPROACH**: Development bypass with real authentication
+**PLAYWRIGHT SCRIPT AVAILABLE**: `scripts/staging/auth-bypass.js`
 
-**Staging Instructions**:
+**Quick Usage**:
+```bash
+node scripts/staging/auth-bypass.js
+```
+
+**Manual Staging Instructions** (if needed):
 ```
 Navigate to http://localhost:3000 and authenticate using the development bypass.
 
@@ -51,7 +80,7 @@ Steps:
 6. Take a screenshot of the authenticated state
 7. Return control to main agent
 
-Handoff: Screenshot of authenticated home page with real user session active
+Handoff: Screenshot saved as stage1-authenticated-home.png
 ```
 
 **What the AI can do next**:
@@ -63,11 +92,16 @@ Handoff: Screenshot of authenticated home page with real user session active
 
 ---
 
-### Stage 2: Upload Interface with Image - ✅ COMPLETED (2025-09-22)
+### Stage 2: Upload Interface with Image - ✅ WORKING (2025-09-22)
 **Purpose**: Get to the upload interface with an image uploaded
 **Critical Stage**: ✅ **AI needs Playwright support for file upload**
 
-**WORKING SOLUTION**: Playwright MCP file upload automation
+**PLAYWRIGHT SCRIPT AVAILABLE**: `scripts/staging/upload-ready.js`
+
+**Quick Usage**:
+```bash
+node scripts/staging/upload-ready.js
+```
 
 **Staging Instructions**:
 ```
@@ -105,7 +139,35 @@ await mcp__playwright__browser_take_screenshot({ "filename": "stage2-upload-inte
 
 ---
 
-### Stage 3: Parameter Selection Interface
+### Stage 3: Generation Workflow (with Error Capture) - ✅ WORKING (2025-09-22)
+**Purpose**: Test complete generation workflow and capture current errors
+**Critical Stage**: ⚠️ **Generation has known issues - script captures errors for analysis**
+
+**PLAYWRIGHT SCRIPT AVAILABLE**: `scripts/staging/generation-complete.js`
+
+**Quick Usage**:
+```bash
+node scripts/staging/generation-complete.js
+```
+
+**What it does**:
+- Completes authentication and upload (Stages 1-2)
+- Sets default parameters (standard complexity, medium thickness)
+- Clicks "Generate Coloring Page" button
+- Monitors for success/error states
+- Captures console logs and API requests
+- Takes screenshots at each step
+- **Expected outcome**: Currently captures API errors for debugging
+
+**Output**:
+- `stage3-before-parameters.png` - Parameter selection interface
+- `stage3-parameters-set.png` - Parameters configured
+- `stage3-generation-result.png` - Final result (currently error state)
+- Console logs with API calls and errors
+
+---
+
+### Stage 3 (Legacy): Parameter Selection Interface
 **Purpose**: Get to the parameter selection interface with options visible
 **AI Capable**: ✅ **AI can handle this manually, but Playwright is more reliable**
 
