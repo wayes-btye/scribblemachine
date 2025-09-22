@@ -4,6 +4,20 @@ This file serves as a development scratchpad for tracking progress, notes, and d
 
 ## Last 5 Entries
 
+### [2025-09-22T12:45:00Z] — Session Summary
+**Focus:** Playwright Staging Scripts Implementation - Clean Screenshot Management
+**Done:**
+- Created three self-contained Playwright scripts (auth-bypass.js, upload-ready.js, generation-complete.js)
+- Implemented clean screenshot management in scripts/screenshots/ directory
+- Updated CLAUDE.md with UI staging guidance prioritizing scripts over manual MCP commands
+**Next:**
+- AI agents can use fast staging scripts to reach application states in < 90 seconds
+- Screenshots contained and gitignored, root directory stays clean
+**Decisions:**
+- Playwright scripts faster and more reliable than MCP instruction sequences
+- Clean file organization prevents screenshot clutter in project root
+- Scripts handle critical authentication and file upload barriers AI agents struggle with
+
 ### [2025-09-22T08:45:00Z] — Session Summary
 **Focus:** Authentication Bypass Solution - Real User Authentication Implementation
 **Done:**
@@ -589,4 +603,27 @@ This file serves as a development scratchpad for tracking progress, notes, and d
 - Authentication bypass button only appears in development mode for security
 - Successfully validated: homepage auth, credits API (shows 50 credits), /create route access
 - Previous magic link and token generation approaches documented but deprecated
+
+### [2025-09-22T12:45:00Z] — Session Summary
+**Focus:** Playwright Staging Scripts Implementation - Clean Screenshot Management
+**Done:**
+- Created three self-contained Playwright scripts for AI agent staging (auth-bypass.js, upload-ready.js, generation-complete.js)
+- Implemented clean screenshot management in scripts/screenshots/ directory with .gitignore exclusion
+- Updated CLAUDE.md with UI staging guidance prioritizing scripts over manual MCP commands
+- Reorganized legacy files into proper scripts/staging/ and scripts/testing/ structure
+- Added comprehensive documentation in scripts/README.md with usage patterns and cleanup commands
+**Next:**
+- AI agents can use fast staging scripts to reach application states (auth < 30s, upload < 60s, generation < 90s)
+- Screenshots contained and automatically ignored by git, root directory stays clean
+- Scripts provide "jump to state" capabilities with error capture for debugging current generation issues
+**Decisions:**
+- Playwright scripts significantly faster and more reliable than verbose MCP instruction sequences
+- Clean file organization prevents screenshot clutter in project root directory
+- Scripts handle critical authentication and file upload barriers that AI agents struggle with manually
+- Legacy MCP instructions preserved but moved to appropriate directories
+**Notes:**
+- All scripts tested and verified working with current application setup
+- Scripts capture current generation workflow errors for debugging analysis
+- Screenshot management: scripts/screenshots/ directory, rm scripts/screenshots/*.png for cleanup
+- Documentation updated in CLAUDE.md, TEST_EXECUTION_GUIDE.md, and scripts/README.md
 
