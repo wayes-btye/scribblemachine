@@ -1,8 +1,10 @@
 import 'dotenv/config';
 import { v4 as uuidv4 } from 'uuid';
-import { validateEnv } from '@coloringpage/config';
+import { validateEnv, config } from '@coloringpage/config';
 import { createSupabaseAdminClient } from '@coloringpage/database';
 import { createGeminiService, GenerationRequest } from './services/gemini-service';
+import PDFDocument from 'pdfkit';
+import sharp from 'sharp';
 
 interface Job {
   id: string;
@@ -15,6 +17,68 @@ interface Job {
     custom_prompt?: string;
   };
   created_at: string;
+}
+
+async function createPDFFromPNG(pngBuffer: Buffer): Promise<Buffer> {
+  // Use A4 as default paper size (8.27 x 11.69 inches = 595 x 842 points)
+  const paperWidth = 595;
+  const paperHeight = 842;
+  const marginPoints = (config.pdf.marginMM / 25.4) * 72; // Convert mm to points
+
+  // Process image to fit within margins
+  const contentWidth = paperWidth - (marginPoints * 2);
+  const contentHeight = paperHeight - (marginPoints * 2);
+
+  const processedImage = await sharp(pngBuffer)
+    .resize(
+      Math.floor(contentWidth),
+      Math.floor(contentHeight),
+      {
+        fit: 'inside',
+        withoutEnlargement: true,
+      }
+    )
+    .png()
+    .toBuffer();
+
+  // Create PDF document
+  const doc = new PDFDocument({
+    size: [paperWidth, paperHeight],
+    margins: {
+      top: marginPoints,
+      bottom: marginPoints,
+      left: marginPoints,
+      right: marginPoints,
+    },
+  });
+
+  // Get image metadata for centering
+  const imageMetadata = await sharp(processedImage).metadata();
+  const imageWidth = imageMetadata.width!;
+  const imageHeight = imageMetadata.height!;
+
+  // Center the image
+  const x = (paperWidth - imageWidth) / 2;
+  const y = (paperHeight - imageHeight) / 2;
+
+  // Add the image to PDF
+  doc.image(processedImage, x, y, {
+    width: imageWidth,
+    height: imageHeight,
+  });
+
+  // Convert PDF to buffer
+  const pdfChunks: Buffer[] = [];
+  doc.on('data', (chunk) => pdfChunks.push(chunk));
+
+  const pdfBuffer = await new Promise<Buffer>((resolve) => {
+    doc.on('end', () => {
+      resolve(Buffer.concat(pdfChunks));
+    });
+    doc.end();
+  });
+
+  return pdfBuffer;
 }
 
 async function main() {
@@ -169,6 +233,44 @@ async function processGenerationJob(job: Job, supabase: any, geminiService: any)
     }
 
     console.log(`  ✅ Created edge_map asset: ${edgeAssetId}`);
+
+    // Generate PDF from the PNG coloring page
+    console.log(`  📄 Generating PDF from coloring page...`);
+    try {
+      const pdfBuffer = await createPDFFromPNG(edgeMapBuffer);
+      const pdfPath = `${job.user_id}/${job.id}/coloring_page.pdf`;
+
+      // Upload PDF to artifacts bucket
+      const { error: pdfUploadError } = await supabase.storage
+        .from('artifacts')
+        .upload(pdfPath, pdfBuffer, {
+          contentType: 'application/pdf',
+          upsert: true,
+        });
+
+      if (pdfUploadError) {
+        console.warn(`⚠️ PDF upload failed (non-blocking): ${pdfUploadError.message}`);
+      } else {
+        // Create PDF asset record
+        const pdfAssetId = uuidv4();
+        const { error: pdfInsertError } = await supabase.from('assets').insert({
+          id: pdfAssetId,
+          user_id: job.user_id,
+          kind: 'pdf',
+          storage_path: pdfPath,
+          bytes: pdfBuffer.length,
+          created_at: new Date().toISOString()
+        });
+
+        if (pdfInsertError) {
+          console.warn(`⚠️ PDF asset record failed (non-blocking): ${pdfInsertError.message}`);
+        } else {
+          console.log(`  ✅ Created PDF asset: ${pdfAssetId} (${Math.round(pdfBuffer.length / 1024)}KB)`);
+        }
+      }
+    } catch (pdfError: any) {
+      console.warn(`⚠️ PDF generation failed (non-blocking): ${pdfError.message}`);
+    }
 
     // Update job as completed with metadata
     await supabase

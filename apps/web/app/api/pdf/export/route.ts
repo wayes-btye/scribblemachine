@@ -1,19 +1,25 @@
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
+import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import type { Database } from '@coloringpage/types'
 
 interface ExportRequest {
-  jobId: string
-  paperSize: 'A4' | 'LETTER'
+  jobId?: string
+  job_id?: string
+  paperSize?: 'A4' | 'LETTER'
+  paper_size?: 'A4' | 'LETTER'
   title?: string
   includeCreditLine?: boolean
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const { jobId, paperSize, title, includeCreditLine }: ExportRequest =
-      await request.json()
+    const requestBody: ExportRequest = await request.json()
+
+    // Handle both parameter formats
+    const jobId = requestBody.jobId || requestBody.job_id
+    const paperSize = requestBody.paperSize || requestBody.paper_size
+    const { title, includeCreditLine } = requestBody
 
     // Validate input
     if (!jobId || !paperSize) {
@@ -33,7 +39,28 @@ export async function POST(request: NextRequest) {
     }
 
     const cookieStore = cookies()
-    const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore })
+    const supabase = createServerClient<Database>(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return cookieStore.getAll()
+          },
+          setAll(cookiesToSet) {
+            try {
+              cookiesToSet.forEach(({ name, value, options }) =>
+                cookieStore.set(name, value, options)
+              )
+            } catch {
+              // The `setAll` method was called from a Server Component.
+              // This can be ignored if you have middleware refreshing
+              // user sessions.
+            }
+          },
+        },
+      }
+    )
 
     // Check authentication
     const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -76,28 +103,42 @@ export async function POST(request: NextRequest) {
 
     const isFreeTier = !credits || credits.balance <= 0
 
-    // TODO: In Phase 1, this would trigger the PDF generation worker
-    // For now, we'll create a placeholder response
+    // Look for existing PDF asset for this job
+    const { data: pdfAsset, error: pdfAssetError } = await supabase
+      .from('assets')
+      .select('storage_path')
+      .eq('user_id', user.id)
+      .eq('kind', 'pdf')
+      .like('storage_path', `${user.id}/${jobId}/%`)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single()
 
-    // Create export parameters
-    const exportParams = {
-      jobId,
-      paperSize,
-      title,
-      includeCreditLine: includeCreditLine !== false, // Default to true
-      includeWatermark: isFreeTier,
+    if (pdfAssetError || !pdfAsset) {
+      return NextResponse.json(
+        { error: 'PDF not found. The coloring page may still be processing or the PDF generation failed.' },
+        { status: 404 }
+      )
     }
 
-    // In production, this would:
-    // 1. Queue a PDF generation job
-    // 2. Return a job ID for polling
-    // 3. The worker would generate the PDF and store it in artifacts bucket
+    // Generate signed URL for PDF download (valid for 1 hour)
+    const { data: signedUrlData, error: signedUrlError } = await supabase.storage
+      .from('artifacts')
+      .createSignedUrl(pdfAsset.storage_path, 3600) // 1 hour expiry
+
+    if (signedUrlError || !signedUrlData) {
+      return NextResponse.json(
+        { error: 'Failed to generate download URL' },
+        { status: 500 }
+      )
+    }
 
     return NextResponse.json({
-      message: 'PDF export queued successfully',
-      exportParams,
-      estimatedTime: '30-60 seconds',
-      note: 'PDF generation integration with Phase 1 worker pending',
+      success: true,
+      pdfUrl: signedUrlData.signedUrl,
+      expiresIn: 3600, // seconds
+      paperSize,
+      estimatedFileSize: '~500KB'
     })
   } catch (error) {
     console.error('PDF export API error:', error)

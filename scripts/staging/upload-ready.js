@@ -199,9 +199,8 @@ async function main() {
     };
 
   } finally {
-    if (browser) {
-      await browser.close();
-    }
+    // Browser kept open for subsequent screenshot/testing
+    // Note: browser.close() removed to allow AI agents to take screenshots
   }
 }
 
