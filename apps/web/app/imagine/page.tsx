@@ -27,6 +27,13 @@ export default function ImaginePage() {
   }
 
   const handleGenerationComplete = (job: Job) => {
+    console.log('✅ GENERATION COMPLETE HANDLER:')
+    console.log('  Completed job ID:', job.id)
+    console.log('  Job status:', job.status)
+    console.log('  Is edit job:', !!job.params_json?.edit_parent_id)
+    console.log('  Edit prompt:', job.params_json?.edit_prompt)
+    console.log('  Setting isGenerating=false to show ResultPreview')
+
     setCurrentJob(job)
     setIsGenerating(false)
   }
@@ -39,8 +46,18 @@ export default function ImaginePage() {
 
   const handleEditJobCreated = (editJob: Job) => {
     // Switch to tracking the edit job instead of the original
+    console.log('🔄 EDIT JOB CREATED - Switching job tracking:')
+    console.log('  Previous job ID:', currentJob?.id)
+    console.log('  Previous job status:', currentJob?.status)
+    console.log('  NEW edit job ID:', editJob.id)
+    console.log('  Edit job status:', editJob.status)
+    console.log('  Edit prompt:', editJob.params_json?.edit_prompt)
+    console.log('  Edit parent ID:', editJob.params_json?.edit_parent_id)
+
     setCurrentJob(editJob)
     setIsGenerating(true)
+
+    console.log('  ✅ State updated: currentJob set to edit job, isGenerating=true')
   }
 
   return (
@@ -82,9 +99,12 @@ export default function ImaginePage() {
                 </Card>
               )}
 
-              {currentJob && (
+              {/* Show GenerationProgress when actively generating */}
+              {currentJob && isGenerating && (
                 <Card className="p-6">
-                  <h2 className="text-xl font-semibold mb-4">Generation Progress</h2>
+                  <h2 className="text-xl font-semibold mb-4">
+                    {currentJob.params_json?.edit_parent_id ? 'Edit Progress' : 'Generation Progress'}
+                  </h2>
                   <GenerationProgress
                     job={currentJob}
                     onComplete={handleGenerationComplete}
@@ -92,7 +112,8 @@ export default function ImaginePage() {
                 </Card>
               )}
 
-              {currentJob?.status === 'succeeded' && (
+              {/* Show ResultPreview only when not actively generating and job is complete */}
+              {currentJob?.status === 'succeeded' && !isGenerating && (
                 <Card className="p-6">
                   <h2 className="text-xl font-semibold mb-4">Your Coloring Page</h2>
                   <ResultPreview
