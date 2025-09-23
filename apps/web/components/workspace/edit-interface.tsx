@@ -104,7 +104,17 @@ export function EditInterface({ job, onEditJobCreated }: EditInterfaceProps) {
       setEditPrompt('')
 
       // Notify parent component about the new edit job
+      console.log('📝 EDIT SUBMISSION SUCCESS:')
+      console.log('  Original job ID:', job.id)
+      console.log('  Edit prompt:', editPrompt.trim())
+      console.log('  Created edit job ID:', editJob.id)
+      console.log('  Edit job status:', editJob.status)
+      console.log('  Edit job params:', editJob.params_json)
+      console.log('  Calling onEditJobCreated callback...')
+
       onEditJobCreated(editJob)
+
+      console.log('  ✅ Edit job callback completed, showing toast')
 
       toast({
         title: 'Edit started',

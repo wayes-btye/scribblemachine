@@ -48,8 +48,16 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
   const [startTime] = useState(Date.now())
   const [elapsedTime, setElapsedTime] = useState(0)
 
+  // Log when component receives a job
+  console.log('🔄 GENERATION PROGRESS COMPONENT INITIALIZED:')
+  console.log('  Job ID:', initialJob?.id)
+  console.log('  Job status:', initialJob?.status)
+  console.log('  Is edit job:', !!initialJob?.params_json?.edit_parent_id)
+  console.log('  Edit prompt:', initialJob?.params_json?.edit_prompt)
+
   // Early return if job is invalid
   if (!job || !job.id) {
+    console.log('❌ GENERATION PROGRESS: Invalid job data received')
     return (
       <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />
@@ -62,24 +70,43 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
 
   // Poll for job status updates
   useEffect(() => {
+    console.log('📊 POLLING USEEFFECT TRIGGERED:')
+    console.log('  Job ID:', job.id)
+    console.log('  Job status:', job.status)
+    console.log('  Is edit job:', !!job.params_json?.edit_parent_id)
+
     if (!job.id || job.status === 'succeeded' || job.status === 'failed') {
+      console.log('  🛑 SKIPPING POLLING:', job.status === 'succeeded' ? 'Job completed' : job.status === 'failed' ? 'Job failed' : 'No job ID')
       if (job.status === 'succeeded' || job.status === 'failed') {
+        console.log('  📞 Calling onComplete callback')
         onComplete(job)
       }
       return
     }
+
+    console.log('  ⏳ STARTING POLLING for job:', job.id)
 
     const pollJob = async () => {
       try {
         const response = await fetch(`/api/jobs/${job.id}`)
         if (response.ok) {
           const updatedJob: Job = await response.json()
-          console.log('Job update received:', updatedJob.id, 'Status:', updatedJob.status, 'Download URLs:', updatedJob.download_urls)
+          console.log('📥 JOB UPDATE RECEIVED:')
+          console.log('  Job ID:', updatedJob.id)
+          console.log('  Status:', updatedJob.status)
+          console.log('  Is edit job:', !!updatedJob.params_json?.edit_parent_id)
+          console.log('  Edit prompt:', updatedJob.params_json?.edit_prompt)
+          console.log('  Download URLs:', updatedJob.download_urls)
+          console.log('  Has edge_map URL:', !!updatedJob.download_urls?.edge_map)
+
           setJob(updatedJob)
 
           if (updatedJob.status === 'succeeded' || updatedJob.status === 'failed') {
+            console.log('  🎯 JOB COMPLETED:', updatedJob.status, '- calling onComplete')
             onComplete(updatedJob)
           }
+        } else {
+          console.log('❌ Failed to fetch job update, status:', response.status)
         }
       } catch (error) {
         console.error('Failed to poll job status:', error)
@@ -87,11 +114,17 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
     }
 
     // Start polling immediately instead of waiting for interval
+    console.log('  🚀 Starting immediate first poll...')
     pollJob() // Immediate first poll
 
     // Poll every 2 seconds
+    console.log('  ⏰ Setting up 2-second polling interval')
     const interval = setInterval(pollJob, 2000)
-    return () => clearInterval(interval)
+
+    return () => {
+      console.log('  🛑 Cleaning up polling interval for job:', job.id)
+      clearInterval(interval)
+    }
   }, [job.id, job.status, onComplete])
 
   // Update elapsed time
