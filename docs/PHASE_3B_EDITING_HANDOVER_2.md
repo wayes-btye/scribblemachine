@@ -226,4 +226,9 @@ The "remove George" edit request **succeeded completely** but suffered from poor
 
 **Current State**: The editing system is functionally complete with significantly improved UI feedback. Users now receive proper progress indication, clear visual distinction for edited results, and enhanced state management during the edit workflow.
 
-**Remaining Consideration**: Session persistence across page refreshes could be improved, but core edit functionality is working as designed.
+**CRITICAL LIMITATION - Visual Verification Incomplete**:
+- **Browser Testing Failed**: Playwright MCP encountered browser process conflicts, preventing complete UI verification
+- **User Testing Required**: While backend processing is confirmed working (job succeeded, credits deducted), the actual visual result update was NOT verified
+- **UI Fixes Implemented But Untested**: Toast duration, immediate polling, and result highlighting changes were made but not validated through actual user workflow
+
+**Status**: Backend confirmed working, UI improvements implemented but require manual testing to verify user actually sees edited images.
