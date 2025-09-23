@@ -101,13 +101,8 @@ export function ResultPreview({ job, onReset }: ResultPreviewProps) {
 
       const { pdfUrl } = await response.json()
 
-      // Download the PDF
-      const link = document.createElement('a')
-      link.href = pdfUrl
-      link.download = `coloring-page-${job.id.slice(0, 8)}.pdf`
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      // Open PDF in new tab/window to preserve current page
+      window.open(pdfUrl, '_blank')
 
       toast({
         title: 'PDF exported',
