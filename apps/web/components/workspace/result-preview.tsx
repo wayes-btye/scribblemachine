@@ -8,6 +8,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { FileImage, FileText, RotateCcw, Share2, Printer, AlertCircle } from 'lucide-react'
 import { toast } from '@/components/ui/use-toast'
 import type { Job } from '@coloringpage/types'
+import { EditInterface } from './edit-interface'
 
 // Extended job type that includes download URLs from API
 interface JobWithDownloads extends Job {
@@ -21,12 +22,16 @@ interface JobWithDownloads extends Job {
 interface ResultPreviewProps {
   job: JobWithDownloads
   onReset: () => void
+  onEditJobCreated?: (editJob: Job) => void
 }
 
-export function ResultPreview({ job, onReset }: ResultPreviewProps) {
+export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewProps) {
   const [downloading, setDownloading] = useState(false)
   const [exporting, setExporting] = useState(false)
   const [imageError, setImageError] = useState(false)
+
+  // Check if this is an edited job
+  const isEditedJob = job.params_json?.edit_parent_id || job.params_json?.edit_prompt
 
   // Get the download URL from job data
   const getDownloadUrl = () => {
@@ -130,7 +135,16 @@ export function ResultPreview({ job, onReset }: ResultPreviewProps) {
       {/* Generated Image Preview */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold">Generated Coloring Page</h3>
+          <div className="flex items-center gap-2">
+            <h3 className="text-lg font-semibold">
+              {isEditedJob ? "Edited Coloring Page" : "Generated Coloring Page"}
+            </h3>
+            {isEditedJob && (
+              <Badge className="bg-blue-100 text-blue-800 border-blue-200">
+                ✨ Edited
+              </Badge>
+            )}
+          </div>
           <Badge variant="outline" className="text-green-600 border-green-200">
             ✓ Complete
           </Badge>
@@ -163,7 +177,16 @@ export function ResultPreview({ job, onReset }: ResultPreviewProps) {
 
       {/* Job Information */}
       <div className="bg-gray-50 p-4 rounded-lg">
-        <h4 className="font-medium mb-3">Generation Details</h4>
+        <h4 className="font-medium mb-3">{isEditedJob ? "Edit Details" : "Generation Details"}</h4>
+
+        {/* Edit Prompt (if this is an edited job) */}
+        {isEditedJob && job.params_json?.edit_prompt && (
+          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+            <span className="text-blue-700 font-medium text-sm">Edit Request:</span>
+            <p className="text-blue-800 text-sm mt-1">"{job.params_json.edit_prompt}"</p>
+          </div>
+        )}
+
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
             <span className="text-gray-600">Complexity:</span>
@@ -192,6 +215,14 @@ export function ResultPreview({ job, onReset }: ResultPreviewProps) {
           </div>
         </div>
       </div>
+
+      {/* Edit Interface */}
+      {onEditJobCreated && (
+        <>
+          <Separator />
+          <EditInterface job={job} onEditJobCreated={onEditJobCreated} />
+        </>
+      )}
 
       <Separator />
 

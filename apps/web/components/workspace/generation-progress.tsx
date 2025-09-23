@@ -74,6 +74,7 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
         const response = await fetch(`/api/jobs/${job.id}`)
         if (response.ok) {
           const updatedJob: Job = await response.json()
+          console.log('Job update received:', updatedJob.id, 'Status:', updatedJob.status, 'Download URLs:', updatedJob.download_urls)
           setJob(updatedJob)
 
           if (updatedJob.status === 'succeeded' || updatedJob.status === 'failed') {
@@ -84,6 +85,9 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
         console.error('Failed to poll job status:', error)
       }
     }
+
+    // Start polling immediately instead of waiting for interval
+    pollJob() // Immediate first poll
 
     // Poll every 2 seconds
     const interval = setInterval(pollJob, 2000)
