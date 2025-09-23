@@ -189,7 +189,8 @@ Key types defined in `packages/types/src/index.ts`:
 - **NEVER create new log/summary files** - always use `docs/work_log.md`
 - **After any meaningful action** (code change, command, file creation, major decision), append an entry at the END
 - **Always keep entries in chronological order** (oldest at top, newest at bottom)
-- **Update "Last 5 Entries" section** at the top by copying the most recent 5 entries verbatim
+- **To check recent activity**: Read the last 5-10 entries from the end of the file using `read_file` with offset/limit
+- **Example**: `read_file("docs/work_log.md", offset=-50)` to see recent entries
 
 ### Entry Templates
 Use one of two templates:
@@ -222,7 +223,7 @@ Use one of two templates:
 - Max 3 bullets per list
 - Do not paste large code or logs; link to diffs/PRs/issues instead
 - Do not overwrite existing entries; append only
-- Every time you update, refresh the "Last 5 Entries" section at the top
+- Always append new entries at the end (chronological order)
 
 ## MCP Server Usage
 
