@@ -241,6 +241,12 @@ The project is configured to work with these MCP servers:
 - **Best practice**: Use to verify current schema, check RLS policies, debug auth flows, and validate configurations
 - **Example**: Managing RLS policies, storage bucket configurations, or complex joins
 
+### ShadCN MCP
+- **Use for**: Component library management, adding new UI components, and staying current with shadcn/ui
+- **CRITICAL**: Always check ShadCN MCP when adding new UI components or updating existing ones
+- **Best practice**: Use to discover available components, check component props, and ensure we're using the latest shadcn/ui patterns
+- **Example**: "Add a new dialog component" or "Update button component with latest shadcn/ui features"
+
 ### Playwright MCP
 - **Use for**: Interactive UI testing and workflow validation
 - **CRITICAL**: Always use after ANY UI changes to verify updates work correctly
