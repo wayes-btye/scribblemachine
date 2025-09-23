@@ -18,6 +18,12 @@ export interface GenerationRequest {
   customPrompt?: string;
 }
 
+export interface TextGenerationRequest {
+  textPrompt: string;
+  complexity: 'simple' | 'standard' | 'detailed';
+  lineThickness: 'thin' | 'medium' | 'thick';
+}
+
 export interface GenerationResult {
   success: boolean;
   imageBase64?: string;
@@ -55,6 +61,52 @@ export class GeminiService {
   constructor(config: GeminiServiceConfig) {
     this.config = config;
     this.genAI = new GoogleGenerativeAI(config.apiKey);
+  }
+
+  /**
+   * Generate coloring page from text prompt
+   */
+  async generateColoringPageFromText(request: TextGenerationRequest): Promise<GenerationResult> {
+    const startTime = Date.now();
+
+    try {
+      // Validate input
+      this.validateTextRequest(request);
+
+      // Generate prompt based on complexity and line thickness
+      const prompt = this.buildTextPrompt(request.textPrompt, request.complexity, request.lineThickness);
+
+      // Attempt generation with retry logic
+      const result = await this.generateFromTextWithRetry(prompt);
+
+      const responseTime = Date.now() - startTime;
+
+      return {
+        success: true,
+        imageBase64: result,
+        metadata: {
+          responseTimeMs: responseTime,
+          cost: COST_PER_GENERATION,
+          model: this.config.model,
+          promptUsed: prompt
+        }
+      };
+
+    } catch (error) {
+      const responseTime = Date.now() - startTime;
+      const geminiError = this.categorizeError(error);
+
+      return {
+        success: false,
+        error: geminiError,
+        metadata: {
+          responseTimeMs: responseTime,
+          cost: geminiError.retryable ? 0 : COST_PER_GENERATION, // Don't charge for retryable failures
+          model: this.config.model,
+          promptUsed: this.buildTextPrompt(request.textPrompt, request.complexity, request.lineThickness)
+        }
+      };
+    }
   }
 
   /**
@@ -285,6 +337,129 @@ export class GeminiService {
       retryable: true,
       originalError: error
     };
+  }
+
+  /**
+   * Build prompt for text-to-image generation
+   */
+  private buildTextPrompt(textPrompt: string, complexity: string, lineThickness: string): string {
+    // Start with the user's idea
+    let prompt = `Create a black and white coloring page of: ${textPrompt}. `;
+
+    // Complexity mapping (from PRD: Simple/Standard/Detailed)
+    switch (complexity) {
+      case 'simple':
+        prompt += `Make it a simple coloring page for children ages 4-6. Use very basic shapes with minimal detail. `;
+        prompt += `Simplify complex elements into large, easy-to-color regions. Remove small details and merge similar elements. `;
+        break;
+      case 'standard':
+        prompt += `Make it a standard coloring page for children ages 6-10. Include moderate detail while keeping shapes manageable. `;
+        prompt += `Maintain important features but simplify textures and backgrounds. `;
+        break;
+      case 'detailed':
+        prompt += `Make it a detailed coloring page for children ages 8-12 and adults. Preserve fine details and intricate patterns. `;
+        prompt += `Include background elements and complex textures that can be colored separately. `;
+        break;
+    }
+
+    // Line thickness mapping (from PRD: Thin/Medium/Thick)
+    switch (lineThickness) {
+      case 'thin':
+        prompt += `Use thin, precise lines (1-1.5px width at 300 DPI) for detailed work. `;
+        break;
+      case 'medium':
+        prompt += `Use medium-weight lines (2-3px width at 300 DPI) for balanced coloring. `;
+        break;
+      case 'thick':
+        prompt += `Use thick, bold lines (3-4px width at 300 DPI) perfect for younger children and crayons. `;
+        break;
+    }
+
+    // Common requirements for all variations
+    prompt += `Requirements: `;
+    prompt += `- Pure black lines (#000000) on pure white background (#FFFFFF) `;
+    prompt += `- No colors, shading, gradients, or gray tones `;
+    prompt += `- Clean, continuous outlines with no gaps `;
+    prompt += `- Closed shapes that can be easily filled with color `;
+    prompt += `- Cartoon or illustration style, not photorealistic `;
+    prompt += `- Ensure the result is suitable for printing and coloring with crayons, markers, or colored pencils. `;
+
+    return prompt;
+  }
+
+  /**
+   * Generate image from text with retry logic
+   */
+  private async generateFromTextWithRetry(prompt: string): Promise<string> {
+    const model = this.genAI.getGenerativeModel({ model: this.config.model });
+
+    let lastError: any;
+
+    for (let attempt = 0; attempt <= this.config.maxRetries; attempt++) {
+      try {
+        const result = await model.generateContent([
+          {
+            text: prompt
+          }
+        ]);
+
+        const response = await result.response;
+        const candidates = response.candidates;
+
+        if (candidates && candidates.length > 0) {
+          const parts = candidates[0].content?.parts;
+          if (parts && parts.length > 0) {
+            for (const part of parts) {
+              if (part.inlineData && part.inlineData.data) {
+                return part.inlineData.data;
+              }
+            }
+          }
+        }
+
+        throw new Error('No image data returned from Gemini API');
+
+      } catch (error) {
+        lastError = error;
+        const errorType = this.categorizeError(error);
+
+        // Don't retry for non-retryable errors
+        if (!errorType.retryable || attempt === this.config.maxRetries) {
+          throw error;
+        }
+
+        // Exponential backoff: 1s, 2s, 4s
+        const delay = this.config.retryDelayMs * Math.pow(2, attempt);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+    }
+
+    throw lastError;
+  }
+
+  /**
+   * Validate text generation request
+   */
+  private validateTextRequest(request: TextGenerationRequest): void {
+    if (!request.textPrompt || typeof request.textPrompt !== 'string') {
+      throw new Error('Text prompt is required');
+    }
+
+    if (request.textPrompt.length < 5) {
+      throw new Error('Text prompt must be at least 5 characters');
+    }
+
+    if (request.textPrompt.length > 500) {
+      throw new Error('Text prompt must be less than 500 characters');
+    }
+
+    if (!['simple', 'standard', 'detailed'].includes(request.complexity)) {
+      throw new Error('Invalid complexity level');
+    }
+
+    if (!['thin', 'medium', 'thick'].includes(request.lineThickness)) {
+      throw new Error('Invalid line thickness');
+    }
   }
 
   /**

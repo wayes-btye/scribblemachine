@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { v4 as uuidv4 } from 'uuid';
 import { validateEnv, config } from '@coloringpage/config';
 import { createSupabaseAdminClient } from '@coloringpage/database';
-import { createGeminiService, GenerationRequest } from './services/gemini-service';
+import { createGeminiService, GenerationRequest, TextGenerationRequest } from './services/gemini-service';
 import PDFDocument from 'pdfkit';
 import sharp from 'sharp';
 
@@ -11,7 +11,8 @@ interface Job {
   user_id: string;
   status: string;
   params_json: {
-    asset_id: string;
+    asset_id?: string; // Optional for text-based jobs
+    text_prompt?: string; // For text-to-image jobs
     complexity: 'simple' | 'standard' | 'detailed';
     line_thickness: 'thin' | 'medium' | 'thick';
     custom_prompt?: string;
@@ -159,43 +160,68 @@ async function processGenerationJob(job: Job, supabase: any, geminiService: any)
   const startTime = Date.now();
 
   try {
-    // Get original asset
-    const { data: asset, error: assetError } = await supabase
-      .from('assets')
-      .select('storage_path')
-      .eq('id', job.params_json.asset_id)
-      .eq('kind', 'original')
-      .single();
+    let result;
 
-    if (assetError || !asset) {
-      throw new Error(`Original asset ${job.params_json.asset_id} not found`);
+    // Check if this is a text-based job or image-based job
+    if (job.params_json.text_prompt) {
+      // Text-to-image generation
+      console.log(`  Text prompt: "${job.params_json.text_prompt}"`);
+
+      const textRequest: TextGenerationRequest = {
+        textPrompt: job.params_json.text_prompt,
+        complexity: job.params_json.complexity,
+        lineThickness: job.params_json.line_thickness
+      };
+
+      console.log(`  Sending text request to Gemini (${job.params_json.complexity}, ${job.params_json.line_thickness})`);
+
+      // Generate coloring page from text with Gemini
+      result = await geminiService.generateColoringPageFromText(textRequest);
+
+    } else if (job.params_json.asset_id) {
+      // Image-to-image generation (existing logic)
+
+      // Get original asset
+      const { data: asset, error: assetError } = await supabase
+        .from('assets')
+        .select('storage_path')
+        .eq('id', job.params_json.asset_id)
+        .eq('kind', 'original')
+        .single();
+
+      if (assetError || !asset) {
+        throw new Error(`Original asset ${job.params_json.asset_id} not found`);
+      }
+
+      // Download original image
+      const { data: imageData, error: downloadError } = await supabase.storage
+        .from('originals')
+        .download(asset.storage_path);
+
+      if (downloadError || !imageData) {
+        throw new Error('Failed to download original image');
+      }
+
+      // Convert to base64 for Gemini service
+      const buffer = Buffer.from(await imageData.arrayBuffer());
+      const base64Image = buffer.toString('base64');
+
+      // Create Gemini generation request
+      const geminiRequest: GenerationRequest = {
+        imageBase64: base64Image,
+        mimeType: 'image/jpeg',
+        complexity: job.params_json.complexity,
+        lineThickness: job.params_json.line_thickness
+      };
+
+      console.log(`  Sending image request to Gemini (${job.params_json.complexity}, ${job.params_json.line_thickness})`);
+
+      // Generate coloring page with Gemini
+      result = await geminiService.generateColoringPage(geminiRequest);
+
+    } else {
+      throw new Error('Job must have either text_prompt or asset_id');
     }
-
-    // Download original image
-    const { data: imageData, error: downloadError } = await supabase.storage
-      .from('originals')
-      .download(asset.storage_path);
-
-    if (downloadError || !imageData) {
-      throw new Error('Failed to download original image');
-    }
-
-    // Convert to base64 for Gemini service
-    const buffer = Buffer.from(await imageData.arrayBuffer());
-    const base64Image = buffer.toString('base64');
-
-    // Create Gemini generation request
-    const geminiRequest: GenerationRequest = {
-      imageBase64: base64Image,
-      mimeType: 'image/jpeg',
-      complexity: job.params_json.complexity,
-      lineThickness: job.params_json.line_thickness
-    };
-
-    console.log(`  Sending request to Gemini (${job.params_json.complexity}, ${job.params_json.line_thickness})`);
-
-    // Generate coloring page with Gemini
-    const result = await geminiService.generateColoringPage(geminiRequest);
 
     if (!result.success || !result.imageBase64) {
       throw new Error(result.error?.message || 'Generation failed');

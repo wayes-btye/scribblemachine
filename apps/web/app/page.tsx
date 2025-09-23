@@ -38,14 +38,16 @@ export default function Home() {
                 Upload Photo - It&apos;s FREE!
               </Button>
             </Link>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-brand-warm-orange text-brand-warm-orange hover:bg-brand-warm-orange/10 text-lg px-8 py-4 rounded-2xl"
-            >
-              <Sparkles className="mr-2 h-5 w-5" />
-              Imagine An Idea
-            </Button>
+            <Link href="/imagine">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-brand-warm-orange text-brand-warm-orange hover:bg-brand-warm-orange/10 text-lg px-8 py-4 rounded-2xl"
+              >
+                <Sparkles className="mr-2 h-5 w-5" />
+                Imagine An Idea
+              </Button>
+            </Link>
           </div>
 
           {/* Status Bar */}

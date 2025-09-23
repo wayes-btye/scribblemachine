@@ -76,18 +76,18 @@ From comprehensive review and hands-on Playwright testing:
 ### **Session 3B-Extended.1: Core Missing Features (4-5 hours)**
 **Goal**: Implement primary competitive differentiators and engagement features
 
-#### **Prerequisites & Verification (30 min)**
-- [ ] Test Gemini API text-to-image generation capability
-- [ ] Test Gemini API image+prompt editing capability
-- [ ] Verify current service architecture compatibility
+#### **Prerequisites & Verification (30 min)** ✅ COMPLETE
+- [x] Test Gemini API text-to-image generation capability
+- [ ] Test Gemini API image+prompt editing capability (deferred to editing system)
+- [x] Verify current service architecture compatibility
 
-#### **"Imagine An Idea" Text-to-Image Flow (2 hours)**
-- [ ] Create text input interface component
-- [ ] Update homepage routing to distinguish upload vs. text input
-- [ ] Implement text prompt validation and safety checks
-- [ ] Integrate with Gemini API for text-to-image generation
-- [ ] Add job creation for text-based inputs
-- [ ] Test complete text → coloring page → download flow
+#### **"Imagine An Idea" Text-to-Image Flow (2 hours)** ✅ COMPLETE
+- [x] Create text input interface component
+- [x] Update homepage routing to distinguish upload vs. text input
+- [x] Implement text prompt validation and safety checks
+- [x] Integrate with Gemini API for text-to-image generation
+- [x] Add job creation for text-based inputs
+- [x] Test complete text → coloring page → download flow
 
 #### **Post-Generation Editing System (2.5 hours)**
 - [ ] Create editing interface with text input after generation
@@ -99,11 +99,11 @@ From comprehensive review and hands-on Playwright testing:
 - [ ] Test editing workflow: generate → edit → preview → download
 
 #### **Session 3B-Extended.1 Success Criteria**
-- [ ] "Imagine An Idea" button navigates to text input interface
-- [ ] Text prompts generate coloring pages successfully
-- [ ] Post-generation editing produces modified coloring pages
-- [ ] Edit history tracks changes within credit limits
-- [ ] Both workflows integrate with existing download/PDF systems
+- [x] "Imagine An idea" button navigates to text input interface
+- [x] Text prompts generate coloring pages successfully
+- [ ] Post-generation editing produces modified coloring pages (pending)
+- [ ] Edit history tracks changes within credit limits (pending)
+- [x] Text-to-image workflow integrates with existing download/PDF systems
 
 ---
 
@@ -207,7 +207,7 @@ After completing Phase 3B Extended + Mobile Polish:
 ## Success Criteria & Definition of Done
 
 ### **Phase 3B Extended Complete When:**
-- [ ] "Imagine An Idea" text-to-image flow fully functional
+- [x] "Imagine An Idea" text-to-image flow fully functional
 - [ ] Post-generation editing system implemented and tested
 - [ ] Stripe integration enabling credit purchases
 - [ ] Visual design matches intended UI mockups

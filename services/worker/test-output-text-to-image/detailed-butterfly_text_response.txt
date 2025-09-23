@@ -1,0 +1,8 @@
+Test Prompt: A beautiful butterfly with flowers
+Complexity: detailed
+Target Age: 8-12
+Response Time: 8762ms
+Full Prompt: Create a detailed coloring page of a beautiful butterfly with flowers for children ages 8-12 and adults. Include intricate wing patterns, detailed flower petals, leaves, and background elements. Use thin, precise black lines (1-2px width) on a pure white background. Preserve fine details and complex patterns that can be colored separately. Remove all colors, shading, and textures but maintain the complex beauty suitable for detailed coloring work.
+
+Text Response:
+Here's a detailed coloring page of a beautiful butterfly with flowers, designed for both children ages 8-12 and adults:

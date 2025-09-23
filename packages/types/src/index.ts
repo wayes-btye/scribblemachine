@@ -71,6 +71,12 @@ export interface GenerationRequest {
   customPrompt?: string;
 }
 
+export interface TextGenerationRequest {
+  textPrompt: string;
+  complexity: Complexity;
+  lineThickness: LineThickness;
+}
+
 export interface PDFExportRequest {
   job_id: string;
   paper_size: PaperSize;
