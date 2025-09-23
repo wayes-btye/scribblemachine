@@ -1,0 +1,75 @@
+{
+  "testName": "Authentication Flow Test",
+  "timestamp": "2025-09-23T05:45:16.870Z",
+  "passed": false,
+  "duration": 12285,
+  "steps": [
+    "Navigate to application",
+    "Verify initial page load",
+    "Trigger authentication flow",
+    "Check for Sign In button",
+    "Use development bypass",
+    "Verify authentication success"
+  ],
+  "screenshots": [
+    "scripts\\screenshots\\testing\\auth-test-01-initial-load.png",
+    "scripts\\screenshots\\testing\\auth-test-02-auth-triggered.png",
+    "scripts\\screenshots\\testing\\auth-test-03-bypass-clicked.png",
+    "scripts\\screenshots\\testing\\auth-test-04-final-state.png"
+  ],
+  "errors": [],
+  "consoleMessages": [
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+      "timestamp": "2025-09-23T05:45:21.039Z"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-09-23T05:45:21.316Z"
+    },
+    {
+      "type": "error",
+      "text": "`DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.\n\nIf you want to hide the `DialogTitle`, you can wrap it with our VisuallyHidden component.\n\nFor more information, see https://radix-ui.com/primitives/docs/components/dialog",
+      "timestamp": "2025-09-23T05:45:24.313Z"
+    },
+    {
+      "type": "warning",
+      "text": "Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.",
+      "timestamp": "2025-09-23T05:45:24.314Z"
+    },
+    {
+      "type": "error",
+      "text": "`DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.\n\nIf you want to hide the `DialogTitle`, you can wrap it with our VisuallyHidden component.\n\nFor more information, see https://radix-ui.com/primitives/docs/components/dialog",
+      "timestamp": "2025-09-23T05:45:24.319Z"
+    },
+    {
+      "type": "warning",
+      "text": "Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.",
+      "timestamp": "2025-09-23T05:45:24.319Z"
+    },
+    {
+      "type": "log",
+      "text": "Dev bypass successful: wayes.appsmate@gmail.com",
+      "timestamp": "2025-09-23T05:45:25.791Z"
+    }
+  ],
+  "networkRequests": [
+    {
+      "method": "GET",
+      "url": "http://localhost:3000/api/credits",
+      "timestamp": "2025-09-23T05:45:25.813Z"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:3000/api/credits",
+      "timestamp": "2025-09-23T05:45:25.813Z"
+    }
+  ],
+  "assertions": {
+    "total": 6,
+    "passed": 4,
+    "failed": 2
+  }
+}

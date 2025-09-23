@@ -115,14 +115,13 @@ Port migration = authentication broken. Always verify `http://localhost:3000` re
 
 **RECOMMENDED (Cost-Effective):**
 - `pnpm --filter @coloringpage/worker test:gemini:single` - Single image test (1 API call)
+- `pnpm --filter @coloringpage/worker test:gemini` - Basic Gemini connectivity
+- `pnpm --filter @coloringpage/worker test:pdf` - PDF generation testing
 
 **USE SPARINGLY (Expensive):**
 - `pnpm --filter @coloringpage/worker test:gemini:generate` - Full test suite (18 API calls)
-- `pnpm --filter @coloringpage/worker test:gemini:generate:full` - Same as above
 
-**Other Worker Tests:**
-- `pnpm --filter @coloringpage/worker test:gemini` - Basic Gemini connectivity
-- `pnpm --filter @coloringpage/worker test:pdf` - PDF generation testing
+📖 **See [README.md Testing section](./README.md#-testing) for complete backend testing documentation**
 
 ## Architecture Details
 
@@ -231,35 +230,47 @@ The project is configured to work with these MCP servers:
 
 ### Context7 MCP
 - **Use for**: Documentation lookup and API reference checking
-- **Best practice**: When implementing new features, use Context7 to look up latest API documentation for Gemini, Supabase, or other services
+- **CRITICAL**: Always check Context7 MCP when knowledge gaps exist - training data may be outdated
+- **Best practice**: Use Context7 to verify current API documentation, syntax, and best practices for any external service
 - **Example**: "Look up Gemini API image generation endpoints" before implementing AI features
 
 ### Supabase MCP
-- **Use for**: Database operations, schema management, and real-time features
-- **Best practice**: Use for complex database queries, migration management, and debugging Supabase-specific issues
+- **Use for**: Database operations, schema management, and real-time features  
+- **CRITICAL**: Always check Supabase MCP when database/auth issues arise - fills gaps in Supabase knowledge
+- **Best practice**: Use to verify current schema, check RLS policies, debug auth flows, and validate configurations
 - **Example**: Managing RLS policies, storage bucket configurations, or complex joins
 
 ### Playwright MCP
-- **Use for**: End-to-end testing and user flow validation
-- **UI Staging Scripts Available**: Use these BEFORE manual Playwright MCP testing
-  - `node scripts/staging/auth-bypass.js` - Get to authenticated home page (< 30s)
-  - `node scripts/staging/upload-ready.js` - Get to upload interface with image (< 60s)
-  - `node scripts/staging/generation-complete.js` - Test full workflow with error capture (< 90s)
-  - **Benefits**: Faster than manual MCP, handles authentication/upload barriers, captures errors
-  - **Screenshots**: Saved to `scripts/screenshots/` (can be cleaned with `rm scripts/screenshots/*.png`)
-- **Authentication**: Use development bypass for authenticated testing:
-  1. Navigate to `http://localhost:3000`
-  2. Click "Upload Photo - It's FREE!" to trigger sign-in
-  3. Click "Sign In" button to open auth dialog
-  4. Click "🧪 Dev Bypass (wayes.appsmate@gmail.com)" for instant authentication
-  5. User now has full access with 50 credits for testing
-- **Best practice**:
-  - **START with staging scripts** to quickly reach desired application state
-  - If staging fails, fall back to manual MCP commands following the steps above
-  - Test complete authenticated workflows (upload → generate → download)
-  - Validate responsive design across different screen sizes
-  - Test payment flows when Stripe integration is added
-  - Screenshot comparison for UI regression testing
-  - Clean up screenshots: `rm scripts/screenshots/*.png` after analysis
-- **When to use**: After implementing new UI features or before production deployments
+- **Use for**: Interactive UI testing and workflow validation
+- **CRITICAL**: Always use after ANY UI changes to verify updates work correctly
+
+#### Staging Scripts (Get to Application States)
+**Purpose**: Generate MCP commands to reach specific application states
+- `node scripts/staging/auth-bypass-mcp.js` - Authentication instructions
+- `node scripts/staging/upload-ready-mcp.js` - Upload interface with image instructions  
+- `node scripts/staging/generation-complete-mcp.js` - Complete workflow instructions
+- **Usage**: Copy the generated MCP commands and execute them in your MCP session
+- **When to use**: When you need to quickly reach a specific state for testing/analysis
+
+#### Testing Scripts (Automated Validation)
+**Purpose**: Run automated tests and generate reports for analysis
+- `node scripts/testing/auth-flow-test.js` - Validate authentication workflow
+- `node scripts/testing/upload-validation-test.js` - Validate upload functionality
+- `node scripts/testing/generation-workflow-test.js` - Test complete generation workflow
+- **Output**: JSON reports in `scripts/logs/testing/` + screenshots in `scripts/screenshots/testing/`
+- **When to use**: When you need detailed test results and error analysis
+
+#### Manual MCP Testing
+- **Authentication**: Use dev bypass (click "Upload Photo" → "Sign In" → "🧪 Dev Bypass")
+- **File Upload**: Use test image at `services/worker/test-images/blue-girl-smile.jpg`
+- **Testing Flow**: Navigate → authenticate → upload → generate → download
+- **Screenshots**: Saved to `.playwright-mcp/` directory
+
+#### UI Update Verification Protocol
+**MANDATORY after any UI changes** (components, pages, styles, functionality):
+1. **Use staging scripts** to quickly reach the affected UI state
+2. **Take screenshots** before and after changes for comparison
+3. **Test key user flows** that involve the updated UI elements
+4. **Verify responsive design** if layout changes were made
+5. **Document any breaking changes** or unexpected behavior
 

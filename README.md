@@ -159,12 +159,34 @@ npx supabase db push --linked
 
 ## 🧪 Testing
 
+### Frontend Testing
 ```bash
 # Run all tests
 pnpm test
 
 # Test specific packages
 pnpm --filter @coloringpage/types test
+```
+
+### Backend/Worker Testing
+⚠️ **API Cost Warning**: Use cost-effective tests for routine validation
+
+**RECOMMENDED (Cost-Effective):**
+```bash
+# Single image test (1 API call)
+pnpm --filter @coloringpage/worker test:gemini:single
+
+# Basic Gemini connectivity test
+pnpm --filter @coloringpage/worker test:gemini
+
+# PDF generation test (no API calls)
+pnpm --filter @coloringpage/worker test:pdf
+```
+
+**USE SPARINGLY (Expensive):**
+```bash
+# Full test suite (18 API calls)
+pnpm --filter @coloringpage/worker test:gemini:generate
 ```
 
 ## 📚 Documentation

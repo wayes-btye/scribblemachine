@@ -1,171 +1,164 @@
-# Playwright Staging Scripts
+# Scripts Directory
 
-This directory contains Playwright scripts that get AI agents to specific application states for testing and analysis.
+This directory contains two types of scripts for different purposes:
 
-## Quick Start
+## 📋 Staging Scripts (`/staging/`)
+
+**Purpose**: Generate MCP (Model Context Protocol) instructions for AI agents to reach specific application states.
+
+**How they work**: These scripts output exact Playwright MCP commands that AI agents can copy and execute in their own browser sessions.
+
+### Available Staging Scripts
+
+- **`auth-bypass-mcp.js`** - Get to authenticated home page state
+- **`upload-ready-mcp.js`** - Get to upload interface with test image uploaded  
+- **`generation-complete-mcp.js`** - Complete full workflow including generation
+
+### Usage
 
 ```bash
-# Install dependencies (if not already done)
-pnpm install
+# Generate MCP instructions for authentication
+node scripts/staging/auth-bypass-mcp.js
 
-# Ensure app is running on localhost:3000
-pnpm dev
+# Generate MCP instructions for upload ready state  
+node scripts/staging/upload-ready-mcp.js
 
-# Run individual staging scripts
-node scripts/staging/auth-bypass.js          # Get to authenticated home page
-node scripts/staging/upload-ready.js         # Get to upload interface with image
-node scripts/staging/generation-complete.js  # Test full generation workflow
+# Generate MCP instructions for complete generation workflow
+node scripts/staging/generation-complete-mcp.js
 ```
 
-## Scripts Overview
+**Output**: Each script outputs step-by-step MCP commands that AI agents can execute:
 
-### `/staging/` - Quick State Scripts
+```javascript
+// Example output:
+await mcp_playwright_browser_navigate({
+  "url": "http://localhost:3000"
+});
 
-**Purpose**: Get AI agents past critical barriers to specific application states
+await mcp_playwright_browser_click({
+  "element": "Upload Photo - It's FREE! button",
+  "ref": "FIND_BY_TEXT"
+});
+// ... more commands
+```
 
-| Script | Purpose | What it does | Output |
-|--------|---------|--------------|--------|
-| `auth-bypass.js` | Authentication | Navigate → click dev bypass → verify auth | `stage1-authenticated-home.png` |
-| `upload-ready.js` | File Upload | Auth → navigate → upload test image | `stage2-upload-ready.png` |
-| `generation-complete.js` | Generation Flow | Upload → set params → generate → capture errors | `stage3-generation-result.png` |
+## 🧪 Testing Scripts (`/testing/`)
 
-**Key Features:**
-- **Fast execution** (< 60 seconds each)
-- **Self-contained** - can run independently
-- **Error handling** - captures failures for debugging
-- **Screenshot capture** - provides visual handoff to AI agents
-- **Console/network monitoring** - logs API calls and errors
+**Purpose**: Run automated tests and generate detailed reports for AI agents to analyze.
 
-### `/testing/` - Future Test Suite
+**How they work**: These scripts execute actual Playwright tests, capture screenshots, logs, and generate JSON reports.
 
-**Purpose**: Proper end-to-end tests with assertions and expected results
+### Available Testing Scripts
 
-*Currently contains legacy files - proper test suite to be implemented*
+- **`auth-flow-test.js`** - Validate authentication workflow
+- **`upload-validation-test.js`** - Validate file upload functionality
+- **`generation-workflow-test.js`** - Test complete generation workflow
 
-## Usage Patterns
+### Usage
+
+```bash
+# Test authentication flow
+node scripts/testing/auth-flow-test.js
+
+# Test upload validation
+node scripts/testing/upload-validation-test.js
+
+# Test complete generation workflow  
+node scripts/testing/generation-workflow-test.js
+```
+
+**Output**: Each test generates:
+- **JSON Report**: Detailed test results in `scripts/logs/testing/`
+- **Screenshots**: Visual evidence in `scripts/screenshots/testing/`
+- **Console Output**: Real-time test progress and summary
+
+### Test Report Format
+
+```json
+{
+  "testName": "Authentication Flow Test",
+  "timestamp": "2025-09-23T05:45:16.870Z", 
+  "passed": false,
+  "duration": 12285,
+  "steps": ["Navigate to application", "Verify initial page load", ...],
+  "screenshots": ["auth-test-01-initial-load.png", ...],
+  "errors": [],
+  "consoleMessages": [...],
+  "networkRequests": [...],
+  "assertions": {
+    "total": 6,
+    "passed": 4, 
+    "failed": 2
+  }
+}
+```
+
+## 🔄 Workflow Integration
 
 ### For AI Agents
 
-**Single State Access:**
-```bash
-# Jump directly to specific state
-node scripts/staging/upload-ready.js
-# AI can then analyze the uploaded image interface
-```
+1. **Use Staging Scripts** when you need to reach a specific application state:
+   - Copy the generated MCP commands
+   - Execute them in your MCP session
+   - Proceed with your analysis
 
-**Sequential Analysis:**
-```bash
-# Run stages in sequence for complete workflow analysis
-node scripts/staging/auth-bypass.js
-# → Analyze authentication state
-node scripts/staging/upload-ready.js
-# → Analyze upload interface
-node scripts/staging/generation-complete.js
-# → Analyze generation errors
-```
+2. **Use Testing Scripts** when you need to validate functionality:
+   - Run the test script
+   - Analyze the generated reports and screenshots
+   - Investigate any failures or issues
 
-**Error Investigation:**
-```bash
-# Focus on specific workflow issues
-node scripts/staging/generation-complete.js
-# → Captures current generation errors for debugging
-```
+### Prerequisites
 
-### For Developers
+- Application must be running on `http://localhost:3000`
+- Playwright must be installed (available in project dependencies)
+- Test image must exist: `services/worker/test-images/blue-girl-smile.jpg`
 
-**Quick Manual Testing:**
-```bash
-# Fast way to test authentication flow
-node scripts/staging/auth-bypass.js
-
-# Test file upload without manual clicking
-node scripts/staging/upload-ready.js
-```
-
-**Debugging Generation Issues:**
-```bash
-# Captures detailed logs and screenshots of generation errors
-node scripts/staging/generation-complete.js
-# Check console output and stage3-generation-result.png
-```
-
-## Technical Details
-
-### Authentication Method
-- Uses development bypass button: "🧪 Dev Bypass (wayes.appsmate@gmail.com)"
-- Provides real user session with 50 credits
-- Only works in development environment
-
-### File Upload Method
-- Uses test image: `services/worker/test-images/blue-girl-smile.jpg`
-- Direct input file selection (faster than file chooser)
-- Waits for upload processing and preview
-
-### Error Handling
-- **Console monitoring**: Captures all JavaScript errors
-- **Network monitoring**: Logs API requests/responses
-- **Screenshot capture**: Visual state at failure points
-- **Graceful fallbacks**: Alternative approaches when primary method fails
-
-### Browser Configuration
-- **Headless**: `false` (shows browser for debugging)
-- **SlowMo**: `500ms` (visual feedback during execution)
-- **Timeouts**: Conservative timeouts for reliable execution
-
-## Expected Current Behavior
-
-### ✅ Working (Tested)
-- **Stage 1**: Authentication bypass works perfectly
-- **Stage 2**: File upload and preview works perfectly
-- **Stage 3**: Parameter selection works
-
-### ⚠️ Known Issues (Expected)
-- **Generation workflow**: Has current implementation issues
-- **API errors**: `/api/jobs` returns errors that are captured for analysis
-- **Console warnings**: Dialog accessibility warnings (non-critical)
-
-### 📊 Generation Script Analysis
-The `generation-complete.js` script successfully captures:
-- ✅ API call to `/api/jobs`
-- ✅ Error detection (`error_alert` outcome)
-- ✅ Console error logging
-- ✅ Network request monitoring
-- ✅ Screenshot capture of error states
-
-This provides complete data for debugging the generation workflow.
-
-## Integration with Claude Code
-
-These scripts are designed to work with Claude Code's Playwright MCP and can be:
-- **Called directly** by AI agents for fast state access
-- **Used as reference** for manual MCP command sequences
-- **Extended** for custom testing scenarios
-- **Integrated** into CI/CD pipelines for automated testing
-
-## File Structure
+### Directory Structure
 
 ```
 scripts/
-├── README.md                              # This file
-├── staging/                               # Quick staging scripts
-│   ├── auth-bypass.js                     # Authentication bypass
-│   ├── upload-ready.js                    # Upload interface ready
-│   ├── generation-complete.js             # Generation workflow test
-│   └── stage2-upload-staging-legacy.js   # Legacy MCP instructions
-└── testing/                               # Future proper tests
-    └── legacy-end-to-end.js              # Outdated test approach
+├── staging/                    # MCP instruction generators
+│   ├── auth-bypass-mcp.js     # Authentication state
+│   ├── upload-ready-mcp.js    # Upload ready state  
+│   └── generation-complete-mcp.js # Complete workflow
+├── testing/                    # Automated test runners
+│   ├── auth-flow-test.js       # Auth workflow validation
+│   ├── upload-validation-test.js # Upload functionality test
+│   └── generation-workflow-test.js # Complete workflow test
+├── screenshots/                # Generated during testing
+│   └── testing/               # Test screenshots
+├── logs/                      # Generated during testing  
+│   └── testing/               # Test reports (JSON)
+└── README.md                  # This file
 ```
 
-Generated screenshots are saved to `scripts/screenshots/` directory to keep project root clean.
+## 🚨 Important Notes
 
-## Screenshot Management
+- **Staging scripts** don't run browsers - they generate instructions
+- **Testing scripts** do run browsers and require the app to be running
+- Both types capture screenshots for analysis
+- Test failures are often acceptable - the goal is comprehensive analysis
+- Clean up screenshots periodically: `rm scripts/screenshots/testing/*.png`
 
+## 🔧 Troubleshooting
+
+### App Not Running
 ```bash
-# View generated screenshots
-ls scripts/screenshots/
+# Check if app is running
+netstat -ano | findstr ":3000"
 
-# Clean up screenshots after analysis
-rm scripts/screenshots/*.png
+# Start the app if needed
+pnpm dev
+```
 
-# Screenshots are automatically ignored by git (.gitignore)
+### Missing Test Image
+```bash
+# Verify test image exists
+ls services/worker/test-images/blue-girl-smile.jpg
+```
+
+### Playwright Issues
+```bash
+# Install browsers if needed
+npx playwright install
 ```
