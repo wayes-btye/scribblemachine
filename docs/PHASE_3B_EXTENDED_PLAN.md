@@ -118,12 +118,18 @@ From comprehensive review and hands-on Playwright testing:
 ### **Session 3B-Extended.2: Business Systems & Polish (3 hours)**
 **Goal**: Enable revenue generation and enhance user experience
 
-#### **Stripe Integration & Credit Purchasing (2 hours)** ✅ COMPLETE
+#### **Stripe Integration & Credit Purchasing (2 hours)** 🔄 95% COMPLETE
 - [x] Configure Stripe products and pricing
 - [x] Implement checkout flow components
 - [x] Create webhook handlers for payment processing
 - [x] Add "Get Credits" CTA when insufficient balance
-- [x] Test end-to-end credit purchasing flow
+- [x] Test checkout flow (up to Stripe payment page)
+- [ ] **Configure webhook secret in Stripe dashboard** (5 min)
+- [ ] **Test complete payment flow with credit allocation** (15 min):
+  - Use Stripe test card (4242 4242 4242 4242) to complete payment
+  - Verify webhook receives checkout.session.completed event
+  - Confirm user credit balance increases correctly
+  - Test payment failure scenarios and error handling
 - [x] Integrate credit consumption validation
 
 #### **Enhanced User Experience (1 hour)**
@@ -134,8 +140,9 @@ From comprehensive review and hands-on Playwright testing:
 - [ ] **Edit History Comparison (30 min)** - Allow users to toggle between original and edited versions of generated coloring pages
 
 #### **Session 3B-Extended.2 Success Criteria**
-- [x] Users can purchase credits via Stripe checkout
-- [x] Credit balance updates immediately after purchase (webhook configured)
+- [x] Users can navigate through Stripe checkout flow
+- [ ] **Credit balance updates immediately after successful payment** (requires webhook secret)
+- [ ] **Complete payment-to-credit allocation tested end-to-end**
 - [ ] Paper size selection affects PDF output format
 - [ ] Loading states include engaging mascot animations
 - [ ] All complexity levels (Simple/Standard/Detailed) functional

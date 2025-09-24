@@ -714,7 +714,7 @@ This file serves as a development scratchpad for tracking progress, notes, and d
 **Context:** Stripe checkout integration implementation and testing completion
 **What changed:**
 - Resolved live/test mode mismatch by creating test products and prices in correct Stripe account
-- Successfully tested complete checkout flow: frontend dialog → Stripe checkout → cancel flow
+- Successfully tested checkout flow (up to payment): frontend dialog → Stripe checkout → cancel flow
 - Verified all payment methods (Card, Klarna, Revolut, Amazon Pay) and user email pre-filling
 **Leftover:**
 - Configure Stripe webhook secret for payment completion handling
@@ -725,14 +725,14 @@ This file serves as a development scratchpad for tracking progress, notes, and d
 **Done:**
 - Implemented complete Stripe checkout integration: products, pricing, frontend components, backend APIs
 - Successfully resolved live/test mode API key mismatch by creating test products in correct account
-- Tested full user journey: credits dialog → Stripe checkout → cancel flow with all payment methods verified
+- Tested user journey to Stripe checkout: credits dialog → Stripe checkout → cancel flow (payment completion pending webhook secret)
 **Next:**
 - Configure webhook secret in Stripe dashboard for payment completion handling
 - Implement edit history comparison feature (30min enhancement to compare original/edited versions)
 **Decisions:**
-- Stripe integration production-ready: proper error handling, authentication, and UX implemented
-- Credit purchasing system fully functional with £2/15 credits and £5/50 credits pricing validated
+- Stripe integration 95% complete: checkout flow, error handling, authentication, and UX implemented (pending webhook secret)
+- Credit purchasing system infrastructure complete with £2/15 credits and £5/50 credits pricing (payment-to-credit allocation pending webhook secret)
 **Notes:**
-- Monetization foundation complete: users can purchase credits through professional Stripe checkout experience
+- Monetization foundation 95% complete: users can navigate professional Stripe checkout (credit allocation requires webhook secret configuration)
 - Technical execution excellent: clean separation of concerns, proper validation, multiple payment methods supported
 
