@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { v4 as uuidv4 } from 'uuid';
 import { validateEnv, config } from '@coloringpage/config';
 import { createSupabaseAdminClient } from '@coloringpage/database';
-import { createGeminiService, GenerationRequest, TextGenerationRequest } from './services/gemini-service';
+import { createGeminiService, GenerationRequest, TextGenerationRequest, EditRequest } from './services/gemini-service';
 import PDFDocument from 'pdfkit';
 import sharp from 'sharp';
 
@@ -13,6 +13,9 @@ interface Job {
   params_json: {
     asset_id?: string; // Optional for text-based jobs
     text_prompt?: string; // For text-to-image jobs
+    edit_parent_id?: string; // For edit jobs
+    edit_prompt?: string; // For edit jobs
+    edit_source_asset_id?: string; // For edit jobs
     complexity: 'simple' | 'standard' | 'detailed';
     line_thickness: 'thin' | 'medium' | 'thick';
     custom_prompt?: string;
@@ -121,11 +124,27 @@ async function main() {
         }
 
         if (!jobs || jobs.length === 0) {
+          // Enhanced debug: Check total job counts periodically
+          const { data: recentJobs } = await supabase
+            .from('jobs')
+            .select('id, status, created_at, params_json')
+            .order('created_at', { ascending: false })
+            .limit(5);
+
+          const timestamp = new Date().toISOString();
+          console.log(`[${timestamp}] 📊 No queued jobs. Recent jobs:`,
+            recentJobs?.map(j => `${j.id.substring(0,8)}:${j.status}${j.params_json?.edit_parent_id ? ':EDIT' : ''}`) || 'none');
           return; // No jobs to process
         }
 
         const job = jobs[0] as Job;
-        console.log(`🎨 Processing job ${job.id} for user ${job.user_id}`);
+        const jobType = job.params_json.edit_parent_id ? 'EDIT' :
+                       job.params_json.text_prompt ? 'TEXT' : 'IMAGE';
+        console.log(`🎨 Processing ${jobType} job ${job.id} for user ${job.user_id}`);
+
+        if (jobType === 'EDIT') {
+          console.log(`🔧 EDIT DETAILS: parent=${job.params_json.edit_parent_id}, prompt="${job.params_json.edit_prompt}", source_asset=${job.params_json.edit_source_asset_id}`);
+        }
 
         // Update job status to running
         await supabase
@@ -178,6 +197,69 @@ async function processGenerationJob(job: Job, supabase: any, geminiService: any)
       // Generate coloring page from text with Gemini
       result = await geminiService.generateColoringPageFromText(textRequest);
 
+    } else if (job.params_json.edit_parent_id && job.params_json.edit_prompt) {
+      // Edit existing coloring page
+      console.log(`  Edit request: "${job.params_json.edit_prompt}" for parent job ${job.params_json.edit_parent_id}`);
+
+      // Debug: Check all assets for this source ID
+      const { data: allAssets } = await supabase
+        .from('assets')
+        .select('id, kind, storage_path, user_id')
+        .eq('id', job.params_json.edit_source_asset_id);
+
+      console.log(`🔍 DEBUG: Assets for source ID ${job.params_json.edit_source_asset_id}:`, allAssets);
+
+      // Get the source edge map asset for editing
+      const { data: sourceAsset, error: sourceAssetError } = await supabase
+        .from('assets')
+        .select('storage_path')
+        .eq('id', job.params_json.edit_source_asset_id)
+        .eq('kind', 'edge_map')
+        .single();
+
+      console.log(`🔍 DEBUG: Edge map lookup result:`, { sourceAsset, error: sourceAssetError });
+
+      if (sourceAssetError || !sourceAsset) {
+        // Additional debug: Look for edge_map assets by parent job pattern
+        const parentJobId = job.params_json.edit_parent_id;
+        const { data: edgeAssets } = await supabase
+          .from('assets')
+          .select('id, storage_path, user_id')
+          .eq('kind', 'edge_map')
+          .like('storage_path', `%/${parentJobId}/%`);
+
+        console.log(`🔍 DEBUG: Edge assets for parent job ${parentJobId}:`, edgeAssets);
+        throw new Error(`Source edge map asset ${job.params_json.edit_source_asset_id} not found for editing`);
+      }
+
+      // Download the existing coloring page
+      const { data: imageData, error: downloadError } = await supabase.storage
+        .from('intermediates')
+        .download(sourceAsset.storage_path);
+
+      if (downloadError || !imageData) {
+        throw new Error('Failed to download existing coloring page for editing');
+      }
+
+      // Convert to base64 for Gemini service
+      const buffer = Buffer.from(await imageData.arrayBuffer());
+      const base64Image = buffer.toString('base64');
+
+      // Create Gemini edit request
+      const editRequest: EditRequest = {
+        existingImageBase64: base64Image,
+        mimeType: 'image/png',
+        editPrompt: job.params_json.edit_prompt,
+        complexity: job.params_json.complexity,
+        lineThickness: job.params_json.line_thickness,
+        originalPrompt: job.params_json.custom_prompt
+      };
+
+      console.log(`  Sending edit request to Gemini (${job.params_json.complexity}, ${job.params_json.line_thickness})`);
+
+      // Edit coloring page with Gemini
+      result = await geminiService.editColoringPage(editRequest);
+
     } else if (job.params_json.asset_id) {
       // Image-to-image generation (existing logic)
 
@@ -220,7 +302,7 @@ async function processGenerationJob(job: Job, supabase: any, geminiService: any)
       result = await geminiService.generateColoringPage(geminiRequest);
 
     } else {
-      throw new Error('Job must have either text_prompt or asset_id');
+      throw new Error('Job must have either text_prompt, asset_id, or edit_parent_id with edit_prompt');
     }
 
     if (!result.success || !result.imageBase64) {

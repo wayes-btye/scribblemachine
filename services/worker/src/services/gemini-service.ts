@@ -24,6 +24,15 @@ export interface TextGenerationRequest {
   lineThickness: 'thin' | 'medium' | 'thick';
 }
 
+export interface EditRequest {
+  existingImageBase64: string;
+  mimeType: string;
+  editPrompt: string;
+  complexity: 'simple' | 'standard' | 'detailed';
+  lineThickness: 'thin' | 'medium' | 'thick';
+  originalPrompt?: string;
+}
+
 export interface GenerationResult {
   success: boolean;
   imageBase64?: string;
@@ -104,6 +113,55 @@ export class GeminiService {
           cost: geminiError.retryable ? 0 : COST_PER_GENERATION, // Don't charge for retryable failures
           model: this.config.model,
           promptUsed: this.buildTextPrompt(request.textPrompt, request.complexity, request.lineThickness)
+        }
+      };
+    }
+  }
+
+  /**
+   * Edit existing coloring page with user prompt modifications
+   */
+  async editColoringPage(request: EditRequest): Promise<GenerationResult> {
+    const startTime = Date.now();
+
+    try {
+      // Validate input
+      this.validateEditRequest(request);
+
+      // Prepare existing image for optimal API usage
+      const processedImage = await this.preprocessImage(request.existingImageBase64, request.mimeType);
+
+      // Generate edit prompt based on user request and existing parameters
+      const prompt = this.buildEditPrompt(request.editPrompt, request.complexity, request.lineThickness, request.originalPrompt);
+
+      // Attempt generation with retry logic
+      const result = await this.generateWithRetry(processedImage, prompt);
+
+      const responseTime = Date.now() - startTime;
+
+      return {
+        success: true,
+        imageBase64: result,
+        metadata: {
+          responseTimeMs: responseTime,
+          cost: COST_PER_GENERATION,
+          model: this.config.model,
+          promptUsed: prompt
+        }
+      };
+
+    } catch (error) {
+      const responseTime = Date.now() - startTime;
+      const geminiError = this.categorizeError(error);
+
+      return {
+        success: false,
+        error: geminiError,
+        metadata: {
+          responseTimeMs: responseTime,
+          cost: geminiError.retryable ? 0 : COST_PER_GENERATION, // Don't charge for retryable failures
+          model: this.config.model,
+          promptUsed: this.buildEditPrompt(request.editPrompt, request.complexity, request.lineThickness, request.originalPrompt)
         }
       };
     }
@@ -340,6 +398,63 @@ export class GeminiService {
   }
 
   /**
+   * Build prompt for editing existing coloring pages
+   */
+  private buildEditPrompt(editPrompt: string, complexity: string, lineThickness: string, originalPrompt?: string): string {
+    // Base editing instruction
+    let prompt = `Modify this existing black and white coloring page based on the following edit request: "${editPrompt}". `;
+
+    // Include context from original prompt if available
+    if (originalPrompt) {
+      prompt += `The original was created with these instructions: "${originalPrompt}". `;
+    }
+
+    // Add editing-specific guidance
+    prompt += `Make the requested changes while maintaining the overall coloring page format. `;
+
+    // Complexity mapping (from PRD: Simple/Standard/Detailed)
+    switch (complexity) {
+      case 'simple':
+        prompt += `Keep the result simple for children ages 4-6. Use very basic shapes with minimal detail. `;
+        prompt += `Simplify any new elements into large, easy-to-color regions. `;
+        break;
+      case 'standard':
+        prompt += `Keep the result at standard complexity for children ages 6-10. Include moderate detail while keeping shapes manageable. `;
+        prompt += `Maintain important features but simplify textures and backgrounds. `;
+        break;
+      case 'detailed':
+        prompt += `Maintain detailed complexity for children ages 8-12 and adults. Preserve fine details and intricate patterns. `;
+        prompt += `Include background elements and complex textures that can be colored separately. `;
+        break;
+    }
+
+    // Line thickness mapping (from PRD: Thin/Medium/Thick)
+    switch (lineThickness) {
+      case 'thin':
+        prompt += `Use thin, precise lines (1-1.5px width at 300 DPI) for detailed work. `;
+        break;
+      case 'medium':
+        prompt += `Use medium-weight lines (2-3px width at 300 DPI) for balanced coloring. `;
+        break;
+      case 'thick':
+        prompt += `Use thick, bold lines (3-4px width at 300 DPI) perfect for younger children and crayons. `;
+        break;
+    }
+
+    // Common requirements for edited coloring pages
+    prompt += `Requirements: `;
+    prompt += `- Maintain pure black lines (#000000) on pure white background (#FFFFFF) `;
+    prompt += `- No colors, shading, gradients, or gray tones `;
+    prompt += `- Clean, continuous outlines with no gaps `;
+    prompt += `- Closed shapes that can be easily filled with color `;
+    prompt += `- Remove all photographic textures and replace with simple patterns `;
+    prompt += `- Ensure the result is still suitable for printing and coloring with crayons, markers, or colored pencils `;
+    prompt += `- Keep the overall composition recognizable while incorporating the requested changes. `;
+
+    return prompt;
+  }
+
+  /**
    * Build prompt for text-to-image generation
    */
   private buildTextPrompt(textPrompt: string, complexity: string, lineThickness: string): string {
@@ -438,6 +553,46 @@ export class GeminiService {
   }
 
   /**
+   * Validate edit request
+   */
+  private validateEditRequest(request: EditRequest): void {
+    if (!request.existingImageBase64) {
+      throw new Error('Existing image data is required');
+    }
+
+    if (!request.mimeType) {
+      throw new Error('MIME type is required');
+    }
+
+    if (!request.editPrompt || typeof request.editPrompt !== 'string') {
+      throw new Error('Edit prompt is required');
+    }
+
+    if (request.editPrompt.length < 3) {
+      throw new Error('Edit prompt must be at least 3 characters');
+    }
+
+    if (request.editPrompt.length > 200) {
+      throw new Error('Edit prompt must be less than 200 characters');
+    }
+
+    if (!['simple', 'standard', 'detailed'].includes(request.complexity)) {
+      throw new Error('Invalid complexity level');
+    }
+
+    if (!['thin', 'medium', 'thick'].includes(request.lineThickness)) {
+      throw new Error('Invalid line thickness');
+    }
+
+    // Check base64 format
+    try {
+      Buffer.from(request.existingImageBase64, 'base64');
+    } catch {
+      throw new Error('Invalid base64 image data');
+    }
+  }
+
+  /**
    * Validate text generation request
    */
   private validateTextRequest(request: TextGenerationRequest): void {
@@ -503,8 +658,8 @@ export class GeminiService {
   updateRetryConfig(maxRetries: number, retryDelayMs: number): void {
     this.config = {
       ...this.config,
-      maxRetries,
-      retryDelayMs
+      maxRetries: maxRetries as 3,
+      retryDelayMs: retryDelayMs as 1000
     };
   }
 }
