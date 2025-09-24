@@ -86,42 +86,81 @@ export async function GET(
 
     // Determine if this is an original job or an edit job
     const isEditJob = requestedJob.params_json?.edit_parent_id
-    let originalJobId = isEditJob ? requestedJob.params_json.edit_parent_id : jobId
+    let originalJobId = jobId
+    let originalJob = requestedJob
 
-    // Get the original job
-    let originalJob = isEditJob ? null : requestedJob
+    // If this is an edit job, recursively trace back to find the true original
     if (isEditJob) {
-      const { data: originalJobData, error: originalError } = await supabase
+      let currentJobId = requestedJob.params_json.edit_parent_id
+      let currentJob = null
+
+      // Keep following the edit_parent_id chain until we find a job without edit_parent_id
+      while (currentJobId) {
+        const { data: jobData, error: jobError } = await supabase
+          .from('jobs')
+          .select('*')
+          .eq('id', currentJobId)
+          .eq('user_id', user.id)
+          .single()
+
+        if (jobError || !jobData) {
+          return NextResponse.json(
+            { error: 'Parent job not found in edit chain' },
+            { status: 404 }
+          )
+        }
+
+        currentJob = jobData
+
+        // If this job has no edit_parent_id, it's the original
+        if (!currentJob.params_json?.edit_parent_id) {
+          originalJobId = currentJob.id
+          originalJob = currentJob
+          break
+        }
+
+        // Otherwise, continue tracing back
+        currentJobId = currentJob.params_json.edit_parent_id
+      }
+    }
+
+    // Get all edit jobs in the entire edit chain (including nested edits)
+    const allEditJobs = []
+    const processedJobIds = new Set()
+
+    // Recursive function to find all descendants of a job
+    const findAllEditsRecursive = async (parentJobId) => {
+      // Find direct children of this job
+      const { data: childJobs, error: childError } = await supabase
         .from('jobs')
         .select('*')
-        .eq('id', originalJobId)
         .eq('user_id', user.id)
-        .single()
+        .contains('params_json', { edit_parent_id: parentJobId })
+        .order('created_at', { ascending: true })
 
-      if (originalError || !originalJobData) {
-        return NextResponse.json(
-          { error: 'Original job not found' },
-          { status: 404 }
-        )
+      if (childError) {
+        console.error('Error fetching child edit jobs for', parentJobId, ':', childError)
+        return
       }
-      originalJob = originalJobData
+
+      if (childJobs && childJobs.length > 0) {
+        for (const childJob of childJobs) {
+          // Avoid infinite loops
+          if (!processedJobIds.has(childJob.id)) {
+            processedJobIds.add(childJob.id)
+            allEditJobs.push(childJob)
+
+            // Recursively find children of this child
+            await findAllEditsRecursive(childJob.id)
+          }
+        }
+      }
     }
 
-    // Get all edit jobs for this original job
-    const { data: editJobs, error: editsError } = await supabase
-      .from('jobs')
-      .select('*')
-      .eq('user_id', user.id)
-      .contains('params_json', { edit_parent_id: originalJobId })
-      .order('created_at', { ascending: true })
+    // Start the recursive search from the original job
+    await findAllEditsRecursive(originalJobId)
 
-    if (editsError) {
-      console.error('Error fetching edit jobs:', editsError)
-      return NextResponse.json(
-        { error: 'Error fetching edit history' },
-        { status: 500 }
-      )
-    }
+    const editJobs = allEditJobs
 
     // Helper function to get download URLs for a job
     const getDownloadUrls = async (job: any) => {

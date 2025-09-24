@@ -191,7 +191,7 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
 
   return (
     <div className="space-y-6" data-testid="result-preview">
-      {/* Generated Image Preview */}
+      {/* Header with Version Toggle - Always visible */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -217,6 +217,10 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
             ✓ Complete
           </Badge>
         </div>
+      </div>
+
+      {!showComparison && (
+        <div className="space-y-4">
 
         <div className="bg-white p-4 rounded-lg border">
           {imageError || !getImagePreviewUrl() ? (
@@ -260,7 +264,8 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
         </div>
       </div>
 
-      {/* Job Information */}
+      )}
+      {!showComparison && (
       <div className="bg-gray-50 p-4 rounded-lg">
         <h4 className="font-medium mb-3">{isEditedJob ? "Edit Details" : "Generation Details"}</h4>
 
@@ -301,6 +306,7 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
         </div>
       </div>
 
+      )}
       {/* Version Comparison */}
       {hasMultipleVersions && showComparison && (
         <VersionComparison
