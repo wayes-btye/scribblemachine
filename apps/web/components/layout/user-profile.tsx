@@ -15,6 +15,7 @@ import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { User, CreditCard, LogOut, Coins } from 'lucide-react'
+import { GetCreditsButton } from '@/components/payments'
 
 interface Credits {
   balance: number
@@ -130,10 +131,14 @@ export function UserProfile() {
             <span>Profile</span>
           </DropdownMenuItem>
 
-          <DropdownMenuItem className="focus:bg-brand-cream/50">
+          <GetCreditsButton
+            variant="ghost"
+            className="w-full justify-start p-2 h-auto font-normal"
+            onCreditsUpdated={fetchCredits}
+          >
             <CreditCard className="mr-2 h-4 w-4" />
-            <span>Billing</span>
-          </DropdownMenuItem>
+            <span>Get Credits</span>
+          </GetCreditsButton>
 
           <DropdownMenuSeparator />
 
