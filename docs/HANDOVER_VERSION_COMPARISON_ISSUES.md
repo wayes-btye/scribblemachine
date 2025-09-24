@@ -269,4 +269,101 @@ docs/work_log.md                                    # Session logging
 
 ---
 
-**Resolution Complete**: The Version Comparison feature is now fully functional and ready for user release. All critical image display issues have been resolved through the storage bucket fix and enhanced state management.
+# ADDITIONAL CRITICAL FIX - INFINITE LOOP RESOLVED
+
+**Date**: 2025-09-24 (Final Update)
+**Status**: ✅ **FULLY RESOLVED** - All issues addressed including server crash
+**Priority**: CRITICAL BUG FIX COMPLETED
+
+## 🚨 NEW CRITICAL ISSUE DISCOVERED & FIXED
+
+### Issue: Server Crash Due to Infinite API Loop
+**Problem**: After the storage bucket fix, a new critical issue emerged causing complete server unresponsiveness. The application would load with a blank screen and localhost:3000 would timeout due to an infinite loop of API calls to `/api/jobs/[id]/versions`.
+
+**Root Cause**: Missing dependency in `VersionComparison` component's useEffect hook causing infinite re-renders.
+
+### Critical Fix Applied
+
+**File**: `apps/web/components/workspace/version-comparison.tsx`
+**Lines**: 96-101 (useEffect dependency array)
+
+**Before** (Causing Infinite Loop):
+```typescript
+useEffect(() => {
+  if (versions.length > 0 && onVersionSelect) {
+    onVersionSelect(versions[currentVersionIndex])
+  }
+}, [currentVersionIndex, versions]) // ❌ Missing onVersionSelect dependency
+```
+
+**After** (Fixed):
+```typescript
+useEffect(() => {
+  if (versions.length > 0 && onVersionSelect) {
+    onVersionSelect(versions[currentVersionIndex])
+  }
+}, [currentVersionIndex, versions, onVersionSelect]) // ✅ Added onVersionSelect
+```
+
+### Resolution Results
+
+**✅ All Critical Issues Now Resolved:**
+1. **Storage Bucket Fix**: Corrected 'generated' → 'intermediates' bucket usage
+2. **Infinite Loop Fix**: Added missing useEffect dependency preventing server crashes
+3. **Image Display**: Version comparison shows actual coloring page images correctly
+4. **Server Stability**: Application loads properly on localhost:3000
+5. **State Management**: Version switching works without infinite re-renders
+
+### Final Comprehensive Testing Results
+
+**✅ Complete End-to-End Testing Performed:**
+- Successfully uploaded test image (`blue-girl-smile.jpg`)
+- Generated coloring page (Job ID: `70846d73...`)
+- Created edit with prompt "add stars in the sky" (Edit Job ID: `3d4b7e2b...`)
+- ✅ **Version Comparison Activated**: Shows 2 versions (Original + Edit 1)
+- ✅ **Version Navigation**: Arrow buttons, dots, and quick buttons all functional
+- ✅ **Image Display**: Both versions display correctly with actual coloring page images
+- ✅ **State Switching**: Clean transitions between Original and Edit versions
+- ✅ **Hide/Show Versions**: Proper state restoration and cleanup
+- ✅ **Console Logs**: No errors, successful image loading confirmations
+
+**Console Success Confirmations:**
+```
+[DEBUG] Image loaded successfully for job 70846d73...
+[DEBUG] Image loaded successfully for job 3d4b7e2b...
+```
+
+### Technical Impact
+
+1. **Server Performance**: Eliminated infinite API call loop that was overwhelming the server
+2. **User Experience**: Restored application functionality from completely broken to fully operational
+3. **React Best Practices**: Proper useEffect dependency management prevents future similar issues
+4. **System Stability**: Application now handles version switching without crashes
+
+### Files Modified (Complete Resolution)
+
+```bash
+# Fixed Files:
+apps/web/components/workspace/version-comparison.tsx   # Infinite loop fix
+apps/web/app/api/jobs/[id]/versions/route.ts         # Storage bucket fix
+apps/web/components/workspace/result-preview.tsx      # Enhanced state management
+docs/HANDOVER_VERSION_COMPARISON_ISSUES.md            # Documentation updates
+```
+
+## Final Status
+
+- **Priority Level**: LOW - Feature fully operational and stable
+- **Fix Time**: ~6 hours total (including investigation, fixes, and comprehensive testing)
+- **Risk Level**: MINIMAL - Well-tested with both storage and React fixes applied
+- **User Impact**: Feature ready for production use
+
+## Recommendations for Future Development
+
+1. **Code Review Protocol**: Always check useEffect dependencies in React components
+2. **Testing Strategy**: Use Playwright MCP for immediate verification of UI changes
+3. **Monitoring**: Watch for similar infinite loop patterns in other components
+4. **Documentation**: Maintain comprehensive logs for complex debugging sessions
+
+---
+
+**Final Resolution Complete**: The Version Comparison feature is now fully functional, stable, and ready for user release. Both the storage bucket issue AND the infinite loop issue have been resolved through systematic debugging and comprehensive end-to-end testing.

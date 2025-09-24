@@ -1,0 +1,27 @@
+
+- can only go back 1 step, i cant keep going back through each verision of updates
+
+CURRENT: Additional History Component:
+- As soon as you press "show version" why does it appear on a new (history) component altogether, leaving the initial component still there.
+- just seems like when it was implemented just chucked a new component in there without thinking too hard about how it should reasonably look
+Options@
+ 1) leave the initial component there - but with only the current generated image and the history component is the one that allows scrolling leaving initial component static 
+ 2) "show verions" / "hide versions" toggles the initial component to dissappear/appear and opposingly the history component to appear disappear. 
+ ... why is 2 components even a thing? whats the harm in showing the version by default.
+
+
+CURRENT: The editing of the image only works on the most recent generated image,
+1) Remove the editing option for the any version except the current generated version 
+OR 
+2) The editting should be allowed on whatever the image is on display at the time
+	(then there might be complication for the original edit button) because you need to track the before an after potentially)
+
+Tbh those two buttons original and edit 1 should be called before / after
+
+I understand why the original and editing - only 2 versions are there so you can clearly see what was edited alongside the prompt
+
+
+
+
+
+

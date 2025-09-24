@@ -98,7 +98,7 @@ export function VersionComparison({ jobId, onVersionSelect, currentJobId }: Vers
     if (versions.length > 0 && onVersionSelect) {
       onVersionSelect(versions[currentVersionIndex])
     }
-  }, [currentVersionIndex, versions])
+  }, [currentVersionIndex, versions, onVersionSelect])
 
   const handlePrevious = () => {
     if (currentVersionIndex > 0) {
