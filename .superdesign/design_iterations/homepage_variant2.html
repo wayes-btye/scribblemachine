@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scribble Machine - AI Coloring Page Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage_variant2_theme.css">
+
+    <style>
+        /* Minimal animations */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        .scale-in { animation: scaleIn 0.5s ease-out forwards; }
+
+        /* Stagger delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+
+        /* Clean button styles */
+        .btn-primary {
+            background: var(--primary) !important;
+            color: var(--primary-foreground) !important;
+            border-radius: var(--radius) !important;
+            padding: 0.875rem 2rem !important;
+            font-weight: 500 !important;
+            font-size: 1rem !important;
+            transition: all 0.2s ease !important;
+            border: none !important;
+            letter-spacing: var(--tracking-normal) !important;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px) !important;
+            box-shadow: var(--shadow-lg) !important;
+        }
+
+        .btn-outline {
+            background: transparent !important;
+            color: var(--foreground) !important;
+            border: 1px solid var(--border) !important;
+            border-radius: var(--radius) !important;
+            padding: 0.875rem 2rem !important;
+            font-weight: 500 !important;
+            font-size: 1rem !important;
+            transition: all 0.2s ease !important;
+            letter-spacing: var(--tracking-normal) !important;
+        }
+
+        .btn-outline:hover {
+            background: var(--muted) !important;
+            border-color: var(--foreground) !important;
+        }
+
+        /* Typography overrides */
+        h1, h2, h3, h4 {
+            font-family: var(--font-sans) !important;
+            letter-spacing: var(--tracking-normal) !important;
+        }
+        body {
+            font-family: var(--font-sans) !important;
+            letter-spacing: var(--tracking-normal) !important;
+        }
+
+        /* Clean card styles */
+        .feature-card {
+            background: var(--card) !important;
+            border: 1px solid var(--border) !important;
+            border-radius: var(--radius-lg) !important;
+            padding: 2rem !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent) !important;
+            box-shadow: var(--shadow-sm) !important;
+        }
+
+        /* Hero section */
+        .hero-section {
+            background: var(--gradient-hero);
+        }
+
+        /* Process step */
+        .process-step {
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -2rem;
+            width: 2rem;
+            height: 1px;
+            background: var(--border);
+            transform: translateY(-50%);
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .process-step::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body style="background-color: var(--background); color: var(--foreground);">
+    <!-- Header -->
+    <header class="py-4 px-4 border-b" style="border-color: var(--border);">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img src="../../apps/web/public/assets/ScribbleIcon.svg" alt="Scribble Machine" class="w-8 h-8">
+                <span class="text-lg font-medium">Scribble Machine</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-sm px-4 py-2 hover:bg-gray-50 rounded transition-colors">Login</button>
+                <button class="btn-primary">Get Started</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="hero-section py-24">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Hero Content -->
+                    <div class="fade-in-up">
+                        <h1 class="text-6xl font-bold mb-6 leading-tight">
+                            Transform photos into
+                            <span style="color: var(--accent);">coloring pages</span>
+                        </h1>
+
+                        <p class="text-xl mb-8 leading-relaxed" style="color: var(--muted-foreground);">
+                            AI-powered tool that converts any image into beautiful, printable coloring pages in seconds.
+                        </p>
+
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                            <button class="btn-primary flex items-center justify-center">
+                                <i data-lucide="upload" class="w-4 h-4 mr-2"></i>
+                                Upload Image
+                            </button>
+                            <button class="btn-outline flex items-center justify-center">
+                                <i data-lucide="play" class="w-4 h-4 mr-2"></i>
+                                See How It Works
+                            </button>
+                        </div>
+
+                        <!-- Stats -->
+                        <div class="flex items-center space-x-8 text-sm" style="color: var(--muted-foreground);">
+                            <div>
+                                <span class="font-medium text-2xl" style="color: var(--foreground);">50K+</span>
+                                <div>Images processed</div>
+                            </div>
+                            <div>
+                                <span class="font-medium text-2xl" style="color: var(--foreground);">&lt;10s</span>
+                                <div>Average processing time</div>
+                            </div>
+                            <div>
+                                <span class="font-medium text-2xl" style="color: var(--foreground);">4.9★</span>
+                                <div>User rating</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Image -->
+                    <div class="scale-in delay-200">
+                        <div class="relative">
+                            <img src="../../apps/web/public/assets/HeroBook-WithImages-upscaled.png" alt="Coloring pages example" class="w-full max-w-lg mx-auto">
+                            <div class="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="py-24 border-t" style="border-color: var(--border);">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-16 fade-in-up">
+                    <h2 class="text-4xl font-bold mb-4">How it works</h2>
+                    <p class="text-lg" style="color: var(--muted-foreground);">Three simple steps to create your coloring page</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="process-step text-center fade-in-up delay-100">
+                        <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style="background-color: var(--muted);">
+                            <i data-lucide="upload" class="w-10 h-10" style="color: var(--primary);"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Upload</h3>
+                        <p style="color: var(--muted-foreground);">Choose any photo from your device or describe your idea</p>
+                    </div>
+
+                    <div class="process-step text-center fade-in-up delay-200">
+                        <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style="background-color: var(--muted);">
+                            <img src="../../apps/web/public/assets/ScribbleMachine3D-nopen.svg" alt="AI Processing" class="w-12 h-12">
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Process</h3>
+                        <p style="color: var(--muted-foreground);">Our AI analyzes and converts your image to line art</p>
+                    </div>
+
+                    <div class="process-step text-center fade-in-up delay-300">
+                        <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style="background-color: var(--muted);">
+                            <i data-lucide="download" class="w-10 h-10" style="color: var(--accent);"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Download</h3>
+                        <p style="color: var(--muted-foreground);">Get your high-quality, printable coloring page</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-24" style="background-color: var(--muted);">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold mb-4">Why choose Scribble Machine?</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="feature-card text-center fade-in-up delay-100">
+                        <i data-lucide="zap" class="w-8 h-8 mx-auto mb-4" style="color: var(--primary);"></i>
+                        <h3 class="font-semibold mb-2">Lightning Fast</h3>
+                        <p class="text-sm" style="color: var(--muted-foreground);">Generate coloring pages in under 10 seconds</p>
+                    </div>
+
+                    <div class="feature-card text-center fade-in-up delay-200">
+                        <i data-lucide="sparkles" class="w-8 h-8 mx-auto mb-4" style="color: var(--accent);"></i>
+                        <h3 class="font-semibold mb-2">AI-Powered</h3>
+                        <p class="text-sm" style="color: var(--muted-foreground);">Advanced algorithms for perfect line art</p>
+                    </div>
+
+                    <div class="feature-card text-center fade-in-up delay-300">
+                        <i data-lucide="printer" class="w-8 h-8 mx-auto mb-4" style="color: var(--primary);"></i>
+                        <h3 class="font-semibold mb-2">Print Ready</h3>
+                        <p class="text-sm" style="color: var(--muted-foreground);">High-resolution files optimized for printing</p>
+                    </div>
+
+                    <div class="feature-card text-center fade-in-up delay-400">
+                        <i data-lucide="shield-check" class="w-8 h-8 mx-auto mb-4" style="color: var(--accent);"></i>
+                        <h3 class="font-semibold mb-2">Family Safe</h3>
+                        <p class="text-sm" style="color: var(--muted-foreground);">Content filtering ensures appropriate images</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-24">
+            <div class="max-w-4xl mx-auto text-center px-4 fade-in-up">
+                <h2 class="text-4xl font-bold mb-6">Ready to create amazing coloring pages?</h2>
+                <p class="text-xl mb-8" style="color: var(--muted-foreground);">Join thousands of families creating magical coloring experiences</p>
+                <button class="btn-primary text-lg px-8 py-4">
+                    Start Creating Now
+                </button>
+                <p class="text-sm mt-4" style="color: var(--muted-foreground);">Free tier includes 3 coloring pages</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t text-center" style="border-color: var(--border);">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="text-sm" style="color: var(--muted-foreground);">
+                © 2024 Scribble Machine. Made for creative families everywhere.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = entry.target.classList.contains('fade-in-up')
+                        ? 'translateY(0)'
+                        : entry.target.classList.contains('scale-in')
+                        ? 'scale(1)'
+                        : 'none';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in-up, .fade-in, .scale-in').forEach(el => {
+            el.style.opacity = '0';
+            if (el.classList.contains('fade-in-up')) {
+                el.style.transform = 'translateY(20px)';
+            } else if (el.classList.contains('scale-in')) {
+                el.style.transform = 'scale(0.95)';
+            }
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

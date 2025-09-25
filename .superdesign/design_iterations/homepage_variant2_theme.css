@@ -1,0 +1,65 @@
+/* Modern Minimalist Theme - Homepage Variant 2 */
+:root {
+  /* Core Colors - Clean & Professional */
+  --background: oklch(1.0000 0 0);                       /* Pure white */
+  --foreground: oklch(0.1450 0 0);                       /* Near black */
+  --card: oklch(1.0000 0 0);
+  --card-foreground: oklch(0.1450 0 0);
+  --popover: oklch(1.0000 0 0);
+  --popover-foreground: oklch(0.1450 0 0);
+
+  /* Primary - Sophisticated Blue */
+  --primary: oklch(0.3920 0.1440 264.0520);             /* Deep blue */
+  --primary-foreground: oklch(1.0000 0 0);
+
+  /* Secondary - Warm Gray */
+  --secondary: oklch(0.9700 0 0);                        /* Light gray */
+  --secondary-foreground: oklch(0.2050 0 0);
+
+  /* Accent - Subtle Orange */
+  --accent: oklch(0.7240 0.1180 45.3650);               /* Muted orange */
+  --accent-foreground: oklch(0.1450 0 0);
+
+  /* Neutrals */
+  --muted: oklch(0.9700 0 0);
+  --muted-foreground: oklch(0.5560 0 0);
+  --border: oklch(0.9220 0 0);
+  --input: oklch(0.9220 0 0);
+  --ring: oklch(0.3920 0.1440 264.0520);
+
+  /* Status */
+  --destructive: oklch(0.5770 0.2450 27.3250);
+  --destructive-foreground: oklch(1.0000 0 0);
+
+  /* Typography - Clean & Modern */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing & Layout - Minimal */
+  --radius: 0.5rem;                                      /* Subtle rounded */
+  --spacing: 0.25rem;
+  --tracking-normal: -0.01em;                            /* Tight tracking */
+
+  /* Shadows - Subtle & Clean */
+  --shadow-2xs: 0 1px 2px 0px hsl(0 0% 0% / 0.03);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.08), 0 1px 2px -1px hsl(0 0% 0% / 0.04);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.08), 0 1px 2px -1px hsl(0 0% 0% / 0.04);
+  --shadow-md: 0 4px 6px 0px hsl(0 0% 0% / 0.05), 0 2px 4px -1px hsl(0 0% 0% / 0.03);
+  --shadow-lg: 0 8px 15px 0px hsl(0 0% 0% / 0.08), 0 4px 6px -1px hsl(0 0% 0% / 0.05);
+  --shadow-xl: 0 12px 25px 0px hsl(0 0% 0% / 0.10), 0 6px 10px -1px hsl(0 0% 0% / 0.08);
+  --shadow-2xl: 0 20px 40px 0px hsl(0 0% 0% / 0.12);
+
+  /* Gradients - Subtle */
+  --gradient-hero: linear-gradient(135deg,
+    oklch(0.9850 0 0) 0%,                                /* Off-white */
+    oklch(0.9700 0 0) 100%                              /* Light gray */
+  );
+
+  /* Size variants */
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+}

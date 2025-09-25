@@ -1,0 +1,89 @@
+/* Playful Kids Creative Theme - Homepage Variant 1 */
+:root {
+  /* Core Brand Colors */
+  --background: oklch(0.9850 0.0150 85.7140);           /* Warm cream */
+  --foreground: oklch(0.2460 0.0890 264.0520);         /* Deep purple-blue */
+  --card: oklch(1.0000 0 0);                           /* Pure white */
+  --card-foreground: oklch(0.2460 0.0890 264.0520);    /* Deep purple-blue */
+  --popover: oklch(1.0000 0 0);
+  --popover-foreground: oklch(0.2460 0.0890 264.0520);
+
+  /* Primary Actions - Bright Orange */
+  --primary: oklch(0.7240 0.2180 45.3650);             /* Warm orange */
+  --primary-foreground: oklch(1.0000 0 0);             /* White */
+
+  /* Secondary Actions - Soft Blue */
+  --secondary: oklch(0.7580 0.1420 235.8960);          /* Soft blue */
+  --secondary-foreground: oklch(1.0000 0 0);           /* White */
+
+  /* Accent Colors */
+  --accent: oklch(0.8720 0.1680 145.2340);             /* Mint green */
+  --accent-foreground: oklch(0.2460 0.0890 264.0520);  /* Deep purple-blue */
+
+  /* Neutral Tones */
+  --muted: oklch(0.9680 0.0120 85.7140);               /* Light cream */
+  --muted-foreground: oklch(0.5460 0.0450 264.0520);   /* Muted purple */
+
+  /* Interactive Elements */
+  --border: oklch(0.9180 0.0240 85.7140);              /* Cream border */
+  --input: oklch(0.9180 0.0240 85.7140);
+  --ring: oklch(0.7240 0.2180 45.3650);                /* Orange focus ring */
+
+  /* Status Colors */
+  --destructive: oklch(0.6280 0.2450 15.4520);         /* Red */
+  --destructive-foreground: oklch(1.0000 0 0);
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', sans-serif;         /* Friendly, rounded */
+  --font-serif: 'Architects Daughter', cursive;         /* Playful handwritten */
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing & Layout */
+  --radius: 1.25rem;                                    /* Rounded corners */
+  --spacing: 0.25rem;
+  --tracking-normal: 0em;
+
+  /* Shadows - Playful & Soft */
+  --shadow-2xs: 0 2px 4px 0px hsl(264 45% 25% / 0.05);
+  --shadow-xs: 0 2px 4px 0px hsl(264 45% 25% / 0.08);
+  --shadow-sm: 0 4px 8px 0px hsl(264 45% 25% / 0.10), 0 2px 4px -1px hsl(264 45% 25% / 0.06);
+  --shadow: 0 4px 8px 0px hsl(264 45% 25% / 0.10), 0 2px 4px -1px hsl(264 45% 25% / 0.06);
+  --shadow-md: 0 6px 12px 0px hsl(264 45% 25% / 0.12), 0 3px 6px -1px hsl(264 45% 25% / 0.08);
+  --shadow-lg: 0 8px 16px 0px hsl(264 45% 25% / 0.14), 0 4px 8px -1px hsl(264 45% 25% / 0.10);
+  --shadow-xl: 0 12px 24px 0px hsl(264 45% 25% / 0.16), 0 6px 12px -1px hsl(264 45% 25% / 0.12);
+  --shadow-2xl: 0 16px 32px 0px hsl(264 45% 25% / 0.20);
+
+  /* Magic Gradients */
+  --gradient-hero: linear-gradient(135deg,
+    oklch(0.7240 0.2180 45.3650) 0%,     /* Warm orange */
+    oklch(0.7580 0.1420 235.8960) 50%,   /* Soft blue */
+    oklch(0.8720 0.1680 145.2340) 100%   /* Mint green */
+  );
+
+  --gradient-subtle: linear-gradient(135deg,
+    oklch(0.9850 0.0150 85.7140) 0%,     /* Warm cream */
+    oklch(0.9680 0.0120 85.7140) 100%    /* Light cream */
+  );
+
+  /* Size Variants */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Custom utility classes */
+.gradient-text {
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-bg {
+  background: var(--gradient-hero);
+}
+
+.gradient-subtle-bg {
+  background: var(--gradient-subtle);
+}

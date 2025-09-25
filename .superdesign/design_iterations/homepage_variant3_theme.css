@@ -1,0 +1,76 @@
+/* Bold & Energetic Theme - Homepage Variant 3 */
+:root {
+  /* Core Colors - Bold & Vibrant */
+  --background: oklch(0.9950 0.0080 285.8200);          /* Subtle purple-tinted white */
+  --foreground: oklch(0.1200 0.0350 285.8200);          /* Deep purple-blue */
+  --card: oklch(1.0000 0 0);
+  --card-foreground: oklch(0.1200 0.0350 285.8200);
+  --popover: oklch(1.0000 0 0);
+  --popover-foreground: oklch(0.1200 0.0350 285.8200);
+
+  /* Primary - Electric Blue */
+  --primary: oklch(0.5580 0.2840 252.8470);             /* Electric blue */
+  --primary-foreground: oklch(1.0000 0 0);
+
+  /* Secondary - Hot Pink */
+  --secondary: oklch(0.7120 0.2890 328.3634);           /* Hot pink */
+  --secondary-foreground: oklch(1.0000 0 0);
+
+  /* Accent - Lime Green */
+  --accent: oklch(0.8520 0.2120 142.4953);              /* Lime green */
+  --accent-foreground: oklch(0.1200 0.0350 285.8200);
+
+  /* Supporting Colors */
+  --muted: oklch(0.9750 0.0120 285.8200);
+  --muted-foreground: oklch(0.4800 0.0280 285.8200);
+  --border: oklch(0.9350 0.0180 285.8200);
+  --input: oklch(0.9350 0.0180 285.8200);
+  --ring: oklch(0.5580 0.2840 252.8470);
+
+  /* Status */
+  --destructive: oklch(0.6280 0.2450 15.4520);
+  --destructive-foreground: oklch(1.0000 0 0);
+
+  /* Typography - Bold & Dynamic */
+  --font-sans: 'Outfit', system-ui, sans-serif;
+  --font-serif: 'Architects Daughter', cursive;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Spacing & Layout - Dynamic */
+  --radius: 1.5rem;                                      /* Bold rounded */
+  --spacing: 0.25rem;
+  --tracking-normal: -0.02em;                            /* Tight, dynamic */
+
+  /* Shadows - Bold & Colorful */
+  --shadow-2xs: 0 2px 4px 0px hsl(253 72% 50% / 0.08);
+  --shadow-xs: 0 2px 4px 0px hsl(253 72% 50% / 0.12);
+  --shadow-sm: 0 4px 8px 0px hsl(253 72% 50% / 0.15), 0 2px 4px -1px hsl(328 73% 67% / 0.10);
+  --shadow: 0 4px 8px 0px hsl(253 72% 50% / 0.15), 0 2px 4px -1px hsl(328 73% 67% / 0.10);
+  --shadow-md: 0 6px 12px 0px hsl(253 72% 50% / 0.18), 0 3px 6px -1px hsl(142 49% 85% / 0.12);
+  --shadow-lg: 0 8px 16px 0px hsl(253 72% 50% / 0.20), 0 4px 8px -1px hsl(328 73% 67% / 0.15);
+  --shadow-xl: 0 12px 24px 0px hsl(253 72% 50% / 0.25), 0 6px 12px -1px hsl(142 49% 85% / 0.18);
+  --shadow-2xl: 0 16px 32px 0px hsl(253 72% 50% / 0.30);
+
+  /* Gradients - Dynamic & Colorful */
+  --gradient-hero: linear-gradient(135deg,
+    oklch(0.5580 0.2840 252.8470) 0%,     /* Electric blue */
+    oklch(0.7120 0.2890 328.3634) 50%,    /* Hot pink */
+    oklch(0.8520 0.2120 142.4953) 100%    /* Lime green */
+  );
+
+  --gradient-card: linear-gradient(135deg,
+    oklch(1.0000 0 0) 0%,                 /* White */
+    oklch(0.9950 0.0080 285.8200) 100%    /* Subtle purple-tinted */
+  );
+
+  --gradient-accent: linear-gradient(90deg,
+    oklch(0.7120 0.2890 328.3634) 0%,     /* Hot pink */
+    oklch(0.8520 0.2120 142.4953) 100%    /* Lime green */
+  );
+
+  /* Size variants */
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 3px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+}
