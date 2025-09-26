@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScribbleMachine.com - Homepage with Timeline How It Works</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Architects+Daughter:wght@400&family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage_variant1_5_theme.css">
+
+    <style>
+        /* Base animations */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+        }
+
+        /* BALANCED PAINT DREAMS - Variant 3: Enhanced artistic flow, optimal visibility */
+        @keyframes creativePaintFloat1 {
+            0% {
+                opacity: 0.26;
+                transform: translateY(-16px) translateX(-6px) scale(0.48) rotate(4deg);
+                border-radius: 62% 38% 48% 72%;
+                filter: blur(2.8px);
+            }
+            25% {
+                opacity: 0.29;
+                transform: translateY(-5px) translateX(-2px) scale(0.52) rotate(7deg);
+                border-radius: 58% 42% 52% 68%;
+                filter: blur(2.6px);
+            }
+            50% {
+                opacity: 0.36;
+                transform: translateY(32px) translateX(10px) scale(0.68) rotate(15deg);
+                border-radius: 48% 52% 62% 38%;
+                filter: blur(1.8px);
+            }
+            75% {
+                opacity: 0.29;
+                transform: translateY(-5px) translateX(-2px) scale(0.52) rotate(23deg);
+                border-radius: 58% 42% 52% 68%;
+                filter: blur(2.6px);
+            }
+            100% {
+                opacity: 0.26;
+                transform: translateY(-16px) translateX(-6px) scale(0.48) rotate(31deg);
+                border-radius: 62% 38% 48% 72%;
+                filter: blur(2.8px);
+            }
+        }
+
+        @keyframes creativePaintFloat2 {
+            0% {
+                opacity: 0.24;
+                transform: translateX(22px) translateY(-15px) scale(0.42) rotate(-7deg);
+                border-radius: 66% 34% 44% 56%;
+                filter: blur(2.8px);
+            }
+            25% {
+                opacity: 0.27;
+                transform: translateX(8px) translateY(-6px) scale(0.46) rotate(-9deg);
+                border-radius: 62% 38% 48% 52%;
+                filter: blur(2.6px);
+            }
+            50% {
+                opacity: 0.34;
+                transform: translateX(-22px) translateY(26px) scale(0.58) rotate(-11deg);
+                border-radius: 34% 66% 56% 44%;
+                filter: blur(1.8px);
+            }
+            75% {
+                opacity: 0.27;
+                transform: translateX(8px) translateY(-6px) scale(0.46) rotate(-20deg);
+                border-radius: 62% 38% 48% 52%;
+                filter: blur(2.6px);
+            }
+            100% {
+                opacity: 0.24;
+                transform: translateX(22px) translateY(-15px) scale(0.42) rotate(-29deg);
+                border-radius: 66% 34% 44% 56%;
+                filter: blur(2.8px);
+            }
+        }
+
+        @keyframes enhancedColorBleed {
+            0%, 100% {
+                opacity: 0.14;
+                transform: scale(0.84) translateX(-3.5px);
+                background-size: 100% 100%;
+            }
+            50% {
+                opacity: 0.23;
+                transform: scale(1.05) translateX(2.5px);
+                background-size: 110% 110%;
+            }
+        }
+
+        @keyframes enhancedColorBleed2 {
+            0%, 100% {
+                opacity: 0.11;
+                transform: scale(0.91) translateY(-2.5px);
+                background-size: 100% 100%;
+            }
+            50% {
+                opacity: 0.18;
+                transform: scale(1.03) translateY(1.5px);
+                background-size: 106% 106%;
+            }
+        }
+
+        @keyframes elegantCornerFloat {
+            0%, 100% {
+                clipPath: ellipse(34% 46% at 16% 16%);
+                transform: rotate(0deg);
+                opacity: 0.14;
+            }
+            25% {
+                clipPath: ellipse(46% 34% at 74% 20%);
+                transform: rotate(90deg);
+                opacity: 0.23;
+            }
+            50% {
+                clipPath: ellipse(41% 51% at 80% 74%);
+                transform: rotate(180deg);
+                opacity: 0.20;
+            }
+            75% {
+                clipPath: ellipse(51% 39% at 20% 80%);
+                transform: rotate(270deg);
+                opacity: 0.17;
+            }
+        }
+
+        @keyframes elegantWatercolorFade {
+            0% {
+                opacity: 0.20;
+                transform: scale(0.82) rotate(2.5deg) translateX(4.5px);
+                filter: blur(2.8px) saturate(1.15);
+            }
+            25% {
+                opacity: 0.24;
+                transform: scale(0.92) rotate(1deg) translateX(5.5px);
+                filter: blur(3.3px) saturate(1.08);
+            }
+            50% {
+                opacity: 0.28;
+                transform: scale(1.02) rotate(-1.5deg) translateX(6.5px);
+                filter: blur(3.8px) saturate(1.0);
+            }
+            75% {
+                opacity: 0.23;
+                transform: scale(0.88) rotate(0.5deg) translateX(5.5px);
+                filter: blur(3.0px) saturate(1.12);
+            }
+            100% {
+                opacity: 0.20;
+                transform: scale(0.82) rotate(2.5deg) translateX(4.5px);
+                filter: blur(2.8px) saturate(1.15);
+            }
+        }
+
+        /* Timeline animations */
+        @keyframes slideInLeft {
+            0% { opacity: 0; transform: translateX(-50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            0% { opacity: 0; transform: translateX(50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px oklch(0.68 0.20 280 / 0.3); }
+            50% { box-shadow: 0 0 40px oklch(0.68 0.20 280 / 0.6); }
+        }
+
+        @keyframes timelineProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Animation classes */
+        .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .scale-in { animation: scaleIn 0.8s ease-out forwards; }
+        .logo-float { animation: logoFloat 4s ease-in-out infinite; }
+
+        .creative-paint-float-1 {
+            animation: creativePaintFloat1 16s ease-in-out infinite;
+        }
+        .creative-paint-float-2 {
+            animation: creativePaintFloat2 20s ease-in-out infinite;
+        }
+        .enhanced-color-bleed {
+            animation: enhancedColorBleed 23s ease-in-out infinite;
+        }
+        .enhanced-color-bleed-2 {
+            animation: enhancedColorBleed2 20.5s ease-in-out infinite;
+        }
+        .elegant-corner-float {
+            animation: elegantCornerFloat 29s ease-in-out infinite;
+        }
+        .elegant-watercolor-fade {
+            animation: elegantWatercolorFade 16.5s ease-in-out infinite;
+        }
+
+        .slide-left { animation: slideInLeft 0.8s ease-out forwards; }
+        .slide-right { animation: slideInRight 0.8s ease-out forwards; }
+        .pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
+        .timeline-progress { animation: timelineProgress 2s ease-out forwards; }
+
+        /* Staggered delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+
+        /* Modern button styles */
+        .btn-primary {
+            background: var(--gradient-hero) !important;
+            color: white !important;
+            border-radius: var(--radius-lg) !important;
+            padding: 1rem 2rem !important;
+            font-weight: 600 !important;
+            font-size: 1.125rem !important;
+            font-family: var(--font-sans) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: var(--shadow-lg) !important;
+            border: none !important;
+            position: relative !important;
+            overflow: hidden !important;
+            white-space: nowrap !important;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02) !important;
+            box-shadow: var(--shadow-xl) !important;
+        }
+
+        .btn-secondary {
+            background: var(--gradient-accent) !important;
+            color: white !important;
+            border: 2px solid transparent !important;
+            border-radius: var(--radius-lg) !important;
+            padding: 1rem 2rem !important;
+            font-weight: 600 !important;
+            font-size: 1.125rem !important;
+            font-family: var(--font-sans) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: var(--shadow) !important;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px) scale(1.02) !important;
+            box-shadow: var(--shadow-lg) !important;
+            background: var(--gradient-hero) !important;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--font-sans) !important;
+            font-weight: 700 !important;
+            line-height: 1.2 !important;
+        }
+
+        .handwritten {
+            font-family: var(--font-serif) !important;
+        }
+
+        .modern-sans {
+            font-family: 'Space Grotesk', sans-serif !important;
+            font-weight: 600 !important;
+        }
+
+        .refined-sans {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-weight: 700 !important;
+        }
+
+        body {
+            font-family: var(--font-mono) !important;
+            background: var(--gradient-bg) !important;
+            min-height: 100vh !important;
+            position: relative;
+        }
+
+        /* Enhanced background with creative paint dreams */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 26%, rgba(255, 159, 243, 0.065) 0%, transparent 44%),
+                radial-gradient(circle at 80% 20%, rgba(101, 195, 247, 0.055) 0%, transparent 39%),
+                radial-gradient(circle at 40% 75%, rgba(254, 202, 87, 0.045) 0%, transparent 34%),
+                var(--paint-splatter);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Logo styling */
+        .logo-header {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo-header:hover {
+            transform: scale(1.05) rotate(1deg);
+        }
+
+        /* Enhanced book positioning */
+        .hero-book {
+            filter: drop-shadow(0 25px 50px oklch(0.15 0.12 260 / 0.25))
+                   drop-shadow(0 10px 20px oklch(0.15 0.12 260 / 0.15));
+            transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-book:hover {
+            transform: perspective(1000px) rotateY(-2deg) rotateX(1deg) scale(1.02);
+            filter: drop-shadow(0 35px 70px oklch(0.15 0.12 260 / 0.3))
+                   drop-shadow(0 15px 30px oklch(0.15 0.12 260 / 0.2));
+        }
+
+        .book-container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 2rem;
+        }
+
+        /* Creative paint dreams container */
+        .paint-dreams {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .paint-element {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        /* Creative paint drops - balanced placement */
+        .drop-1 {
+            top: 11%;
+            left: 6%;
+            width: 78px;
+            height: 78px;
+            background: radial-gradient(circle at 30% 30%,
+                oklch(0.86 0.135 320 / 0.26),
+                oklch(0.76 0.165 340 / 0.135),
+                transparent 74%);
+        }
+
+        .drop-2 {
+            top: 19%;
+            right: 6%;
+            width: 98px;
+            height: 98px;
+            background: radial-gradient(ellipse at 40% 60%,
+                oklch(0.815 0.115 60 / 0.225),
+                oklch(0.715 0.145 80 / 0.115),
+                transparent 79%);
+        }
+
+        .drop-3 {
+            bottom: 16%;
+            left: 9%;
+            width: 88px;
+            height: 88px;
+            background: radial-gradient(circle at 56% 36%,
+                oklch(0.765 0.175 180 / 0.21),
+                oklch(0.665 0.195 200 / 0.105),
+                transparent 71%);
+        }
+
+        .drop-4 {
+            bottom: 13%;
+            right: 9%;
+            width: 73px;
+            height: 73px;
+            background: radial-gradient(ellipse at 43% 57%,
+                oklch(0.835 0.155 280 / 0.235),
+                oklch(0.735 0.175 300 / 0.115),
+                transparent 77%);
+        }
+
+        .drop-5 {
+            top: 62%;
+            right: 11%;
+            width: 83px;
+            height: 83px;
+            background: radial-gradient(circle at 50% 50%,
+                oklch(0.805 0.125 40 / 0.175),
+                oklch(0.705 0.145 50 / 0.075),
+                transparent 81%);
+        }
+
+        /* Enhanced color bleeds */
+        .bleed-1 {
+            top: 9%;
+            left: 2.5%;
+            width: 140px;
+            height: 118px;
+            background: linear-gradient(135deg,
+                oklch(0.905 0.095 280 / 0.11),
+                oklch(0.855 0.115 300 / 0.165),
+                oklch(0.805 0.135 320 / 0.09));
+            border-radius: 61% 39% 69% 31%;
+            filter: blur(3.8px);
+        }
+
+        .bleed-2 {
+            top: 23%;
+            right: 1.5%;
+            width: 120px;
+            height: 138px;
+            background: linear-gradient(-45deg,
+                oklch(0.885 0.075 40 / 0.135),
+                oklch(0.825 0.095 60 / 0.185),
+                oklch(0.765 0.115 80 / 0.095));
+            border-radius: 41% 59% 51% 49%;
+            filter: blur(2.8px);
+        }
+
+        .bleed-3 {
+            bottom: 19%;
+            left: 4%;
+            width: 130px;
+            height: 108px;
+            background: linear-gradient(90deg,
+                oklch(0.865 0.115 160 / 0.12),
+                oklch(0.805 0.135 180 / 0.175),
+                oklch(0.745 0.155 200 / 0.095));
+            border-radius: 69% 31% 59% 41%;
+            filter: blur(4.2px);
+        }
+
+        .bleed-4 {
+            bottom: 9%;
+            right: 3.5%;
+            width: 115px;
+            height: 125px;
+            background: linear-gradient(180deg,
+                oklch(0.845 0.155 240 / 0.14),
+                oklch(0.785 0.175 260 / 0.195),
+                oklch(0.725 0.195 280 / 0.105));
+            border-radius: 51% 49% 69% 31%;
+            filter: blur(3.8px);
+        }
+
+        /* Elegant watercolor spreads */
+        .watercolor-1 {
+            top: 6%;
+            left: 11%;
+            width: 115px;
+            height: 115px;
+            background: radial-gradient(ellipse at center,
+                oklch(0.925 0.055 160 / 0.135),
+                oklch(0.865 0.075 180 / 0.20),
+                oklch(0.805 0.095 200 / 0.11),
+                transparent 86.5%);
+            border-radius: 73.5% 26.5% 63.5% 36.5%;
+        }
+
+        .watercolor-2 {
+            top: 11%;
+            right: 13.5%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 62% 28%,
+                oklch(0.885 0.115 240 / 0.165),
+                oklch(0.825 0.135 260 / 0.235),
+                oklch(0.765 0.155 280 / 0.135),
+                transparent 83.5%);
+            border-radius: 36.5% 63.5% 73.5% 26.5%;
+        }
+
+        .watercolor-3 {
+            bottom: 9%;
+            left: 15%;
+            width: 105px;
+            height: 105px;
+            background: radial-gradient(ellipse at 48% 62%,
+                oklch(0.905 0.065 60 / 0.11),
+                oklch(0.845 0.085 80 / 0.165),
+                oklch(0.785 0.105 100 / 0.09),
+                transparent 81.5%);
+            border-radius: 53.5% 46.5% 56.5% 43.5%;
+        }
+
+        .watercolor-4 {
+            bottom: 13.5%;
+            right: 18.5%;
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle at 33% 42%,
+                oklch(0.865 0.125 320 / 0.155),
+                oklch(0.805 0.145 340 / 0.215),
+                oklch(0.745 0.165 360 / 0.11),
+                transparent 84.5%);
+            border-radius: 43.5% 56.5% 36.5% 63.5%;
+        }
+
+        /* Elegant liquid flows */
+        .liquid-1 {
+            top: 0%;
+            right: 9%;
+            width: 150px;
+            height: 123px;
+            background: conic-gradient(from 45deg at 50% 50%,
+                oklch(0.865 0.145 320 / 0.11),
+                oklch(0.815 0.165 340 / 0.165),
+                oklch(0.765 0.185 360 / 0.11),
+                oklch(0.865 0.145 320 / 0.11));
+            filter: blur(4.2px);
+        }
+
+        .liquid-2 {
+            top: 0%;
+            left: 11%;
+            width: 140px;
+            height: 113px;
+            background: conic-gradient(from 120deg at 48% 58%,
+                oklch(0.835 0.125 60 / 0.12),
+                oklch(0.785 0.145 80 / 0.175),
+                oklch(0.735 0.165 100 / 0.13),
+                oklch(0.835 0.125 60 / 0.12));
+            filter: blur(3.8px);
+        }
+
+        .liquid-3 {
+            bottom: 0%;
+            right: 15%;
+            width: 130px;
+            height: 103px;
+            background: conic-gradient(from 200deg at 58% 42%,
+                oklch(0.805 0.175 180 / 0.11),
+                oklch(0.755 0.195 200 / 0.165),
+                oklch(0.705 0.215 220 / 0.12),
+                oklch(0.805 0.175 180 / 0.11));
+            filter: blur(3.2px);
+        }
+
+        .liquid-4 {
+            bottom: 0%;
+            left: 13%;
+            width: 120px;
+            height: 93px;
+            background: conic-gradient(from 300deg at 38% 68%,
+                oklch(0.845 0.135 280 / 0.10),
+                oklch(0.795 0.155 300 / 0.145),
+                oklch(0.745 0.175 320 / 0.11),
+                oklch(0.845 0.135 280 / 0.10));
+            filter: blur(2.8px);
+        }
+
+        /* Hero section styling */
+        .hero-section {
+            position: relative;
+            background: transparent;
+            z-index: 2;
+        }
+
+        /* Timeline How It Works */
+        .how-it-works {
+            position: relative;
+            z-index: 10;
+            padding: 8rem 0;
+            background: linear-gradient(135deg,
+                oklch(0.99 0.01 45 / 0.95) 0%,
+                oklch(0.96 0.02 45 / 0.90) 100%);
+            margin-top: 4rem;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg,
+                var(--gradient-hero) 0%,
+                var(--gradient-accent) 50%,
+                oklch(0.56 0.24 260 / 0.8) 100%);
+            border-radius: 2px;
+            z-index: 1;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg,
+                oklch(0.68 0.20 280 / 0.8) 0%,
+                oklch(0.56 0.24 260 / 0.8) 100%);
+            border-radius: 2px;
+            z-index: 2;
+        }
+
+        .timeline-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 3;
+            margin-top: -2px;
+        }
+
+        .timeline-step {
+            background: oklch(1 0 0 / 0.95);
+            border: 3px solid var(--gradient-hero);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .timeline-step:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px oklch(0.68 0.20 280 / 0.3);
+        }
+
+        .timeline-step.active {
+            box-shadow: 0 0 30px oklch(0.68 0.20 280 / 0.6);
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        .step-content {
+            position: absolute;
+            text-align: center;
+            width: 300px;
+            padding: 2rem;
+            background: oklch(1 0 0 / 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid oklch(0.92 0.03 45 / 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .step-content.top {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            margin-bottom: 1rem;
+        }
+
+        .step-content.bottom {
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            margin-top: 1rem;
+        }
+
+        .timeline-step:hover .step-content {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .timeline-step:hover .step-content.top {
+            transform: translateX(-50%) translateY(-30px);
+        }
+
+        .timeline-step:hover .step-content.bottom {
+            transform: translateX(-50%) translateY(30px);
+        }
+
+        .step-emoji-large {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 4px 8px oklch(0.15 0.12 260 / 0.2));
+        }
+
+        .step-title-timeline {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--foreground);
+        }
+
+        .step-description-timeline {
+            color: var(--muted-foreground);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .timeline-icon {
+            color: var(--gradient-hero);
+            font-size: 2rem;
+        }
+
+        .step-number-timeline {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 32px;
+            height: 32px;
+            background: oklch(0.56 0.24 260 / 0.9);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px oklch(0.56 0.24 260 / 0.4);
+        }
+    </style>
+</head>
+<body style="background: var(--gradient-bg); color: var(--foreground);">
+    <!-- Creative Paint Dreams - Variant 3: Enhanced artistic flow, optimal visibility -->
+    <div class="paint-dreams">
+        <!-- Creative paint drops - balanced placement -->
+        <div class="paint-element drop-1 creative-paint-float-1"></div>
+        <div class="paint-element drop-2 creative-paint-float-2" style="animation-delay: 2.8s;"></div>
+        <div class="paint-element drop-3 creative-paint-float-1" style="animation-delay: 5.6s;"></div>
+        <div class="paint-element drop-4 creative-paint-float-2" style="animation-delay: 8.4s;"></div>
+        <div class="paint-element drop-5 creative-paint-float-1" style="animation-delay: 11.2s;"></div>
+
+        <!-- Enhanced color bleeds -->
+        <div class="paint-element bleed-1 enhanced-color-bleed"></div>
+        <div class="paint-element bleed-2 enhanced-color-bleed-2" style="animation-delay: 4.6s;"></div>
+        <div class="paint-element bleed-3 enhanced-color-bleed" style="animation-delay: 9.2s;"></div>
+        <div class="paint-element bleed-4 enhanced-color-bleed-2" style="animation-delay: 13.8s;"></div>
+
+        <!-- Elegant watercolor spreads -->
+        <div class="paint-element watercolor-1 elegant-watercolor-fade"></div>
+        <div class="paint-element watercolor-2 elegant-watercolor-fade" style="animation-delay: 3.7s;"></div>
+        <div class="paint-element watercolor-3 elegant-watercolor-fade" style="animation-delay: 7.4s;"></div>
+        <div class="paint-element watercolor-4 elegant-watercolor-fade" style="animation-delay: 11.1s;"></div>
+
+        <!-- Elegant liquid flows -->
+        <div class="paint-element liquid-1 elegant-corner-float"></div>
+        <div class="paint-element liquid-2 elegant-corner-float" style="animation-delay: 6.5s;"></div>
+        <div class="paint-element liquid-3 elegant-corner-float" style="animation-delay: 13s;"></div>
+        <div class="paint-element liquid-4 elegant-corner-float" style="animation-delay: 19.5s;"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="relative z-60 py-4 px-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center logo-header fade-in-up">
+                <img src="../../apps/web/public/assets/ScribbleMachinecom.svg" alt="ScribbleMachine.com" class="w-auto" style="height: 7rem;">
+            </div>
+            <div class="flex items-center space-x-6 fade-in-up delay-200">
+                <button class="text-lg font-medium px-6 py-3 hover:bg-white/10 rounded-lg transition-all duration-300" style="color: var(--foreground);">Sign In</button>
+                <button class="btn-primary flex items-center">
+                    <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>
+                    Start Creating
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="relative z-20">
+        <section class="hero-section py-16">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-16 items-start">
+                    <!-- Hero Content -->
+                    <div class="text-center lg:text-left">
+                        <div class="fade-in-up">
+                            <h1 class="text-5xl lg:text-7xl font-bold mb-8 leading-tight">
+                                <span class="modern-sans">Where</span>
+                                <span class="handwritten bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Memories</span>
+                                <span class="refined-sans">& Dreams</span>
+                                <br/>
+                                <span class="handwritten bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Become</span>
+                                <span class="modern-sans">Coloring</span>
+                                <span class="refined-sans bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">Magic</span>
+                            </h1>
+                        </div>
+
+                        <div class="fade-in-up delay-200">
+                            <p class="text-xl lg:text-2xl mb-10 leading-relaxed" style="color: var(--muted-foreground);">
+                                Upload your precious photos OR simply describe your wildest imagination.
+                                <span class="font-semibold" style="color: var(--primary);">Our AI turns both into stunning coloring adventures!</span>
+                            </p>
+                        </div>
+
+                        <!-- Dual-Mode CTA Buttons -->
+                        <div class="grid sm:grid-cols-2 gap-4 mb-12 fade-in-up delay-300">
+                            <button class="btn-primary flex items-center justify-center text-lg px-6 py-4 relative">
+                                <i data-lucide="camera" class="w-6 h-6 mr-3"></i>
+                                <div class="text-left">
+                                    <div class="font-bold">Upload Photo</div>
+                                    <div class="text-sm opacity-90">Turn memories into art</div>
+                                </div>
+                            </button>
+                            <button class="btn-secondary flex items-center justify-center text-lg px-6 py-4 relative">
+                                <i data-lucide="lightbulb" class="w-6 h-6 mr-3"></i>
+                                <div class="text-left">
+                                    <div class="font-bold">Imagine Ideas</div>
+                                    <div class="text-sm opacity-90">Describe your dreams</div>
+                                </div>
+                            </button>
+                        </div>
+
+                        <!-- Enhanced trust indicators -->
+                        <div class="inline-flex items-center bg-white/85 backdrop-blur-sm rounded-full px-8 py-4 shadow-sm fade-in-up delay-400">
+                            <div class="flex items-center space-x-6 text-sm font-medium" style="color: var(--muted-foreground);">
+                                <div class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span>
+                                    3 FREE Pages
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-blue-500 mr-2">⚡</span>
+                                    Both Ways Work
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-purple-500 mr-2">👨‍👩‍👧‍👦</span>
+                                    Family Safe
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Image -->
+                    <div class="relative scale-in delay-300 book-container">
+                        <div class="relative max-w-xl mx-auto">
+                            <img src="../../apps/web/public/assets/HeroBook-WithImages-upscaled.png"
+                                 alt="Magical coloring book"
+                                 class="w-full hero-book rounded-2xl">
+
+                            <!-- Integrated logo element -->
+                            <div class="absolute -top-8 -right-8 logo-float">
+                                <div class="bg-white/95 backdrop-blur-sm rounded-full p-4 shadow-2xl border border-white/50">
+                                    <img src="../../apps/web/public/assets/ScribbleIcon.svg" alt="ScribbleMachine" class="w-16 h-16">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline How It Works Section -->
+        <section class="how-it-works">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4 handwritten" style="color: var(--foreground);">How It Works</h2>
+                    <p class="text-xl" style="color: var(--muted-foreground);">Your creative journey in three simple steps</p>
+                </div>
+
+                <div class="timeline-container">
+                    <div class="timeline-line">
+                        <div class="timeline-progress timeline-progress"></div>
+                    </div>
+
+                    <div class="timeline-steps">
+                        <!-- Step 1 -->
+                        <div class="timeline-step active slide-left">
+                            <div class="step-number-timeline">1</div>
+                            <i data-lucide="image" class="timeline-icon"></i>
+                            <div class="step-content bottom">
+                                <div class="step-emoji-large">📸</div>
+                                <h3 class="step-title-timeline">Start Creating</h3>
+                                <p class="step-description-timeline">Upload your favorite photo or describe your dream scene. Every magical journey begins with a simple spark!</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="timeline-step slide-left delay-200">
+                            <div class="step-number-timeline">2</div>
+                            <i data-lucide="sparkles" class="timeline-icon"></i>
+                            <div class="step-content top">
+                                <div class="step-emoji-large">✨</div>
+                                <h3 class="step-title-timeline">AI Magic</h3>
+                                <p class="step-description-timeline">Watch our intelligent AI transform your ideas into perfect line drawings. Like magic, but with more heart!</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="timeline-step slide-right delay-400">
+                            <div class="step-number-timeline">3</div>
+                            <i data-lucide="download" class="timeline-icon"></i>
+                            <div class="step-content bottom">
+                                <div class="step-emoji-large">🎨</div>
+                                <h3 class="step-title-timeline">Color & Share</h3>
+                                <p class="step-description-timeline">Download your masterpiece and share the joy of coloring. Every page tells a unique story waiting to bloom!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simple benefits -->
+                <div class="text-center mt-16">
+                    <div class="inline-flex items-center gap-12 px-12 py-6 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">🎯</span>
+                            <div>
+                                <div class="font-semibold">Easy</div>
+                                <div class="text-sm" style="color: var(--muted-foreground);">Anyone can create</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">⚡</span>
+                            <div>
+                                <div class="font-semibold">Fast</div>
+                                <div class="text-sm" style="color: var(--muted-foreground);">Results in minutes</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">👨‍👩‍👧‍👦</span>
+                            <div>
+                                <div class="font-semibold">Family Fun</div>
+                                <div class="text-sm" style="color: var(--muted-foreground);">Perfect for everyone</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Professional intersection observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) translateX(0) scale(1)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in-up, .scale-in, .slide-left, .slide-right').forEach((el, index) => {
+            el.style.opacity = '0';
+
+            if (el.classList.contains('fade-in-up')) {
+                el.style.transform = 'translateY(30px)';
+            } else if (el.classList.contains('scale-in')) {
+                el.style.transform = 'scale(0.9)';
+            } else if (el.classList.contains('slide-left')) {
+                el.style.transform = 'translateX(-50px)';
+            } else if (el.classList.contains('slide-right')) {
+                el.style.transform = 'translateX(50px)';
+            }
+
+            el.style.transition = `opacity 0.8s ease-out ${index * 0.2}s, transform 0.8s ease-out ${index * 0.2}s`;
+            observer.observe(el);
+        });
+
+        // Enhanced button interactions
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px) scale(1.02)';
+            });
+
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Timeline step interactions
+        document.querySelectorAll('.timeline-step').forEach(step => {
+            step.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.15) rotate(5deg)';
+            });
+
+            step.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+    </script>
+</body>
+</html>

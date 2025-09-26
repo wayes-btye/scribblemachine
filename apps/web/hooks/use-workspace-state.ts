@@ -48,7 +48,7 @@ export function useWorkspaceState() {
       ...prev,
       data: {
         ...prev.data,
-        uploadedImage: { assetId, url }
+        uploadedImage: assetId && url ? { assetId, url } : undefined
       }
     }))
   }, [])
