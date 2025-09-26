@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - Magical Sketch Trails v2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Architects+Daughter:wght@400&family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage_variant1_5_theme.css">
+
+    <style>
+        /* Magical Sketch Trails Animations v2 */
+        @keyframes sparkleTrail {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(0) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(20px) scale(0.8);
+            }
+        }
+
+        @keyframes magicFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-8px) rotate(2deg);
+            }
+            66% {
+                transform: translateY(4px) rotate(-1deg);
+            }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes sparkleBurst {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.3) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5) rotate(360deg);
+            }
+        }
+
+        /* Animation classes */
+        .sparkle-trail { animation: sparkleTrail 3s ease-in-out infinite; }
+        .magic-float { animation: magicFloat 6s ease-in-out infinite; }
+        .glow-pulse { animation: glowPulse 4s ease-in-out infinite; }
+        .sparkle-burst { animation: sparkleBurst 5s ease-in-out infinite; }
+
+        /* Staggered delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+
+        body {
+            font-family: var(--font-mono);
+            background: var(--gradient-bg);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .section-container {
+            background: transparent;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Step card with magical trails */
+        .step-card {
+            background: var(--gradient-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid oklch(0.92 0.03 45 / 0.5);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle,
+                oklch(0.68 0.20 280 / 0.1) 0%,
+                transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .step-card:hover::before {
+            opacity: 1;
+        }
+
+        .step-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 40px oklch(0.15 0.12 260 / 0.2);
+            border-color: oklch(0.68 0.20 280 / 0.4);
+        }
+
+        /* Magical step number */
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-hero);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            box-shadow: 0 10px 25px oklch(0.68 0.20 280 / 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .step-number::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(45deg,
+                oklch(0.68 0.20 280),
+                oklch(0.85 0.12 60),
+                oklch(0.78 0.16 25));
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        .step-card:hover .step-number::after {
+            opacity: 1;
+        }
+
+        .step-card:hover .step-number {
+            transform: scale(1.1);
+        }
+
+        /* Magical icon */
+        .step-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-accent);
+            color: white;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 8px 20px oklch(0.85 0.12 60 / 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover .step-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 30px oklch(0.85 0.12 60 / 0.4);
+        }
+
+        /* Sparkle decorations */
+        .sparkle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .sparkle-1 { top: 10%; right: 10%; animation-delay: 0s; }
+        .sparkle-2 { bottom: 15%; left: 12%; animation-delay: 1s; }
+        .sparkle-3 { top: 20%; left: 15%; animation-delay: 2s; }
+
+        /* Magic trail connectors */
+        .magic-connector {
+            height: 4px;
+            background: linear-gradient(90deg,
+                oklch(0.68 0.20 280 / 0.3),
+                oklch(0.85 0.12 60 / 0.4),
+                oklch(0.78 0.16 25 / 0.3));
+            margin: 2rem 0;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .magic-connector::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                oklch(0.85 0.12 60 / 0.8),
+                transparent);
+            animation: sparkle-trail 2s ease-in-out infinite;
+        }
+
+        /* Typography */
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            color: var(--muted-foreground);
+            margin-bottom: 3rem;
+            text-align: center;
+            max-width: 3xl mx-auto;
+        }
+
+        .step-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.75rem;
+            color: var(--foreground);
+            margin-bottom: 0.75rem;
+        }
+
+        .step-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.125rem;
+            color: var(--muted-foreground);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .fun-tag {
+            display: inline-block;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .fun-tag:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 20px oklch(0.85 0.12 60 / 0.3);
+        }
+
+        /* Background magical elements */
+        .magic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.15;
+        }
+
+        .magic-trail {
+            position: absolute;
+            stroke: oklch(0.68 0.20 280 / 0.4);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-dasharray: 10, 5;
+        }
+
+        .trail-1 {
+            top: 15%;
+            left: 5%;
+            width: 150px;
+            height: 80px;
+            animation: magic-float 12s ease-in-out infinite;
+        }
+
+        .trail-2 {
+            top: 65%;
+            right: 8%;
+            width: 120px;
+            height: 60px;
+            animation: magic-float 15s ease-in-out infinite reverse;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .step-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+
+            .step-icon {
+                width: 56px;
+                height: 56px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Magical Background -->
+    <div class="magic-bg">
+        <svg class="magic-trail trail-1" viewBox="0 0 150 80">
+            <path d="M10,40 Q75,20 140,50"/>
+        </svg>
+        <svg class="magic-trail trail-2" viewBox="0 0 120 60">
+            <path d="M20,30 Q60,10 100,40"/>
+        </svg>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="section-container py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <!-- Section Header -->
+            <div class="mb-16">
+                <h2 class="section-title magic-float">How It Works</h2>
+                <p class="section-subtitle">
+                    ✨ Three magical steps to turn your photos and dreams into coloring adventures! ✨
+                </p>
+            </div>
+
+            <!-- Steps Grid -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1: Upload or Imagine -->
+                <div class="step-card relative">
+                    <div class="sparkle sparkle-1 sparkle-burst">
+                        <svg width="20" height="20" viewBox="0 0 20 20">
+                            <path d="M10,2 L12,8 L18,10 L12,12 L10,18 L8,12 L2,10 L8,8 Z" fill="oklch(0.85 0.12 60)"/>
+                        </svg>
+                    </div>
+
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i data-lucide="wand-2" class="w-8 h-8"></i>
+                    </div>
+                    <div class="magic-connector"></div>
+                    <h3 class="step-title">Create Magic</h3>
+                    <p class="step-description">
+                        Upload your favorite photo <span class="font-semibold" style="color: var(--primary);">OR</span> describe your dream scene with words. Both ways work like magic! 🎨
+                    </p>
+                    <div class="fun-tag">
+                        <i data-lucide="sparkles" class="w-4 h-4 mr-1"></i>
+                        Choose Your Path
+                    </div>
+                </div>
+
+                <!-- Step 2: AI Transformation -->
+                <div class="step-card relative delay-200">
+                    <div class="sparkle sparkle-2 sparkle-burst delay-100">
+                        <svg width="20" height="20" viewBox="0 0 20 20">
+                            <path d="M10,3 L11,9 L17,10 L11,11 L10,17 L9,11 L3,10 L9,9 Z" fill="oklch(0.68 0.20 280)"/>
+                        </svg>
+                    </div>
+
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i data-lucide="zap" class="w-8 h-8"></i>
+                    </div>
+                    <div class="magic-connector delay-200"></div>
+                    <h3 class="step-title">Watch Magic Happen</h3>
+                    <p class="step-description">
+                        Our AI instantly transforms your input into beautiful line art. Smart technology meets creativity! ⚡
+                    </p>
+                    <div class="fun-tag">
+                        <i data-lucide="cpu" class="w-4 h-4 mr-1"></i>
+                        Instant Results
+                    </div>
+                </div>
+
+                <!-- Step 3: Download & Enjoy -->
+                <div class="step-card relative delay-400">
+                    <div class="sparkle sparkle-3 sparkle-burst delay-200">
+                        <svg width="20" height="20" viewBox="0 0 20 20">
+                            <path d="M10,4 L11,10 L16,11 L11,12 L10,16 L9,12 L4,11 L9,10 Z" fill="oklch(0.78 0.16 25)"/>
+                        </svg>
+                    </div>
+
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i data-lucide="heart" class="w-8 h-8"></i>
+                    </div>
+                    <div class="magic-connector delay-400"></div>
+                    <h3 class="step-title">Color Your World</h3>
+                    <p class="step-description">
+                        Download your masterpiece and start the coloring adventure! Perfect for family fun and creative souls! 🌈
+                    </p>
+                    <div class="fun-tag">
+                        <i data-lucide="download" class="w-4 h-4 mr-1"></i>
+                        Ready to Play
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fun callout -->
+            <div class="mt-16 text-center">
+                <div class="inline-flex items-center bg-white/80 backdrop-blur-sm rounded-full px-8 py-4 shadow-lg">
+                    <div class="flex items-center space-x-6 text-sm font-medium" style="color: var(--muted-foreground);">
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">🎯</span>
+                            Super Easy
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-blue-500 mr-2">⚡</span>
+                            Lightning Fast
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-purple-500 mr-2">👨‍👩‍👧‍👦</span>
+                            Family Approved
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe all animated elements
+        document.querySelectorAll('.step-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `opacity 0.8s ease-out ${index * 0.2}s, transform 0.8s ease-out ${index * 0.2}s`;
+            observer.observe(card);
+        });
+
+        // Enhanced hover effects
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.querySelector('.step-number').style.transform = 'scale(1.15) rotate(5deg)';
+                this.querySelector('.step-icon').style.transform = 'scale(1.15) rotate(-5deg)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.querySelector('.step-number').style.transform = 'scale(1)';
+                this.querySelector('.step-icon').style.transform = 'scale(1)';
+            });
+        });
+
+        // Dynamic sparkle creation on hover
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                if (Math.random() > 0.95) {
+                    const sparkle = document.createElement('div');
+                    sparkle.style.cssText = `
+                        position: absolute;
+                        width: 8px;
+                        height: 8px;
+                        background: oklch(0.85 0.12 60);
+                        border-radius: 50%;
+                        left: ${e.offsetX}px;
+                        top: ${e.offsetY}px;
+                        pointer-events: none;
+                        animation: sparkle-burst 1s ease-out forwards;
+                    `;
+                    card.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - Paint Dreams</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Architects+Daughter:wght@400&family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage_variant1_5_theme.css">
+
+    <style>
+        /* Paint Dreams Animations */
+        @keyframes paintSplash {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            25% {
+                opacity: 0.7;
+                transform: scale(1.2) rotate(45deg);
+            }
+            50% {
+                opacity: 0.9;
+                transform: scale(0.9) rotate(90deg);
+            }
+            75% {
+                opacity: 0.7;
+                transform: scale(1.1) rotate(135deg);
+            }
+            100% {
+                opacity: 0.3;
+                transform: scale(0.8) rotate(180deg);
+            }
+        }
+
+        @keyframes dripDrop {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0.4;
+                transform: translateY(20px) scale(0.9);
+            }
+        }
+
+        @keyframes colorBlend {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes paintStroke {
+            0% {
+                opacity: 0;
+                stroke-dashoffset: 300;
+                transform: scaleX(0);
+            }
+            50% {
+                opacity: 0.8;
+                stroke-dashoffset: 0;
+                transform: scaleX(1);
+            }
+            100% {
+                opacity: 0.4;
+                stroke-dashoffset: -300;
+                transform: scaleX(0.9);
+            }
+        }
+
+        @keyframes dreamyFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-10px) rotate(2deg);
+            }
+            66% {
+                transform: translateY(5px) rotate(-1deg);
+            }
+        }
+
+        /* Animation classes */
+        .paint-splash { animation: paintSplash 8s ease-in-out infinite; }
+        .drip-drop { animation: dripDrop 4s ease-in-out infinite; }
+        .color-blend { animation: colorBlend 6s ease-in-out infinite; }
+        .paint-stroke { animation: paintStroke 5s ease-in-out infinite; }
+        .dreamy-float { animation: dreamyFloat 12s ease-in-out infinite; }
+
+        /* Staggered delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        body {
+            font-family: var(--font-mono);
+            background: var(--gradient-bg);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .section-container {
+            background: transparent;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Paint blob container */
+        .paint-blob {
+            position: absolute;
+            border-radius: 40% 60% 50% 70%;
+            filter: blur(1px);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        /* Step card styling with paint theme */
+        .step-card {
+            background: linear-gradient(135deg,
+                oklch(1.0 0 0 / 0.95) 0%,
+                oklch(0.99 0.01 280 / 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg,
+                oklch(0.68 0.20 280),
+                oklch(0.85 0.12 60),
+                oklch(0.78 0.16 25));
+            border-radius: var(--radius-xl);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background-size: 300% 300%;
+        }
+
+        .step-card:hover::before {
+            opacity: 1;
+            animation: colorBlend 3s ease-in-out infinite;
+        }
+
+        .step-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        /* Paint splash elements */
+        .paint-splash-element {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .splash-1 {
+            top: 10%;
+            right: 10%;
+            background: radial-gradient(circle, oklch(0.68 0.20 280 / 0.8) 0%, transparent 70%);
+        }
+
+        .splash-2 {
+            bottom: 15%;
+            left: 8%;
+            background: radial-gradient(circle, oklch(0.85 0.12 60 / 0.8) 0%, transparent 70%);
+        }
+
+        .splash-3 {
+            top: 50%;
+            right: 5%;
+            background: radial-gradient(circle, oklch(0.78 0.16 25 / 0.8) 0%, transparent 70%);
+        }
+
+        /* Step number with paint theme */
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg,
+                oklch(0.68 0.20 280) 0%,
+                oklch(0.72 0.18 300) 50%,
+                oklch(0.78 0.16 25) 100%);
+            color: white;
+            border-radius: 30% 70% 40% 60%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+            transition: all 0.3s ease;
+        }
+
+        .step-number:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        /* Paint icon container */
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg,
+                oklch(0.85 0.12 60) 0%,
+                oklch(0.82 0.14 80) 100%);
+            color: white;
+            border-radius: 20% 80% 30% 70%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+
+        .step-icon:hover {
+            transform: scale(1.1) rotate(-5deg);
+            background: linear-gradient(135deg,
+                oklch(0.78 0.16 25) 0%,
+                oklch(0.68 0.20 280) 100%);
+        }
+
+        /* Paint stroke divider */
+        .paint-stroke-divider {
+            height: 3px;
+            background: linear-gradient(90deg,
+                transparent,
+                oklch(0.68 0.20 280 / 0.6),
+                oklch(0.85 0.12 60 / 0.6),
+                transparent);
+            margin: 1.5rem 0;
+            border-radius: 2px;
+        }
+
+        /* Floating paint drops */
+        .paint-drop {
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background: linear-gradient(to bottom,
+                oklch(0.85 0.12 60 / 0.8),
+                oklch(0.78 0.16 25 / 0.6));
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: dripDrop 3s ease-in-out infinite;
+        }
+
+        /* Typography */
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg,
+                oklch(0.68 0.20 280) 0%,
+                oklch(0.85 0.12 60) 50%,
+                oklch(0.78 0.16 25) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px oklch(0.15 0.12 260 / 0.1);
+        }
+
+        .section-subtitle {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.375rem;
+            color: var(--muted-foreground);
+            margin-bottom: 4rem;
+            max-width: 4xl mx-auto;
+        }
+
+        .step-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.625rem;
+            color: var(--foreground);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .step-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.125rem;
+            color: var(--muted-foreground);
+            line-height: 1.7;
+        }
+
+        /* Background paint blobs */
+        .paint-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        .blob-1 {
+            top: 10%;
+            left: 5%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, oklch(0.68 0.20 280 / 0.3) 0%, transparent 70%);
+            animation: dreamy-float 20s ease-in-out infinite;
+        }
+
+        .blob-2 {
+            top: 60%;
+            right: 10%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, oklch(0.85 0.12 60 / 0.3) 0%, transparent 70%);
+            animation: dreamy-float 25s ease-in-out infinite reverse;
+        }
+
+        .blob-3 {
+            bottom: 20%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, oklch(0.78 0.16 25 / 0.3) 0%, transparent 70%);
+            animation: dreamy-float 30s ease-in-out infinite;
+        }
+
+        /* Process flow connector */
+        .process-flow {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 3rem 0;
+        }
+
+        .flow-line {
+            height: 2px;
+            background: linear-gradient(90deg,
+                oklch(0.68 0.20 280 / 0.3),
+                oklch(0.85 0.12 60 / 0.3),
+                oklch(0.78 0.16 25 / 0.3));
+            flex: 1;
+            margin: 0 1rem;
+            border-radius: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flow-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                oklch(0.85 0.12 60 / 0.8),
+                transparent);
+            animation: paintStroke 3s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .step-card {
+                padding: 1.5rem;
+            }
+
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .step-icon {
+                width: 48px;
+                height: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Paint Background Blobs -->
+    <div class="paint-bg">
+        <div class="paint-blob blob-1"></div>
+        <div class="paint-blob blob-2"></div>
+        <div class="paint-blob blob-3"></div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="section-container py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="section-title dreamy-float">How It Works</h2>
+                <p class="section-subtitle max-w-3xl mx-auto">
+                    Transform your creative vision into beautiful coloring pages with our dreamy,
+                    paint-inspired process. Every step is designed to be as colorful as your imagination!
+                </p>
+            </div>
+
+            <!-- Process Flow Indicator -->
+            <div class="process-flow mb-12">
+                <div class="step-number text-lg">1</div>
+                <div class="flow-line"></div>
+                <div class="step-number text-lg">2</div>
+                <div class="flow-line delay-200"></div>
+                <div class="step-number text-lg">3</div>
+                <div class="flow-line delay-400"></div>
+                <div class="step-number text-lg">4</div>
+            </div>
+
+            <!-- Steps Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Step 1: Create -->
+                <div class="step-card relative">
+                    <div class="paint-splash-element splash-1 paint-splash"></div>
+                    <div class="paint-drop" style="top: 20%; left: 80%; animation-delay: 0.5s;"></div>
+
+                    <div class="step-number delay-100">1</div>
+                    <div class="step-icon delay-200">
+                        <i data-lucide="brush" class="w-7 h-7"></i>
+                    </div>
+                    <div class="paint-stroke-divider paint-stroke delay-300"></div>
+                    <h3 class="step-title">Create</h3>
+                    <p class="step-description">
+                        Paint your imagination with words or upload your favorite photo.
+                        Either way, you're the artist of your story!
+                    </p>
+                </div>
+
+                <!-- Step 2: Transform -->
+                <div class="step-card relative">
+                    <div class="paint-splash-element splash-2 paint-splash delay-200"></div>
+                    <div class="paint-drop" style="top: 30%; right: 10%; animation-delay: 1s;"></div>
+
+                    <div class="step-number delay-200">2</div>
+                    <div class="step-icon delay-300">
+                        <i data-lucide="wand-2" class="w-7 h-7"></i>
+                    </div>
+                    <div class="paint-stroke-divider paint-stroke delay-400"></div>
+                    <h3 class="step-title">Transform</h3>
+                    <p class="step-description">
+                        Watch as AI magic blends colors and lines, turning your ideas
+                        into perfect coloring canvases.
+                    </p>
+                </div>
+
+                <!-- Step 3: Personalize -->
+                <div class="step-card relative">
+                    <div class="paint-splash-element splash-3 paint-splash delay-400"></div>
+                    <div class="paint-drop" style="bottom: 25%; left: 15%; animation-delay: 1.5s;"></div>
+
+                    <div class="step-number delay-300">3</div>
+                    <div class="step-icon delay-400">
+                        <i data-lucide="sliders" class="w-7 h-7"></i>
+                    </div>
+                    <div class="paint-stroke-divider paint-stroke delay-500"></div>
+                    <h3 class="step-title">Personalize</h3>
+                    <p class="step-description">
+                        Add your personal touch with custom text, complexity levels,
+                        and artistic flourishes.
+                    </p>
+                </div>
+
+                <!-- Step 4: Enjoy -->
+                <div class="step-card relative">
+                    <div class="paint-splash-element splash-1 paint-splash delay-600"></div>
+                    <div class="paint-drop" style="top: 15%; right: 20%; animation-delay: 2s;"></div>
+
+                    <div class="step-number delay-400">4</div>
+                    <div class="step-icon delay-500">
+                        <i data-lucide="heart" class="w-7 h-7"></i>
+                    </div>
+                    <div class="paint-stroke-divider paint-stroke delay-600"></div>
+                    <h3 class="step-title">Enjoy</h3>
+                    <p class="step-description">
+                        Download your masterpiece and start coloring! Perfect for
+                        family time, creative expression, and making memories.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Decorative paint splashes -->
+            <div class="flex justify-center mt-16 space-x-8">
+                <div class="paint-splash-element" style="
+                    width: 60px;
+                    height: 60px;
+                    background: radial-gradient(circle, oklch(0.68 0.20 280 / 0.4) 0%, transparent 70%);
+                    animation: paintSplash 6s ease-in-out infinite;
+                "></div>
+                <div class="paint-splash-element" style="
+                    width: 45px;
+                    height: 45px;
+                    background: radial-gradient(circle, oklch(0.85 0.12 60 / 0.4) 0%, transparent 70%);
+                    animation: paintSplash 8s ease-in-out infinite delay-200;
+                "></div>
+                <div class="paint-splash-element" style="
+                    width: 55px;
+                    height: 55px;
+                    background: radial-gradient(circle, oklch(0.78 0.16 25 / 0.4) 0%, transparent 70%);
+                    animation: paintSplash 7s ease-in-out infinite delay-400;
+                "></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe all animated elements
+        document.querySelectorAll('.step-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `opacity 0.8s ease-out ${index * 0.1}s, transform 0.8s ease-out ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Enhanced paint splash effects on hover
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                // Create temporary paint splash
+                const splash = document.createElement('div');
+                splash.className = 'paint-splash-element';
+                splash.style.cssText = `
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    background: radial-gradient(circle, oklch(0.85 0.12 60 / 0.6) 0%, transparent 70%);
+                    pointer-events: none;
+                    animation: paintSplash 2s ease-out forwards;
+                `;
+
+                const rect = this.getBoundingClientRect();
+                splash.style.left = Math.random() * rect.width + 'px';
+                splash.style.top = Math.random() * rect.height + 'px';
+
+                this.appendChild(splash);
+
+                setTimeout(() => splash.remove(), 2000);
+            });
+        });
+
+        // Dreamy floating animation for section title
+        const title = document.querySelector('.section-title');
+        if (title) {
+            title.style.animation = 'dreamy-float 12s ease-in-out infinite';
+        }
+    </script>
+</body>
+</html>

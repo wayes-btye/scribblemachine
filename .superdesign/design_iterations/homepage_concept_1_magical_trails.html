@@ -40,15 +40,20 @@
                 stroke-dashoffset: 500;
                 transform: translateX(0px) translateY(0px) rotate(0deg) scale(1);
             }
-            80% {
+            50% {
                 opacity: 0.8;
                 stroke-dashoffset: 0;
                 transform: translateX(100px) translateY(-50px) rotate(15deg) scale(1.1);
             }
+            80% {
+                opacity: 0.7;
+                stroke-dashoffset: 500;
+                transform: translateX(0px) translateY(0px) rotate(0deg) scale(1);
+            }
             100% {
                 opacity: 0;
-                stroke-dashoffset: -200;
-                transform: translateX(200px) translateY(-100px) rotate(30deg) scale(0.9);
+                stroke-dashoffset: 1000;
+                transform: translateX(-100px) translateY(50px) rotate(-15deg) scale(0.8);
             }
         }
 
@@ -63,15 +68,20 @@
                 stroke-dashoffset: 400;
                 transform: translateX(50px) translateY(-20px) rotate(10deg) scale(0.95);
             }
-            75% {
+            50% {
                 opacity: 0.7;
                 stroke-dashoffset: 0;
                 transform: translateX(-50px) translateY(40px) rotate(-5deg) scale(1.05);
             }
+            75% {
+                opacity: 0.6;
+                stroke-dashoffset: 400;
+                transform: translateX(50px) translateY(-20px) rotate(10deg) scale(0.95);
+            }
             100% {
                 opacity: 0;
-                stroke-dashoffset: -300;
-                transform: translateX(-150px) translateY(100px) rotate(-20deg) scale(0.8);
+                stroke-dashoffset: 800;
+                transform: translateX(150px) translateY(-80px) rotate(25deg) scale(0.7);
             }
         }
 
@@ -81,20 +91,25 @@
                 transform: scale(0) rotate(0deg);
                 stroke-dashoffset: 50;
             }
-            30% {
+            25% {
                 opacity: 0.8;
                 transform: scale(1.2) rotate(90deg);
                 stroke-dashoffset: 25;
             }
-            70% {
+            50% {
                 opacity: 0.9;
                 transform: scale(0.9) rotate(180deg);
                 stroke-dashoffset: 0;
             }
+            75% {
+                opacity: 0.8;
+                transform: scale(1.2) rotate(270deg);
+                stroke-dashoffset: 25;
+            }
             100% {
                 opacity: 0;
-                transform: scale(0.3) rotate(270deg);
-                stroke-dashoffset: -25;
+                transform: scale(0) rotate(360deg);
+                stroke-dashoffset: 50;
             }
         }
 
@@ -321,11 +336,7 @@
         /* Hero section styling */
         .hero-section {
             position: relative;
-            background: linear-gradient(135deg,
-                oklch(0.99 0.02 45 / 0.9) 0%,
-                oklch(0.98 0.04 280 / 0.7) 50%,
-                oklch(0.99 0.01 60 / 0.9) 100%);
-            backdrop-filter: blur(10px);
+            background: transparent;
             z-index: 2;
         }
     </style>
@@ -409,7 +420,7 @@
     </div>
 
     <!-- Header -->
-    <header class="relative z-50 py-4 px-4">
+    <header class="relative z-60 py-4 px-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center logo-header fade-in-up">
                 <img src="../../apps/web/public/assets/ScribbleMachinecom.svg" alt="ScribbleMachine.com" class="w-auto" style="height: 7rem;">

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - Living Sketchbook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Architects+Daughter:wght@400&family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage_variant1_5_theme.css">
+
+    <style>
+        /* Living Sketchbook Animations */
+        @keyframes sketchbookTurn {
+            0% {
+                transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+            }
+            25% {
+                transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
+            }
+            50% {
+                transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+            }
+            75% {
+                transform: perspective(1000px) rotateY(15deg) rotateX(-5deg);
+            }
+            100% {
+                transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+            }
+        }
+
+        @keyframes pencilDraw {
+            0% {
+                opacity: 0;
+                stroke-dashoffset: 200;
+                transform: translateX(-20px);
+            }
+            50% {
+                opacity: 0.8;
+                stroke-dashoffset: 0;
+                transform: translateX(0);
+            }
+            100% {
+                opacity: 0.4;
+                stroke-dashoffset: -200;
+                transform: translateX(20px);
+            }
+        }
+
+        @keyframes paperFlip {
+            0%, 100% {
+                transform: rotateX(0deg) translateY(0);
+            }
+            50% {
+                transform: rotateX(15deg) translateY(-5px);
+            }
+        }
+
+        @keyframes doodleFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-8px) rotate(2deg);
+            }
+            75% {
+                transform: translateY(5px) rotate(-1deg);
+            }
+        }
+
+        @keyframes inkBlot {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0.1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Animation classes */
+        .sketchbook-turn { animation: sketchbookTurn 20s ease-in-out infinite; }
+        .pencil-draw { animation: pencilDraw 8s ease-in-out infinite; }
+        .paper-flip { animation: paperFlip 6s ease-in-out infinite; }
+        .doodle-float { animation: doodleFloat 12s ease-in-out infinite; }
+        .ink-blot { animation: inkBlot 4s ease-in-out infinite; }
+
+        /* Staggered delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        body {
+            font-family: var(--font-mono);
+            background: var(--gradient-bg);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .section-container {
+            background: transparent;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Sketchbook paper texture */
+        .sketchbook-paper {
+            background: linear-gradient(135deg,
+                oklch(0.99 0.01 45 / 0.98) 0%,
+                oklch(0.98 0.01 45 / 0.95) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sketchbook-paper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 28px,
+                    oklch(0.15 0.12 260 / 0.03) 28px,
+                    oklch(0.15 0.12 260 / 0.03) 29px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 28px,
+                    oklch(0.15 0.12 260 / 0.02) 28px,
+                    oklch(0.15 0.12 260 / 0.02) 29px
+                );
+            pointer-events: none;
+        }
+
+        /* Step card as sketchbook pages */
+        .step-card {
+            background: var(--gradient-card);
+            backdrop-filter: blur(5px);
+            border: 2px solid oklch(0.92 0.03 45 / 0.8);
+            border-radius: 8px 12px 8px 12px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                inset 0 1px 0 oklch(1 0 0 / 0.8),
+                inset 0 -1px 0 oklch(0.15 0.12 260 / 0.1),
+                var(--shadow-lg);
+        }
+
+        .step-card:hover {
+            transform: translateY(-6px) rotateX(2deg);
+            box-shadow:
+                inset 0 1px 0 oklch(1 0 0 / 0.9),
+                inset 0 -1px 0 oklch(0.15 0.12 260 / 0.15),
+                var(--shadow-xl);
+            border-color: oklch(0.68 0.20 280 / 0.4);
+        }
+
+        /* Corner fold effect */
+        .corner-fold {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg,
+                transparent 50%,
+                oklch(0.92 0.03 45 / 0.4) 50%);
+            border-radius: 0 8px 0 0;
+            pointer-events: none;
+        }
+
+        /* Pencil sketch step number */
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: transparent;
+            border: 3px solid oklch(0.15 0.12 260 / 0.8);
+            color: var(--foreground);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            font-family: 'Architects Daughter', cursive;
+            transition: all 0.3s ease;
+            box-shadow:
+                inset 0 2px 4px oklch(0.15 0.12 260 / 0.1),
+                0 4px 8px oklch(0.15 0.12 260 / 0.1);
+        }
+
+        .step-number:hover {
+            transform: scale(1.1) rotate(5deg);
+            border-color: oklch(0.68 0.20 280 / 0.8);
+            box-shadow:
+                inset 0 2px 4px oklch(0.15 0.12 260 / 0.15),
+                0 6px 12px oklch(0.15 0.12 260 / 0.2);
+        }
+
+        /* Sketch icon */
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background: transparent;
+            border: 2px solid oklch(0.85 0.12 60 / 0.6);
+            color: oklch(0.15 0.12 260 / 0.8);
+            border-radius: 12px 8px 12px 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .step-icon:hover {
+            border-color: oklch(0.68 0.20 280 / 0.8);
+            color: oklch(0.68 0.20 280);
+            transform: rotate(-5deg) scale(1.05);
+        }
+
+        /* Hand-drawn underline */
+        .hand-drawn-underline {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hand-drawn-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: oklch(0.68 0.20 280 / 0.4);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover .hand-drawn-underline::after {
+            transform: scaleX(1);
+        }
+
+        /* Sketch elements */
+        .sketch-element {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        .sketch-line {
+            stroke: oklch(0.15 0.12 260 / 0.4);
+            stroke-width: 1.5;
+            fill: none;
+            stroke-linecap: round;
+        }
+
+        /* Doodle decorations */
+        .doodle {
+            position: absolute;
+            font-family: 'Architects Daughter', cursive;
+            color: oklch(0.15 0.12 260 / 0.3);
+            font-size: 0.875rem;
+            pointer-events: none;
+        }
+
+        /* Ink blot effect */
+        .ink-blot-element {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, oklch(0.15 0.12 260 / 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Typography */
+        .section-title {
+            font-family: 'Architects Daughter', cursive;
+            font-weight: 400;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            color: oklch(0.15 0.12 260 / 0.9);
+            margin-bottom: 1rem;
+            position: relative;
+            text-shadow: 1px 1px 2px oklch(0.15 0.12 260 / 0.1);
+        }
+
+        .section-subtitle {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.25rem;
+            color: var(--muted-foreground);
+            margin-bottom: 3rem;
+            max-width: 3xl mx-auto;
+            font-style: italic;
+        }
+
+        .step-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: var(--foreground);
+            margin-bottom: 1rem;
+        }
+
+        .step-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--muted-foreground);
+            line-height: 1.6;
+        }
+
+        /* Background sketch elements */
+        .sketch-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        /* Pencil strokes */
+        .pencil-stroke {
+            position: absolute;
+            stroke: oklch(0.15 0.12 260 / 0.3);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+        }
+
+        /* Process flow with sketch style */
+        .sketch-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 3rem 0;
+            gap: 2rem;
+        }
+
+        .flow-arrow {
+            width: 40px;
+            height: 2px;
+            background: oklch(0.15 0.12 260 / 0.3);
+            position: relative;
+        }
+
+        .flow-arrow::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid oklch(0.15 0.12 260 / 0.3);
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .step-card {
+                padding: 1.5rem;
+            }
+
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .step-icon {
+                width: 48px;
+                height: 48px;
+            }
+
+            .sketch-flow {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .flow-arrow {
+                width: 2px;
+                height: 40px;
+            }
+
+            .flow-arrow::after {
+                right: -4px;
+                top: 35px;
+                border-left: 5px solid transparent;
+                border-top: 10px solid oklch(0.15 0.12 260 / 0.3);
+                border-right: 5px solid transparent;
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sketch Background Elements -->
+    <div class="sketch-bg">
+        <svg class="pencil-stroke" style="top: 10%; left: 5%; width: 100px; height: 50px;" viewBox="0 0 100 50">
+            <path d="M10,25 Q50,10 90,35" class="pencil-draw"/>
+        </svg>
+        <svg class="pencil-stroke" style="top: 70%; right: 10%; width: 80px; height: 40px;" viewBox="0 0 80 40">
+            <path d="M10,20 Q40,30 70,15" class="pencil-draw delay-200"/>
+        </svg>
+        <svg class="pencil-stroke" style="bottom: 20%; left: 50%; width: 60px; height: 30px;" viewBox="0 0 60 30">
+            <path d="M5,15 Q30,5 55,25" class="pencil-draw delay-400"/>
+        </svg>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="section-container py-20 px-4 sketchbook-paper">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="section-title doodle-float">How It Works</h2>
+                <p class="section-subtitle max-w-3xl mx-auto">
+                    Like turning pages in a living sketchbook, each step reveals a new chapter
+                    in your creative journey. Simple, organic, and beautifully handcrafted.
+                </p>
+            </div>
+
+            <!-- Sketch Flow Process -->
+            <div class="sketch-flow">
+                <div class="step-number text-lg">1</div>
+                <div class="flow-arrow"></div>
+                <div class="step-number text-lg">2</div>
+                <div class="flow-arrow"></div>
+                <div class="step-number text-lg">3</div>
+                <div class="flow-arrow"></div>
+                <div class="step-number text-lg">4</div>
+            </div>
+
+            <!-- Steps Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Step 1: Sketch -->
+                <div class="step-card sketchbook-turn paper-flip relative">
+                    <div class="corner-fold"></div>
+                    <div class="ink-blot-element" style="
+                        width: 30px;
+                        height: 20px;
+                        top: 10%;
+                        right: 15%;
+                        animation: ink-blot 3s ease-in-out infinite;
+                    "></div>
+
+                    <div class="step-number delay-100">1</div>
+                    <div class="step-icon delay-200">
+                        <i data-lucide="pencil" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="step-title hand-drawn-underline">Sketch</h3>
+                    <p class="step-description">
+                        Draw your vision with words or share a photo that tells your story.
+                        Every great creation starts with a simple sketch.
+                    </p>
+
+                    <!-- Sketch decoration -->
+                    <div class="doodle" style="bottom: 10px; right: 15px;">✏️</div>
+                </div>
+
+                <!-- Step 2: Craft -->
+                <div class="step-card sketchbook-turn paper-flip relative delay-200">
+                    <div class="corner-fold"></div>
+                    <div class="ink-blot-element" style="
+                        width: 25px;
+                        height: 25px;
+                        top: 15%;
+                        left: 10%;
+                        animation: ink-blot 4s ease-in-out infinite delay-100;
+                    "></div>
+
+                    <div class="step-number delay-200">2</div>
+                    <div class="step-icon delay-300">
+                        <i data-lucide="scissors" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="step-title hand-drawn-underline">Craft</h3>
+                    <p class="step-description">
+                        Watch as AI carefully crafts your ideas into perfect line drawings,
+                        preserving the essence of your original vision.
+                    </p>
+
+                    <!-- Sketch decoration -->
+                    <div class="doodle" style="bottom: 10px; left: 15px;">🎨</div>
+                </div>
+
+                <!-- Step 3: Refine -->
+                <div class="step-card sketchbook-turn paper-flip relative delay-400">
+                    <div class="corner-fold"></div>
+                    <div class="ink-blot-element" style="
+                        width: 20px;
+                        height: 15px;
+                        bottom: 20%;
+                        right: 10%;
+                        animation: ink-blot 3.5s ease-in-out infinite delay-200;
+                    "></div>
+
+                    <div class="step-number delay-300">3</div>
+                    <div class="step-icon delay-400">
+                        <i data-lucide="eraser" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="step-title hand-drawn-underline">Refine</h3>
+                    <p class="step-description">
+                        Perfect your creation with adjustments, text, and personal touches.
+                        Make it uniquely yours, like a signature on artwork.
+                    </p>
+
+                    <!-- Sketch decoration -->
+                    <div class="doodle" style="top: 15px; right: 10px;">✨</div>
+                </div>
+
+                <!-- Step 4: Share -->
+                <div class="step-card sketchbook-turn paper-flip relative delay-600">
+                    <div class="corner-fold"></div>
+                    <div class="ink-blot-element" style="
+                        width: 35px;
+                        height: 20px;
+                        top: 20%;
+                        left: 20%;
+                        animation: ink-blot 4.5s ease-in-out infinite delay-300;
+                    "></div>
+
+                    <div class="step-number delay-400">4</div>
+                    <div class="step-icon delay-500">
+                        <i data-lucide="book-open" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="step-title hand-drawn-underline">Share</h3>
+                    <p class="step-description">
+                        Download your masterpiece and share the joy of coloring.
+                        Every page tells a story waiting to be brought to life.
+                    </p>
+
+                    <!-- Sketch decoration -->
+                    <div class="doodle" style="bottom: 15px; right: 20px;">📖</div>
+                </div>
+            </div>
+
+            <!-- Decorative sketch elements -->
+            <div class="flex justify-center mt-16 space-x-12">
+                <svg width="40" height="40" viewBox="0 0 40 40" class="doodle-float">
+                    <path d="M20,5 L25,15 L35,15 L27,22 L30,32 L20,25 L10,32 L13,22 L5,15 L15,15 Z"
+                          stroke="oklch(0.15 0.12 260 / 0.3)"
+                          stroke-width="1.5"
+                          fill="none"
+                          class="pencil-draw"/>
+                </svg>
+                <svg width="35" height="35" viewBox="0 0 35 35" class="doodle-float delay-200">
+                    <circle cx="17.5" cy="17.5" r="15"
+                            stroke="oklch(0.85 0.12 60 / 0.3)"
+                            stroke-width="1.5"
+                            fill="none"
+                            class="pencil-draw"/>
+                </svg>
+                <svg width="45" height="30" viewBox="0 0 45 30" class="doodle-float delay-400">
+                    <path d="M5,15 Q22.5,5 40,15"
+                          stroke="oklch(0.78 0.16 25 / 0.3)"
+                          stroke-width="1.5"
+                          fill="none"
+                          class="pencil-draw"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe all animated elements
+        document.querySelectorAll('.step-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `opacity 0.8s ease-out ${index * 0.1}s, transform 0.8s ease-out ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Enhanced paper flip effect on hover
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-6px) rotateX(2deg) scale(1.02)';
+                this.querySelector('.step-icon').style.transform = 'rotate(-5deg) scale(1.1)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) rotateX(0deg) scale(1)';
+                this.querySelector('.step-icon').style.transform = 'rotate(0deg) scale(1)';
+            });
+        });
+
+        // Dynamic ink blot creation on click
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                const blot = document.createElement('div');
+                blot.className = 'ink-blot-element';
+                blot.style.cssText = `
+                    position: absolute;
+                    width: ${20 + Math.random() * 20}px;
+                    height: ${15 + Math.random() * 15}px;
+                    left: ${e.offsetX}px;
+                    top: ${e.offsetY}px;
+                    background: radial-gradient(circle, oklch(0.15 0.12 260 / 0.2) 0%, transparent 70%);
+                    pointer-events: none;
+                    animation: ink-blot 2s ease-out forwards;
+                `;
+
+                this.appendChild(blot);
+                setTimeout(() => blot.remove(), 2000);
+            });
+        });
+
+        // Sketchbook page turning effect for the entire container
+        const container = document.querySelector('.sketchbook-paper');
+        if (container) {
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width;
+                const y = (e.clientY - rect.top) / rect.height;
+
+                container.style.transform = `perspective(1000px) rotateY(${(x - 0.5) * 2}deg) rotateX(${(y - 0.5) * -1}deg)`;
+            });
+
+            container.addEventListener('mouseleave', () => {
+                container.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+            });
+        }
+    </script>
+</body>
+</html>

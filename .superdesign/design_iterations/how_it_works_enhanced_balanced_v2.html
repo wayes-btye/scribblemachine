@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - Enhanced Balanced v2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Architects+Daughter:wght@400&family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage_variant1_5_theme.css">
+
+    <style>
+        /* Enhanced Balanced Animations v2 */
+        @keyframes harmonyFloat {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+            }
+            25% {
+                transform: translateY(-6px) scale(1.02);
+            }
+            50% {
+                transform: translateY(-3px) scale(1.01);
+            }
+            75% {
+                transform: translateY(-8px) scale(1.03);
+            }
+        }
+
+        @keyframes waveFlow {
+            0% {
+                transform: translateX(-100%) skewX(-15deg);
+            }
+            50% {
+                transform: translateX(0%) skewX(0deg);
+            }
+            100% {
+                transform: translateX(100%) skewX(15deg);
+            }
+        }
+
+        @keyframes balancePulse {
+            0%, 100% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.08);
+            }
+        }
+
+        @keyframes harmonyRotate {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                transform: rotate(90deg) scale(1.1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1);
+            }
+            75% {
+                transform: rotate(270deg) scale(1.1);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        @keyframes colorShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Animation classes */
+        .harmony-float { animation: harmonyFloat 8s ease-in-out infinite; }
+        .wave-flow { animation: waveFlow 6s ease-in-out infinite; }
+        .balance-pulse { animation: balancePulse 4s ease-in-out infinite; }
+        .harmony-rotate { animation: harmonyRotate 10s linear infinite; }
+        .color-shift { animation: colorShift 8s ease-in-out infinite; }
+
+        /* Staggered delays */
+        .delay-150 { animation-delay: 0.15s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-450 { animation-delay: 0.45s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        body {
+            font-family: var(--font-mono);
+            background: var(--gradient-bg);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .section-container {
+            background: transparent;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Enhanced balanced step card */
+        .step-card {
+            background: var(--gradient-card);
+            backdrop-filter: blur(12px);
+            border: 2px solid oklch(0.92 0.03 45 / 0.6);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                oklch(0.68 0.20 280 / 0.1),
+                oklch(0.85 0.12 60 / 0.1),
+                oklch(0.78 0.16 25 / 0.1),
+                oklch(0.68 0.20 280 / 0.1));
+            background-size: 400% 400%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            animation: color-shift 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .step-card:hover::before {
+            opacity: 1;
+        }
+
+        .step-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px oklch(0.15 0.12 260 / 0.25);
+            border-color: oklch(0.68 0.20 280 / 0.6);
+        }
+
+        /* Balanced step number */
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg,
+                var(--gradient-hero),
+                var(--gradient-accent));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            box-shadow: 0 12px 30px oklch(0.68 0.20 280 / 0.4);
+            transition: all 0.4s ease;
+        }
+
+        .step-number::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            background: conic-gradient(
+                oklch(0.68 0.20 280),
+                oklch(0.85 0.12 60),
+                oklch(0.78 0.16 25),
+                oklch(0.68 0.20 280));
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            animation: harmony-rotate 3s linear infinite;
+        }
+
+        .step-card:hover .step-number::after {
+            opacity: 1;
+        }
+
+        .step-card:hover .step-number {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        /* Balanced icon */
+        .step-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg,
+                var(--gradient-accent),
+                var(--gradient-hero));
+            color: white;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 25px oklch(0.85 0.12 60 / 0.4);
+            transition: all 0.4s ease;
+        }
+
+        .step-card:hover .step-icon {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 15px 35px oklch(0.85 0.12 60 / 0.5);
+        }
+
+        /* Harmony wave connectors */
+        .wave-connector {
+            height: 6px;
+            background: linear-gradient(90deg,
+                oklch(0.68 0.20 280 / 0.4),
+                oklch(0.85 0.12 60 / 0.5),
+                oklch(0.78 0.16 25 / 0.4));
+            margin: 2rem 0;
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wave-connector::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                oklch(0.85 0.12 60 / 0.9),
+                transparent);
+            animation: wave-flow 3s ease-in-out infinite;
+        }
+
+        /* Balance elements */
+        .balance-orb {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            top: 10%;
+            right: 15%;
+            background: radial-gradient(circle, oklch(0.68 0.20 280), oklch(0.68 0.20 280 / 0.3));
+            animation: balance-pulse 4s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            bottom: 20%;
+            left: 10%;
+            background: radial-gradient(circle, oklch(0.85 0.12 60), oklch(0.85 0.12 60 / 0.3));
+            animation: balance-pulse 4s ease-in-out infinite 1s;
+        }
+
+        .orb-3 {
+            top: 50%;
+            right: 5%;
+            background: radial-gradient(circle, oklch(0.78 0.16 25), oklch(0.78 0.16 25 / 0.3));
+            animation: balance-pulse 4s ease-in-out infinite 2s;
+        }
+
+        /* Typography */
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            background: linear-gradient(135deg,
+                var(--gradient-hero),
+                var(--gradient-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            color: var(--muted-foreground);
+            margin-bottom: 3rem;
+            text-align: center;
+            max-width: 3xl mx-auto;
+        }
+
+        .step-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.75rem;
+            color: var(--foreground);
+            margin-bottom: 0.75rem;
+        }
+
+        .step-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.125rem;
+            color: var(--muted-foreground);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .harmony-badge {
+            display: inline-block;
+            background: linear-gradient(135deg,
+                var(--gradient-accent),
+                var(--gradient-hero));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .harmony-badge:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 10px 25px oklch(0.85 0.12 60 / 0.4);
+        }
+
+        /* Background harmony elements */
+        .harmony-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .harmony-wave {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            border: 2px solid oklch(0.68 0.20 280 / 0.3);
+            border-radius: 50%;
+            border-top-color: transparent;
+            border-right-color: transparent;
+        }
+
+        .wave-1 {
+            top: 20%;
+            left: 10%;
+            animation: harmony-rotate 20s linear infinite;
+        }
+
+        .wave-2 {
+            bottom: 30%;
+            right: 15%;
+            animation: harmony-rotate 15s linear infinite reverse;
+        }
+
+        .wave-3 {
+            top: 60%;
+            left: 20%;
+            animation: harmony-rotate 25s linear infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .step-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+
+            .step-icon {
+                width: 56px;
+                height: 56px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Harmony Background -->
+    <div class="harmony-bg">
+        <div class="harmony-wave wave-1"></div>
+        <div class="harmony-wave wave-2"></div>
+        <div class="harmony-wave wave-3"></div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="section-container py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <!-- Section Header -->
+            <div class="mb-16">
+                <h2 class="section-title harmony-float">How It Works</h2>
+                <p class="section-subtitle">
+                    ✨ Three perfectly balanced steps to create magical coloring pages from your photos and dreams! ✨
+                </p>
+            </div>
+
+            <!-- Steps Grid -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1: Create Magic -->
+                <div class="step-card relative">
+                    <div class="balance-orb orb-1"></div>
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i data-lucide="palette" class="w-8 h-8"></i>
+                    </div>
+                    <div class="wave-connector"></div>
+                    <h3 class="step-title">Create Magic</h3>
+                    <p class="step-description">
+                        Upload your favorite photo <span class="font-semibold" style="color: var(--primary);">OR</span> describe your dream scene. Magic awaits! 🎨
+                    </p>
+                    <div class="harmony-badge">
+                        <i data-lucide="sparkles" class="w-4 h-4 mr-1"></i>
+                        Start Creating
+                    </div>
+                </div>
+
+                <!-- Step 2: Watch Magic Happen -->
+                <div class="step-card relative delay-300">
+                    <div class="balance-orb orb-2"></div>
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i data-lucide="wand-2" class="w-8 h-8"></i>
+                    </div>
+                    <div class="wave-connector delay-300"></div>
+                    <h3 class="step-title">Watch Magic Happen</h3>
+                    <p class="step-description">
+                        Our AI transforms your input into beautiful line art. Perfect results every time! ✨
+                    </p>
+                    <div class="harmony-badge">
+                        <i data-lucide="zap" class="w-4 h-4 mr-1"></i>
+                        Instant Magic
+                    </div>
+                </div>
+
+                <!-- Step 3: Color Your World -->
+                <div class="step-card relative delay-600">
+                    <div class="balance-orb orb-3"></div>
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i data-lucide="heart" class="w-8 h-8"></i>
+                    </div>
+                    <div class="wave-connector delay-600"></div>
+                    <h3 class="step-title">Color Your World</h3>
+                    <p class="step-description">
+                        Download your masterpiece and start coloring! Perfect for creative souls! 🌈
+                    </p>
+                    <div class="harmony-badge">
+                        <i data-lucide="download" class="w-4 h-4 mr-1"></i>
+                        Ready to Color
+                    </div>
+                </div>
+            </div>
+
+            <!-- Harmony callout -->
+            <div class="mt-16 text-center">
+                <div class="inline-flex items-center bg-white/80 backdrop-blur-sm rounded-full px-8 py-4 shadow-lg">
+                    <div class="flex items-center space-x-6 text-sm font-medium" style="color: var(--muted-foreground);">
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">⚖️</span>
+                            Perfectly Balanced
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-blue-500 mr-2">🎯</span>
+                            Super Easy
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-purple-500 mr-2">👨‍👩‍👧‍👦</span>
+                            Family Fun
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe all animated elements
+        document.querySelectorAll('.step-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `opacity 0.8s ease-out ${index * 0.2}s, transform 0.8s ease-out ${index * 0.2}s`;
+            observer.observe(card);
+        });
+
+        // Enhanced hover effects
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.querySelector('.step-number').style.transform = 'scale(1.2) rotate(10deg)';
+                this.querySelector('.step-icon').style.transform = 'scale(1.15) rotate(-8deg)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.querySelector('.step-number').style.transform = 'scale(1)';
+                this.querySelector('.step-icon').style.transform = 'scale(1)';
+            });
+        });
+
+        // Dynamic orb creation on hover
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                if (Math.random() > 0.9) {
+                    const orb = document.createElement('div');
+                    orb.style.cssText = `
+                        position: absolute;
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        background: radial-gradient(circle, oklch(0.85 0.12 60), oklch(0.85 0.12 60 / 0.3));
+                        left: ${e.offsetX}px;
+                        top: ${e.offsetY}px;
+                        pointer-events: none;
+                        animation: balance-pulse 1s ease-out forwards;
+                    `;
+                    card.appendChild(orb);
+                    setTimeout(() => orb.remove(), 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

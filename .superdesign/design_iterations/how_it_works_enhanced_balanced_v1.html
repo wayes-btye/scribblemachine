@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - Enhanced Balanced</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Architects+Daughter:wght@400&family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage_variant1_5_theme.css">
+
+    <style>
+        /* Enhanced Balanced Animations */
+        @keyframes balancePulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+        }
+
+        @keyframes balancedFlow {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px) rotateY(15deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(0) rotateY(0deg);
+            }
+            100% {
+                opacity: 0.8;
+                transform: translateX(30px) rotateY(-15deg);
+            }
+        }
+
+        @keyframes harmonyGlow {
+            0%, 100% {
+                box-shadow: var(--shadow-lg);
+                border-color: oklch(0.92 0.03 45 / 0.3);
+            }
+            50% {
+                box-shadow: var(--shadow-xl);
+                border-color: oklch(0.68 0.20 280 / 0.4);
+            }
+        }
+
+        @keyframes syncWave {
+            0%, 100% {
+                transform: translateY(0) scaleY(1);
+            }
+            50% {
+                transform: translateY(-5px) scaleY(1.1);
+            }
+        }
+
+        @keyframes zenFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* Animation classes */
+        .balance-pulse { animation: balancePulse 4s ease-in-out infinite; }
+        .balanced-flow { animation: balancedFlow 8s ease-in-out infinite; }
+        .harmony-glow { animation: harmonyGlow 6s ease-in-out infinite; }
+        .sync-wave { animation: syncWave 5s ease-in-out infinite; }
+        .zen-float { animation: zenFloat 10s ease-in-out infinite; }
+
+        /* Staggered delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        body {
+            font-family: var(--font-mono);
+            background: var(--gradient-bg);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .section-container {
+            background: transparent;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Balanced card styling */
+        .step-card {
+            background: linear-gradient(135deg,
+                oklch(1.0 0 0 / 0.98) 0%,
+                oklch(0.99 0.01 280 / 0.95) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid oklch(0.92 0.03 45 / 0.6);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle,
+                oklch(0.68 0.20 280 / 0.05) 0%,
+                transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .step-card:hover::before {
+            opacity: 1;
+        }
+
+        .step-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-2xl);
+            border-color: oklch(0.68 0.20 280 / 0.3);
+        }
+
+        /* Balanced step number */
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg,
+                oklch(0.68 0.20 280) 0%,
+                oklch(0.72 0.18 300) 50%,
+                oklch(0.78 0.16 25) 100%);
+            color: white;
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+
+        .step-number::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(45deg,
+                oklch(0.85 0.12 60),
+                oklch(0.78 0.16 25),
+                oklch(0.68 0.20 280));
+            border-radius: var(--radius-xl);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .step-card:hover .step-number::after {
+            opacity: 1;
+            animation: harmony-glow 2s ease-in-out infinite;
+        }
+
+        /* Balanced icon */
+        .step-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg,
+                oklch(0.85 0.12 60) 0%,
+                oklch(0.82 0.14 80) 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                oklch(1 0 0 / 0.3),
+                transparent);
+            transition: left 0.5s ease;
+        }
+
+        .step-card:hover .step-icon::before {
+            left: 100%;
+        }
+
+        .step-card:hover .step-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Balanced connector lines */
+        .balanced-connector {
+            position: relative;
+            height: 2px;
+            background: linear-gradient(90deg,
+                oklch(0.68 0.20 280 / 0.3),
+                oklch(0.85 0.12 60 / 0.3),
+                oklch(0.78 0.16 25 / 0.3));
+            margin: 1rem 0;
+            border-radius: 1px;
+            overflow: hidden;
+        }
+
+        .balanced-connector::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                oklch(0.85 0.12 60 / 0.6),
+                transparent);
+            animation: balanced-flow 3s ease-in-out infinite;
+        }
+
+        /* Harmony elements */
+        .harmony-element {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                oklch(0.68 0.20 280 / 0.1) 0%,
+                transparent 70%);
+            pointer-events: none;
+        }
+
+        .harmony-1 {
+            top: 10%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            animation: zen-float 15s ease-in-out infinite;
+        }
+
+        .harmony-2 {
+            bottom: 15%;
+            left: 8%;
+            width: 80px;
+            height: 80px;
+            animation: zen-float 20s ease-in-out infinite reverse;
+        }
+
+        /* Typography */
+        .section-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg,
+                oklch(0.68 0.20 280) 0%,
+                oklch(0.85 0.12 60) 50%,
+                oklch(0.78 0.16 25) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.375rem;
+            color: var(--muted-foreground);
+            margin-bottom: 3rem;
+            max-width: 4xl mx-auto;
+            text-align: center;
+        }
+
+        .step-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            font-size: 1.625rem;
+            color: var(--foreground);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .step-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.125rem;
+            color: var(--muted-foreground);
+            line-height: 1.7;
+        }
+
+        /* Process flow visualization */
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 4rem 0;
+            position: relative;
+        }
+
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .flow-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--gradient-hero);
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-md);
+            animation: balance-pulse 3s ease-in-out infinite;
+        }
+
+        .flow-line {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg,
+                oklch(0.68 0.20 280 / 0.3),
+                oklch(0.85 0.12 60 / 0.3),
+                oklch(0.78 0.16 25 / 0.3));
+            z-index: 1;
+        }
+
+        .flow-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg,
+                oklch(0.68 0.20 280 / 0.6),
+                oklch(0.85 0.12 60 / 0.6),
+                oklch(0.78 0.16 25 / 0.6));
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: syncWave 4s ease-in-out infinite;
+        }
+
+        /* Balanced wave background */
+        .balanced-waves {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .wave {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z' fill='oklch(0.68 0.20 280 / 0.3)'/%3E%3C/svg%3E") repeat-x;
+            animation: syncWave 8s ease-in-out infinite;
+        }
+
+        .wave:nth-child(2) {
+            bottom: 20px;
+            opacity: 0.7;
+            animation-delay: -2s;
+            animation-duration: 10s;
+        }
+
+        .wave:nth-child(3) {
+            bottom: 40px;
+            opacity: 0.5;
+            animation-delay: -4s;
+            animation-duration: 12s;
+        }
+
+        /* Feature badge */
+        .feature-badge {
+            display: inline-flex;
+            align-items: center;
+            background: oklch(0.96 0.01 45 / 0.8);
+            border: 1px solid oklch(0.92 0.03 45 / 0.6);
+            border-radius: var(--radius-full);
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--muted-foreground);
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-badge:hover {
+            background: var(--gradient-accent);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .step-card {
+                padding: 1.5rem;
+            }
+
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .step-icon {
+                width: 48px;
+                height: 48px;
+            }
+
+            .process-flow {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .flow-line {
+                width: 2px;
+                height: 100px;
+                top: 20px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Balanced Waves Background -->
+    <div class="balanced-waves">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <!-- Harmony Elements -->
+    <div class="harmony-element harmony-1"></div>
+    <div class="harmony-element harmony-2"></div>
+
+    <!-- How It Works Section -->
+    <div class="section-container py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="section-title zen-float">How It Works</h2>
+                <p class="section-subtitle max-w-4xl mx-auto">
+                    Experience the perfect balance of technology and creativity. Our harmonious process
+                    transforms your ideas into beautiful coloring pages with elegance and simplicity.
+                </p>
+            </div>
+
+            <!-- Process Flow Visualization -->
+            <div class="process-flow">
+                <div class="flow-line"></div>
+                <div class="flow-step">
+                    <div class="flow-dot delay-100"></div>
+                    <span class="text-sm font-medium" style="color: var(--muted-foreground);">Start</span>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-dot delay-200"></div>
+                    <span class="text-sm font-medium" style="color: var(--muted-foreground);">Transform</span>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-dot delay-300"></div>
+                    <span class="text-sm font-medium" style="color: var(--muted-foreground);">Perfect</span>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-dot delay-400"></div>
+                    <span class="text-sm font-medium" style="color: var(--muted-foreground);">Enjoy</span>
+                </div>
+            </div>
+
+            <!-- Steps Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Step 1: Create -->
+                <div class="step-card relative">
+                    <div class="step-number delay-100">1</div>
+                    <div class="step-icon delay-200">
+                        <i data-lucide="image-plus" class="w-8 h-8"></i>
+                    </div>
+                    <div class="balanced-connector delay-300"></div>
+                    <h3 class="step-title">Create</h3>
+                    <p class="step-description">
+                        Upload your cherished photo or describe your dream scene with words.
+                        Both paths are perfectly balanced and equally powerful.
+                    </p>
+                    <div class="feature-badge">
+                        <i data-lucide="check-circle" class="w-4 h-4 mr-1"></i>
+                        Both Ways Work
+                    </div>
+                </div>
+
+                <!-- Step 2: Transform -->
+                <div class="step-card relative delay-200">
+                    <div class="step-number delay-200">2</div>
+                    <div class="step-icon delay-300">
+                        <i data-lucide="sparkles" class="w-8 h-8"></i>
+                    </div>
+                    <div class="balanced-connector delay-400"></div>
+                    <h3 class="step-title">Transform</h3>
+                    <p class="step-description">
+                        Our balanced AI carefully processes your input, preserving the essence
+                        while creating perfect line art for coloring.
+                    </p>
+                    <div class="feature-badge">
+                        <i data-lucide="zap" class="w-4 h-4 mr-1"></i>
+                        Instant Results
+                    </div>
+                </div>
+
+                <!-- Step 3: Customize -->
+                <div class="step-card relative delay-400">
+                    <div class="step-number delay-300">3</div>
+                    <div class="step-icon delay-400">
+                        <i data-lucide="settings" class="w-8 h-8"></i>
+                    </div>
+                    <div class="balanced-connector delay-500"></div>
+                    <h3 class="step-title">Customize</h3>
+                    <p class="step-description">
+                        Fine-tune your creation with balanced controls for complexity,
+                        text elements, and artistic preferences.
+                    </p>
+                    <div class="feature-badge">
+                        <i data-lucide="palette" class="w-4 h-4 mr-1"></i>
+                        Personal Touch
+                    </div>
+                </div>
+
+                <!-- Step 4: Download -->
+                <div class="step-card relative delay-600">
+                    <div class="step-number delay-400">4</div>
+                    <div class="step-icon delay-500">
+                        <i data-lucide="download" class="w-8 h-8"></i>
+                    </div>
+                    <div class="balanced-connector delay-600"></div>
+                    <h3 class="step-title">Download</h3>
+                    <p class="step-description">
+                        Receive your high-quality coloring page ready for printing or digital coloring.
+                        Perfect quality, perfectly balanced.
+                    </p>
+                    <div class="feature-badge">
+                        <i data-lucide="star" class="w-4 h-4 mr-1"></i>
+                        Premium Quality
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balanced Feature Highlights -->
+            <div class="mt-16 text-center">
+                <div class="inline-flex flex-wrap items-center justify-center gap-4 p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-oklch(0.92 0.03 45 / 0.4)">
+                    <div class="flex items-center text-sm font-medium" style="color: var(--muted-foreground);">
+                        <span class="text-green-500 mr-2">✓</span>
+                        Harmonious Design
+                    </div>
+                    <div class="flex items-center text-sm font-medium" style="color: var(--muted-foreground);">
+                        <span class="text-blue-500 mr-2">⚖️</span>
+                        Balanced Approach
+                    </div>
+                    <div class="flex items-center text-sm font-medium" style="color: var(--muted-foreground);">
+                        <span class="text-purple-500 mr-2">🎨</span>
+                        Perfect Quality
+                    </div>
+                    <div class="flex items-center text-sm font-medium" style="color: var(--muted-foreground);">
+                        <span class="text-orange-500 mr-2">👨‍👩‍👧‍👦</span>
+                        Family Friendly
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe all animated elements
+        document.querySelectorAll('.step-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `opacity 0.8s ease-out ${index * 0.1}s, transform 0.8s ease-out ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Enhanced hover effects with balanced animations
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.querySelector('.step-number').style.transform = 'scale(1.1) rotate(5deg)';
+                this.querySelector('.step-icon').style.transform = 'scale(1.1) rotate(-5deg)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.querySelector('.step-number').style.transform = 'scale(1) rotate(0deg)';
+                this.querySelector('.step-icon').style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Balanced wave animation
+        const waves = document.querySelectorAll('.wave');
+        waves.forEach((wave, index) => {
+            wave.style.animationDelay = `${index * 2}s`;
+        });
+
+        // Feature badge interactions
+        document.querySelectorAll('.feature-badge').forEach(badge => {
+            badge.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px) scale(1.05)';
+            });
+
+            badge.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Process flow animation on scroll
+        const flowSteps = document.querySelectorAll('.flow-step');
+        flowSteps.forEach((step, index) => {
+            step.style.opacity = '0';
+            step.style.transform = 'translateY(20px)';
+            step.style.transition = `opacity 0.6s ease-out ${index * 0.1}s, transform 0.6s ease-out ${index * 0.1}s`;
+            observer.observe(step);
+        });
+
+        // Dynamic harmony glow effect
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const deltaX = (x - centerX) / centerX;
+                const deltaY = (y - centerY) / centerY;
+
+                card.style.transform = `perspective(1000px) rotateY(${deltaX * 5}deg) rotateX(${-deltaY * 5}deg) translateY(-8px) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

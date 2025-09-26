@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScribbleMachine.com - Living Sketchbook Concept</title>
+    <title>ScribbleMachine.com - Balanced Paint Dreams - Variant 1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,114 +28,147 @@
             50% { transform: translateY(-10px) scale(1.02); }
         }
 
-        /* LIVING SKETCHBOOK - Concept 3 */
-        @keyframes sketchDraw {
+        /* BALANCED PAINT DREAMS - Variant 1: Medium visibility, edge-focused */
+        @keyframes balancedPaintFloat1 {
             0% {
-                stroke-dashoffset: 1000;
-                opacity: 0;
+                opacity: 0.25;
+                transform: translateY(-15px) translateX(-3px) scale(0.45) rotate(3deg);
+                border-radius: 65% 35% 45% 75%;
+                filter: blur(3px);
             }
             25% {
-                stroke-dashoffset: 500;
-                opacity: 0.8;
+                opacity: 0.30;
+                transform: translateY(5px) translateX(2px) scale(0.52) rotate(6deg);
+                border-radius: 58% 42% 52% 68%;
+                filter: blur(2.8px);
             }
             50% {
-                stroke-dashoffset: 0;
-                opacity: 1;
+                opacity: 0.35;
+                transform: translateY(30px) translateX(8px) scale(0.65) rotate(12deg);
+                border-radius: 45% 55% 65% 35%;
+                filter: blur(2px);
             }
             75% {
-                stroke-dashoffset: 500;
-                opacity: 0.8;
+                opacity: 0.30;
+                transform: translateY(5px) translateX(2px) scale(0.52) rotate(18deg);
+                border-radius: 58% 42% 52% 68%;
+                filter: blur(2.8px);
             }
             100% {
-                stroke-dashoffset: 1000;
-                opacity: 0;
+                opacity: 0.25;
+                transform: translateY(-15px) translateX(-3px) scale(0.45) rotate(24deg);
+                border-radius: 65% 35% 45% 75%;
+                filter: blur(3px);
             }
         }
 
-        @keyframes sketchErase {
+        @keyframes balancedPaintFloat2 {
             0% {
-                stroke-dashoffset: 0;
-                opacity: 1;
+                opacity: 0.20;
+                transform: translateX(20px) translateY(-12px) scale(0.4) rotate(-6deg);
+                border-radius: 65% 35% 45% 55%;
+                filter: blur(2px);
+            }
+            25% {
+                opacity: 0.23;
+                transform: translateX(5px) translateY(-2px) scale(0.45) rotate(-7deg);
+                border-radius: 58% 42% 52% 58%;
+                filter: blur(2.2px);
             }
             50% {
-                stroke-dashoffset: 1000;
-                opacity: 0;
+                opacity: 0.30;
+                transform: translateX(-20px) translateY(25px) scale(0.55) rotate(-9deg);
+                border-radius: 35% 65% 45% 55%;
+                filter: blur(2px);
+            }
+            75% {
+                opacity: 0.23;
+                transform: translateX(5px) translateY(-2px) scale(0.45) rotate(-17deg);
+                border-radius: 58% 42% 52% 58%;
+                filter: blur(2.2px);
             }
             100% {
-                stroke-dashoffset: 0;
-                opacity: 1;
+                opacity: 0.20;
+                transform: translateX(20px) translateY(-12px) scale(0.4) rotate(-24deg);
+                border-radius: 65% 35% 45% 55%;
+                filter: blur(2px);
             }
         }
 
-        @keyframes doodleFloat {
+        @keyframes mediumColorBleed {
             0%, 100% {
-                transform: translateY(0px) rotate(0deg) scale(1);
-                opacity: 0.6;
-            }
-            25% {
-                transform: translateY(-20px) rotate(5deg) scale(1.05);
-                opacity: 0.8;
+                opacity: 0.12;
+                transform: scale(0.85) translateX(-3px);
+                background-size: 100% 100%;
             }
             50% {
-                transform: translateY(-10px) rotate(-3deg) scale(0.95);
-                opacity: 0.9;
-            }
-            75% {
-                transform: translateY(-25px) rotate(8deg) scale(1.1);
-                opacity: 0.7;
+                opacity: 0.20;
+                transform: scale(1.03) translateX(2px);
+                background-size: 108% 108%;
             }
         }
 
-        @keyframes toolWiggle {
+        @keyframes mediumColorBleed2 {
             0%, 100% {
-                transform: rotate(0deg) translateX(0px);
-                opacity: 0.5;
-            }
-            25% {
-                transform: rotate(2deg) translateX(2px);
-                opacity: 0.7;
+                opacity: 0.10;
+                transform: scale(0.92) translateY(-2px);
+                background-size: 100% 100%;
             }
             50% {
-                transform: rotate(-1deg) translateX(-1px);
-                opacity: 0.8;
-            }
-            75% {
-                transform: rotate(3deg) translateX(3px);
-                opacity: 0.6;
+                opacity: 0.16;
+                transform: scale(1.01) translateY(1px);
+                background-size: 104% 104%;
             }
         }
 
-        @keyframes scribbleMorph {
+        @keyframes mediumCornerFloat {
+            0%, 100% {
+                clipPath: ellipse(35% 45% at 18% 18%);
+                transform: rotate(0deg);
+                opacity: 0.12;
+            }
+            25% {
+                clipPath: ellipse(45% 35% at 72% 18%);
+                transform: rotate(90deg);
+                opacity: 0.20;
+            }
+            50% {
+                clipPath: ellipse(40% 50% at 78% 72%);
+                transform: rotate(180deg);
+                opacity: 0.18;
+            }
+            75% {
+                clipPath: ellipse(50% 40% at 22% 78%);
+                transform: rotate(270deg);
+                opacity: 0.15;
+            }
+        }
+
+        @keyframes mediumWatercolorFade {
             0% {
-                d: path("M20,50 Q30,20 60,40 Q90,60 120,30");
-                opacity: 0.4;
+                opacity: 0.18;
+                transform: scale(0.8) rotate(2deg) translateX(4px);
+                filter: blur(3px) saturate(1.1);
             }
             25% {
-                d: path("M20,40 Q40,10 70,35 Q100,65 120,25");
-                opacity: 0.7;
+                opacity: 0.22;
+                transform: scale(0.9) rotate(0deg) translateX(5px);
+                filter: blur(3.5px) saturate(1.05);
             }
             50% {
-                d: path("M25,55 Q35,25 65,45 Q95,70 115,35");
-                opacity: 0.6;
+                opacity: 0.25;
+                transform: scale(0.95) rotate(-1deg) translateX(6px);
+                filter: blur(4px) saturate(1.0);
             }
             75% {
-                d: path("M15,45 Q45,15 75,40 Q105,60 125,30");
-                opacity: 0.8;
+                opacity: 0.20;
+                transform: scale(0.85) rotate(1deg) translateX(5px);
+                filter: blur(3.2px) saturate(1.08);
             }
             100% {
-                d: path("M20,50 Q30,20 60,40 Q90,60 120,30");
-                opacity: 0.4;
-            }
-        }
-
-        @keyframes paperTexture {
-            0%, 100% {
-                background-position: 0% 0%;
-                opacity: 0.3;
-            }
-            50% {
-                background-position: 5% 5%;
-                opacity: 0.5;
+                opacity: 0.18;
+                transform: scale(0.8) rotate(2deg) translateX(4px);
+                filter: blur(3px) saturate(1.1);
             }
         }
 
@@ -144,23 +177,23 @@
         .scale-in { animation: scaleIn 0.8s ease-out forwards; }
         .logo-float { animation: logoFloat 4s ease-in-out infinite; }
 
-        .sketch-draw {
-            animation: sketchDraw 6s ease-in-out infinite;
+        .balanced-paint-float-1 {
+            animation: balancedPaintFloat1 14s ease-in-out infinite;
         }
-        .sketch-erase {
-            animation: sketchErase 4s ease-in-out infinite;
+        .balanced-paint-float-2 {
+            animation: balancedPaintFloat2 18s ease-in-out infinite;
         }
-        .doodle-float {
-            animation: doodleFloat 8s ease-in-out infinite;
+        .medium-color-bleed {
+            animation: mediumColorBleed 22s ease-in-out infinite;
         }
-        .tool-wiggle {
-            animation: toolWiggle 5s ease-in-out infinite;
+        .medium-color-bleed-2 {
+            animation: mediumColorBleed2 20s ease-in-out infinite;
         }
-        .scribble-morph {
-            animation: scribbleMorph 12s ease-in-out infinite;
+        .medium-corner-float {
+            animation: mediumCornerFloat 28s ease-in-out infinite;
         }
-        .paper-texture {
-            animation: paperTexture 20s ease-in-out infinite;
+        .medium-watercolor-fade {
+            animation: mediumWatercolorFade 16s ease-in-out infinite;
         }
 
         /* Staggered delays */
@@ -238,7 +271,7 @@
             position: relative;
         }
 
-        /* Enhanced background with sketchbook texture */
+        /* Enhanced background with balanced paint dreams */
         body::before {
             content: '';
             position: fixed;
@@ -247,11 +280,9 @@
             width: 100%;
             height: 100%;
             background:
-                /* Paper texture */
-                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23000000' stroke-width='0.5' opacity='0.03'%3E%3Cpath d='M10,10 L15,12 L20,8 L25,14 L30,9'/%3E%3Cpath d='M40,15 L45,11 L50,17 L55,13 L60,19'/%3E%3Cpath d='M70,8 L75,16 L80,12 L85,18 L90,14'/%3E%3Cpath d='M5,30 L12,35 L18,28 L24,38 L32,31'/%3E%3Cpath d='M45,25 L52,32 L58,26 L65,36 L72,29'/%3E%3Cpath d='M80,35 L87,28 L93,39 L98,33'/%3E%3C/g%3E%3C/svg%3E"),
-                radial-gradient(circle at 20% 30%, rgba(255, 159, 243, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(101, 195, 247, 0.06) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(254, 202, 87, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 18% 25%, rgba(255, 159, 243, 0.06) 0%, transparent 45%),
+                radial-gradient(circle at 82% 18%, rgba(101, 195, 247, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 38% 78%, rgba(254, 202, 87, 0.04) 0%, transparent 35%),
                 var(--paint-splatter);
             pointer-events: none;
             z-index: 1;
@@ -287,8 +318,8 @@
             padding-top: 2rem;
         }
 
-        /* Living sketchbook container */
-        .sketchbook {
+        /* Balanced paint dreams container */
+        .paint-dreams {
             position: fixed;
             top: 0;
             left: 0;
@@ -299,104 +330,224 @@
             overflow: hidden;
         }
 
-        .sketch-svg {
+        .paint-element {
             position: absolute;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+            border-radius: 50%;
         }
 
-        /* Sketch line styles */
-        .sketch-line-1 {
-            top: 15%;
-            left: 10%;
-            width: 200px;
-            height: 100px;
-            stroke: oklch(0.70 0.15 280);
-            stroke-width: 2;
-            opacity: 0.6;
-        }
-
-        .sketch-line-2 {
-            top: 45%;
-            right: 15%;
-            width: 180px;
-            height: 120px;
-            stroke: oklch(0.75 0.12 60);
-            stroke-width: 1.5;
-            opacity: 0.7;
-        }
-
-        .sketch-line-3 {
-            top: 65%;
-            left: 20%;
-            width: 160px;
-            height: 80px;
-            stroke: oklch(0.72 0.18 180);
-            stroke-width: 1.8;
-            opacity: 0.5;
-        }
-
-        /* Doodle elements */
-        .doodle-element {
-            position: absolute;
-            stroke: oklch(0.68 0.20 320);
-            stroke-width: 2;
-            fill: none;
-        }
-
-        .doodle-1 {
-            top: 25%;
-            left: 30%;
-            width: 60px;
-            height: 60px;
-            opacity: 0.6;
-        }
-
-        .doodle-2 {
-            top: 55%;
-            right: 25%;
-            width: 50px;
-            height: 50px;
-            opacity: 0.7;
-        }
-
-        .doodle-3 {
-            top: 35%;
-            right: 40%;
+        /* Balanced paint drops - edge focused */
+        .drop-1 {
+            top: 10%;
+            left: 7%;
             width: 70px;
             height: 70px;
-            opacity: 0.5;
+            background: radial-gradient(circle at 28% 28%,
+                oklch(0.87 0.13 320 / 0.25),
+                oklch(0.77 0.16 340 / 0.12),
+                transparent 75%);
         }
 
-        /* Art tool elements */
-        .art-tool {
-            position: absolute;
-            stroke: oklch(0.60 0.25 25);
-            stroke-width: 2;
-            fill: oklch(0.85 0.15 40);
-            opacity: 0.4;
+        .drop-2 {
+            top: 18%;
+            right: 5%;
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(ellipse at 38% 62%,
+                oklch(0.82 0.11 60 / 0.20),
+                oklch(0.72 0.14 80 / 0.10),
+                transparent 80%);
         }
 
-        .tool-1 {
-            top: 20%;
+        .drop-3 {
+            bottom: 15%;
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 55% 35%,
+                oklch(0.77 0.17 180 / 0.18),
+                oklch(0.67 0.19 200 / 0.09),
+                transparent 72%);
+        }
+
+        .drop-4 {
+            bottom: 12%;
+            right: 8%;
+            width: 65px;
+            height: 65px;
+            background: radial-gradient(ellipse at 42% 58%,
+                oklch(0.84 0.15 280 / 0.22),
+                oklch(0.74 0.17 300 / 0.11),
+                transparent 78%);
+        }
+
+        .drop-5 {
+            top: 65%;
             right: 10%;
-            width: 40px;
-            height: 40px;
+            width: 75px;
+            height: 75px;
+            background: radial-gradient(circle at 48% 48%,
+                oklch(0.81 0.12 40 / 0.15),
+                oklch(0.71 0.14 50 / 0.07),
+                transparent 82%);
         }
 
-        .tool-2 {
-            top: 70%;
+        /* Medium color bleeds */
+        .bleed-1 {
+            top: 8%;
+            left: 3%;
+            width: 130px;
+            height: 110px;
+            background: linear-gradient(135deg,
+                oklch(0.91 0.09 280 / 0.10),
+                oklch(0.86 0.11 300 / 0.15),
+                oklch(0.81 0.13 320 / 0.08));
+            border-radius: 60% 40% 70% 30%;
+            filter: blur(4px);
+        }
+
+        .bleed-2 {
+            top: 22%;
+            right: 2%;
+            width: 110px;
+            height: 130px;
+            background: linear-gradient(-45deg,
+                oklch(0.89 0.07 40 / 0.12),
+                oklch(0.83 0.09 60 / 0.17),
+                oklch(0.77 0.11 80 / 0.08));
+            border-radius: 40% 60% 50% 50%;
+            filter: blur(3px);
+        }
+
+        .bleed-3 {
+            bottom: 18%;
             left: 5%;
-            width: 45px;
-            height: 45px;
+            width: 120px;
+            height: 100px;
+            background: linear-gradient(90deg,
+                oklch(0.87 0.11 160 / 0.11),
+                oklch(0.81 0.13 180 / 0.16),
+                oklch(0.75 0.15 200 / 0.08));
+            border-radius: 70% 30% 60% 40%;
+            filter: blur(5px);
         }
 
-        .tool-3 {
-            top: 40%;
-            left: 70%;
-            width: 35px;
-            height: 35px;
+        .bleed-4 {
+            bottom: 8%;
+            right: 4%;
+            width: 105px;
+            height: 115px;
+            background: linear-gradient(180deg,
+                oklch(0.85 0.15 240 / 0.13),
+                oklch(0.79 0.17 260 / 0.18),
+                oklch(0.73 0.19 280 / 0.09));
+            border-radius: 50% 50% 70% 30%;
+            filter: blur(4px);
+        }
+
+        /* Medium watercolor spreads */
+        .watercolor-1 {
+            top: 5%;
+            left: 10%;
+            width: 110px;
+            height: 110px;
+            background: radial-gradient(ellipse at center,
+                oklch(0.93 0.05 160 / 0.12),
+                oklch(0.87 0.07 180 / 0.18),
+                oklch(0.81 0.09 200 / 0.10),
+                transparent 88%);
+            border-radius: 75% 25% 65% 35%;
+        }
+
+        .watercolor-2 {
+            top: 10%;
+            right: 12%;
+            width: 95px;
+            height: 95px;
+            background: radial-gradient(circle at 65% 25%,
+                oklch(0.89 0.11 240 / 0.15),
+                oklch(0.83 0.13 260 / 0.22),
+                oklch(0.77 0.15 280 / 0.12),
+                transparent 85%);
+            border-radius: 35% 65% 75% 25%;
+        }
+
+        .watercolor-3 {
+            bottom: 8%;
+            left: 14%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(ellipse at 45% 65%,
+                oklch(0.91 0.06 60 / 0.10),
+                oklch(0.85 0.08 80 / 0.15),
+                oklch(0.79 0.10 100 / 0.08),
+                transparent 83%);
+            border-radius: 55% 45% 55% 45%;
+        }
+
+        .watercolor-4 {
+            bottom: 12%;
+            right: 17%;
+            width: 85px;
+            height: 85px;
+            background: radial-gradient(circle at 30% 40%,
+                oklch(0.87 0.12 320 / 0.14),
+                oklch(0.81 0.14 340 / 0.20),
+                oklch(0.75 0.16 360 / 0.10),
+                transparent 86%);
+            border-radius: 45% 55% 35% 65%;
+        }
+
+        /* Medium liquid flows */
+        .liquid-1 {
+            top: 0%;
+            right: 8%;
+            width: 140px;
+            height: 115px;
+            background: conic-gradient(from 45deg at 50% 50%,
+                oklch(0.87 0.14 320 / 0.10),
+                oklch(0.82 0.16 340 / 0.15),
+                oklch(0.77 0.18 360 / 0.10),
+                oklch(0.87 0.14 320 / 0.10));
+            filter: blur(5px);
+        }
+
+        .liquid-2 {
+            top: 0%;
+            left: 10%;
+            width: 130px;
+            height: 105px;
+            background: conic-gradient(from 120deg at 45% 55%,
+                oklch(0.84 0.12 60 / 0.11),
+                oklch(0.79 0.14 80 / 0.16),
+                oklch(0.74 0.16 100 / 0.12),
+                oklch(0.84 0.12 60 / 0.11));
+            filter: blur(4px);
+        }
+
+        .liquid-3 {
+            bottom: 0%;
+            right: 14%;
+            width: 120px;
+            height: 95px;
+            background: conic-gradient(from 200deg at 55% 45%,
+                oklch(0.81 0.17 180 / 0.10),
+                oklch(0.76 0.19 200 / 0.15),
+                oklch(0.71 0.21 220 / 0.11),
+                oklch(0.81 0.17 180 / 0.10));
+            filter: blur(4px);
+        }
+
+        .liquid-4 {
+            bottom: 0%;
+            left: 12%;
+            width: 110px;
+            height: 85px;
+            background: conic-gradient(from 300deg at 35% 65%,
+                oklch(0.85 0.13 280 / 0.09),
+                oklch(0.80 0.15 300 / 0.13),
+                oklch(0.75 0.17 320 / 0.10),
+                oklch(0.85 0.13 280 / 0.09));
+            filter: blur(3px);
         }
 
         /* Hero section styling */
@@ -408,108 +559,32 @@
     </style>
 </head>
 <body style="background: var(--gradient-bg); color: var(--foreground);">
-    <!-- Living Sketchbook - Concept 3 -->
-    <div class="sketchbook">
-        <!-- Animated sketch lines -->
-        <svg class="sketch-svg sketch-line-1 sketch-draw" viewBox="0 0 200 100">
-            <path d="M20,60 Q60,20 100,50 Q140,80 180,40"
-                  stroke-dasharray="5,3"
-                  stroke-dashoffset="1000"/>
-        </svg>
+    <!-- Balanced Paint Dreams - Variant 1: Medium visibility, edge-focused -->
+    <div class="paint-dreams">
+        <!-- Balanced paint drops - edge focused -->
+        <div class="paint-element drop-1 balanced-paint-float-1"></div>
+        <div class="paint-element drop-2 balanced-paint-float-2" style="animation-delay: 2.5s;"></div>
+        <div class="paint-element drop-3 balanced-paint-float-1" style="animation-delay: 5s;"></div>
+        <div class="paint-element drop-4 balanced-paint-float-2" style="animation-delay: 7.5s;"></div>
+        <div class="paint-element drop-5 balanced-paint-float-1" style="animation-delay: 10s;"></div>
 
-        <svg class="sketch-svg sketch-line-2 sketch-draw" viewBox="0 0 180 120" style="animation-delay: 2s;">
-            <path d="M30,80 Q70,30 110,70 Q150,100 170,50"
-                  stroke-dasharray="4,2"
-                  stroke-dashoffset="1000"/>
-        </svg>
+        <!-- Medium color bleeds -->
+        <div class="paint-element bleed-1 medium-color-bleed"></div>
+        <div class="paint-element bleed-2 medium-color-bleed-2" style="animation-delay: 4s;"></div>
+        <div class="paint-element bleed-3 medium-color-bleed" style="animation-delay: 8s;"></div>
+        <div class="paint-element bleed-4 medium-color-bleed-2" style="animation-delay: 12s;"></div>
 
-        <svg class="sketch-svg sketch-line-3 sketch-draw" viewBox="0 0 160 80" style="animation-delay: 4s;">
-            <path d="M25,50 Q55,20 95,45 Q125,65 140,35"
-                  stroke-dasharray="3,2"
-                  stroke-dashoffset="1000"/>
-        </svg>
+        <!-- Medium watercolor spreads -->
+        <div class="paint-element watercolor-1 medium-watercolor-fade"></div>
+        <div class="paint-element watercolor-2 medium-watercolor-fade" style="animation-delay: 3s;"></div>
+        <div class="paint-element watercolor-3 medium-watercolor-fade" style="animation-delay: 6s;"></div>
+        <div class="paint-element watercolor-4 medium-watercolor-fade" style="animation-delay: 9s;"></div>
 
-        <!-- Floating doodles -->
-        <svg class="doodle-element doodle-1 doodle-float" viewBox="0 0 60 60">
-            <!-- Hand-drawn heart -->
-            <path d="M30,45 C25,35 15,25 15,20 C15,15 20,10 25,15 C27,12 33,12 35,15 C40,10 45,15 45,20 C45,25 35,35 30,45 Z"
-                  stroke-dasharray="2,1"/>
-        </svg>
-
-        <svg class="doodle-element doodle-2 doodle-float" viewBox="0 0 50 50" style="animation-delay: 3s;">
-            <!-- Hand-drawn star -->
-            <path d="M25,5 L28,18 L42,18 L31,27 L35,40 L25,32 L15,40 L19,27 L8,18 L22,18 Z"
-                  stroke-dasharray="3,2"/>
-        </svg>
-
-        <svg class="doodle-element doodle-3 doodle-float" viewBox="0 0 70 70" style="animation-delay: 5s;">
-            <!-- Hand-drawn flower -->
-            <circle cx="35" cy="35" r="8" stroke-dasharray="2,1"/>
-            <path d="M35,15 Q40,25 35,27 Q30,25 35,15"
-                  stroke-dasharray="1,1"/>
-            <path d="M55,35 Q45,30 43,35 Q45,40 55,35"
-                  stroke-dasharray="1,1"/>
-            <path d="M35,55 Q30,45 35,43 Q40,45 35,55"
-                  stroke-dasharray="1,1"/>
-            <path d="M15,35 Q25,40 27,35 Q25,30 15,35"
-                  stroke-dasharray="1,1"/>
-        </svg>
-
-        <!-- Art tools -->
-        <svg class="art-tool tool-1 tool-wiggle" viewBox="0 0 40 40">
-            <!-- Hand-drawn pencil -->
-            <rect x="15" y="5" width="10" height="25" rx="1"/>
-            <polygon points="15,30 25,30 20,35"/>
-            <rect x="17" y="8" width="6" height="3" fill="oklch(0.90 0.05 60)"/>
-        </svg>
-
-        <svg class="art-tool tool-2 tool-wiggle" viewBox="0 0 45 45" style="animation-delay: 2s;">
-            <!-- Hand-drawn brush -->
-            <rect x="18" y="10" width="9" height="20" rx="2"/>
-            <ellipse cx="22.5" cy="32" rx="6" ry="8"/>
-            <rect x="20" y="5" width="5" height="8" rx="2"/>
-        </svg>
-
-        <svg class="art-tool tool-3 tool-wiggle" viewBox="0 0 35 35" style="animation-delay: 4s;">
-            <!-- Hand-drawn crayon -->
-            <rect x="12" y="8" width="11" height="18" rx="5"/>
-            <polygon points="12,26 23,26 17.5,30"/>
-            <text x="17.5" y="18" font-size="6" text-anchor="middle" fill="white">C</text>
-        </svg>
-
-        <!-- Morphing scribbles -->
-        <svg class="sketch-svg" style="top: 30%; right: 30%; width: 140px; height: 80px;">
-            <path class="scribble-morph"
-                  d="M20,50 Q30,20 60,40 Q90,60 120,30"
-                  stroke="oklch(0.76 0.14 160)"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-dasharray="4,2"
-                  opacity="0.5"/>
-        </svg>
-
-        <svg class="sketch-svg" style="top: 50%; left: 40%; width: 120px; height: 70px;">
-            <path class="scribble-morph"
-                  d="M15,45 Q45,15 75,40 Q105,60 110,25"
-                  stroke="oklch(0.78 0.16 240)"
-                  stroke-width="1.5"
-                  fill="none"
-                  stroke-dasharray="3,3"
-                  opacity="0.6"
-                  style="animation-delay: 6s;"/>
-        </svg>
-
-        <!-- Paper texture overlay -->
-        <div class="paper-texture" style="
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23000000\' fill-opacity=\'0.02\'%3E%3Ccircle cx=\'8\' cy=\'8\' r=\'0.5\'/%3E%3Ccircle cx=\'32\' cy=\'12\' r=\'0.3\'/%3E%3Ccircle cx=\'16\' cy=\'28\' r=\'0.4\'/%3E%3Ccircle cx=\'24\' cy=\'6\' r=\'0.2\'/%3E%3C/g%3E%3C/svg%3E');
-            background-size: 40px 40px;
-            mix-blend-mode: multiply;
-        "></div>
+        <!-- Medium liquid flows -->
+        <div class="paint-element liquid-1 medium-corner-float"></div>
+        <div class="paint-element liquid-2 medium-corner-float" style="animation-delay: 6s;"></div>
+        <div class="paint-element liquid-3 medium-corner-float" style="animation-delay: 12s;"></div>
+        <div class="paint-element liquid-4 medium-corner-float" style="animation-delay: 18s;"></div>
     </div>
 
     <!-- Header -->
