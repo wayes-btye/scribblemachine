@@ -6,12 +6,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
-import { Badge } from '@/components/ui/badge'
-import { Sparkles, Zap, Settings, Minus, RectangleHorizontal, Square, Palette, PaintBucket, Pen } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 import { toast } from '@/components/ui/use-toast'
+import { ParameterControls } from '@/components/workspace/parameter-controls'
 import type { Complexity, LineThickness, Job, TextGenerationRequest } from '@coloringpage/types'
 
 const formSchema = z.object({
@@ -33,53 +31,6 @@ interface TextPromptFormProps {
   disabled?: boolean
 }
 
-const complexityOptions = [
-  {
-    value: 'simple' as Complexity,
-    label: 'Simple',
-    description: 'Clean lines, perfect for young children',
-    icon: Minus,
-    badge: 'Ages 3-6'
-  },
-  {
-    value: 'standard' as Complexity,
-    label: 'Standard',
-    description: 'Balanced detail for most ages',
-    icon: RectangleHorizontal,
-    badge: 'Ages 6-12'
-  },
-  {
-    value: 'detailed' as Complexity,
-    label: 'Detailed',
-    description: 'Intricate patterns for advanced colorers',
-    icon: Square,
-    badge: 'Ages 12+'
-  }
-]
-
-const thicknessOptions = [
-  {
-    value: 'thin' as LineThickness,
-    label: 'Thin Lines',
-    description: 'Fine details, best for older children',
-    icon: Pen,
-    badge: '1-2px'
-  },
-  {
-    value: 'medium' as LineThickness,
-    label: 'Medium Lines',
-    description: 'Perfect balance for most ages',
-    icon: Palette,
-    badge: '2-3px'
-  },
-  {
-    value: 'thick' as LineThickness,
-    label: 'Thick Lines',
-    description: 'Easy coloring for small hands',
-    icon: PaintBucket,
-    badge: '3-4px'
-  }
-]
 
 const examplePrompts = [
   'A friendly dragon in a magical forest',
@@ -200,113 +151,15 @@ export function TextPromptForm({ onGenerationStart, disabled = false }: TextProm
 
       <Separator />
 
-      {/* Complexity Selection */}
-      <div className="space-y-4">
-        <div>
-          <h3 className="text-lg font-medium flex items-center gap-2">
-            <Settings className="h-5 w-5 text-brand-warm-blue" />
-            Complexity Level
-          </h3>
-          <p className="text-sm text-gray-600">Choose the right level of detail</p>
-        </div>
-
-        <RadioGroup
-          value={selectedComplexity}
-          onValueChange={(value) => form.setValue('complexity', value as Complexity)}
-          className="space-y-3"
-          data-testid="complexity-selection"
-        >
-          {complexityOptions.map((option) => {
-            const Icon = option.icon
-            const isSelected = selectedComplexity === option.value
-
-            return (
-              <div key={option.value} className="relative">
-                <RadioGroupItem
-                  value={option.value}
-                  id={`complexity-${option.value}`}
-                  className="peer sr-only"
-                  disabled={disabled || generating}
-                />
-                <Label
-                  htmlFor={`complexity-${option.value}`}
-                  className={`flex items-center space-x-3 p-4 rounded-lg border-2 cursor-pointer transition-all hover:bg-gray-50 ${
-                    isSelected
-                      ? 'border-brand-warm-blue bg-brand-warm-blue/5'
-                      : 'border-gray-200'
-                  }`}
-                >
-                  <Icon className={`h-5 w-5 ${isSelected ? 'text-brand-warm-blue' : 'text-gray-400'}`} />
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium">{option.label}</span>
-                      <Badge variant={isSelected ? 'default' : 'secondary'} className="text-xs">
-                        {option.badge}
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-gray-600 mt-1">{option.description}</p>
-                  </div>
-                </Label>
-              </div>
-            )
-          })}
-        </RadioGroup>
-      </div>
-
-      <Separator />
-
-      {/* Line Thickness Selection */}
-      <div className="space-y-4">
-        <div>
-          <h3 className="text-lg font-medium flex items-center gap-2">
-            <Zap className="h-5 w-5 text-brand-warm-green" />
-            Line Thickness
-          </h3>
-          <p className="text-sm text-gray-600">Perfect for different coloring tools</p>
-        </div>
-
-        <RadioGroup
-          value={selectedThickness}
-          onValueChange={(value) => form.setValue('lineThickness', value as LineThickness)}
-          className="space-y-3"
-          data-testid="thickness-selection"
-        >
-          {thicknessOptions.map((option) => {
-            const Icon = option.icon
-            const isSelected = selectedThickness === option.value
-
-            return (
-              <div key={option.value} className="relative">
-                <RadioGroupItem
-                  value={option.value}
-                  id={`thickness-${option.value}`}
-                  className="peer sr-only"
-                  disabled={disabled || generating}
-                />
-                <Label
-                  htmlFor={`thickness-${option.value}`}
-                  className={`flex items-center space-x-3 p-4 rounded-lg border-2 cursor-pointer transition-all hover:bg-gray-50 ${
-                    isSelected
-                      ? 'border-brand-warm-green bg-brand-warm-green/5'
-                      : 'border-gray-200'
-                  }`}
-                >
-                  <Icon className={`h-5 w-5 ${isSelected ? 'text-brand-warm-green' : 'text-gray-400'}`} />
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium">{option.label}</span>
-                      <Badge variant={isSelected ? 'default' : 'secondary'} className="text-xs">
-                        {option.badge}
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-gray-600 mt-1">{option.description}</p>
-                  </div>
-                </Label>
-              </div>
-            )
-          })}
-        </RadioGroup>
-      </div>
+      {/* Unified Parameter Controls */}
+      <ParameterControls
+        complexity={selectedComplexity}
+        lineThickness={selectedThickness}
+        onComplexityChange={(value) => form.setValue('complexity', value)}
+        onLineThicknessChange={(value) => form.setValue('lineThickness', value)}
+        disabled={disabled || generating}
+        compact={true}
+      />
 
       {/* Generate Button */}
       <Button
