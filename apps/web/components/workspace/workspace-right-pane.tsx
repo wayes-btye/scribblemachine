@@ -26,16 +26,16 @@ export function WorkspaceRightPane({ workspaceState }: WorkspaceRightPaneProps) 
   // Show mode explanation when no mode is selected
   if (!mode) {
     return (
-      <div className="space-y-6">
-        <Card className="p-8 text-center">
+      <div className="space-y-4 sm:space-y-6">
+        <Card className="p-4 sm:p-8 text-center">
           <div className="space-y-4">
-            <div className="text-4xl">✨</div>
-            <h3 className="text-lg font-medium">Two Ways to Create</h3>
-            <div className="grid grid-cols-1 gap-4 text-sm text-gray-600">
-              <div className="p-4 bg-gray-50 rounded-lg">
+            <div className="text-3xl sm:text-4xl">✨</div>
+            <h3 className="text-base sm:text-lg font-medium">Two Ways to Create</h3>
+            <div className="grid grid-cols-1 gap-3 sm:gap-4 text-sm text-gray-600">
+              <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
                 <strong>Upload Photo:</strong> Turn your photos into beautiful coloring pages
               </div>
-              <div className="p-4 bg-gray-50 rounded-lg">
+              <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
                 <strong>Imagine Idea:</strong> Describe what you want and let AI create it
               </div>
             </div>
@@ -46,11 +46,11 @@ export function WorkspaceRightPane({ workspaceState }: WorkspaceRightPaneProps) 
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Input step - Show context based on mode */}
       {step === 'input' && mode === 'upload' && data.uploadedImage && (
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4">Original Image</h2>
+        <Card className="p-4 sm:p-6">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Original Image</h2>
           <div className="aspect-square bg-gray-50 rounded-lg overflow-hidden">
             <img
               src={data.uploadedImage.url}
@@ -63,8 +63,8 @@ export function WorkspaceRightPane({ workspaceState }: WorkspaceRightPaneProps) 
       )}
 
       {step === 'input' && mode === 'prompt' && data.textPrompt && (
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4">Your Idea</h2>
+        <Card className="p-4 sm:p-6">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Your Idea</h2>
           <div className="bg-gray-50 rounded-lg p-4">
             <p className="text-gray-700 italic">"{data.textPrompt}"</p>
           </div>
@@ -73,8 +73,8 @@ export function WorkspaceRightPane({ workspaceState }: WorkspaceRightPaneProps) 
 
       {/* Generating step - Show progress with context preservation */}
       {(step === 'generating' || step === 'editing') && data.currentJob && (
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4">
+        <Card className="p-4 sm:p-6">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">
             {step === 'editing' ? 'Edit Progress' : 'Generation Progress'}
           </h2>
 
@@ -111,8 +111,8 @@ export function WorkspaceRightPane({ workspaceState }: WorkspaceRightPaneProps) 
 
       {/* Result step - Show completed result with edit capabilities */}
       {step === 'result' && data.currentJob?.status === 'succeeded' && (
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4">Your Coloring Page</h2>
+        <Card className="p-4 sm:p-6">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Your Coloring Page</h2>
           <ResultPreview
             job={data.currentJob}
             onReset={reset}
@@ -125,12 +125,12 @@ export function WorkspaceRightPane({ workspaceState }: WorkspaceRightPaneProps) 
 
       {/* Empty state for input step */}
       {step === 'input' && !data.uploadedImage && !data.textPrompt && (
-        <Card className="p-8 text-center">
+        <Card className="p-4 sm:p-8 text-center">
           <div className="space-y-4">
-            <div className="text-4xl">
+            <div className="text-3xl sm:text-4xl">
               {mode === 'upload' ? '📸' : '💭'}
             </div>
-            <h3 className="text-lg font-medium">
+            <h3 className="text-base sm:text-lg font-medium">
               {mode === 'upload' ? 'Upload an Image' : 'Share Your Idea'}
             </h3>
             <p className="text-gray-600 text-sm">

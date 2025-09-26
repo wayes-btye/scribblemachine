@@ -29,7 +29,7 @@ export default function Home() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Link href="/create">
+            <Link href="/workspace">
               <Button
                 size="lg"
                 className="bg-brand-soft-blue hover:bg-brand-soft-blue/90 text-white text-lg px-8 py-4 rounded-2xl shadow-lg"
@@ -38,7 +38,7 @@ export default function Home() {
                 Upload Photo - It&apos;s FREE!
               </Button>
             </Link>
-            <Link href="/imagine">
+            <Link href="/workspace">
               <Button
                 variant="outline"
                 size="lg"

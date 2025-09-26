@@ -26,12 +26,12 @@ export function WorkspaceLeftPane({ workspaceState }: WorkspaceLeftPaneProps) {
   // Show mode selection if no mode is selected
   if (!mode) {
     return (
-      <div className="space-y-6">
-        <Card className="p-8 text-center">
+      <div className="space-y-4 sm:space-y-6">
+        <Card className="p-4 sm:p-8 text-center">
           <div className="space-y-4">
-            <div className="text-6xl">🎨</div>
-            <h2 className="text-xl font-semibold">Get Started</h2>
-            <p className="text-gray-600">
+            <div className="text-4xl sm:text-6xl">🎨</div>
+            <h2 className="text-lg sm:text-xl font-semibold">Get Started</h2>
+            <p className="text-gray-600 text-sm sm:text-base">
               Choose how you'd like to create your coloring page using the toggle above
             </p>
           </div>
@@ -43,10 +43,10 @@ export function WorkspaceLeftPane({ workspaceState }: WorkspaceLeftPaneProps) {
   // Upload mode workflow
   if (mode === 'upload') {
     return (
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {/* Step 1: Upload */}
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4">1. Upload Your Image</h2>
+        <Card className="p-4 sm:p-6">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">1. Upload Your Image</h2>
           <FileUploader
             onUploadComplete={(assetId: string, imageUrl: string) => {
               setUploadedImage(assetId, imageUrl)
@@ -57,8 +57,8 @@ export function WorkspaceLeftPane({ workspaceState }: WorkspaceLeftPaneProps) {
 
         {/* Step 2: Parameters (only show after upload) */}
         {data.uploadedImage && (
-          <Card className="p-6">
-            <h2 className="text-xl font-semibold mb-4">2. Choose Your Style</h2>
+          <Card className="p-4 sm:p-6">
+            <h2 className="text-lg sm:text-xl font-semibold mb-4">2. Choose Your Style</h2>
             <ParameterForm
               assetId={data.uploadedImage.assetId}
               onGenerationStart={(job) => {
@@ -75,9 +75,9 @@ export function WorkspaceLeftPane({ workspaceState }: WorkspaceLeftPaneProps) {
   // Prompt mode workflow
   if (mode === 'prompt') {
     return (
-      <div className="space-y-6">
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold mb-4">1. Describe Your Idea</h2>
+      <div className="space-y-4 sm:space-y-6">
+        <Card className="p-4 sm:p-6">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">1. Describe Your Idea</h2>
           <TextPromptForm
             onGenerationStart={(job, prompt) => {
               setTextPrompt(prompt)

@@ -39,17 +39,17 @@ export default function WorkspacePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-cream via-brand-soft-blue/10 to-brand-soft-pink/10">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         <div className="max-w-6xl mx-auto">
-          {/* Header with Mode Toggle */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+          {/* Header with Mode Toggle - Sticky on mobile for better UX */}
+          <div className="sticky top-0 bg-gradient-to-br from-brand-cream/95 via-brand-soft-blue/5 to-brand-soft-pink/5 backdrop-blur-sm z-10 -mx-3 sm:mx-0 px-3 sm:px-0 py-4 sm:py-0 sm:relative sm:bg-transparent sm:backdrop-blur-none text-center mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
               Create Your{' '}
               <span className="text-transparent bg-gradient-to-r from-brand-warm-blue to-brand-warm-orange bg-clip-text">
                 Coloring Page
               </span>
             </h1>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 text-sm sm:text-base mb-4 sm:mb-6">
               {workspaceState.mode === 'upload'
                 ? 'Upload an image and watch the magic happen!'
                 : workspaceState.mode === 'prompt'
@@ -58,21 +58,27 @@ export default function WorkspacePage() {
               }
             </p>
 
-            {/* Mode Toggle */}
-            <ModeToggle
-              mode={workspaceState.mode}
-              onModeChange={workspaceState.setMode}
-              canSwitchMode={workspaceState.canSwitchMode}
-            />
+            {/* Mode Toggle - Full width on mobile */}
+            <div className="px-2 sm:px-0">
+              <ModeToggle
+                mode={workspaceState.mode}
+                onModeChange={workspaceState.setMode}
+                canSwitchMode={workspaceState.canSwitchMode}
+              />
+            </div>
           </div>
 
           {/* Main Workspace - Progressive Disclosure Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
             {/* Left Pane - Dynamic form based on mode */}
-            <WorkspaceLeftPane workspaceState={workspaceState} />
+            <div className="order-1">
+              <WorkspaceLeftPane workspaceState={workspaceState} />
+            </div>
 
             {/* Right Pane - Context canvas that adapts to current step */}
-            <WorkspaceRightPane workspaceState={workspaceState} />
+            <div className="order-2 lg:order-2">
+              <WorkspaceRightPane workspaceState={workspaceState} />
+            </div>
           </div>
         </div>
       </div>
