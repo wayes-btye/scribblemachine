@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Lottie from 'lottie-react'
 import { Progress } from '@/components/ui/progress'
 
@@ -63,6 +63,13 @@ export function LottieLoader({
   className = '',
 }: LottieLoaderProps) {
   const [animationError, setAnimationError] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Auto-hide loading state after a reasonable time
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 500)
+    return () => clearTimeout(timer)
+  }, [])
 
   // Use custom animation data or theme-based animation
   const currentAnimation = animationData || animationThemes[theme]

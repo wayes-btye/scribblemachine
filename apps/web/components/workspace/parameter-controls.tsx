@@ -1,9 +1,11 @@
 'use client'
 
+import React from 'react'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
+import { ErrorBoundary } from '@/components/ui/error-boundary'
 import { Sparkles, Settings, Minus, RectangleHorizontal, Square, Palette, PaintBucket, Pen } from 'lucide-react'
 import type { Complexity, LineThickness } from '@coloringpage/types'
 
@@ -67,7 +69,7 @@ const thicknessOptions = [
   }
 ]
 
-export function ParameterControls({
+export const ParameterControls = React.memo(function ParameterControls({
   complexity,
   lineThickness,
   onComplexityChange,
@@ -75,16 +77,21 @@ export function ParameterControls({
   disabled = false,
   compact = false
 }: ParameterControlsProps) {
-  const spacing = compact ? 'space-y-4' : 'space-y-6'
+  const spacing = compact ? 'space-y-3' : 'space-y-5'
   const iconColor = {
     complexity: 'text-brand-warm-orange',
     thickness: 'text-brand-warm-green'
   }
 
   return (
-    <div className={spacing}>
+    <ErrorBoundary fallback={
+      <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg text-center">
+        <p className="text-sm text-gray-600">Unable to load parameter controls. Please refresh the page.</p>
+      </div>
+    }>
+      <div className={spacing}>
       {/* Complexity Selection */}
-      <div className="space-y-4">
+      <div className={compact ? "space-y-3" : "space-y-4"}>
         <div>
           <h3 className="text-lg font-medium flex items-center gap-2">
             <Sparkles className={`h-5 w-5 ${iconColor.complexity}`} />
@@ -96,8 +103,9 @@ export function ParameterControls({
         <RadioGroup
           value={complexity}
           onValueChange={onComplexityChange}
-          className="space-y-3"
+          className={compact ? "space-y-2" : "space-y-3"}
           data-testid="complexity-selection"
+          aria-label="Complexity level selection"
         >
           {complexityOptions.map((option) => {
             const Icon = option.icon
@@ -110,10 +118,11 @@ export function ParameterControls({
                   id={`complexity-${option.value}`}
                   className="peer sr-only"
                   disabled={disabled}
+                  aria-describedby={`complexity-${option.value}-description`}
                 />
                 <Label
                   htmlFor={`complexity-${option.value}`}
-                  className={`flex items-center space-x-3 p-4 rounded-lg border-2 cursor-pointer transition-all hover:bg-gray-50 ${
+                  className={`flex items-center space-x-3 ${compact ? 'p-3' : 'p-4'} rounded-lg border-2 cursor-pointer transition-all hover:bg-gray-50 focus-within:ring-2 focus-within:ring-brand-warm-orange ${
                     isSelected
                       ? 'border-brand-warm-orange bg-brand-warm-orange/5'
                       : 'border-gray-200'
@@ -127,7 +136,7 @@ export function ParameterControls({
                         {option.badge}
                       </Badge>
                     </div>
-                    <p className="text-sm text-gray-600 mt-1">{option.description}</p>
+                    <p className="text-sm text-gray-600 mt-1" id={`complexity-${option.value}-description`}>{option.description}</p>
                   </div>
                 </Label>
               </div>
@@ -139,7 +148,7 @@ export function ParameterControls({
       <Separator />
 
       {/* Line Thickness Selection */}
-      <div className="space-y-4">
+      <div className={compact ? "space-y-3" : "space-y-4"}>
         <div>
           <h3 className="text-lg font-medium flex items-center gap-2">
             <Settings className={`h-5 w-5 ${iconColor.thickness}`} />
@@ -151,8 +160,9 @@ export function ParameterControls({
         <RadioGroup
           value={lineThickness}
           onValueChange={onLineThicknessChange}
-          className="space-y-3"
+          className={compact ? "space-y-2" : "space-y-3"}
           data-testid="thickness-selection"
+          aria-label="Line thickness selection"
         >
           {thicknessOptions.map((option) => {
             const Icon = option.icon
@@ -165,10 +175,11 @@ export function ParameterControls({
                   id={`thickness-${option.value}`}
                   className="peer sr-only"
                   disabled={disabled}
+                  aria-describedby={`thickness-${option.value}-description`}
                 />
                 <Label
                   htmlFor={`thickness-${option.value}`}
-                  className={`flex items-center space-x-3 p-4 rounded-lg border-2 cursor-pointer transition-all hover:bg-gray-50 ${
+                  className={`flex items-center space-x-3 ${compact ? 'p-3' : 'p-4'} rounded-lg border-2 cursor-pointer transition-all hover:bg-gray-50 focus-within:ring-2 focus-within:ring-brand-warm-green ${
                     isSelected
                       ? 'border-brand-warm-green bg-brand-warm-green/5'
                       : 'border-gray-200'
@@ -182,7 +193,7 @@ export function ParameterControls({
                         {option.badge}
                       </Badge>
                     </div>
-                    <p className="text-sm text-gray-600 mt-1">{option.description}</p>
+                    <p className="text-sm text-gray-600 mt-1" id={`thickness-${option.value}-description`}>{option.description}</p>
                   </div>
                 </Label>
               </div>
@@ -192,7 +203,7 @@ export function ParameterControls({
       </div>
 
       {/* Parameter Preview */}
-      <div className="bg-gray-50 p-4 rounded-lg">
+      <div className={`bg-gray-50 ${compact ? 'p-3' : 'p-4'} rounded-lg`} aria-label="Selected options summary">
         <h4 className="font-medium mb-2">Selected Options</h4>
         <div className="space-y-1 text-sm">
           <p>
@@ -209,6 +220,7 @@ export function ParameterControls({
           </p>
         </div>
       </div>
-    </div>
+      </div>
+    </ErrorBoundary>
   )
-}
+})

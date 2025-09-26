@@ -120,10 +120,12 @@ export function TextPromptForm({ onGenerationStart, disabled = false }: TextProm
             className="min-h-[100px] resize-none"
             disabled={disabled || generating}
             data-testid="text-prompt-input"
+            aria-label="Describe your coloring page idea"
+            aria-describedby="text-prompt-help"
           />
 
           <div className="flex justify-between text-xs text-gray-500">
-            <span>{textPrompt.length}/500 characters</span>
+            <span id="text-prompt-help">{textPrompt.length}/500 characters</span>
             {form.formState.errors.textPrompt && (
               <span className="text-red-500">{form.formState.errors.textPrompt.message}</span>
             )}
@@ -132,14 +134,15 @@ export function TextPromptForm({ onGenerationStart, disabled = false }: TextProm
           {/* Example Prompts */}
           <div className="space-y-2">
             <p className="text-xs font-medium text-gray-600">💡 Need inspiration? Try one of these:</p>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2" role="group" aria-label="Example prompts">
               {examplePrompts.map((example, index) => (
                 <button
                   key={index}
                   type="button"
                   onClick={() => form.setValue('textPrompt', example)}
-                  className="text-left text-xs p-2 rounded-md bg-gray-50 hover:bg-gray-100 transition-colors"
+                  className="text-left text-xs p-2 rounded-md bg-gray-50 hover:bg-gray-100 transition-colors focus:ring-2 focus:ring-brand-warm-orange focus:outline-none"
                   disabled={disabled || generating}
+                  aria-label={`Use example prompt: ${example}`}
                 >
                   "{example}"
                 </button>
