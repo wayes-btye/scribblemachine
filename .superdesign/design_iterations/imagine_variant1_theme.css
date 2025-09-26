@@ -1,0 +1,68 @@
+/* Creative Studio Theme - Imagine Page Variant 1 */
+:root {
+  /* Creative Studio Colors - Warm & Inspiring */
+  --background: oklch(0.9890 0.0180 65.4720);           /* Warm cream */
+  --foreground: oklch(0.2280 0.0420 285.8200);         /* Deep purple */
+  --card: oklch(1.0000 0 0);                           /* Pure white */
+  --card-foreground: oklch(0.2280 0.0420 285.8200);
+
+  /* Primary - Creative Orange */
+  --primary: oklch(0.7450 0.2280 52.3650);             /* Warm creative orange */
+  --primary-foreground: oklch(1.0000 0 0);
+
+  /* Secondary - Inspiring Purple */
+  --secondary: oklch(0.6180 0.2140 285.8200);          /* Creative purple */
+  --secondary-foreground: oklch(1.0000 0 0);
+
+  /* Accent - Imagination Green */
+  --accent: oklch(0.7920 0.1580 158.2340);             /* Creative mint */
+  --accent-foreground: oklch(0.2280 0.0420 285.8200);
+
+  /* Supporting Colors */
+  --muted: oklch(0.9750 0.0140 65.4720);               /* Light warm cream */
+  --muted-foreground: oklch(0.4680 0.0320 285.8200);
+  --border: oklch(0.9280 0.0220 65.4720);
+  --input: oklch(0.9880 0.0160 65.4720);               /* Warm input bg */
+  --ring: oklch(0.7450 0.2280 52.3650);
+
+  /* Status */
+  --destructive: oklch(0.6480 0.2550 18.4520);
+  --destructive-foreground: oklch(1.0000 0 0);
+
+  /* Typography - Creative & Readable */
+  --font-sans: 'DM Sans', sans-serif;
+  --font-serif: 'Architects Daughter', cursive;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Creative Layout */
+  --radius: 1rem;                                      /* Friendly rounded */
+  --spacing: 0.25rem;
+  --tracking-normal: -0.01em;
+
+  /* Warm Shadows */
+  --shadow-2xs: 0 2px 4px 0px hsl(52 72% 45% / 0.06);
+  --shadow-xs: 0 2px 4px 0px hsl(52 72% 45% / 0.10);
+  --shadow-sm: 0 4px 8px 0px hsl(52 72% 45% / 0.12), 0 2px 4px -1px hsl(286 42% 23% / 0.08);
+  --shadow: 0 4px 8px 0px hsl(52 72% 45% / 0.12), 0 2px 4px -1px hsl(286 42% 23% / 0.08);
+  --shadow-md: 0 6px 12px 0px hsl(52 72% 45% / 0.14), 0 3px 6px -1px hsl(158 58% 79% / 0.10);
+  --shadow-lg: 0 8px 16px 0px hsl(52 72% 45% / 0.16), 0 4px 8px -1px hsl(286 42% 23% / 0.12);
+  --shadow-xl: 0 12px 24px 0px hsl(52 72% 45% / 0.18), 0 6px 12px -1px hsl(158 58% 79% / 0.12);
+  --shadow-2xl: 0 16px 32px 0px hsl(52 72% 45% / 0.22);
+
+  /* Creative Gradients */
+  --gradient-hero: linear-gradient(135deg,
+    oklch(0.7450 0.2280 52.3650) 0%,     /* Creative orange */
+    oklch(0.6180 0.2140 285.8200) 50%,   /* Purple */
+    oklch(0.7920 0.1580 158.2340) 100%   /* Mint */
+  );
+
+  --gradient-card: linear-gradient(135deg,
+    oklch(1.0000 0 0) 0%,                /* White */
+    oklch(0.9890 0.0180 65.4720) 100%    /* Warm cream */
+  );
+
+  --gradient-input: linear-gradient(135deg,
+    oklch(0.9880 0.0160 65.4720) 0%,     /* Warm input */
+    oklch(1.0000 0 0) 100%               /* White */
+  );
+}

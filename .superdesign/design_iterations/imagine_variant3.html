@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 IMAGINATION WORKSHOP - Scribble Machine!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Architects+Daughter:wght@400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="imagine_variant3_theme.css">
+
+    <style>
+        /* Super Fun Animations */
+        @keyframes superBounce {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            25% { transform: translateY(-15px) scale(1.02); }
+            50% { transform: translateY(-25px) scale(1.05); }
+            75% { transform: translateY(-10px) scale(1.02); }
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        @keyframes wiggleJoy {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(5deg) scale(1.05); }
+            75% { transform: rotate(-5deg) scale(1.05); }
+        }
+
+        @keyframes popInBig {
+            0% { opacity: 0; transform: scale(0.5) rotate(-15deg); }
+            70% { opacity: 1; transform: scale(1.15) rotate(3deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        @keyframes floatDance {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            33% { transform: translateY(-10px) translateX(5px); }
+            66% { transform: translateY(-5px) translateX(-5px); }
+        }
+
+        @keyframes textPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .super-bounce { animation: superBounce 3s ease-in-out infinite; }
+        .rainbow-shift { animation: rainbow 8s linear infinite; }
+        .wiggle-joy { animation: wiggleJoy 2s ease-in-out infinite; }
+        .pop-in-big { animation: popInBig 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; }
+        .float-dance { animation: floatDance 4s ease-in-out infinite; }
+        .text-pulse { animation: textPulse 2s ease-in-out infinite; }
+
+        /* Delay classes */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-800 { animation-delay: 0.8s; }
+
+        /* Super Fun Buttons */
+        .btn-primary {
+            background: var(--gradient-hero) !important;
+            color: white !important;
+            border-radius: var(--radius) !important;
+            padding: 1.5rem 4rem !important;
+            font-weight: 800 !important;
+            font-size: 1.5rem !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.1em !important;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+            box-shadow: var(--shadow-2xl) !important;
+            border: none !important;
+            font-family: var(--font-sans) !important;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-8px) scale(1.08) rotate(2deg) !important;
+            box-shadow: 0 25px 50px 0px hsl(328 83% 68% / 0.5) !important;
+            filter: brightness(1.2) !important;
+        }
+
+        .btn-secondary {
+            background: var(--gradient-card) !important;
+            color: var(--foreground) !important;
+            border: 3px solid transparent !important;
+            background-image: var(--gradient-fun), var(--gradient-card) !important;
+            background-origin: border-box !important;
+            background-clip: content-box, border-box !important;
+            border-radius: var(--radius) !important;
+            padding: 1rem 2rem !important;
+            font-weight: 700 !important;
+            font-size: 1.125rem !important;
+            text-transform: uppercase !important;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-5px) scale(1.05) rotate(-2deg) !important;
+            box-shadow: var(--shadow-xl) !important;
+        }
+
+        /* Fun Textarea */
+        .fun-textarea {
+            background: var(--gradient-card) !important;
+            border: 3px solid var(--border) !important;
+            border-radius: var(--radius) !important;
+            padding: 2rem !important;
+            font-family: var(--font-sans) !important;
+            font-size: 1.25rem !important;
+            line-height: 1.8 !important;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+            resize: vertical !important;
+            min-height: 180px !important;
+            font-weight: 500 !important;
+        }
+
+        .fun-textarea:focus {
+            outline: none !important;
+            border-color: var(--primary) !important;
+            box-shadow: var(--shadow-xl), 0 0 0 5px oklch(0.6820 0.3290 328.3634 / 0.2) !important;
+            transform: scale(1.02) !important;
+            background: white !important;
+        }
+
+        .fun-textarea::placeholder {
+            color: var(--muted-foreground) !important;
+            font-weight: 400 !important;
+        }
+
+        /* Idea Cards */
+        .idea-card {
+            background: var(--gradient-card) !important;
+            border: 3px solid var(--border) !important;
+            border-radius: var(--radius) !important;
+            padding: 2rem !important;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+            cursor: pointer !important;
+            text-align: center !important;
+        }
+
+        .idea-card:hover {
+            transform: translateY(-10px) scale(1.08) rotate(3deg) !important;
+            border-color: var(--accent) !important;
+            box-shadow: var(--shadow-2xl) !important;
+            background: white !important;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--font-sans) !important;
+            font-weight: 900 !important;
+            letter-spacing: var(--tracking-normal) !important;
+        }
+        .handwritten { font-family: var(--font-serif) !important; }
+        body {
+            font-family: var(--font-sans) !important;
+            background-color: var(--background) !important;
+            color: var(--foreground) !important;
+        }
+
+        /* Workshop Background */
+        .workshop-bg {
+            background: var(--gradient-card);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .workshop-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ec4899' fill-opacity='0.08'%3E%3Cpath d='M40 40c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm20 0c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Floating decorations */
+        .floating-emoji {
+            position: absolute;
+            font-size: 2rem;
+            pointer-events: none;
+        }
+
+        .float-1 { top: 10%; left: 5%; animation: floatDance 3s ease-in-out infinite; }
+        .float-2 { top: 15%; right: 8%; animation: floatDance 4s ease-in-out infinite 0.5s; }
+        .float-3 { bottom: 20%; left: 10%; animation: floatDance 3.5s ease-in-out infinite 1s; }
+        .float-4 { bottom: 25%; right: 5%; animation: floatDance 4.5s ease-in-out infinite 1.5s; }
+        .float-5 { top: 50%; left: 3%; animation: floatDance 3.2s ease-in-out infinite 2s; }
+        .float-6 { top: 45%; right: 2%; animation: floatDance 3.8s ease-in-out infinite 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Fun Workshop Header -->
+    <header class="py-4 px-4 border-b-4 rainbow-shift" style="border-color: var(--primary);">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <button class="flex items-center space-x-2 text-lg font-bold hover:bg-white/50 px-4 py-3 rounded-full transition-all duration-300 transform hover:scale-105">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    <span>Back</span>
+                </button>
+                <div class="flex items-center space-x-3">
+                    <img src="../../apps/web/public/assets/ScribbleIcon.svg" alt="Scribble Machine" class="w-12 h-12 wiggle-joy">
+                    <span class="text-2xl font-black handwritten text-pulse">🎨 IMAGINATION WORKSHOP 🎨</span>
+                </div>
+            </div>
+            <button class="w-12 h-12 rounded-full border-3 border-dashed flex items-center justify-center hover:bg-white/50 transition-all duration-300 transform hover:scale-110 super-bounce" style="border-color: var(--accent);">
+                <i data-lucide="smile" class="w-6 h-6" style="color: var(--accent);"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Workshop Hero -->
+    <main>
+        <section class="workshop-bg py-20 relative">
+            <!-- Floating decorations -->
+            <div class="floating-emoji float-1">🌟</div>
+            <div class="floating-emoji float-2">🎨</div>
+            <div class="floating-emoji float-3">✨</div>
+            <div class="floating-emoji float-4">🌈</div>
+            <div class="floating-emoji float-5">🦄</div>
+            <div class="floating-emoji float-6">🎪</div>
+
+            <div class="max-w-7xl mx-auto px-4 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Hero Book with Bouncing -->
+                    <div class="text-center pop-in-big">
+                        <img src="../../apps/web/public/assets/HeroBook-WithImages-upscaled.png" alt="Magic Coloring Workshop" class="w-full max-w-md mx-auto super-bounce">
+                        <div class="mt-6">
+                            <div class="text-6xl mb-2 wiggle-joy delay-200">🎭</div>
+                            <p class="text-xl font-bold handwritten" style="color: var(--secondary);">Magic Happens Here!</p>
+                        </div>
+                    </div>
+
+                    <!-- Workshop Content -->
+                    <div class="pop-in-big delay-200">
+                        <h1 class="text-5xl lg:text-7xl font-black mb-6 leading-tight">
+                            🌈 WELCOME TO THE
+                            <span class="handwritten" style="color: var(--primary);">MAGIC WORKSHOP!</span>
+                            🌈
+                        </h1>
+
+                        <h2 class="text-3xl font-bold mb-8 handwritten" style="color: var(--accent);">
+                            Tell me about your AWESOME idea!
+                        </h2>
+
+                        <div class="mb-8">
+                            <textarea
+                                class="fun-textarea w-full"
+                                placeholder="A super cool dragon with rainbow wings flying over a candy castle with gummy bear guards! 🐲🌈🍭"
+                                rows="5"
+                            ></textarea>
+                            <div class="flex justify-between items-center mt-3 text-lg font-bold">
+                                <span style="color: var(--secondary);">🚀 Make it AMAZING! 🚀</span>
+                                <span id="fun-counter" style="color: var(--accent);">0 words of FUN!</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary w-full rainbow-shift">
+                            🚀 CREATE MY MASTERPIECE! 🚀
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Idea Playground -->
+        <section class="py-24" style="background-color: var(--background);">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16 pop-in-big">
+                    <h2 class="text-5xl font-black mb-6">🎪 AWESOME IDEAS TO TRY! 🎪</h2>
+                    <p class="text-2xl font-bold handwritten" style="color: var(--muted-foreground);">Click any idea to use it!</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                    <!-- Row 1 -->
+                    <div class="idea-card pop-in-big delay-100" onclick="fillFunTextarea('A magical unicorn with sparkly horn prancing through a rainbow forest with singing flowers and dancing butterflies! 🦄🌈🌸')">
+                        <div class="text-6xl mb-4 wiggle-joy">🦄</div>
+                        <h3 class="text-xl font-black mb-2" style="color: var(--primary);">UNICORN</h3>
+                        <h4 class="text-lg font-bold" style="color: var(--secondary);">MAGIC!</h4>
+                    </div>
+
+                    <div class="idea-card pop-in-big delay-200" onclick="fillFunTextarea('A giant princess castle with towers reaching the clouds, flags waving, and happy princesses having a tea party! 🏰👑☕')">
+                        <div class="text-6xl mb-4 wiggle-joy delay-100">🏰</div>
+                        <h3 class="text-xl font-black mb-2" style="color: var(--accent);">CASTLE</h3>
+                        <h4 class="text-lg font-bold" style="color: var(--secondary);">PARTY!</h4>
+                    </div>
+
+                    <div class="idea-card pop-in-big delay-300" onclick="fillFunTextarea('Super fast race cars zooming around a racetrack with cheering crowds and colorful flags everywhere! 🚗💨🏁')">
+                        <div class="text-6xl mb-4 wiggle-joy delay-200">🚗</div>
+                        <h3 class="text-xl font-black mb-2" style="color: var(--orange);">CARS</h3>
+                        <h4 class="text-lg font-bold" style="color: var(--secondary);">RACING!</h4>
+                    </div>
+
+                    <div class="idea-card pop-in-big delay-400" onclick="fillFunTextarea('Brave space heroes flying rocket ships through galaxies with friendly aliens and twinkling stars! 🚀👽⭐')">
+                        <div class="text-6xl mb-4 wiggle-joy delay-300">🌟</div>
+                        <h3 class="text-xl font-black mb-2" style="color: var(--purple);">SPACE</h3>
+                        <h4 class="text-lg font-bold" style="color: var(--secondary);">HEROES!</h4>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="idea-card pop-in-big delay-500" onclick="fillFunTextarea('Underwater adventure with friendly octopus, colorful fish, treasure chests, and seahorses playing together! 🐙🐠💎')">
+                        <div class="text-6xl mb-4 wiggle-joy delay-400">🐙</div>
+                        <h3 class="text-xl font-black mb-2" style="color: var(--accent);">OCEAN</h3>
+                        <h4 class="text-lg font-bold" style="color: var(--secondary);">FRIENDS!</h4>
+                    </div>
+
+                    <div class="idea-card pop-in-big delay-600" onclick="fillFunTextarea('Amazing birthday party with huge colorful cake, balloons floating everywhere, and happy friends celebrating! 🎂🎈🎉')">
+                        <div class="text-6xl mb-4 wiggle-joy delay-500">🎂</div>
+                        <h3 class="text-xl font-black mb-2" style="color: var(--primary);">BIRTHDAY</h3>
+                        <h4 class="text-lg font-bold" style="color: var(--secondary);">PARTY!</h4>
+                    </div>
+
+                    <div class="idea-card pop-in-big delay-700" onclick="fillFunTextarea('Friendly dinosaurs playing in a jungle with tall trees, vines, and tropical flowers blooming everywhere! 🦖🌴🌺')">
+                        <div class="text-6xl mb-4 wiggle-joy delay-600">🦖</div>
+                        <h3 class="text-xl font-black mb-2" style="color: var(--lime);">DINOSAUR</h3>
+                        <h4 class="text-lg font-bold" style="color: var(--secondary);">LAND!</h4>
+                    </div>
+
+                    <div class="idea-card pop-in-big delay-800" onclick="fillFunTextarea('Beautiful garden with talking flowers, busy bees making honey, and butterflies dancing in the sunshine! 🌺🐝🦋')">
+                        <div class="text-6xl mb-4 wiggle-joy delay-700">🌺</div>
+                        <h3 class="text-xl font-black mb-2" style="color: var(--orange);">GARDEN</h3>
+                        <h4 class="text-lg font-bold" style="color: var(--secondary);">PARTY!</h4>
+                    </div>
+                </div>
+
+                <!-- Super Tips -->
+                <div class="rounded-3xl p-8 text-center pop-in-big delay-400" style="background: var(--gradient-card); border: 4px solid var(--border);">
+                    <h3 class="text-4xl font-black mb-6">🎨 SUPER TIPS FOR AMAZING COLORING PAGES! 🎨</h3>
+                    <div class="grid md:grid-cols-3 gap-6 text-left">
+                        <div class="text-center">
+                            <div class="text-5xl mb-4 super-bounce">💪</div>
+                            <h4 class="text-xl font-bold mb-3" style="color: var(--primary);">Use BIG Words!</h4>
+                            <p class="text-lg font-medium" style="color: var(--muted-foreground);">"HUGE dragon" sounds way cooler than "big dragon"!</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-5xl mb-4 super-bounce delay-200">🌈</div>
+                            <h4 class="text-xl font-bold mb-3" style="color: var(--accent);">Add ALL the Colors!</h4>
+                            <p class="text-lg font-medium" style="color: var(--muted-foreground);">"Purple cat with rainbow stripes and golden eyes!"</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-5xl mb-4 super-bounce delay-400">😊</div>
+                            <h4 class="text-xl font-bold mb-3" style="color: var(--orange);">Make Everything Happy!</h4>
+                            <p class="text-lg font-medium" style="color: var(--muted-foreground);">"Smiling flowers dancing in the sunny sky!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Fill textarea with fun content
+        function fillFunTextarea(text) {
+            const textarea = document.querySelector('.fun-textarea');
+            textarea.value = text;
+            textarea.focus();
+            updateFunCounter();
+
+            // Add celebration animation
+            textarea.style.transform = 'scale(1.05)';
+            textarea.style.borderColor = 'var(--accent)';
+            setTimeout(() => {
+                textarea.style.transform = 'scale(1.02)';
+                textarea.style.borderColor = 'var(--primary)';
+            }, 300);
+        }
+
+        // Fun word counter
+        function updateFunCounter() {
+            const textarea = document.querySelector('.fun-textarea');
+            const counter = document.getElementById('fun-counter');
+            const words = textarea.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+
+            if (words === 0) {
+                counter.textContent = '0 words of FUN!';
+            } else if (words < 10) {
+                counter.textContent = `${words} words - ADD MORE FUN! 🎉`;
+            } else if (words < 20) {
+                counter.textContent = `${words} words - GETTING AWESOME! 🚀`;
+            } else {
+                counter.textContent = `${words} words - SUPER AMAZING! 🌟`;
+            }
+        }
+
+        // Add event listeners
+        document.querySelector('.fun-textarea').addEventListener('input', updateFunCounter);
+
+        // Intersection observer for animations
+        const observerOptions = {
+            threshold: 0.05,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'scale(1) rotate(0deg)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.pop-in-big').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'scale(0.5) rotate(-15deg)';
+            observer.observe(el);
+        });
+
+        // Add extra sparkle effects on interaction
+        document.querySelectorAll('.idea-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.background = 'white';
+                this.style.boxShadow = 'var(--shadow-2xl), 0 0 30px rgba(236, 72, 153, 0.3)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.background = 'var(--gradient-card)';
+                this.style.boxShadow = '';
+            });
+        });
+
+        // Initialize fun counter
+        updateFunCounter();
+    </script>
+</body>
+</html>

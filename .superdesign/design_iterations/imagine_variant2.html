@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Coloring Page - Scribble Machine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="imagine_variant2_theme.css">
+
+    <style>
+        /* Minimal animations */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes softFocus {
+            0%, 100% { box-shadow: 0 0 0 0px var(--primary); }
+            50% { box-shadow: 0 0 0 3px oklch(0.4820 0.1580 264.0520 / 0.1); }
+        }
+
+        .fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
+        .soft-focus { animation: softFocus 2s ease-in-out infinite; }
+
+        /* Clean button */
+        .btn-primary {
+            background: var(--primary) !important;
+            color: var(--primary-foreground) !important;
+            border-radius: var(--radius) !important;
+            padding: 1rem 2rem !important;
+            font-weight: 500 !important;
+            font-size: 1rem !important;
+            transition: all 0.2s ease !important;
+            border: none !important;
+            letter-spacing: var(--tracking-normal) !important;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px) !important;
+            box-shadow: var(--shadow-lg) !important;
+            background: oklch(0.4420 0.1580 264.0520) !important;
+        }
+
+        /* Clean textarea */
+        .focus-textarea {
+            background: var(--input) !important;
+            border: 2px solid var(--border) !important;
+            border-radius: var(--radius) !important;
+            padding: 1.5rem !important;
+            font-family: var(--font-sans) !important;
+            font-size: 1.125rem !important;
+            line-height: 1.7 !important;
+            transition: all 0.2s ease !important;
+            resize: vertical !important;
+            min-height: 160px !important;
+            width: 100% !important;
+        }
+
+        .focus-textarea:focus {
+            outline: none !important;
+            border-color: var(--primary) !important;
+            box-shadow: var(--shadow-sm), 0 0 0 3px oklch(0.4820 0.1580 264.0520 / 0.1) !important;
+        }
+
+        .focus-textarea::placeholder {
+            color: var(--muted-foreground) !important;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--font-sans) !important;
+            font-weight: 600 !important;
+            letter-spacing: var(--tracking-normal) !important;
+        }
+
+        body {
+            font-family: var(--font-sans) !important;
+            background-color: var(--background) !important;
+            color: var(--foreground) !important;
+            letter-spacing: var(--tracking-normal) !important;
+        }
+
+        /* Simple list items */
+        .example-item {
+            padding: 0.75rem 0 !important;
+            border-bottom: 1px solid var(--border) !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .example-item:hover {
+            background-color: var(--muted) !important;
+            padding-left: 1rem !important;
+            border-radius: var(--radius) !important;
+            border-bottom: 1px solid transparent !important;
+        }
+
+        .example-item:last-child {
+            border-bottom: none !important;
+        }
+
+        /* Delay classes */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Minimal Header -->
+    <header class="py-4 px-4 border-b" style="border-color: var(--border);">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <button class="flex items-center space-x-2 hover:bg-gray-50 px-3 py-2 rounded-lg transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    <span class="font-medium">Scribble Machine</span>
+                </button>
+            </div>
+            <button class="w-10 h-10 rounded-full border flex items-center justify-center hover:bg-gray-50 transition-colors" style="border-color: var(--border);">
+                <i data-lucide="user" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Focused Content -->
+    <main class="py-16">
+        <div class="max-w-4xl mx-auto px-4">
+            <!-- Hero Question -->
+            <div class="text-center mb-12 fade-in-up">
+                <h1 class="text-4xl lg:text-5xl font-semibold mb-4 leading-tight">
+                    What would you like to create?
+                </h1>
+                <p class="text-lg" style="color: var(--muted-foreground);">
+                    Describe your idea and watch it transform into a coloring page
+                </p>
+            </div>
+
+            <!-- Main Input Area -->
+            <div class="mb-12 fade-in-up delay-100">
+                <textarea
+                    class="focus-textarea"
+                    placeholder="Describe your idea here... For example: A friendly dragon playing with butterflies in a magical garden with colorful flowers"
+                    rows="6"
+                ></textarea>
+                <div class="flex justify-between items-center mt-3 text-sm" style="color: var(--muted-foreground);">
+                    <span>💡 The more details you add, the better your result</span>
+                    <span id="char-count">0 characters</span>
+                </div>
+            </div>
+
+            <!-- Generate Button -->
+            <div class="text-center mb-16 fade-in-up delay-200">
+                <button class="btn-primary soft-focus">
+                    Generate Coloring Page
+                </button>
+            </div>
+
+            <!-- Simple Examples -->
+            <div class="mb-16 fade-in-up delay-300">
+                <h3 class="text-xl font-semibold mb-6">Quick Ideas:</h3>
+                <div class="space-y-2">
+                    <div class="example-item" onclick="fillTextarea('A happy dog playing in the park with a ball and trees in the background')">
+                        • A happy dog playing in the park
+                    </div>
+                    <div class="example-item" onclick="fillTextarea('A beautiful princess with a crown and a flowing dress standing in front of a castle')">
+                        • Princess with a crown and beautiful dress
+                    </div>
+                    <div class="example-item" onclick="fillTextarea('A rocket ship flying to the moon with stars and planets all around')">
+                        • Rocket ship flying to the moon
+                    </div>
+                    <div class="example-item" onclick="fillTextarea('A magical unicorn with a horn and flowing mane in a rainbow forest with flowers')">
+                        • Magical unicorn in a rainbow forest
+                    </div>
+                    <div class="example-item" onclick="fillTextarea('A cozy house with a garden full of vegetables and a friendly scarecrow')">
+                        • Cozy house with a vegetable garden
+                    </div>
+                    <div class="example-item" onclick="fillTextarea('An underwater scene with colorful fish, coral, and a treasure chest')">
+                        • Underwater scene with colorful fish
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simple Tip -->
+            <div class="text-center p-6 rounded-lg fade-in-up delay-400" style="background-color: var(--card);">
+                <div class="flex items-center justify-center mb-3">
+                    <i data-lucide="lightbulb" class="w-6 h-6 mr-2" style="color: var(--accent);"></i>
+                    <span class="font-medium">Tip for better results</span>
+                </div>
+                <p style="color: var(--muted-foreground);">
+                    Include details like colors, emotions, and settings. Instead of "a cat," try "a fluffy orange cat sitting on a sunny windowsill with plants."
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Fill textarea function
+        function fillTextarea(text) {
+            const textarea = document.querySelector('.focus-textarea');
+            textarea.value = text;
+            textarea.focus();
+            updateCharCount();
+        }
+
+        // Character counter
+        function updateCharCount() {
+            const textarea = document.querySelector('.focus-textarea');
+            const counter = document.getElementById('char-count');
+            counter.textContent = `${textarea.value.length} characters`;
+        }
+
+        // Add event listener for character counting
+        document.querySelector('.focus-textarea').addEventListener('input', updateCharCount);
+
+        // Intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(15px)';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

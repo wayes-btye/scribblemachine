@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagine & Create - Scribble Machine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Architects+Daughter:wght@400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="imagine_variant1_theme.css">
+
+    <style>
+        /* Creative Studio Animations */
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.6; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes magicPulse {
+            0%, 100% { box-shadow: 0 0 0 0px var(--primary); }
+            50% { box-shadow: 0 0 0 10px transparent; }
+        }
+
+        @keyframes slideInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            60% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes typewriter {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .gentle-float { animation: gentleFloat 4s ease-in-out infinite; }
+        .sparkle { animation: sparkle 2s ease-in-out infinite; }
+        .magic-pulse { animation: magicPulse 2s ease-in-out infinite; }
+        .slide-in-up { animation: slideInUp 0.6s ease-out forwards; }
+        .bounce-in { animation: bounceIn 0.8s ease-out forwards; }
+        .cursor-blink { animation: typewriter 1s ease-in-out infinite; }
+
+        /* Stagger delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        /* Button Styles */
+        .btn-primary {
+            background: var(--gradient-hero) !important;
+            color: var(--primary-foreground) !important;
+            border-radius: var(--radius) !important;
+            padding: 1rem 3rem !important;
+            font-weight: 600 !important;
+            font-size: 1.125rem !important;
+            transition: all 0.3s ease !important;
+            box-shadow: var(--shadow-lg) !important;
+            border: none !important;
+            text-transform: none !important;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02) !important;
+            box-shadow: var(--shadow-xl) !important;
+            filter: brightness(1.05) !important;
+        }
+
+        .btn-secondary {
+            background: var(--gradient-card) !important;
+            color: var(--foreground) !important;
+            border: 2px solid var(--border) !important;
+            border-radius: var(--radius) !important;
+            padding: 0.75rem 1.5rem !important;
+            font-weight: 500 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent) !important;
+            background: var(--accent) !important;
+            color: var(--accent-foreground) !important;
+            transform: translateY(-1px) !important;
+        }
+
+        /* Input Styles */
+        .creative-textarea {
+            background: var(--gradient-input) !important;
+            border: 2px solid var(--border) !important;
+            border-radius: var(--radius) !important;
+            padding: 1.5rem !important;
+            font-family: var(--font-sans) !important;
+            font-size: 1.125rem !important;
+            line-height: 1.6 !important;
+            transition: all 0.3s ease !important;
+            resize: vertical !important;
+            min-height: 200px !important;
+        }
+
+        .creative-textarea:focus {
+            outline: none !important;
+            border-color: var(--primary) !important;
+            box-shadow: var(--shadow-lg), 0 0 0 3px oklch(0.7450 0.2280 52.3650 / 0.1) !important;
+            transform: scale(1.01) !important;
+        }
+
+        /* Card Styles */
+        .inspiration-card {
+            background: var(--gradient-card) !important;
+            border: 2px solid var(--border) !important;
+            border-radius: var(--radius) !important;
+            padding: 1.5rem !important;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            cursor: pointer !important;
+        }
+
+        .inspiration-card:hover {
+            transform: translateY(-5px) scale(1.02) !important;
+            border-color: var(--accent) !important;
+            box-shadow: var(--shadow-lg) !important;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--font-sans) !important;
+            font-weight: 700 !important;
+        }
+        .handwritten { font-family: var(--font-serif) !important; }
+        body {
+            font-family: var(--font-sans) !important;
+            background-color: var(--background) !important;
+            color: var(--foreground) !important;
+        }
+
+        /* Hero section */
+        .hero-bg {
+            background: var(--gradient-input);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f97316' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Magic sparkles */
+        .sparkle-container {
+            position: relative;
+        }
+
+        .sparkle-1 { position: absolute; top: -10px; right: -10px; color: var(--primary); animation: sparkle 2s ease-in-out infinite; }
+        .sparkle-2 { position: absolute; bottom: -10px; left: -10px; color: var(--secondary); animation: sparkle 2s ease-in-out infinite 0.5s; }
+        .sparkle-3 { position: absolute; top: 50%; right: -15px; color: var(--accent); animation: sparkle 2s ease-in-out infinite 1s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="py-4 px-4 border-b" style="border-color: var(--border);">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <button class="flex items-center space-x-2 text-lg hover:bg-gray-100 px-3 py-2 rounded-lg transition-colors">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    <span>Back</span>
+                </button>
+                <div class="flex items-center space-x-3">
+                    <img src="../../apps/web/public/assets/ScribbleIcon.svg" alt="Scribble Machine" class="w-8 h-8">
+                    <span class="text-lg font-semibold">Scribble Machine - Imagine</span>
+                </div>
+            </div>
+            <button class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300 transition-colors">
+                <i data-lucide="user" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="hero-bg py-16 relative">
+            <div class="max-w-6xl mx-auto px-4 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Magic Wand Animation -->
+                    <div class="text-center slide-in-up">
+                        <div class="relative sparkle-container">
+                            <img src="../../apps/web/public/assets/ScribbleMachine3D.svg" alt="Magic Creation Wand" class="w-64 h-64 mx-auto gentle-float">
+                            <div class="sparkle-1 text-2xl">✨</div>
+                            <div class="sparkle-2 text-2xl">🌟</div>
+                            <div class="sparkle-3 text-2xl">⭐</div>
+                        </div>
+                        <h3 class="text-xl font-semibold mt-6 handwritten" style="color: var(--secondary);">
+                            AI Magic Awaits Your Words!
+                        </h3>
+                    </div>
+
+                    <!-- Creative Input Area -->
+                    <div class="slide-in-up delay-200">
+                        <h1 class="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                            Describe Your Dream
+                            <span class="handwritten" style="color: var(--primary);">Coloring Page!</span>
+                        </h1>
+
+                        <div class="mb-6">
+                            <textarea
+                                class="creative-textarea w-full"
+                                placeholder="A brave knight riding a rainbow dragon through magical clouds, with a castle in the background and butterflies flying around..."
+                                rows="6"
+                            ></textarea>
+                            <div class="flex justify-between items-center mt-2 text-sm" style="color: var(--muted-foreground);">
+                                <span>Be creative and specific! 🎨</span>
+                                <span class="cursor-blink">|</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary w-full magic-pulse">
+                            <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>
+                            ✨ Generate My Coloring Page ✨
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Creative Inspiration Section -->
+        <section class="py-20">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-12 slide-in-up">
+                    <h2 class="text-3xl font-bold mb-4">Need Ideas? Try These!</h2>
+                    <p class="text-lg" style="color: var(--muted-foreground);">Click any card to use as inspiration</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                    <div class="inspiration-card bounce-in delay-100" onclick="fillTextarea('A magical castle floating on clouds with unicorns flying around and rainbow waterfalls')">
+                        <div class="text-4xl mb-3">🏰</div>
+                        <h3 class="text-lg font-semibold mb-2">Fantasy Castle</h3>
+                        <p class="text-sm" style="color: var(--muted-foreground);">"A magical castle floating on clouds with unicorns..."</p>
+                    </div>
+
+                    <div class="inspiration-card bounce-in delay-200" onclick="fillTextarea('My pet dog playing in a beautiful garden with flowers, butterflies, and a sunny day')">
+                        <div class="text-4xl mb-3">🐕</div>
+                        <h3 class="text-lg font-semibold mb-2">Pet Adventures</h3>
+                        <p class="text-sm" style="color: var(--muted-foreground);">"My pet dog playing in a beautiful garden..."</p>
+                    </div>
+
+                    <div class="inspiration-card bounce-in delay-300" onclick="fillTextarea('A friendly space robot exploring a planet with aliens, rockets, and colorful stars everywhere')">
+                        <div class="text-4xl mb-3">🚀</div>
+                        <h3 class="text-lg font-semibold mb-2">Space Adventure</h3>
+                        <p class="text-sm" style="color: var(--muted-foreground);">"A friendly space robot exploring a planet..."</p>
+                    </div>
+
+                    <div class="inspiration-card bounce-in delay-400" onclick="fillTextarea('A beautiful garden with talking flowers, friendly bees, and a smiling sun in the sky')">
+                        <div class="text-4xl mb-3">🌈</div>
+                        <h3 class="text-lg font-semibold mb-2">Nature Magic</h3>
+                        <p class="text-sm" style="color: var(--muted-foreground);">"A beautiful garden with talking flowers..."</p>
+                    </div>
+
+                    <div class="inspiration-card bounce-in delay-500" onclick="fillTextarea('A circus with dancing elephants, juggling clowns, and happy children watching the show')">
+                        <div class="text-4xl mb-3">🎪</div>
+                        <h3 class="text-lg font-semibold mb-2">Circus Fun</h3>
+                        <p class="text-sm" style="color: var(--muted-foreground);">"A circus with dancing elephants and clowns..."</p>
+                    </div>
+
+                    <div class="inspiration-card bounce-in delay-600" onclick="fillTextarea('A beautiful princess in a tower with long hair, birds singing, and a handsome prince below')">
+                        <div class="text-4xl mb-3">👑</div>
+                        <h3 class="text-lg font-semibold mb-2">Fairy Tale</h3>
+                        <p class="text-sm" style="color: var(--muted-foreground);">"A beautiful princess in a tower with long hair..."</p>
+                    </div>
+                </div>
+
+                <!-- Tips Section -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border-2" style="border-color: var(--border);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <span class="mr-3">✍️</span>
+                        Writing Tips for Amazing Results
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background-color: var(--primary); color: white;">
+                                <i data-lucide="palette" class="w-8 h-8"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2">Be Specific</h4>
+                            <p class="text-sm" style="color: var(--muted-foreground);">Mention colors, sizes, and details to get exactly what you imagine</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background-color: var(--secondary); color: white;">
+                                <i data-lucide="heart" class="w-8 h-8"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2">Add Emotions</h4>
+                            <p class="text-sm" style="color: var(--muted-foreground);">Happy animals, smiling flowers - emotions make coloring more fun!</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background-color: var(--accent); color: var(--accent-foreground);">
+                                <i data-lucide="image" class="w-8 h-8"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2">Set the Scene</h4>
+                            <p class="text-sm" style="color: var(--muted-foreground);">Include backgrounds and settings to create a complete picture</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Function to fill textarea with inspiration
+        function fillTextarea(text) {
+            const textarea = document.querySelector('.creative-textarea');
+            textarea.value = text;
+            textarea.focus();
+
+            // Add a little animation
+            textarea.style.transform = 'scale(1.02)';
+            setTimeout(() => {
+                textarea.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        // Intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    if (entry.target.classList.contains('slide-in-up')) {
+                        entry.target.style.transform = 'translateY(0)';
+                    } else if (entry.target.classList.contains('bounce-in')) {
+                        entry.target.style.transform = 'scale(1)';
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.slide-in-up, .bounce-in').forEach(el => {
+            el.style.opacity = '0';
+            if (el.classList.contains('slide-in-up')) {
+                el.style.transform = 'translateY(30px)';
+            } else if (el.classList.contains('bounce-in')) {
+                el.style.transform = 'scale(0.8)';
+            }
+            observer.observe(el);
+        });
+
+        // Character counter
+        const textarea = document.querySelector('.creative-textarea');
+        textarea.addEventListener('input', function() {
+            const length = this.value.length;
+            const counter = document.querySelector('.cursor-blink');
+            if (length > 0) {
+                counter.textContent = `${length} characters`;
+                counter.classList.remove('cursor-blink');
+            } else {
+                counter.textContent = '|';
+                counter.classList.add('cursor-blink');
+            }
+        });
+    </script>
+</body>
+</html>

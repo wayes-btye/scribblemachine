@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScribbleMachine.com - Transform Photos Into Epic Coloring Adventures!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Architects+Daughter:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage_variant1_2_theme.css">
+
+    <style>
+        /* Typography-focused animations */
+        @keyframes typewriterEffect {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+            50% { transform: scale(1.1) rotate(5deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes playfulWiggle {
+            0%, 100% { transform: rotate(-3deg) scale(1); }
+            25% { transform: rotate(3deg) scale(1.05); }
+            50% { transform: rotate(-2deg) scale(0.95); }
+            75% { transform: rotate(2deg) scale(1.05); }
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 5px currentColor; }
+            50% { text-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
+        }
+
+        @keyframes slideUpBounce {
+            0% { opacity: 0; transform: translateY(50px) rotate(-5deg); }
+            60% { opacity: 1; transform: translateY(-10px) rotate(2deg); }
+            100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-8px) rotate(120deg); }
+            66% { transform: translateY(-4px) rotate(240deg); }
+        }
+
+        .bounce-in { animation: bounceIn 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; }
+        .playful-wiggle { animation: playfulWiggle 3s ease-in-out infinite; }
+        .text-glow { animation: textGlow 3s ease-in-out infinite; }
+        .slide-up-bounce { animation: slideUpBounce 1s ease-out forwards; }
+        .icon-float { animation: iconFloat 4s ease-in-out infinite; }
+
+        /* Staggered delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-800 { animation-delay: 0.8s; }
+
+        /* Playful button styles */
+        .btn-primary {
+            background: var(--gradient-hero) !important;
+            color: white !important;
+            border-radius: var(--radius-lg) !important;
+            padding: 1.25rem 3rem !important;
+            font-weight: 700 !important;
+            font-size: 1.25rem !important;
+            font-family: var(--font-sans) !important;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+            box-shadow: var(--shadow-lg) !important;
+            border: none !important;
+            position: relative !important;
+            overflow: hidden !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05) rotate(2deg) !important;
+            box-shadow: var(--shadow-2xl) !important;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: var(--gradient-card) !important;
+            color: var(--foreground) !important;
+            border: 3px solid var(--primary) !important;
+            border-radius: var(--radius-lg) !important;
+            padding: 1.25rem 3rem !important;
+            font-weight: 700 !important;
+            font-size: 1.25rem !important;
+            font-family: var(--font-sans) !important;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+            box-shadow: var(--shadow) !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-5px) scale(1.05) rotate(-2deg) !important;
+            box-shadow: var(--shadow-xl) !important;
+            background: var(--primary) !important;
+            color: white !important;
+        }
+
+        /* Typography styles */
+        .mega-title {
+            font-family: var(--font-sans) !important;
+            font-weight: 900 !important;
+            line-height: 0.9 !important;
+            letter-spacing: -0.03em !important;
+        }
+
+        .script-text {
+            font-family: var(--font-serif) !important;
+            font-size: 1.2em !important;
+            position: relative !important;
+        }
+
+        .script-text::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transition: transform 0.6s ease;
+        }
+
+        .script-text.animate::after {
+            transform: scaleX(1);
+        }
+
+        .playful-text {
+            font-family: var(--font-mono) !important;
+            font-weight: 600 !important;
+        }
+
+        /* Card styles with playful hover effects */
+        .feature-card {
+            background: var(--gradient-card) !important;
+            border-radius: var(--radius-xl) !important;
+            padding: 2.5rem !important;
+            box-shadow: var(--shadow-md) !important;
+            border: 2px solid var(--border) !important;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) rotate(2deg) scale(1.02) !important;
+            box-shadow: var(--shadow-2xl) !important;
+            border-color: var(--primary) !important;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            height: 6px;
+            background: var(--gradient-hero);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+
+        /* Background and layout */
+        body {
+            font-family: var(--font-mono) !important;
+            background: var(--gradient-bg) !important;
+            min-height: 100vh !important;
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            font-size: 2.5rem;
+            z-index: 10;
+        }
+
+        .floating-1 { top: 10%; left: 5%; }
+        .floating-2 { top: 20%; right: 8%; }
+        .floating-3 { top: 40%; left: 3%; }
+        .floating-4 { bottom: 35%; right: 6%; }
+        .floating-5 { top: 55%; left: 12%; }
+        .floating-6 { bottom: 15%; left: 8%; }
+        .floating-7 { top: 30%; right: 3%; }
+        .floating-8 { bottom: 40%; right: 12%; }
+
+        /* Pattern overlay */
+        .pattern-overlay {
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") !important;
+        }
+
+        /* Logo animation */
+        .logo-container {
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.1) rotate(2deg) !important;
+        }
+    </style>
+</head>
+<body style="background: var(--gradient-bg); color: var(--foreground);">
+    <!-- Floating decorative elements -->
+    <div class="floating-element floating-1 icon-float delay-100">🎨</div>
+    <div class="floating-element floating-2 playful-wiggle delay-200">✨</div>
+    <div class="floating-element floating-3 icon-float delay-300">🌈</div>
+    <div class="floating-element floating-4 playful-wiggle delay-400">🎪</div>
+    <div class="floating-element floating-5 icon-float delay-500">⭐</div>
+    <div class="floating-element floating-6 playful-wiggle delay-600">🦄</div>
+    <div class="floating-element floating-7 icon-float delay-700">💫</div>
+    <div class="floating-element floating-8 playful-wiggle delay-800">🎭</div>
+
+    <!-- Pattern overlay -->
+    <div class="pattern-overlay"></div>
+
+    <!-- Header -->
+    <header class="relative z-50 py-6 px-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4 logo-container bounce-in">
+                <img src="../../apps/web/public/assets/ScribbleMachinecom.svg" alt="ScribbleMachine.com" class="h-14 w-auto">
+            </div>
+            <div class="flex items-center space-x-6 bounce-in delay-200">
+                <button class="text-lg font-bold px-6 py-3 hover:bg-white/20 rounded-full transition-all duration-300 script-text" style="color: var(--foreground);">Login</button>
+                <button class="btn-primary">
+                    <i data-lucide="sparkles" class="w-6 h-6 mr-2"></i>
+                    Try Free!
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="relative z-20">
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Hero Content -->
+                    <div class="text-center lg:text-left">
+                        <div class="bounce-in">
+                            <h1 class="mega-title text-6xl lg:text-8xl mb-8">
+                                TURN
+                                <span class="script-text text-glow animate" style="color: var(--primary);">Photos</span>
+                                <br>INTO EPIC
+                                <br><span class="script-text text-glow animate" style="color: var(--accent);">Coloring</span>
+                                <br>ADVENTURES!
+                            </h1>
+                        </div>
+
+                        <div class="bounce-in delay-300">
+                            <p class="text-2xl lg:text-3xl mb-10 playful-text leading-relaxed" style="color: var(--muted-foreground);">
+                                🪄 AI Magic + Your Imagination =
+                                <span class="script-text" style="color: var(--primary);">UNLIMITED Fun!</span>
+                            </p>
+                        </div>
+
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-6 mb-12 bounce-in delay-500">
+                            <button class="btn-primary flex items-center justify-center playful-wiggle">
+                                <i data-lucide="camera" class="w-7 h-7 mr-3"></i>
+                                UPLOAD & WATCH MAGIC! ⚡
+                            </button>
+                            <button class="btn-secondary flex items-center justify-center playful-wiggle delay-200">
+                                <i data-lucide="sparkles" class="w-7 h-7 mr-3"></i>
+                                IMAGINE ANYTHING! 🦄
+                            </button>
+                        </div>
+
+                        <!-- Fun stats -->
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-8 text-lg font-bold bounce-in delay-700" style="color: var(--foreground);">
+                            <div class="text-center playful-wiggle delay-100">
+                                <div class="text-4xl script-text" style="color: var(--primary);">100K+</div>
+                                <div class="playful-text">Happy Families!</div>
+                            </div>
+                            <div class="text-center playful-wiggle delay-200">
+                                <div class="text-4xl script-text" style="color: var(--accent);">&lt;10sec</div>
+                                <div class="playful-text">Lightning Fast!</div>
+                            </div>
+                            <div class="text-center playful-wiggle delay-300">
+                                <div class="text-4xl">⭐⭐⭐⭐⭐</div>
+                                <div class="playful-text">Mind = Blown!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Image -->
+                    <div class="relative bounce-in delay-400">
+                        <div class="relative max-w-lg mx-auto playful-wiggle">
+                            <img src="../../apps/web/public/assets/HeroBook-WithImages-upscaled.png" alt="Epic coloring adventure" class="w-full drop-shadow-2xl rounded-3xl">
+
+                            <!-- Playful pulse rings -->
+                            <div class="absolute inset-0 rounded-full border-4 border-white/30 animate-ping"></div>
+                            <div class="absolute inset-8 rounded-full border-3 animate-ping" style="border-color: var(--primary); animation-delay: 0.5s;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="py-24">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-16 slide-up-bounce">
+                    <h2 class="mega-title text-5xl lg:text-7xl mb-6" style="color: var(--foreground);">THE MAGIC FORMULA!</h2>
+                    <p class="text-2xl script-text playful-wiggle" style="color: var(--muted-foreground);">3 Steps to Coloring GREATNESS!</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-12 items-center">
+                    <!-- Step 1 -->
+                    <div class="text-center slide-up-bounce delay-100">
+                        <div class="relative mb-8">
+                            <div class="w-32 h-32 mx-auto rounded-full flex items-center justify-center playful-wiggle"
+                                 style="background: var(--gradient-hero); box-shadow: var(--shadow-xl);">
+                                <i data-lucide="upload" class="w-16 h-16 text-white"></i>
+                            </div>
+                            <div class="absolute -top-4 -right-4 text-6xl font-black bounce-in delay-300" style="color: var(--accent);">1</div>
+                        </div>
+                        <h3 class="text-3xl font-black mb-4 script-text" style="color: var(--primary);">UPLOAD!</h3>
+                        <p class="text-lg playful-text" style="color: var(--muted-foreground);">Drop ANY photo or describe your wildest idea!</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:flex justify-center slide-up-bounce delay-200">
+                        <div class="text-6xl playful-wiggle" style="color: var(--primary);">⚡</div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="text-center slide-up-bounce delay-200">
+                        <div class="relative mb-8">
+                            <div class="w-32 h-32 mx-auto rounded-full flex items-center justify-center text-glow"
+                                 style="background: var(--gradient-accent); box-shadow: var(--shadow-xl);">
+                                <img src="../../apps/web/public/assets/ScribbleIcon.svg" alt="AI POWER!" class="w-18 h-18 playful-wiggle">
+                            </div>
+                            <div class="absolute -top-4 -right-4 text-6xl font-black bounce-in delay-400" style="color: var(--primary);">2</div>
+                        </div>
+                        <h3 class="text-3xl font-black mb-4 script-text" style="color: var(--accent);">AI MAGIC!</h3>
+                        <p class="text-lg playful-text" style="color: var(--muted-foreground);">Watch our AI wizard work its INCREDIBLE magic!</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:flex justify-center slide-up-bounce delay-300">
+                        <div class="text-6xl playful-wiggle delay-100" style="color: var(--accent);">🌈</div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="text-center slide-up-bounce delay-300">
+                        <div class="relative mb-8">
+                            <div class="w-32 h-32 mx-auto rounded-full flex items-center justify-center icon-float"
+                                 style="background: var(--gradient-hero); box-shadow: var(--shadow-xl);">
+                                <i data-lucide="download" class="w-16 h-16 text-white"></i>
+                            </div>
+                            <div class="absolute -top-4 -right-4 text-6xl font-black bounce-in delay-500" style="color: var(--primary);">3</div>
+                        </div>
+                        <h3 class="text-3xl font-black mb-4 script-text" style="color: var(--primary);">DOWNLOAD!</h3>
+                        <p class="text-lg playful-text" style="color: var(--muted-foreground);">Get your AMAZING coloring masterpiece!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="py-24">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-16 slide-up-bounce">
+                    <h2 class="mega-title text-5xl lg:text-7xl mb-6" style="color: var(--foreground);">WHY KIDS & PARENTS GO CRAZY FOR US!</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="feature-card text-center slide-up-bounce delay-100">
+                        <div class="text-6xl mb-6 playful-wiggle">⚡</div>
+                        <h3 class="text-2xl font-black mb-4 script-text" style="color: var(--primary);">LIGHTNING SPEED!</h3>
+                        <p class="playful-text font-bold" style="color: var(--muted-foreground);">Boom! Your coloring page in under 10 seconds!</p>
+                    </div>
+
+                    <div class="feature-card text-center slide-up-bounce delay-200">
+                        <div class="text-6xl mb-6 text-glow">🤖</div>
+                        <h3 class="text-2xl font-black mb-4 script-text" style="color: var(--accent);">AI SUPERHERO!</h3>
+                        <p class="playful-text font-bold" style="color: var(--muted-foreground);">Our AI is like having a magical art wizard!</p>
+                    </div>
+
+                    <div class="feature-card text-center slide-up-bounce delay-300">
+                        <div class="text-6xl mb-6 icon-float">🖨️</div>
+                        <h3 class="text-2xl font-black mb-4 script-text" style="color: var(--primary);">PRINT PERFECT!</h3>
+                        <p class="playful-text font-bold" style="color: var(--muted-foreground);">Crystal clear pages ready for coloring action!</p>
+                    </div>
+
+                    <div class="feature-card text-center slide-up-bounce delay-400">
+                        <div class="text-6xl mb-6 playful-wiggle">🛡️</div>
+                        <h3 class="text-2xl font-black mb-4 script-text" style="color: var(--accent);">100% SAFE!</h3>
+                        <p class="playful-text font-bold" style="color: var(--muted-foreground);">Family-friendly fun you can trust completely!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ultimate CTA -->
+        <section class="py-32 relative">
+            <div class="max-w-4xl mx-auto text-center px-4 relative z-10">
+                <div class="slide-up-bounce">
+                    <h2 class="mega-title text-6xl lg:text-8xl mb-8" style="color: var(--foreground);">READY FOR THE ADVENTURE OF A LIFETIME?!</h2>
+                    <p class="text-2xl font-bold mb-12 script-text playful-wiggle" style="color: var(--muted-foreground);">Join 100,000+ families having EPIC coloring fun!</p>
+                    <button class="btn-primary text-2xl px-16 py-6 playful-wiggle">
+                        START THE MAGIC NOW! 🎪✨
+                    </button>
+                    <p class="text-lg font-bold mt-8 script-text" style="color: var(--muted-foreground);">🎁 FREE: 3 AMAZING Coloring Pages!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 text-center relative z-20">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="text-xl script-text playful-wiggle" style="color: var(--muted-foreground);">
+                © 2024 ScribbleMachine.com - Where Imagination Becomes Reality! 🌈✨
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Enhanced intersection observer for playful animations
+        const observerOptions = {
+            threshold: 0.05,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) rotate(0deg)';
+
+                    // Trigger script text underline animation
+                    const scriptTexts = entry.target.querySelectorAll('.script-text');
+                    scriptTexts.forEach((text, index) => {
+                        setTimeout(() => {
+                            text.classList.add('animate');
+                        }, index * 200);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.slide-up-bounce').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px) rotate(-5deg)';
+            el.style.transition = `opacity 1s ease-out ${index * 0.1}s, transform 1s ease-out ${index * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // Add extra playful effects to buttons
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create a ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+                ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+
+                this.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation to CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

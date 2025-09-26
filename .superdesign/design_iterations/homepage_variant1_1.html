@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScribbleMachine.com - Turn Photos into Magical Coloring Pages</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Architects+Daughter:wght@400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage_variant1_1_theme.css">
+
+    <style>
+        /* Soft floating animations inspired by the reference image */
+        @keyframes softFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            33% { transform: translateY(-15px) rotate(120deg); opacity: 0.8; }
+            66% { transform: translateY(-8px) rotate(240deg); opacity: 1; }
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        @keyframes colorWave {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes slideInSoft {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes sparkleRotate {
+            0% { transform: rotate(0deg) scale(1); opacity: 0.4; }
+            50% { transform: rotate(180deg) scale(1.2); opacity: 1; }
+            100% { transform: rotate(360deg) scale(1); opacity: 0.4; }
+        }
+
+        .soft-float { animation: softFloat 8s ease-in-out infinite; }
+        .gentle-float { animation: gentleFloat 6s ease-in-out infinite; }
+        .sparkle-rotate { animation: sparkleRotate 4s linear infinite; }
+        .slide-in-soft { animation: slideInSoft 1s ease-out forwards; }
+
+        /* Staggered delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+
+        /* Custom button styles with soft shadows */
+        .btn-primary {
+            background: var(--gradient-hero) !important;
+            color: white !important;
+            border-radius: var(--radius-lg) !important;
+            padding: 1rem 2.5rem !important;
+            font-weight: 600 !important;
+            font-size: 1.125rem !important;
+            font-family: var(--font-sans) !important;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: var(--shadow-lg) !important;
+            border: none !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02) !important;
+            box-shadow: var(--shadow-xl) !important;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: colorWave 2s infinite;
+        }
+
+        .btn-secondary {
+            background: var(--gradient-card) !important;
+            color: var(--foreground) !important;
+            border: 2px solid var(--border) !important;
+            border-radius: var(--radius-lg) !important;
+            padding: 1rem 2.5rem !important;
+            font-weight: 600 !important;
+            font-size: 1.125rem !important;
+            font-family: var(--font-sans) !important;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: var(--shadow) !important;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px) scale(1.02) !important;
+            box-shadow: var(--shadow-lg) !important;
+            border-color: var(--primary) !important;
+        }
+
+        /* Card styles */
+        .feature-card {
+            background: var(--gradient-card) !important;
+            border-radius: var(--radius-xl) !important;
+            padding: 2rem !important;
+            box-shadow: var(--shadow-md) !important;
+            border: 1px solid var(--border) !important;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: var(--shadow-xl) !important;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-hero);
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--font-sans) !important;
+            font-weight: 700 !important;
+            line-height: 1.2 !important;
+        }
+
+        .handwritten {
+            font-family: var(--font-serif) !important;
+        }
+
+        body {
+            font-family: var(--font-mono) !important;
+            background: var(--gradient-bg) !important;
+            min-height: 100vh !important;
+        }
+
+        /* Floating elements positioned like the reference image */
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            font-size: 2rem;
+            z-index: 10;
+        }
+
+        .floating-1 { top: 15%; left: 8%; }
+        .floating-2 { top: 25%; right: 12%; }
+        .floating-3 { top: 45%; left: 5%; }
+        .floating-4 { bottom: 30%; right: 8%; }
+        .floating-5 { top: 60%; left: 15%; }
+        .floating-6 { bottom: 20%; left: 10%; }
+        .floating-7 { top: 35%; right: 5%; }
+        .floating-8 { bottom: 45%; right: 15%; }
+
+        /* Soft overlay pattern */
+        .pattern-overlay {
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='20' cy='20' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") !important;
+        }
+
+        /* Logo integration */
+        .logo-container {
+            transition: all 0.3s ease !important;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05) !important;
+        }
+    </style>
+</head>
+<body style="background: var(--gradient-bg); color: var(--foreground);">
+    <!-- Floating decorative elements inspired by reference image -->
+    <div class="floating-element floating-1 soft-float delay-100">✨</div>
+    <div class="floating-element floating-2 sparkle-rotate delay-200">🎨</div>
+    <div class="floating-element floating-3 soft-float delay-300">🌈</div>
+    <div class="floating-element floating-4 sparkle-rotate delay-400">⭐</div>
+    <div class="floating-element floating-5 soft-float delay-500">🦄</div>
+    <div class="floating-element floating-6 sparkle-rotate delay-100">💫</div>
+    <div class="floating-element floating-7 soft-float delay-200">🎪</div>
+    <div class="floating-element floating-8 sparkle-rotate delay-300">🎭</div>
+
+    <!-- Pattern overlay -->
+    <div class="pattern-overlay"></div>
+
+    <!-- Header -->
+    <header class="relative z-50 py-6 px-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4 logo-container slide-in-soft">
+                <img src="../../apps/web/public/assets/ScribbleMachinecom.svg" alt="ScribbleMachine.com" class="h-12 w-auto">
+            </div>
+            <div class="flex items-center space-x-4 slide-in-soft delay-200">
+                <button class="text-lg font-medium px-6 py-3 hover:bg-white/20 rounded-full transition-all duration-300 handwritten" style="color: var(--foreground);">Login</button>
+                <button class="btn-primary">
+                    <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>
+                    Try Free!
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="relative z-20">
+        <section class="py-16">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Hero Content -->
+                    <div class="text-center lg:text-left slide-in-soft">
+                        <h1 class="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+                            Your <span class="handwritten" style="color: var(--primary);">Moments</span>,
+                            <br>Their <span class="handwritten" style="color: var(--accent);">Masterpiece</span>
+                        </h1>
+
+                        <p class="text-xl lg:text-2xl mb-8 leading-relaxed handwritten" style="color: var(--muted-foreground);">
+                            Effortlessly turn cherished photos or imaginative ideas into magical coloring pages, ready to print & color!
+                        </p>
+
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-6 mb-12">
+                            <button class="btn-primary flex items-center justify-center">
+                                <i data-lucide="camera" class="w-6 h-6 mr-3"></i>
+                                Upload Photo - It's FREE!
+                            </button>
+                            <button class="btn-secondary flex items-center justify-center">
+                                <i data-lucide="sparkles" class="w-6 h-6 mr-3"></i>
+                                Imagine An Idea
+                            </button>
+                        </div>
+
+                        <!-- Trust indicators -->
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-8 text-sm font-medium opacity-80" style="color: var(--muted-foreground);">
+                            <div class="flex items-center">
+                                <span class="text-lg mr-2">🎁</span>
+                                Free Tier: 3 Pages
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-lg mr-2">⚡</span>
+                                'Made with ScribbleMachine' Watermark
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Image -->
+                    <div class="relative gentle-float slide-in-soft delay-300">
+                        <div class="relative max-w-lg mx-auto">
+                            <img src="../../apps/web/public/assets/HeroBook-WithImages-upscaled.png" alt="Magical coloring book transformation" class="w-full drop-shadow-2xl rounded-2xl">
+
+                            <!-- Soft glow effect -->
+                            <div class="absolute -inset-4 rounded-2xl opacity-20" style="background: var(--gradient-hero); filter: blur(20px);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="py-20">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-16 slide-in-soft">
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6" style="color: var(--foreground);">How The Magic Works</h2>
+                    <p class="text-xl handwritten" style="color: var(--muted-foreground);">Three simple steps to coloring joy!</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-12 items-center">
+                    <!-- Step 1 -->
+                    <div class="text-center slide-in-soft delay-100">
+                        <div class="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center gentle-float" style="background: var(--gradient-hero); color: white;">
+                            <i data-lucide="upload" class="w-12 h-12"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4" style="color: var(--foreground);">Upload</h3>
+                        <p class="handwritten text-lg" style="color: var(--muted-foreground);">Share your favorite photo or describe your wild imagination</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:flex justify-center slide-in-soft delay-200">
+                        <div class="sparkle-rotate">
+                            <i data-lucide="arrow-right" class="w-8 h-8" style="color: var(--primary);"></i>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="text-center slide-in-soft delay-200">
+                        <div class="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center gentle-float delay-100" style="background: var(--gradient-hero); color: white;">
+                            <img src="../../apps/web/public/assets/ScribbleIcon.svg" alt="AI Magic" class="w-14 h-14">
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4" style="color: var(--foreground);">Transform</h3>
+                        <p class="handwritten text-lg" style="color: var(--muted-foreground);">Our AI magic converts it to perfect coloring lines in seconds</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:flex justify-center slide-in-soft delay-300">
+                        <div class="sparkle-rotate delay-200">
+                            <i data-lucide="arrow-right" class="w-8 h-8" style="color: var(--primary);"></i>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="text-center slide-in-soft delay-300">
+                        <div class="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center gentle-float delay-200" style="background: var(--gradient-hero); color: white;">
+                            <i data-lucide="download" class="w-12 h-12"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4" style="color: var(--foreground);">Create</h3>
+                        <p class="handwritten text-lg" style="color: var(--muted-foreground);">Download, print, and watch memories come to life with color!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="py-20">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-16 slide-in-soft">
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6" style="color: var(--foreground);">Why Families Love Us</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="feature-card text-center slide-in-soft delay-100">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center sparkle-rotate" style="background: var(--gradient-hero); color: white;">
+                            <i data-lucide="zap" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--foreground);">Lightning Fast</h3>
+                        <p class="handwritten" style="color: var(--muted-foreground);">Get your coloring page in seconds, not hours</p>
+                    </div>
+
+                    <div class="feature-card text-center slide-in-soft delay-200">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center sparkle-rotate delay-100" style="background: var(--gradient-hero); color: white;">
+                            <i data-lucide="heart" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--foreground);">Kid-Safe</h3>
+                        <p class="handwritten" style="color: var(--muted-foreground);">Family-friendly content you can trust completely</p>
+                    </div>
+
+                    <div class="feature-card text-center slide-in-soft delay-300">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center sparkle-rotate delay-200" style="background: var(--gradient-hero); color: white;">
+                            <i data-lucide="printer" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--foreground);">Print Perfect</h3>
+                        <p class="handwritten" style="color: var(--muted-foreground);">Crystal clear pages ready for coloring adventures</p>
+                    </div>
+
+                    <div class="feature-card text-center slide-in-soft delay-400">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center sparkle-rotate delay-300" style="background: var(--gradient-hero); color: white;">
+                            <i data-lucide="smartphone" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--foreground);">Easy Upload</h3>
+                        <p class="handwritten" style="color: var(--muted-foreground);">Simple drag & drop from any device</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="py-16">
+            <div class="max-w-4xl mx-auto text-center px-4 slide-in-soft">
+                <h2 class="text-4xl lg:text-6xl font-bold mb-8" style="color: var(--foreground);">Ready to Create Magic?</h2>
+                <p class="text-xl handwritten mb-12" style="color: var(--muted-foreground);">Join thousands of families turning memories into masterpieces!</p>
+                <button class="btn-primary text-xl px-12 py-4">
+                    Start Your Free Pages Now! ✨
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 text-center relative z-20">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="handwritten text-lg" style="color: var(--muted-foreground);">
+                © 2024 ScribbleMachine.com - Where Imagination Becomes Reality! 🌟
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Enhanced intersection observer for smooth animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.slide-in-soft').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(40px)';
+            el.style.transition = `opacity 0.8s ease-out ${index * 0.1}s, transform 0.8s ease-out ${index * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // Add sparkle effect to buttons
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.02)';
+            });
+
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+/* Simple Focus Theme - Imagine Page Variant 2 */
+:root {
+  /* Clean & Minimal Colors */
+  --background: oklch(1.0000 0 0);                       /* Pure white */
+  --foreground: oklch(0.1600 0 0);                       /* Near black */
+  --card: oklch(0.9850 0 0);                            /* Off-white */
+  --card-foreground: oklch(0.1600 0 0);
+
+  /* Primary - Calm Blue */
+  --primary: oklch(0.4820 0.1580 264.0520);             /* Professional blue */
+  --primary-foreground: oklch(1.0000 0 0);
+
+  /* Secondary - Soft Gray */
+  --secondary: oklch(0.9500 0 0);                        /* Light gray */
+  --secondary-foreground: oklch(0.3000 0 0);
+
+  /* Accent - Gentle Green */
+  --accent: oklch(0.7320 0.1420 145.2340);              /* Soft green */
+  --accent-foreground: oklch(0.1600 0 0);
+
+  /* Neutrals */
+  --muted: oklch(0.9700 0 0);
+  --muted-foreground: oklch(0.5200 0 0);
+  --border: oklch(0.9200 0 0);
+  --input: oklch(0.9850 0 0);
+  --ring: oklch(0.4820 0.1580 264.0520);
+
+  /* Status */
+  --destructive: oklch(0.5970 0.2650 28.4765);
+  --destructive-foreground: oklch(1.0000 0 0);
+
+  /* Typography - Clean */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Minimal Layout */
+  --radius: 0.75rem;
+  --spacing: 0.25rem;
+  --tracking-normal: -0.015em;
+
+  /* Subtle Shadows */
+  --shadow-2xs: 0 1px 2px 0px hsl(0 0% 0% / 0.02);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.04);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.06), 0 1px 2px -1px hsl(0 0% 0% / 0.03);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.06), 0 1px 2px -1px hsl(0 0% 0% / 0.03);
+  --shadow-md: 0 4px 6px 0px hsl(0 0% 0% / 0.04), 0 2px 4px -1px hsl(0 0% 0% / 0.02);
+  --shadow-lg: 0 8px 15px 0px hsl(0 0% 0% / 0.06), 0 4px 6px -1px hsl(0 0% 0% / 0.03);
+  --shadow-xl: 0 12px 25px 0px hsl(0 0% 0% / 0.08), 0 6px 10px -1px hsl(0 0% 0% / 0.04);
+  --shadow-2xl: 0 20px 40px 0px hsl(0 0% 0% / 0.10);
+
+  /* Minimal Gradients */
+  --gradient-subtle: linear-gradient(135deg,
+    oklch(0.9850 0 0) 0%,                                /* Off-white */
+    oklch(0.9700 0 0) 100%                              /* Light gray */
+  );
+}

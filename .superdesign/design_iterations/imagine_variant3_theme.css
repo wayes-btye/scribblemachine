@@ -1,0 +1,76 @@
+/* Playful Workshop Theme - Imagine Page Variant 3 */
+:root {
+  /* Kid-Friendly Rainbow Colors */
+  --background: oklch(0.9920 0.0220 95.2180);           /* Sunny cream */
+  --foreground: oklch(0.2180 0.0580 275.8200);         /* Playful purple */
+  --card: oklch(1.0000 0 0);
+  --card-foreground: oklch(0.2180 0.0580 275.8200);
+
+  /* Primary - Electric Pink */
+  --primary: oklch(0.6820 0.3290 328.3634);            /* Hot pink */
+  --primary-foreground: oklch(1.0000 0 0);
+
+  /* Secondary - Sunshine Yellow */
+  --secondary: oklch(0.8520 0.2420 85.4720);           /* Bright yellow */
+  --secondary-foreground: oklch(0.2180 0.0580 275.8200);
+
+  /* Accent - Electric Blue */
+  --accent: oklch(0.6180 0.3140 252.8470);             /* Electric blue */
+  --accent-foreground: oklch(1.0000 0 0);
+
+  /* Fun Colors */
+  --lime: oklch(0.8720 0.2620 125.2340);               /* Lime green */
+  --orange: oklch(0.7640 0.2880 45.3650);              /* Fun orange */
+  --purple: oklch(0.5980 0.2840 285.8200);             /* Fun purple */
+
+  /* Supporting */
+  --muted: oklch(0.9820 0.0180 95.2180);
+  --muted-foreground: oklch(0.4480 0.0380 275.8200);
+  --border: oklch(0.9180 0.0320 95.2180);
+  --input: oklch(0.9920 0.0220 95.2180);
+  --ring: oklch(0.6820 0.3290 328.3634);
+
+  /* Status */
+  --destructive: oklch(0.6580 0.2850 22.4765);
+  --destructive-foreground: oklch(1.0000 0 0);
+
+  /* Typography - Fun & Bold */
+  --font-sans: 'Outfit', system-ui, sans-serif;
+  --font-serif: 'Architects Daughter', cursive;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Playful Layout */
+  --radius: 1.5rem;                                     /* Super rounded */
+  --spacing: 0.25rem;
+  --tracking-normal: 0.02em;                            /* Wide, playful */
+
+  /* Bouncy Shadows */
+  --shadow-2xs: 0 3px 6px 0px hsl(328 83% 68% / 0.12);
+  --shadow-xs: 0 3px 6px 0px hsl(328 83% 68% / 0.16);
+  --shadow-sm: 0 5px 10px 0px hsl(328 83% 68% / 0.20), 0 3px 6px -1px hsl(85 72% 85% / 0.12);
+  --shadow: 0 5px 10px 0px hsl(328 83% 68% / 0.20), 0 3px 6px -1px hsl(85 72% 85% / 0.12);
+  --shadow-md: 0 8px 15px 0px hsl(328 83% 68% / 0.24), 0 4px 8px -1px hsl(125 65% 87% / 0.15);
+  --shadow-lg: 0 10px 20px 0px hsl(328 83% 68% / 0.28), 0 6px 12px -1px hsl(252 79% 62% / 0.18);
+  --shadow-xl: 0 15px 30px 0px hsl(328 83% 68% / 0.32), 0 8px 16px -1px hsl(85 72% 85% / 0.20);
+  --shadow-2xl: 0 20px 40px 0px hsl(328 83% 68% / 0.38);
+
+  /* Rainbow Gradients */
+  --gradient-hero: linear-gradient(135deg,
+    oklch(0.6820 0.3290 328.3634) 0%,     /* Hot pink */
+    oklch(0.8520 0.2420 85.4720) 25%,     /* Yellow */
+    oklch(0.8720 0.2620 125.2340) 50%,    /* Lime */
+    oklch(0.6180 0.3140 252.8470) 75%,    /* Blue */
+    oklch(0.5980 0.2840 285.8200) 100%    /* Purple */
+  );
+
+  --gradient-card: linear-gradient(135deg,
+    oklch(1.0000 0 0) 0%,                 /* White */
+    oklch(0.9920 0.0220 95.2180) 50%,     /* Sunny cream */
+    oklch(0.9820 0.0180 95.2180) 100%     /* Light cream */
+  );
+
+  --gradient-fun: linear-gradient(90deg,
+    oklch(0.8520 0.2420 85.4720) 0%,      /* Yellow */
+    oklch(0.7640 0.2880 45.3650) 100%     /* Orange */
+  );
+}

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScribbleMachine.com - Transform Any Photo Into Magical Coloring Pages</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Architects+Daughter:wght@400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage_variant1_3_theme.css">
+
+    <style>
+        /* Clean, professional animations */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideInRight {
+            0% { opacity: 0; transform: translateX(30px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+        }
+
+        @keyframes iconRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .scale-in { animation: scaleIn 0.8s ease-out forwards; }
+        .slide-in-right { animation: slideInRight 0.8s ease-out forwards; }
+        .logo-float { animation: logoFloat 4s ease-in-out infinite; }
+        .icon-rotate { animation: iconRotate 8s linear infinite; }
+
+        /* Staggered delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        /* Modern button styles */
+        .btn-primary {
+            background: var(--gradient-hero) !important;
+            color: white !important;
+            border-radius: var(--radius-lg) !important;
+            padding: 1rem 2rem !important;
+            font-weight: 600 !important;
+            font-size: 1.125rem !important;
+            font-family: var(--font-sans) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: var(--shadow-lg) !important;
+            border: none !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02) !important;
+            box-shadow: var(--shadow-xl) !important;
+        }
+
+        .btn-secondary {
+            background: var(--gradient-card) !important;
+            color: var(--foreground) !important;
+            border: 2px solid var(--primary) !important;
+            border-radius: var(--radius-lg) !important;
+            padding: 1rem 2rem !important;
+            font-weight: 600 !important;
+            font-size: 1.125rem !important;
+            font-family: var(--font-sans) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: var(--shadow) !important;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px) scale(1.02) !important;
+            box-shadow: var(--shadow-lg) !important;
+            background: var(--primary) !important;
+            color: white !important;
+        }
+
+        /* Professional card styles */
+        .feature-card {
+            background: var(--gradient-card) !important;
+            border-radius: var(--radius-xl) !important;
+            padding: 2rem !important;
+            box-shadow: var(--shadow) !important;
+            border: 1px solid var(--border) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px) !important;
+            box-shadow: var(--shadow-xl) !important;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-hero);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--font-sans) !important;
+            font-weight: 700 !important;
+            line-height: 1.2 !important;
+        }
+
+        .handwritten {
+            font-family: var(--font-serif) !important;
+        }
+
+        body {
+            font-family: var(--font-mono) !important;
+            background: var(--gradient-bg) !important;
+            min-height: 100vh !important;
+        }
+
+        /* Logo integration styles */
+        .logo-hero {
+            filter: drop-shadow(0 10px 20px oklch(0.18 0.10 250 / 0.1));
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo-hero:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 15px 30px oklch(0.18 0.10 250 / 0.15));
+        }
+
+        .logo-header {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo-header:hover {
+            transform: scale(1.05) rotate(1deg);
+        }
+
+        /* Floating decorative elements */
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            z-index: 10;
+        }
+
+        .floating-1 { top: 15%; left: 5%; }
+        .floating-2 { top: 25%; right: 8%; }
+        .floating-3 { top: 45%; left: 3%; }
+        .floating-4 { bottom: 30%; right: 6%; }
+        .floating-5 { top: 60%; left: 12%; }
+        .floating-6 { bottom: 20%; left: 8%; }
+
+        /* Clean background pattern */
+        .pattern-overlay {
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='40' cy='40' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") !important;
+        }
+
+        /* Hero section special styling */
+        .hero-section {
+            position: relative;
+            background: linear-gradient(135deg,
+                oklch(0.97 0.06 80 / 0.8) 0%,
+                oklch(0.96 0.08 210 / 0.8) 50%,
+                oklch(0.97 0.05 330 / 0.8) 100%);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Process step styling */
+        .process-step {
+            position: relative;
+        }
+
+        .process-step::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-hero);
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover::before {
+            opacity: 0.2;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+    </style>
+</head>
+<body style="background: var(--gradient-bg); color: var(--foreground);">
+    <!-- Subtle floating elements -->
+    <div class="floating-element floating-1 logo-float delay-100">✨</div>
+    <div class="floating-element floating-2 icon-rotate delay-200">🎨</div>
+    <div class="floating-element floating-3 logo-float delay-300">🌟</div>
+    <div class="floating-element floating-4 icon-rotate delay-400">⭐</div>
+    <div class="floating-element floating-5 logo-float delay-500">💫</div>
+    <div class="floating-element floating-6 icon-rotate delay-600">🎪</div>
+
+    <!-- Pattern overlay -->
+    <div class="pattern-overlay"></div>
+
+    <!-- Header with prominent logo -->
+    <header class="relative z-50 py-8 px-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center logo-header fade-in-up">
+                <img src="../../apps/web/public/assets/ScribbleMachinecom.svg" alt="ScribbleMachine.com" class="h-16 w-auto">
+            </div>
+            <div class="flex items-center space-x-6 fade-in-up delay-200">
+                <button class="text-lg font-medium px-6 py-3 hover:bg-white/10 rounded-lg transition-all duration-300" style="color: var(--foreground);">Sign In</button>
+                <button class="btn-primary">
+                    <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>
+                    Start Free
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="relative z-20">
+        <section class="hero-section py-24">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Hero Content -->
+                    <div class="text-center lg:text-left">
+                        <div class="fade-in-up">
+                            <h1 class="text-5xl lg:text-7xl font-bold mb-8 leading-tight">
+                                Transform
+                                <span class="handwritten bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">ANY Photo</span>
+                                Into Magical
+                                <span class="handwritten bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">Coloring Pages</span>
+                            </h1>
+                        </div>
+
+                        <div class="fade-in-up delay-200">
+                            <p class="text-xl lg:text-2xl mb-10 leading-relaxed" style="color: var(--muted-foreground);">
+                                Effortlessly turn cherished photos or imaginative ideas into printable coloring adventures.
+                                <span class="font-semibold" style="color: var(--primary);">AI-powered magic in seconds!</span>
+                            </p>
+                        </div>
+
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-6 mb-12 fade-in-up delay-300">
+                            <button class="btn-primary flex items-center justify-center text-lg px-8 py-4">
+                                <i data-lucide="upload" class="w-6 h-6 mr-3"></i>
+                                Upload Photo - FREE
+                            </button>
+                            <button class="btn-secondary flex items-center justify-center text-lg px-8 py-4">
+                                <i data-lucide="lightbulb" class="w-6 h-6 mr-3"></i>
+                                Imagine An Idea
+                            </button>
+                        </div>
+
+                        <!-- Trust indicators -->
+                        <div class="inline-flex items-center bg-white/80 backdrop-blur-sm rounded-full px-8 py-4 shadow-sm fade-in-up delay-400">
+                            <div class="flex items-center space-x-6 text-sm font-medium" style="color: var(--muted-foreground);">
+                                <div class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span>
+                                    Free: 3 Pages
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-blue-500 mr-2">⚡</span>
+                                    Instant Results
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-purple-500 mr-2">👨‍👩‍👧‍👦</span>
+                                    Family Safe
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Image with Logo Integration -->
+                    <div class="relative scale-in delay-300">
+                        <div class="relative max-w-xl mx-auto">
+                            <img src="../../apps/web/public/assets/HeroBook-WithImages-upscaled.png" alt="Magical coloring book" class="w-full drop-shadow-2xl rounded-2xl">
+
+                            <!-- Integrated logo element -->
+                            <div class="absolute -top-8 -right-8 logo-hero logo-float">
+                                <div class="bg-white/90 backdrop-blur-sm rounded-full p-4 shadow-xl">
+                                    <img src="../../apps/web/public/assets/ScribbleIcon.svg" alt="ScribbleMachine" class="w-16 h-16">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="py-24">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-16 fade-in-up">
+                    <h2 class="text-4xl lg:text-6xl font-bold mb-6" style="color: var(--foreground);">How It Works</h2>
+                    <p class="text-xl handwritten" style="color: var(--muted-foreground);">Three simple steps to coloring magic</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-12 items-center">
+                    <!-- Step 1 -->
+                    <div class="text-center process-step fade-in-up delay-100">
+                        <div class="w-24 h-24 mx-auto mb-8 rounded-full flex items-center justify-center relative overflow-hidden"
+                             style="background: var(--gradient-hero); box-shadow: var(--shadow-lg);">
+                            <i data-lucide="upload" class="w-12 h-12 text-white relative z-10"></i>
+                            <div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+                        </div>
+                        <div class="bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 inline-block mb-4">
+                            <span class="text-2xl font-bold" style="color: var(--primary);">01</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4" style="color: var(--foreground);">Upload</h3>
+                        <p class="text-lg" style="color: var(--muted-foreground);">Share your favorite photo or describe your imagination</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:flex justify-center fade-in-up delay-200">
+                        <i data-lucide="arrow-right" class="w-8 h-8 icon-rotate" style="color: var(--primary);"></i>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="text-center process-step fade-in-up delay-200">
+                        <div class="w-24 h-24 mx-auto mb-8 rounded-full flex items-center justify-center relative overflow-hidden"
+                             style="background: var(--gradient-accent); box-shadow: var(--shadow-lg);">
+                            <img src="../../apps/web/public/assets/ScribbleIcon.svg" alt="AI Magic" class="w-14 h-14 relative z-10">
+                            <div class="absolute inset-0 bg-white/20 animate-pulse" style="animation-delay: 0.5s;"></div>
+                        </div>
+                        <div class="bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 inline-block mb-4">
+                            <span class="text-2xl font-bold" style="color: var(--accent);">02</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4" style="color: var(--foreground);">Transform</h3>
+                        <p class="text-lg" style="color: var(--muted-foreground);">Our AI converts it to perfect coloring lines</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:flex justify-center fade-in-up delay-300">
+                        <i data-lucide="arrow-right" class="w-8 h-8 icon-rotate" style="color: var(--accent);"></i>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="text-center process-step fade-in-up delay-300">
+                        <div class="w-24 h-24 mx-auto mb-8 rounded-full flex items-center justify-center relative overflow-hidden"
+                             style="background: var(--gradient-hero); box-shadow: var(--shadow-lg);">
+                            <i data-lucide="download" class="w-12 h-12 text-white relative z-10"></i>
+                            <div class="absolute inset-0 bg-white/20 animate-pulse" style="animation-delay: 1s;"></div>
+                        </div>
+                        <div class="bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 inline-block mb-4">
+                            <span class="text-2xl font-bold" style="color: var(--primary);">03</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4" style="color: var(--foreground);">Create</h3>
+                        <p class="text-lg" style="color: var(--muted-foreground);">Print and watch memories come to life</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="py-24">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-16 fade-in-up">
+                    <h2 class="text-4xl lg:text-6xl font-bold mb-6" style="color: var(--foreground);">Why Families Choose Us</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="feature-card text-center fade-in-up delay-100">
+                        <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: var(--gradient-hero);">
+                            <i data-lucide="zap" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--foreground);">Lightning Fast</h3>
+                        <p style="color: var(--muted-foreground);">Get your coloring page in seconds, not hours</p>
+                    </div>
+
+                    <div class="feature-card text-center fade-in-up delay-200">
+                        <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: var(--gradient-accent);">
+                            <i data-lucide="shield-check" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--foreground);">Kid-Safe</h3>
+                        <p style="color: var(--muted-foreground);">Family-friendly content with safety first</p>
+                    </div>
+
+                    <div class="feature-card text-center fade-in-up delay-300">
+                        <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: var(--gradient-hero);">
+                            <i data-lucide="printer" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--foreground);">Print Perfect</h3>
+                        <p style="color: var(--muted-foreground);">Crystal clear pages ready for coloring</p>
+                    </div>
+
+                    <div class="feature-card text-center fade-in-up delay-400">
+                        <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: var(--gradient-accent);">
+                            <i data-lucide="smartphone" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--foreground);">Easy Upload</h3>
+                        <p style="color: var(--muted-foreground);">Simple drag & drop from any device</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA with Logo -->
+        <section class="py-24">
+            <div class="max-w-4xl mx-auto text-center px-4 fade-in-up">
+                <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-12 shadow-xl">
+                    <div class="mb-8">
+                        <img src="../../apps/web/public/assets/ScribbleMachinecom.svg" alt="ScribbleMachine.com" class="h-20 w-auto mx-auto mb-6 logo-float">
+                    </div>
+                    <h2 class="text-4xl lg:text-6xl font-bold mb-8" style="color: var(--foreground);">Ready to Create Magic?</h2>
+                    <p class="text-xl handwritten mb-12" style="color: var(--muted-foreground);">Join thousands of families turning memories into masterpieces</p>
+                    <button class="btn-primary text-xl px-12 py-6">
+                        Start Your Free Pages Now! ✨
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-16 text-center relative z-20">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="mb-8">
+                <img src="../../apps/web/public/assets/ScribbleMachinecom.svg" alt="ScribbleMachine.com" class="h-12 w-auto mx-auto opacity-60">
+            </div>
+            <p class="text-lg" style="color: var(--muted-foreground);">
+                © 2024 ScribbleMachine.com - Where Imagination Becomes Reality
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Professional intersection observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) translateX(0) scale(1)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in-up, .scale-in, .slide-in-right').forEach((el, index) => {
+            el.style.opacity = '0';
+
+            if (el.classList.contains('fade-in-up')) {
+                el.style.transform = 'translateY(30px)';
+            } else if (el.classList.contains('scale-in')) {
+                el.style.transform = 'scale(0.9)';
+            } else if (el.classList.contains('slide-in-right')) {
+                el.style.transform = 'translateX(30px)';
+            }
+
+            el.style.transition = `opacity 0.8s ease-out ${index * 0.1}s, transform 0.8s ease-out ${index * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // Enhanced button interactions
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px) scale(1.02)';
+            });
+
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
