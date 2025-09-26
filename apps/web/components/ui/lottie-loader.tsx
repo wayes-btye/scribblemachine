@@ -74,19 +74,64 @@ export function LottieLoader({
   const renderFallback = () => {
     if (fallback) return fallback
 
-    // Default fallback with appropriate icon and progress bar
-    const icons = {
-      generation: '🎨',
-      upload: '📸',
-      editing: '✏️',
-      success: '✅',
+    // Enhanced animated fallbacks with CSS animations
+    const animatedIcons = {
+      generation: {
+        icon: '🎨',
+        animation: 'animate-bounce',
+        gradient: 'from-purple-100 via-pink-100 to-yellow-100',
+        pulseColors: 'from-purple-200 to-pink-200'
+      },
+      upload: {
+        icon: '📸',
+        animation: 'animate-pulse',
+        gradient: 'from-blue-100 via-cyan-100 to-teal-100',
+        pulseColors: 'from-blue-200 to-cyan-200'
+      },
+      editing: {
+        icon: '✏️',
+        animation: 'animate-ping',
+        gradient: 'from-green-100 via-emerald-100 to-teal-100',
+        pulseColors: 'from-green-200 to-emerald-200'
+      },
+      success: {
+        icon: '✅',
+        animation: 'animate-bounce',
+        gradient: 'from-green-100 via-emerald-100 to-lime-100',
+        pulseColors: 'from-green-200 to-emerald-200'
+      },
     }
+
+    const config = animatedIcons[theme]
 
     return (
       <div className="flex flex-col items-center space-y-4">
-        <div className={`${sizeClasses[size]} flex items-center justify-center bg-gradient-to-br from-brand-soft-blue/10 to-brand-soft-pink/10 rounded-full`}>
-          <span className="text-2xl">{icons[theme]}</span>
+        {/* Animated Icon Container with Multiple Effects */}
+        <div className={`${sizeClasses[size]} relative flex items-center justify-center`}>
+          {/* Pulsing Background Ring */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${config.pulseColors} rounded-full opacity-30 animate-ping`} />
+
+          {/* Main Icon Container */}
+          <div className={`${sizeClasses[size]} flex items-center justify-center bg-gradient-to-br ${config.gradient} rounded-full border-2 border-white shadow-lg relative z-10`}>
+            <span className={`text-2xl ${config.animation}`} style={{ animationDuration: '2s' }}>
+              {config.icon}
+            </span>
+          </div>
+
+          {/* Rotating Ring for Generation Theme */}
+          {theme === 'generation' && (
+            <div className="absolute inset-0 border-2 border-dashed border-purple-300 rounded-full animate-spin" style={{ animationDuration: '3s' }} />
+          )}
+
+          {/* Floating Sparkles for Success Theme */}
+          {theme === 'success' && (
+            <>
+              <div className="absolute -top-2 -right-2 text-yellow-400 animate-bounce" style={{ animationDelay: '0.5s' }}>✨</div>
+              <div className="absolute -bottom-2 -left-2 text-yellow-400 animate-bounce" style={{ animationDelay: '1s' }}>⭐</div>
+            </>
+          )}
         </div>
+
         {showProgress && progress !== undefined && (
           <Progress value={progress} className="w-full max-w-xs" />
         )}
