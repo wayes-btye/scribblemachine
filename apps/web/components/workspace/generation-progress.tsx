@@ -5,6 +5,7 @@ import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Clock, CheckCircle, XCircle, Loader2, AlertCircle } from 'lucide-react'
+import { LottieLoader } from '@/components/ui/lottie-loader'
 import type { Job } from '@coloringpage/types'
 
 interface GenerationProgressProps {
@@ -14,32 +15,40 @@ interface GenerationProgressProps {
 
 const statusConfig = {
   queued: {
-    label: 'Queued',
-    description: 'Your request is in the queue...',
+    label: 'Getting Ready',
+    description: 'Your magical coloring page is next in line...',
     icon: Clock,
     color: 'bg-yellow-500',
-    progress: 10
+    progress: 10,
+    theme: 'generation' as const,
+    playfulMessage: "We're gathering our digital crayons and getting ready to create something amazing!"
   },
   running: {
-    label: 'Processing',
-    description: 'Creating your coloring page...',
+    label: 'Creating Magic',
+    description: 'Our AI artist is hard at work creating your coloring page...',
     icon: Loader2,
-    color: 'bg-blue-500',
-    progress: 60
+    color: 'bg-brand-warm-blue',
+    progress: 60,
+    theme: 'generation' as const,
+    playfulMessage: "✨ Sprinkling some creativity dust and drawing the perfect lines just for you!"
   },
   succeeded: {
-    label: 'Complete',
-    description: 'Your coloring page is ready!',
+    label: 'Ta-da! It\'s Ready!',
+    description: 'Your beautiful coloring page is complete!',
     icon: CheckCircle,
     color: 'bg-green-500',
-    progress: 100
+    progress: 100,
+    theme: 'success' as const,
+    playfulMessage: "🎉 Your masterpiece awaits! Time to bring it to life with colors!"
   },
   failed: {
-    label: 'Failed',
-    description: 'Something went wrong. Please try again.',
+    label: 'Oops!',
+    description: 'Our AI artist needs to try again. Let\'s give it another shot!',
     icon: XCircle,
     color: 'bg-red-500',
-    progress: 0
+    progress: 0,
+    theme: 'generation' as const,
+    playfulMessage: "Sometimes even the best artists need a second try. Let's create something wonderful together!"
   }
 }
 
@@ -132,36 +141,34 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
   const formattedTime = Math.floor(elapsedTime / 1000)
 
   return (
-    <div className="space-y-4" data-testid="generation-progress">
-      {/* Status Header */}
-      <div className="flex items-center gap-3">
-        <div className={`p-2 rounded-full ${config.color} text-white`}>
-          <Icon className={`h-4 w-4 ${job.status === 'running' ? 'animate-spin' : ''}`} />
-        </div>
-        <div className="flex-1">
+    <div className="space-y-6" data-testid="generation-progress">
+      {/* Enhanced Lottie Animation Loading */}
+      <div className="text-center">
+        <LottieLoader
+          theme={config.theme}
+          progress={config.progress}
+          message={config.playfulMessage}
+          size="lg"
+          showProgress={true}
+          className="mb-4"
+        />
+
+        {/* Status Header */}
+        <div className="flex items-center justify-center gap-3 mb-2">
+          <div className={`p-2 rounded-full ${config.color} text-white`}>
+            <Icon className={`h-4 w-4 ${job.status === 'running' ? 'animate-spin' : ''}`} />
+          </div>
           <div className="flex items-center gap-2">
-            <h3 className="font-medium" data-testid="job-status">
+            <h3 className="font-medium text-lg" data-testid="job-status">
               {config.label}
             </h3>
             <Badge variant="outline" className="text-xs">
               {formattedTime}s
             </Badge>
           </div>
-          <p className="text-sm text-gray-600">{config.description}</p>
         </div>
-      </div>
 
-      {/* Progress Bar */}
-      <div className="space-y-2">
-        <Progress
-          value={config.progress}
-          className="w-full h-2"
-          data-testid="progress-bar"
-        />
-        <div className="flex justify-between text-xs text-gray-500">
-          <span>Progress</span>
-          <span>{config.progress}%</span>
-        </div>
+        <p className="text-gray-600 mb-4">{config.description}</p>
       </div>
 
       {/* Job Details */}
@@ -194,21 +201,26 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
 
       {/* Success Message */}
       {job.status === 'succeeded' && (
-        <Alert className="border-green-200 bg-green-50">
+        <Alert className="border-green-200 bg-gradient-to-r from-green-50 to-emerald-50">
           <CheckCircle className="h-4 w-4 text-green-600" />
-          <AlertDescription className="text-green-800">
-            Your coloring page has been generated successfully! Processing took {formattedTime} seconds.
+          <AlertDescription className="text-green-800 font-medium">
+            🎉 Hooray! Your amazing coloring page is ready to color! It took our AI artist just {formattedTime} seconds to create this masterpiece for you.
           </AlertDescription>
         </Alert>
       )}
 
-      {/* Time Estimates */}
+      {/* Family-Friendly Time Estimates */}
       {(job.status === 'queued' || job.status === 'running') && (
-        <div className="text-xs text-gray-500 text-center">
-          <p>Typical processing time: 6-12 seconds</p>
+        <div className="text-sm text-gray-500 text-center bg-gradient-to-r from-brand-soft-blue/5 to-brand-soft-pink/5 p-3 rounded-lg">
+          <p className="font-medium">⏰ Creating something special usually takes 6-12 seconds</p>
           {formattedTime > 15 && (
-            <p className="text-yellow-600 mt-1">
-              Taking longer than usual - please wait...
+            <p className="text-brand-warm-orange mt-2 font-medium">
+              🎨 Our artist is adding extra details - almost there!
+            </p>
+          )}
+          {formattedTime > 30 && (
+            <p className="text-brand-warm-blue mt-1">
+              ✨ This is going to be extra amazing - worth the wait!
             </p>
           )}
         </div>
