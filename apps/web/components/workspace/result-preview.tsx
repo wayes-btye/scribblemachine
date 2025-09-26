@@ -9,7 +9,7 @@ import { FileImage, FileText, RotateCcw, Share2, Printer, AlertCircle } from 'lu
 import { toast } from '@/components/ui/use-toast'
 import type { Job } from '@coloringpage/types'
 import { EditInterface } from './edit-interface'
-import { VersionComparison } from './version-comparison'
+import { VersionTimeline } from './version-timeline'
 
 // Extended job type that includes download URLs from API
 interface JobWithDownloads extends Job {
@@ -30,7 +30,7 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
   const [downloading, setDownloading] = useState(false)
   const [exporting, setExporting] = useState(false)
   const [imageError, setImageError] = useState(false)
-  const [showComparison, setShowComparison] = useState(false)
+  const [showTimeline, setShowTimeline] = useState(false)
   const [currentDisplayJob, setCurrentDisplayJob] = useState<JobWithDownloads>(job)
   const [originalJob] = useState<JobWithDownloads>(job) // Keep reference to original job for restoration
 
@@ -181,10 +181,10 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
     setImageError(false) // Reset image error when switching versions
   }, [])
 
-  // Add function to restore original state when hiding versions
-  const handleHideVersions = useCallback(() => {
-    console.log('[DEBUG] Hiding versions, restoring original job state')
-    setShowComparison(false)
+  // Add function to restore original state when hiding timeline
+  const handleHideTimeline = useCallback(() => {
+    console.log('[DEBUG] Hiding timeline, restoring original job state')
+    setShowTimeline(false)
     setCurrentDisplayJob(originalJob)
     setImageError(false)
   }, [originalJob])
@@ -207,9 +207,9 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
               <Badge
                 variant="outline"
                 className="cursor-pointer hover:bg-gray-50"
-                onClick={showComparison ? handleHideVersions : () => setShowComparison(true)}
+                onClick={showTimeline ? handleHideTimeline : () => setShowTimeline(true)}
               >
-                {showComparison ? 'Hide' : 'Show'} Versions
+                {showTimeline ? 'Hide' : 'Show'} Timeline
               </Badge>
             )}
           </div>
@@ -219,7 +219,7 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
         </div>
       </div>
 
-      {!showComparison && (
+      {!showTimeline && (
         <div className="space-y-4">
 
         <div className="bg-white p-4 rounded-lg border">
@@ -265,7 +265,7 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
       </div>
 
       )}
-      {!showComparison && (
+      {!showTimeline && (
       <div className="bg-gray-50 p-4 rounded-lg">
         <h4 className="font-medium mb-3">{isEditedJob ? "Edit Details" : "Generation Details"}</h4>
 
@@ -307,9 +307,9 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
       </div>
 
       )}
-      {/* Version Comparison */}
-      {hasMultipleVersions && showComparison && (
-        <VersionComparison
+      {/* Version Timeline */}
+      {hasMultipleVersions && showTimeline && (
+        <VersionTimeline
           jobId={job.id}
           onVersionSelect={handleVersionSelect}
           currentJobId={currentDisplayJob.id}
