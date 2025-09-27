@@ -1,5 +1,6 @@
 'use client'
 
+// Force rebuild to resolve Vercel file resolution issues
 import { useWorkspaceState } from '@/hooks/use-workspace-state'
 import { ModeToggle } from '@/components/workspace/mode-toggle'
 import { WorkspaceLeftPane } from '@/components/workspace/workspace-left-pane'
