@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Separator } from '@/components/ui/separator'
+// import { Separator } from '@/components/ui/separator' // Available for future UI separation
 import { Pencil, Loader2, Clock, AlertCircle, CheckCircle2 } from 'lucide-react'
 import { toast } from '@/components/ui/use-toast'
 import type { Job } from '@coloringpage/types'

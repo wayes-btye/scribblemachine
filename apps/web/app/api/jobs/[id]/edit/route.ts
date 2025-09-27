@@ -1,7 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import type { Database } from '@coloringpage/types'
 import { randomUUID } from 'crypto'
 
 interface EditJobRequest {
@@ -43,7 +42,7 @@ export async function POST(
     }
 
     const cookieStore = cookies()
-    const supabase = createServerClient<Database>(
+    const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
       {

@@ -1,6 +1,7 @@
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
+import { createServerClient } from '@supabase/ssr'
 import { NextRequest, NextResponse } from 'next/server'
+
+export const dynamic = 'force-dynamic'
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,8 +14,24 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const cookieStore = cookies()
-    const supabase = createRouteHandlerClient({ cookies: () => cookieStore })
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return request.headers.get('cookie') ?
+              request.headers.get('cookie')?.split(';').map(cookie => {
+                const [name, value] = cookie.trim().split('=')
+                return { name, value: value || '' }
+              }) || [] : []
+          },
+          setAll() {
+            // No-op for API routes
+          },
+        },
+      }
+    )
 
     const { error } = await supabase.auth.signInWithOtp({
       email,

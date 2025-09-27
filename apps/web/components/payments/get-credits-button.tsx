@@ -44,7 +44,7 @@ export function GetCreditsButton({
 
 // Specialized version for when user has insufficient credits
 export function InsufficientCreditsButton({
-  requiredCredits = 1,
+  requiredCredits: _requiredCredits = 1,
   onCreditsUpdated,
   className = ''
 }: {

@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Zap } from 'lucide-react'
 import { toast } from '@/components/ui/use-toast'
 import { ParameterControls } from '@/components/workspace/parameter-controls'
-import type { Complexity, LineThickness, Job, GenerationRequest } from '@coloringpage/types'
+import type { Job, GenerationRequest } from '@coloringpage/types'
 
 const formSchema = z.object({
   complexity: z.enum(['simple', 'standard', 'detailed'] as const),

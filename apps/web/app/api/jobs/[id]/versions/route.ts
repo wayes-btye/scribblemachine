@@ -1,7 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import type { Database } from '@coloringpage/types'
 
 interface JobVersion {
   id: string
@@ -23,7 +22,7 @@ interface JobVersion {
 }
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
@@ -37,7 +36,7 @@ export async function GET(
     }
 
     const cookieStore = cookies()
-    const supabase = createServerClient<Database>(
+    const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
       {
@@ -125,11 +124,11 @@ export async function GET(
     }
 
     // Get all edit jobs in the entire edit chain (including nested edits)
-    const allEditJobs = []
-    const processedJobIds = new Set()
+    const allEditJobs: any[] = []
+    const processedJobIds = new Set<string>()
 
     // Recursive function to find all descendants of a job
-    const findAllEditsRecursive = async (parentJobId) => {
+    const findAllEditsRecursive = async (parentJobId: string) => {
       // Find direct children of this job
       const { data: childJobs, error: childError } = await supabase
         .from('jobs')

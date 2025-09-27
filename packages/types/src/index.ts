@@ -30,11 +30,14 @@ export interface Job {
 }
 
 export interface JobParams {
-  asset_id: string;
-  complexity: Complexity;
-  line_thickness: LineThickness;
+  asset_id?: string;
+  complexity?: Complexity;
+  line_thickness?: LineThickness;
   paper_size?: PaperSize;
   title?: string;
+  text_prompt?: string;
+  edit_parent_id?: string;
+  edit_prompt?: string;
 }
 
 export interface Asset {

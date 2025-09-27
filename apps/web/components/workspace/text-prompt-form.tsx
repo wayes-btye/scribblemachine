@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { Sparkles } from 'lucide-react'
 import { toast } from '@/components/ui/use-toast'
 import { ParameterControls } from '@/components/workspace/parameter-controls'
-import type { Complexity, LineThickness, Job, TextGenerationRequest } from '@coloringpage/types'
+import type { Job, TextGenerationRequest } from '@coloringpage/types'
 
 const formSchema = z.object({
   textPrompt: z.string()

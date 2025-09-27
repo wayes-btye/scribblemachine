@@ -1,17 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/supabase/server'
+import { createServerClient } from '@supabase/ssr'
 import Stripe from 'stripe'
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('STRIPE_SECRET_KEY is not set')
-}
+export const dynamic = 'force-dynamic'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2025-08-27.basil',
-})
+}) : null
 
 export async function POST(request: NextRequest) {
   try {
+    if (!stripe) {
+      return NextResponse.json(
+        { error: 'Stripe not configured' },
+        { status: 503 }
+      )
+    }
+
     const { priceId, credits, pack } = await request.json()
 
     // Validate required fields
@@ -23,7 +28,24 @@ export async function POST(request: NextRequest) {
     }
 
     // Get authenticated user
-    const supabase = createServerSupabaseClient()
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return request.headers.get('cookie') ?
+              request.headers.get('cookie')?.split(';').map(cookie => {
+                const [name, value] = cookie.trim().split('=')
+                return { name, value: value || '' }
+              }) || [] : []
+          },
+          setAll() {
+            // No-op for API routes
+          },
+        },
+      }
+    )
     const { data: { user }, error: authError } = await supabase.auth.getUser()
 
     if (authError || !user) {

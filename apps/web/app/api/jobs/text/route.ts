@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { z } from 'zod'
-import type { TextGenerationRequest, Job } from '@coloringpage/types'
+import type { Job } from '@coloringpage/types'
 
 const requestSchema = z.object({
   textPrompt: z.string()

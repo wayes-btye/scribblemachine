@@ -44,6 +44,16 @@
       "env": {
         "SUPABASE_ACCESS_TOKEN": "sbp_4cd30d18d09eed63988af406c752348bda561900"
       }
+    },
+    "vercel": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@vercel/mcp@latest"
+      ]
     }
   }
 }

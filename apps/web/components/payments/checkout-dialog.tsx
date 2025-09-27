@@ -54,7 +54,7 @@ interface CheckoutDialogProps {
   onCreditsUpdated?: () => void
 }
 
-export function CheckoutDialog({ children, onCreditsUpdated }: CheckoutDialogProps) {
+export function CheckoutDialog({ children, onCreditsUpdated: _onCreditsUpdated }: CheckoutDialogProps) {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState<string | null>(null)
   const { user } = useAuth()

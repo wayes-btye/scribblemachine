@@ -1,12 +1,11 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
 import { ChevronLeft, ChevronRight, RotateCcw, Sparkles, AlertCircle } from 'lucide-react'
-import { toast } from '@/components/ui/use-toast'
 
 interface JobVersion {
   id: string

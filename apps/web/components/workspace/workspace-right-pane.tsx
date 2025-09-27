@@ -16,7 +16,6 @@ export function WorkspaceRightPane({ workspaceState }: WorkspaceRightPaneProps) 
     mode,
     step,
     data,
-    isLoading,
     completeGeneration,
     completeEditing,
     startEditing,

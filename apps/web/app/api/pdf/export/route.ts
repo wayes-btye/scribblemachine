@@ -1,7 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import type { Database } from '@coloringpage/types'
 
 interface ExportRequest {
   jobId?: string
@@ -19,7 +18,7 @@ export async function POST(request: NextRequest) {
     // Handle both parameter formats
     const jobId = requestBody.jobId || requestBody.job_id
     const paperSize = requestBody.paperSize || requestBody.paper_size
-    const { title, includeCreditLine } = requestBody
+    // title and includeCreditLine are available but not currently used
 
     // Validate input
     if (!jobId || !paperSize) {
@@ -39,7 +38,7 @@ export async function POST(request: NextRequest) {
     }
 
     const cookieStore = cookies()
-    const supabase = createServerClient<Database>(
+    const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
       {
@@ -95,13 +94,14 @@ export async function POST(request: NextRequest) {
     }
 
     // Check user's credit balance for watermark logic
-    const { data: credits } = await supabase
-      .from('credits')
-      .select('balance')
-      .eq('user_id', user.id)
-      .single()
+    // Note: credits and isFreeTier logic are preserved for future watermark implementation
+    // const { data: credits } = await supabase
+    //   .from('credits')
+    //   .select('balance')
+    //   .eq('user_id', user.id)
+    //   .single()
 
-    const isFreeTier = !credits || credits.balance <= 0
+    // const isFreeTier = !credits || credits.balance <= 0 // Available for future watermark logic
 
     // Look for existing PDF asset for this job
     const { data: pdfAsset, error: pdfAssetError } = await supabase

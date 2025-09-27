@@ -1,12 +1,28 @@
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
+import { createServerClient } from '@supabase/ssr'
 import { NextRequest, NextResponse } from 'next/server'
-import type { Database } from '@coloringpage/types'
 
-export async function GET() {
+export const dynamic = 'force-dynamic'
+
+export async function GET(request: NextRequest) {
   try {
-    const cookieStore = cookies()
-    const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore })
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return request.headers.get('cookie') ?
+              request.headers.get('cookie')?.split(';').map(cookie => {
+                const [name, value] = cookie.trim().split('=')
+                return { name, value: value || '' }
+              }) || [] : []
+          },
+          setAll() {
+            // No-op for API routes
+          },
+        },
+      }
+    )
 
     // Check authentication
     const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -76,8 +92,24 @@ export async function PATCH(request: NextRequest) {
   try {
     const { last_login_at } = await request.json()
 
-    const cookieStore = cookies()
-    const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore })
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return request.headers.get('cookie') ?
+              request.headers.get('cookie')?.split(';').map(cookie => {
+                const [name, value] = cookie.trim().split('=')
+                return { name, value: value || '' }
+              }) || [] : []
+          },
+          setAll() {
+            // No-op for API routes
+          },
+        },
+      }
+    )
 
     // Check authentication
     const { data: { user }, error: authError } = await supabase.auth.getUser()

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Progress } from '@/components/ui/progress'
+// import { Progress } from '@/components/ui/progress' // Available for future progress display
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Clock, CheckCircle, XCircle, Loader2, AlertCircle } from 'lucide-react'
@@ -79,8 +79,9 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
             console.log('  Status:', updatedJob.status)
             console.log('  Is edit job:', !!updatedJob.params_json?.edit_parent_id)
             console.log('  Edit prompt:', updatedJob.params_json?.edit_prompt)
-            console.log('  Download URLs:', updatedJob.download_urls)
-            console.log('  Has edge_map URL:', !!updatedJob.download_urls?.edge_map)
+            // Note: download_urls not available in Job interface - remove debug logging
+            // console.log('  Download URLs:', updatedJob.download_urls)
+            // console.log('  Has edge_map URL:', !!updatedJob.download_urls?.edge_map)
           }
 
           setJob(updatedJob)
