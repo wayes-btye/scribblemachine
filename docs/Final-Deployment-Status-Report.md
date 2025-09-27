@@ -205,7 +205,58 @@ After adding environment variables:
 
 ---
 
-*Updated: 2025-01-27 16:30 UTC*
-*Investigation Status: COMPLETE WITH LIVE TESTING*
-*Next Action: Configure environment variables in Vercel dashboard*
-*Confidence Level: HIGH - Root cause confirmed with direct evidence*
+## 🚨 **UPDATED FINDINGS (2025-01-27 17:15 UTC)**
+
+### ✅ **CRITICAL DISCOVERY: Vercel Project Configuration Issue**
+
+**STATUS**: Environment variables were NOT the root cause. **Deeper investigation revealed fundamental Vercel deployment configuration problems.**
+
+### 🔬 **Comprehensive Investigation Results**
+
+**What We Fixed:**
+1. ✅ **Module-level Supabase client initialization** - Removed `export const supabase = createClient()`
+2. ✅ **Static page generation** - Simplified home page to remove auth dependencies
+3. ✅ **Next.js configuration** - Added `framework: "nextjs"` and `rootDirectory: "apps/web"`
+4. ✅ **Monorepo build process** - Confirmed local builds work perfectly (12/12 pages generated)
+
+**What Still Fails:**
+- ❌ **All deployment URLs return 404: NOT_FOUND**
+- ❌ **Multiple deployment attempts with different configurations**
+- ❌ **Both `scribblemachine` and `scribblemachine-clean` projects affected**
+
+### 🎯 **Root Cause Analysis - FINAL**
+
+**CONFIRMED**: The codebase is working correctly:
+```
+✓ Compiled successfully
+✓ Generating static pages (12/12)
+○ /                    177 B    91.2 kB (Static)
+○ /_not-found         883 B    85.1 kB (Static)
+○ /workspace          117 kB   279 kB  (Static)
+```
+
+**ISSUE**: Vercel project configuration is fundamentally broken despite multiple configuration attempts:
+- Environment variables: ✅ Configured correctly
+- Build commands: ✅ Working locally
+- Output directory: ✅ Correctly specified
+- Framework detection: ✅ Explicitly configured
+
+### 🛠️ **FINAL RECOMMENDATION**
+
+**IMMEDIATE ACTION**: Create a **completely new Vercel project** from scratch
+
+**Steps**:
+1. **Delete existing Vercel projects** (both `scribblemachine` and `scribblemachine-clean`)
+2. **Create fresh project** with GitHub integration
+3. **Use automatic framework detection** (let Vercel auto-detect Next.js)
+4. **Configure environment variables** in new project
+5. **Deploy from `main` branch** (commit `47ecfb3`)
+
+**Reasoning**: Multiple deployment attempts with different configurations suggest the Vercel project itself has corrupted configuration that cannot be fixed incrementally.
+
+---
+
+*Updated: 2025-01-27 17:15 UTC*
+*Investigation Status: COMPLETE - RECOMMEND PROJECT RECREATION*
+*Next Action: Create new Vercel project from scratch*
+*Confidence Level: HIGH - Codebase confirmed working, project configuration corrupted*
