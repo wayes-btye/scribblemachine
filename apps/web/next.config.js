@@ -14,6 +14,7 @@ const nextConfig = {
       },
     ],
   },
+  // Force fresh build to pick up environment variables - 2025-01-27
 };
 
 module.exports = nextConfig;
