@@ -66,7 +66,7 @@ export function WorkspaceRightPane({ workspaceState }: WorkspaceRightPaneProps) 
         <Card className="p-4 sm:p-6">
           <h2 className="text-lg sm:text-xl font-semibold mb-4">Your Idea</h2>
           <div className="bg-gray-50 rounded-lg p-4">
-            <p className="text-gray-700 italic">&quot;{data.textPrompt}&quot;</p>
+            <p className="text-gray-700 italic">"{data.textPrompt}"</p>
           </div>
         </Card>
       )}

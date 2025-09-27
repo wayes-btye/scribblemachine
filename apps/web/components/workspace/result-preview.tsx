@@ -273,7 +273,7 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
         {isEditedJob && currentDisplayJob.params_json?.edit_prompt && (
           <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
             <span className="text-blue-700 font-medium text-sm">Edit Request:</span>
-            <p className="text-blue-800 text-sm mt-1">&quot;{currentDisplayJob.params_json.edit_prompt}&quot;</p>
+            <p className="text-blue-800 text-sm mt-1">"{currentDisplayJob.params_json.edit_prompt}"</p>
           </div>
         )}
 

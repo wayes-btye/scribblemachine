@@ -5,17 +5,20 @@ import { ModeToggle } from '@/components/workspace/mode-toggle'
 import { WorkspaceLeftPane } from '@/components/workspace/workspace-left-pane'
 import { WorkspaceRightPane } from '@/components/workspace/workspace-right-pane'
 import { useAuth } from '@/lib/auth/auth-provider'
-import { MagicLinkForm } from '@/components/auth/magic-link-form'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Upload, Sparkles, Lock } from 'lucide-react'
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function WorkspacePage() {
   const { user, loading } = useAuth()
   const workspaceState = useWorkspaceState()
-  const [authDialogOpen, setAuthDialogOpen] = useState(false)
+  const router = useRouter()
+
+  // Redirect to home if not authenticated (but only after loading is complete)
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/')
+    }
+  }, [user, loading, router])
 
   // Show loading while checking authentication
   if (loading) {
@@ -29,73 +32,9 @@ export default function WorkspacePage() {
     )
   }
 
-  // Show authentication gate if user is not signed in
+  // If loading is complete but no user, let the useEffect handle the redirect
   if (!user) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-brand-cream via-brand-soft-blue/10 to-brand-soft-pink/10">
-        <div className="container mx-auto px-4 py-16 md:py-24">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Authentication Gate */}
-            <Card className="max-w-2xl mx-auto mb-8">
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 w-16 h-16 bg-brand-warm-blue/10 rounded-full flex items-center justify-center">
-                  <Lock className="w-8 h-8 text-brand-warm-blue" />
-                </div>
-                <CardTitle className="text-2xl md:text-3xl">
-                  Sign In to Create Your Coloring Page
-                </CardTitle>
-                <CardDescription className="text-lg">
-                  Access the workspace to upload photos or generate custom coloring pages
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-gray-600 mb-8">
-                  Sign in securely with your email to start creating amazing coloring pages. No password required!
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-                  <Dialog open={authDialogOpen} onOpenChange={setAuthDialogOpen}>
-                    <DialogTrigger asChild>
-                      <Button
-                        size="lg"
-                        className="bg-brand-warm-blue hover:bg-brand-warm-blue/90 text-white text-lg px-8 py-4 rounded-2xl shadow-lg"
-                      >
-                        <Upload className="mr-2 h-5 w-5" />
-                        Sign In to Upload Photo
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-md border-0 p-0">
-                      <MagicLinkForm
-                        onSuccess={() => {
-                          setAuthDialogOpen(false)
-                        }}
-                      />
-                    </DialogContent>
-                  </Dialog>
-
-                  <Dialog open={authDialogOpen} onOpenChange={setAuthDialogOpen}>
-                    <DialogTrigger asChild>
-                      <Button
-                        variant="outline"
-                        size="lg"
-                        className="border-brand-warm-orange text-brand-warm-orange hover:bg-brand-warm-orange/10 text-lg px-8 py-4 rounded-2xl"
-                      >
-                        <Sparkles className="mr-2 h-5 w-5" />
-                        Sign In to Imagine Ideas
-                      </Button>
-                    </DialogTrigger>
-                  </Dialog>
-                </div>
-
-                <p className="text-sm text-gray-500">
-                  Free tier available: 3 coloring pages with watermark
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
-    )
+    return null
   }
 
   return (

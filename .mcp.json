@@ -44,10 +44,6 @@
       "env": {
         "SUPABASE_ACCESS_TOKEN": "sbp_4cd30d18d09eed63988af406c752348bda561900"
       }
-    },
-    "vercel": {
-      "type": "http",
-      "url": "https://mcp.vercel.com"
     }
   }
 }

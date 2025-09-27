@@ -144,7 +144,7 @@ export function TextPromptForm({ onGenerationStart, disabled = false }: TextProm
                   disabled={disabled || generating}
                   aria-label={`Use example prompt: ${example}`}
                 >
-                  &quot;{example}&quot;
+                  "{example}"
                 </button>
               ))}
             </div>

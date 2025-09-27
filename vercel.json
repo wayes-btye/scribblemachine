@@ -1,6 +1,0 @@
-{
-  "buildCommand": "pnpm web:build",
-  "installCommand": "pnpm install --frozen-lockfile",
-  "framework": null,
-  "outputDirectory": "apps/web/.next"
-}
