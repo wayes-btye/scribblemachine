@@ -1,5 +1,4 @@
 import { createGeminiService } from './services/gemini-service';
-import * as fs from 'fs';
 import * as path from 'path';
 import dotenv from 'dotenv';
 

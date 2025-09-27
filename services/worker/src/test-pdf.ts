@@ -118,20 +118,20 @@ async function testPDFGeneration(): Promise<void> {
 
       // Add title at the top
       doc.fontSize(14)
-         .fillColor('black')
-         .text('Test Coloring Page', marginPoints, marginPoints / 2, {
-           align: 'center',
-           width: contentWidth
-         });
+        .fillColor('black')
+        .text('Test Coloring Page', marginPoints, marginPoints / 2, {
+          align: 'center',
+          width: contentWidth
+        });
 
       // Add page number at the bottom
       doc.fontSize(10)
-         .text(`Page 1 | ${sizeName.toUpperCase()} | ${DPI} DPI`,
-               marginPoints,
-               pageHeightPoints - marginPoints / 2, {
-           align: 'center',
-           width: contentWidth
-         });
+        .text(`Page 1 | ${sizeName.toUpperCase()} | ${DPI} DPI`,
+          marginPoints,
+          pageHeightPoints - marginPoints / 2, {
+          align: 'center',
+          width: contentWidth
+        });
 
     } catch (error) {
       console.error('Error adding image to PDF:', error);
@@ -140,7 +140,7 @@ async function testPDFGeneration(): Promise<void> {
     // Finalize PDF
     doc.end();
 
-    await new Promise((resolve) => stream.on('finish', resolve));
+    await new Promise<void>((resolve) => stream.on('finish', resolve));
 
     const generationTime = Date.now() - startTime;
     const stats = fs.statSync(pdfPath);
@@ -182,18 +182,18 @@ async function testPDFGeneration(): Promise<void> {
     if (i > 0) multiDoc.addPage();
 
     multiDoc.fontSize(24)
-            .text(`Coloring Page ${i + 1}`, { align: 'center' });
+      .text(`Coloring Page ${i + 1}`, { align: 'center' });
 
     // Draw simple shapes for each page
     multiDoc.rect(100, 200, 400, 500)
-            .stroke();
+      .stroke();
 
     multiDoc.circle(300, 450, 100)
-            .stroke();
+      .stroke();
   }
 
   multiDoc.end();
-  await new Promise((resolve) => multiStream.on('finish', resolve));
+  await new Promise<void>((resolve) => multiStream.on('finish', resolve));
 
   const multiPageTime = Date.now() - multiPageStart;
   const multiStats = fs.statSync(multiPdfPath);

@@ -2,25 +2,28 @@ import 'dotenv/config';
 import { v4 as uuidv4 } from 'uuid';
 import { validateEnv, config } from '@coloringpage/config';
 import { createSupabaseAdminClient } from '@coloringpage/database';
+import type { Job } from '@coloringpage/types';
 import { createGeminiService, GenerationRequest, TextGenerationRequest, EditRequest } from './services/gemini-service';
 import PDFDocument from 'pdfkit';
 import sharp from 'sharp';
 
-interface Job {
-  id: string;
-  user_id: string;
-  status: string;
-  params_json: {
-    asset_id?: string; // Optional for text-based jobs
-    text_prompt?: string; // For text-to-image jobs
-    edit_parent_id?: string; // For edit jobs
-    edit_prompt?: string; // For edit jobs
-    edit_source_asset_id?: string; // For edit jobs
-    complexity: 'simple' | 'standard' | 'detailed';
-    line_thickness: 'thin' | 'medium' | 'thick';
-    custom_prompt?: string;
-  };
-  created_at: string;
+// Extended JobParams interface for worker-specific properties
+interface ExtendedJobParams {
+  asset_id?: string;
+  complexity?: 'simple' | 'standard' | 'detailed';
+  line_thickness?: 'thin' | 'medium' | 'thick';
+  paper_size?: 'A4' | 'Letter';
+  title?: string;
+  text_prompt?: string;
+  edit_parent_id?: string;
+  edit_prompt?: string;
+  edit_source_asset_id?: string;
+  custom_prompt?: string;
+}
+
+// Extended Job interface for worker
+interface ExtendedJob extends Omit<Job, 'params_json'> {
+  params_json: ExtendedJobParams;
 }
 
 async function createPDFFromPNG(pngBuffer: Buffer): Promise<Buffer> {
@@ -133,13 +136,13 @@ async function main() {
 
           const timestamp = new Date().toISOString();
           console.log(`[${timestamp}] 📊 No queued jobs. Recent jobs:`,
-            recentJobs?.map(j => `${j.id.substring(0,8)}:${j.status}${j.params_json?.edit_parent_id ? ':EDIT' : ''}`) || 'none');
+            recentJobs?.map((j: any) => `${j.id.substring(0, 8)}:${j.status}${j.params_json?.edit_parent_id ? ':EDIT' : ''}`) || 'none');
           return; // No jobs to process
         }
 
-        const job = jobs[0] as Job;
+        const job = jobs[0] as ExtendedJob;
         const jobType = job.params_json.edit_parent_id ? 'EDIT' :
-                       job.params_json.text_prompt ? 'TEXT' : 'IMAGE';
+          job.params_json.text_prompt ? 'TEXT' : 'IMAGE';
         console.log(`🎨 Processing ${jobType} job ${job.id} for user ${job.user_id}`);
 
         if (jobType === 'EDIT') {
@@ -147,7 +150,7 @@ async function main() {
         }
 
         // Update job status to running
-        await supabase
+        await (supabase as any)
           .from('jobs')
           .update({
             status: 'running',
@@ -175,7 +178,7 @@ async function main() {
   }
 }
 
-async function processGenerationJob(job: Job, supabase: ReturnType<typeof createSupabaseAdminClient>, geminiService: any) {
+async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeof createSupabaseAdminClient>, geminiService: any) {
   const startTime = Date.now();
 
   try {
@@ -187,9 +190,9 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
       console.log(`  Text prompt: "${job.params_json.text_prompt}"`);
 
       const textRequest: TextGenerationRequest = {
-        textPrompt: job.params_json.text_prompt,
-        complexity: job.params_json.complexity,
-        lineThickness: job.params_json.line_thickness
+        textPrompt: job.params_json.text_prompt!,
+        complexity: job.params_json.complexity || 'standard',
+        lineThickness: job.params_json.line_thickness || 'medium'
       };
 
       console.log(`  Sending text request to Gemini (${job.params_json.complexity}, ${job.params_json.line_thickness})`);
@@ -205,7 +208,7 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
       const { data: allAssets } = await supabase
         .from('assets')
         .select('id, kind, storage_path, user_id')
-        .eq('id', job.params_json.edit_source_asset_id);
+        .eq('id', job.params_json.edit_source_asset_id!);
 
       console.log(`🔍 DEBUG: Assets for source ID ${job.params_json.edit_source_asset_id}:`, allAssets);
 
@@ -213,7 +216,7 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
       const { data: sourceAsset, error: sourceAssetError } = await supabase
         .from('assets')
         .select('storage_path')
-        .eq('id', job.params_json.edit_source_asset_id)
+        .eq('id', job.params_json.edit_source_asset_id!)
         .eq('kind', 'edge_map')
         .single();
 
@@ -235,7 +238,7 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
       // Download the existing coloring page
       const { data: imageData, error: downloadError } = await supabase.storage
         .from('intermediates')
-        .download(sourceAsset.storage_path);
+        .download((sourceAsset as any).storage_path);
 
       if (downloadError || !imageData) {
         throw new Error('Failed to download existing coloring page for editing');
@@ -249,9 +252,9 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
       const editRequest: EditRequest = {
         existingImageBase64: base64Image,
         mimeType: 'image/png',
-        editPrompt: job.params_json.edit_prompt,
-        complexity: job.params_json.complexity,
-        lineThickness: job.params_json.line_thickness,
+        editPrompt: job.params_json.edit_prompt!,
+        complexity: job.params_json.complexity || 'standard',
+        lineThickness: job.params_json.line_thickness || 'medium',
         originalPrompt: job.params_json.custom_prompt
       };
 
@@ -267,7 +270,7 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
       const { data: asset, error: assetError } = await supabase
         .from('assets')
         .select('storage_path')
-        .eq('id', job.params_json.asset_id)
+        .eq('id', job.params_json.asset_id!)
         .eq('kind', 'original')
         .single();
 
@@ -278,7 +281,7 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
       // Download original image
       const { data: imageData, error: downloadError } = await supabase.storage
         .from('originals')
-        .download(asset.storage_path);
+        .download((asset as any).storage_path);
 
       if (downloadError || !imageData) {
         throw new Error('Failed to download original image');
@@ -292,8 +295,8 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
       const geminiRequest: GenerationRequest = {
         imageBase64: base64Image,
         mimeType: 'image/jpeg',
-        complexity: job.params_json.complexity,
-        lineThickness: job.params_json.line_thickness
+        complexity: job.params_json.complexity || 'standard',
+        lineThickness: job.params_json.line_thickness || 'medium'
       };
 
       console.log(`  Sending image request to Gemini (${job.params_json.complexity}, ${job.params_json.line_thickness})`);
@@ -326,7 +329,7 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
 
     // Create edge map asset record with proper UUID
     const edgeAssetId = uuidv4();
-    const { error: insertError } = await supabase.from('assets').insert({
+    const { error: insertError } = await (supabase as any).from('assets').insert({
       id: edgeAssetId,
       user_id: job.user_id,
       kind: 'edge_map',
@@ -361,7 +364,7 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
       } else {
         // Create PDF asset record
         const pdfAssetId = uuidv4();
-        const { error: pdfInsertError } = await supabase.from('assets').insert({
+        const { error: pdfInsertError } = await (supabase as any).from('assets').insert({
           id: pdfAssetId,
           user_id: job.user_id,
           kind: 'pdf',
@@ -381,7 +384,7 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
     }
 
     // Update job as completed with metadata
-    await supabase
+    await (supabase as any)
       .from('jobs')
       .update({
         status: 'succeeded',
@@ -402,7 +405,7 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
 
     // Refund credit to user on failure
     try {
-      const { error: creditError } = await supabase.rpc('increment_user_credits', {
+      const { error: creditError } = await (supabase as any).rpc('increment_user_credits', {
         user_id: job.user_id,
         amount: 1
       });
@@ -411,7 +414,7 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
         console.error(`Failed to refund credit for job ${job.id}:`, creditError);
       } else {
         // Record credit refund event
-        await supabase
+        await (supabase as any)
           .from('credit_events')
           .insert({
             user_id: job.user_id,
@@ -426,7 +429,7 @@ async function processGenerationJob(job: Job, supabase: ReturnType<typeof create
     }
 
     // Update job as failed
-    await supabase
+    await (supabase as any)
       .from('jobs')
       .update({
         status: 'failed',

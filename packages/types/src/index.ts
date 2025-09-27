@@ -38,6 +38,8 @@ export interface JobParams {
   text_prompt?: string;
   edit_parent_id?: string;
   edit_prompt?: string;
+  edit_source_asset_id?: string;
+  custom_prompt?: string;
 }
 
 export interface Asset {

@@ -58,6 +58,11 @@ async function testGeminiServiceParameters() {
   console.log(`📷 Testing with ${testImages.length} image(s)\n`);
 
   // Initialize Gemini service
+  if (!GEMINI_API_KEY) {
+    console.error('❌ GEMINI_API_KEY is not set');
+    return;
+  }
+
   const geminiService = createGeminiService(GEMINI_API_KEY);
 
   // All parameter combinations to test (PRD requirements)

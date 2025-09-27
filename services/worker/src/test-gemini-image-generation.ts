@@ -92,6 +92,11 @@ async function testGeminiImageGeneration() {
 
   try {
     // Initialize Gemini with IMAGE GENERATION model (nano-banana)
+    if (!GEMINI_API_KEY) {
+      console.error('❌ GEMINI_API_KEY is not set');
+      return;
+    }
+
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-image-preview' });
 

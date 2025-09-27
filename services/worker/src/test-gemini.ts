@@ -16,6 +16,12 @@ if (!GEMINI_API_KEY) {
 
 async function testGeminiImageGeneration() {
   console.log('🚀 Testing Google Gemini API Integration\n');
+
+  if (!GEMINI_API_KEY) {
+    console.error('❌ GEMINI_API_KEY is not set');
+    return;
+  }
+
   console.log('API Key:', GEMINI_API_KEY.substring(0, 8) + '...');
 
   try {
@@ -45,8 +51,7 @@ async function testGeminiImageGeneration() {
     - Suitable for ages 4-10`;
 
     const startTime = Date.now();
-    const promptResult = await model.generateContent(coloringPagePrompt);
-    const promptResponse = await promptResult.response;
+    await model.generateContent(coloringPagePrompt);
     const responseTime = Date.now() - startTime;
 
     console.log('✅ Prompt accepted');

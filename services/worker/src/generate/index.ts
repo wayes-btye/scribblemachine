@@ -119,7 +119,7 @@ export async function setupGenerationWorker(
         const { error: creditError } = await supabase
           .from('credits')
           .update({
-            balance: supabase.sql`balance + 1`,
+            balance: 1, // Refund 1 credit
             updated_at: new Date().toISOString()
           })
           .eq('user_id', user_id);
