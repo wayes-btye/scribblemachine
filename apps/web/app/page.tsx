@@ -1,13 +1,8 @@
-'use client'
-
 import { Button } from '@/components/ui/button'
-import { useAuth } from '@/lib/auth/auth-provider'
 import { Upload, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Home() {
-  const { user } = useAuth()
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-cream via-brand-soft-blue/10 to-brand-soft-pink/10">
       <div className="container mx-auto px-4 py-16 md:py-24">
@@ -53,11 +48,7 @@ export default function Home() {
           {/* Status Bar */}
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 max-w-md mx-auto shadow-sm">
             <p className="text-sm text-gray-600">
-              {user ? (
-                <>Welcome back! You&apos;re ready to create amazing coloring pages.</>
-              ) : (
-                <>Free Tier: 3 Pages • &apos;Made with Scribble Machine&apos; Watermark</>
-              )}
+              Free Tier: 3 Pages • &apos;Made with Scribble Machine&apos; Watermark
             </p>
           </div>
         </div>
