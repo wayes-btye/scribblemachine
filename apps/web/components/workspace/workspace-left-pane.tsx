@@ -32,7 +32,7 @@ export function WorkspaceLeftPane({ workspaceState }: WorkspaceLeftPaneProps) {
             <div className="text-4xl sm:text-6xl">🎨</div>
             <h2 className="text-lg sm:text-xl font-semibold">Get Started</h2>
             <p className="text-gray-600 text-sm sm:text-base">
-              Choose how you'd like to create your coloring page using the toggle above
+              Choose how you&apos;d like to create your coloring page using the toggle above
             </p>
           </div>
         </Card>
@@ -128,7 +128,7 @@ export function WorkspaceLeftPane({ workspaceState }: WorkspaceLeftPaneProps) {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-green-800">Idea submitted successfully</p>
-                  <p className="text-xs text-green-600">"{data.textPrompt}"</p>
+                  <p className="text-xs text-green-600">&quot;{data.textPrompt}&quot;</p>
                 </div>
               </div>
               <button

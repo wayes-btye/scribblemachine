@@ -267,7 +267,7 @@ export function VersionTimeline({ jobId, onVersionSelect, currentJobId }: Versio
           {currentVersion.version_type === 'edit' && currentVersion.edit_prompt && (
             <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
               <span className="text-blue-700 font-medium text-sm">Edit Request:</span>
-              <p className="text-blue-800 text-sm mt-1">"{currentVersion.edit_prompt}"</p>
+              <p className="text-blue-800 text-sm mt-1">&quot;{currentVersion.edit_prompt}&quot;</p>
             </div>
           )}
         </div>
