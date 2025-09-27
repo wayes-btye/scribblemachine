@@ -57,18 +57,6 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
   const [startTime] = useState(Date.now())
   const [elapsedTime, setElapsedTime] = useState(0)
 
-  // Early return if job is invalid
-  if (!job || !job.id) {
-    return (
-      <Alert variant="destructive">
-        <AlertCircle className="h-4 w-4" />
-        <AlertDescription>
-          Invalid job data received. Please try again.
-        </AlertDescription>
-      </Alert>
-    )
-  }
-
   // Poll for job status updates
   useEffect(() => {
     if (!job.id || job.status === 'succeeded' || job.status === 'failed') {
@@ -135,6 +123,18 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
 
     return () => clearInterval(interval)
   }, [startTime, job.status, job.id])
+
+  // Early return if job is invalid (must be after all hooks)
+  if (!job || !job.id) {
+    return (
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertDescription>
+          Invalid job data received. Please try again.
+        </AlertDescription>
+      </Alert>
+    )
+  }
 
   const config = statusConfig[job.status] || statusConfig.queued
   const Icon = config.icon

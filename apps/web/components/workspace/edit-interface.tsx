@@ -187,7 +187,7 @@ export function EditInterface({ job, onEditJobCreated }: EditInterfaceProps) {
         <Alert className="border-blue-200 bg-blue-50">
           <CheckCircle2 className="h-4 w-4 text-blue-600" />
           <AlertDescription className="text-blue-800">
-            Describe what you'd like to change and we'll create an improved version. Each edit uses 1 credit.
+            Describe what you&apos;d like to change and we&apos;ll create an improved version. Each edit uses 1 credit.
           </AlertDescription>
         </Alert>
       )}
@@ -211,7 +211,7 @@ export function EditInterface({ job, onEditJobCreated }: EditInterfaceProps) {
             />
             <div className="flex justify-between items-center mt-1">
               <p className="text-xs text-gray-600">
-                Be specific: "add stars", "make lines thicker", "remove background details"
+                Be specific: &quot;add stars&quot;, &quot;make lines thicker&quot;, &quot;remove background details&quot;
               </p>
               <span className="text-xs text-gray-500">
                 {editPrompt.length}/200
