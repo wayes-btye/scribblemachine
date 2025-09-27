@@ -8,5 +8,5 @@ export function createClient() {
   )
 }
 
-// Default client instance for direct usage
-export const supabase = createClient()
+// Note: Removed module-level client instance to prevent build-time initialization
+// Use createClient() function instead for proper client-side initialization
