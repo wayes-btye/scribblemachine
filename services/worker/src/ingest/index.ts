@@ -1,6 +1,5 @@
 import PgBoss from 'pg-boss';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { Database } from '@coloringpage/database';
 import { config } from '@coloringpage/config';
 import sharp from 'sharp';
 
@@ -12,7 +11,7 @@ interface IngestJobData {
 
 export async function setupIngestWorker(
   boss: PgBoss,
-  supabase: SupabaseClient<Database>
+  supabase: SupabaseClient<any>
 ) {
   await boss.work('image-ingest', { teamSize: 2 }, async (job) => {
     const { asset_id, user_id, original_path } = job.data as IngestJobData;

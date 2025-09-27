@@ -175,7 +175,7 @@ async function main() {
   }
 }
 
-async function processGenerationJob(job: Job, supabase: any, geminiService: any) {
+async function processGenerationJob(job: Job, supabase: ReturnType<typeof createSupabaseAdminClient>, geminiService: any) {
   const startTime = Date.now();
 
   try {

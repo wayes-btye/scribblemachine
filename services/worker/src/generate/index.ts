@@ -1,6 +1,5 @@
 import PgBoss from 'pg-boss';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { Database } from '@coloringpage/database';
 import { JobParams } from '@coloringpage/types';
 import { createGeminiService, GenerationRequest } from '../services/gemini-service';
 
@@ -13,7 +12,7 @@ interface GenerationJobData {
 
 export async function setupGenerationWorker(
   boss: PgBoss,
-  supabase: SupabaseClient<Database>
+  supabase: SupabaseClient<any>
 ) {
   // Initialize production Gemini service
   const geminiService = createGeminiService(process.env.GEMINI_API_KEY!);

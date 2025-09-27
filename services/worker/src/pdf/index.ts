@@ -1,6 +1,5 @@
 import PgBoss from 'pg-boss';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { Database } from '@coloringpage/database';
 import { PaperSize } from '@coloringpage/types';
 import { config } from '@coloringpage/config';
 import PDFDocument from 'pdfkit';
@@ -15,7 +14,7 @@ interface PDFJobData {
 
 export async function setupPDFWorker(
   boss: PgBoss,
-  supabase: SupabaseClient<Database>
+  supabase: SupabaseClient<any>
 ) {
   await boss.work('pdf-generation', { teamSize: 2 }, async (job) => {
     const { user_id, job_id, paper_size, title } = job.data as PDFJobData;

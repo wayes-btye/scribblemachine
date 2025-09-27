@@ -1,5 +1,5 @@
 import PgBoss from 'pg-boss';
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { createGeminiService, GenerationRequest as GeminiRequest } from '../services/gemini-service';
 import { Job, JobParams, Asset, JobStatus } from '@coloringpage/types';
 
@@ -34,7 +34,7 @@ export interface GenerationWorkerConfig {
 
 export class GenerationWorker {
   private boss: PgBoss;
-  private supabase: ReturnType<typeof createClient>;
+  private supabase: SupabaseClient<any>;
   private geminiService: ReturnType<typeof createGeminiService>;
   private config: GenerationWorkerConfig;
   private isRunning = false;

@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import * as fs from 'fs';
+// import * as fs from 'fs';
 import * as path from 'path';
 import dotenv from 'dotenv';
 
