@@ -6,6 +6,7 @@ import type { Job } from '@coloringpage/types';
 import { createGeminiService, GenerationRequest, TextGenerationRequest, EditRequest } from './services/gemini-service';
 import PDFDocument from 'pdfkit';
 import sharp from 'sharp';
+import * as http from 'http';
 
 // Extended JobParams interface for worker-specific properties
 interface ExtendedJobParams {
@@ -88,8 +89,36 @@ async function createPDFFromPNG(pngBuffer: Buffer): Promise<Buffer> {
   return pdfBuffer;
 }
 
+// Start HTTP server for Cloud Run health checks
+function startHealthCheckServer() {
+  const port = process.env.PORT || 8080;
+
+  const server = http.createServer((req, res) => {
+    if (req.url === '/health') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        status: 'healthy',
+        service: 'coloringpage-worker',
+        timestamp: new Date().toISOString()
+      }));
+    } else {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('Not found');
+    }
+  });
+
+  server.listen(port, () => {
+    console.log(`🏥 Health check server listening on port ${port}`);
+  });
+
+  return server;
+}
+
 async function main() {
   try {
+    // Start health check server for Cloud Run
+    startHealthCheckServer();
+
     // Validate environment variables
     const env = validateEnv(process.env);
     console.log('✅ Environment variables validated');

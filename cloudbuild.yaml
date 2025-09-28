@@ -1,0 +1,39 @@
+steps:
+  # Build the Docker image using the worker Dockerfile
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-f'
+      - 'services/worker/Dockerfile'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/coloringpage-worker:latest'
+      - '.'
+
+  # Push the image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/coloringpage-worker:latest'
+
+  # Deploy to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'scribblemachine-worker'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/coloringpage-worker:latest'
+      - '--region'
+      - 'europe-west1'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '2Gi'
+      - '--cpu'
+      - '2'
+      - '--set-env-vars'
+      - 'NEXT_PUBLIC_SUPABASE_URL=https://htxsylxwvcbrazdowjys.supabase.co,SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0eHN5bHh3dmNicmF6ZG93anlzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1ODIxMTM0MSwiZXhwIjoyMDczNzg3MzQxfQ.DDB0D4h8359eJix-Yuy64Mf98VQngDyJpTGEbtH6GmA,GEMINI_API_KEY=AIzaSyBnFcITNFm0i4hk9-u1xCbAd272fzfpJqs,NODE_ENV=production'
+
+images:
+  - 'gcr.io/$PROJECT_ID/coloringpage-worker:latest'
+
+timeout: '1200s'
