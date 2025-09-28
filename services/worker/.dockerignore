@@ -48,6 +48,11 @@ Dockerfile*
 coverage/
 .nyc_output/
 test-results/
+test-output/
+test-output-*/
+test-*.ts
+test-*.txt
+test-images/
 
 # Temporary files
 tmp/

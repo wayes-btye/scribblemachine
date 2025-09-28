@@ -58,8 +58,8 @@ export async function setupGenerationWorker(
       const geminiRequest: GenerationRequest = {
         imageBase64: base64Image,
         mimeType: 'image/jpeg',
-        complexity: params.complexity,
-        lineThickness: params.line_thickness
+        complexity: params.complexity || 'standard',
+        lineThickness: params.line_thickness || 'medium'
       };
 
       // Generate coloring page with production Gemini service

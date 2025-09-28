@@ -166,8 +166,8 @@ export class GenerationWorker {
       const geminiRequest: GeminiRequest = {
         imageBase64: imageData.toString('base64'),
         mimeType: 'image/jpeg', // Preprocessed by Gemini service
-        complexity: params.complexity,
-        lineThickness: params.line_thickness
+        complexity: params.complexity || 'standard',
+        lineThickness: params.line_thickness || 'medium'
       };
 
       // 3. Generate coloring page with Gemini
