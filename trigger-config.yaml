@@ -1,0 +1,8 @@
+name: scribblemachine-worker-deploy
+description: "Build and deploy worker service on push to main branch"
+github:
+  owner: wayes-btye
+  name: scribblemachine
+  push:
+    branch: ^main$
+filename: cloudbuild.yaml
