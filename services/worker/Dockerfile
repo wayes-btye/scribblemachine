@@ -7,8 +7,10 @@ RUN npm install -g pnpm@8.15.1
 # Set working directory
 WORKDIR /app
 
-# Copy package files
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+# Copy package files individually for better error handling
+COPY package.json ./
+COPY pnpm-lock.yaml ./
+COPY pnpm-workspace.yaml ./
 COPY packages/types/package.json ./packages/types/
 COPY packages/database/package.json ./packages/database/
 COPY packages/config/package.json ./packages/config/
