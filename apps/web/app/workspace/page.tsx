@@ -5,15 +5,15 @@ import { useWorkspaceState } from '@/hooks/use-workspace-state'
 import { ModeToggle } from '@/components/workspace/mode-toggle'
 import { WorkspaceLeftPane } from '@/components/workspace/workspace-left-pane'
 import { WorkspaceRightPane } from '@/components/workspace/workspace-right-pane'
+import { WorkspaceModeHandler } from '@/components/workspace/workspace-mode-handler'
 import { useAuth } from '@/lib/auth/auth-provider'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useEffect, Suspense } from 'react'
 
 export default function WorkspacePage() {
   const { user, loading } = useAuth()
   const workspaceState = useWorkspaceState()
   const router = useRouter()
-  const searchParams = useSearchParams()
 
   // Redirect to home if not authenticated (but only after loading is complete)
   useEffect(() => {
@@ -21,14 +21,6 @@ export default function WorkspacePage() {
       router.push('/')
     }
   }, [user, loading, router])
-
-  // Set mode from URL parameter
-  useEffect(() => {
-    const mode = searchParams.get('mode')
-    if (mode && (mode === 'upload' || mode === 'prompt')) {
-      workspaceState.setMode(mode)
-    }
-  }, [searchParams, workspaceState.setMode])
 
   // Show loading while checking authentication
   if (loading) {
@@ -49,6 +41,11 @@ export default function WorkspacePage() {
 
   return (
     <div className="min-h-screen relative">
+      {/* Handle URL mode parameter */}
+      <Suspense fallback={null}>
+        <WorkspaceModeHandler setMode={workspaceState.setMode} />
+      </Suspense>
+
       <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         <div className="max-w-6xl mx-auto">
           {/* Header with Mode Toggle - Styled with new design system */}
