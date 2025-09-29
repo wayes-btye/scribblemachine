@@ -176,11 +176,24 @@ async function main() {
     console.log('✅ Environment variables validated');
 
     // Initialize Supabase admin client
+    console.log('🔗 Connecting to Supabase:', env.NEXT_PUBLIC_SUPABASE_URL);
     const supabase = createSupabaseAdminClient(
       env.NEXT_PUBLIC_SUPABASE_URL,
       env.SUPABASE_SERVICE_ROLE_KEY!
     );
-    console.log('✅ Supabase client initialized');
+
+    // Test Supabase connection
+    try {
+      const { error } = await supabase.from('jobs').select('count').limit(1);
+      if (error) {
+        console.error('❌ Supabase connection test failed:', error);
+        return;
+      }
+      console.log('✅ Supabase connection test successful');
+    } catch (err) {
+      console.error('❌ Supabase connection error:', err);
+      return;
+    }
 
     // Initialize Gemini service
     if (!env.GEMINI_API_KEY) {
@@ -198,6 +211,7 @@ async function main() {
     setInterval(async () => {
       try {
         // Get pending jobs
+        console.log('🔍 Fetching pending jobs...');
         const { data: jobs, error } = await supabase
           .from('jobs')
           .select('*')
@@ -206,9 +220,12 @@ async function main() {
           .limit(1);
 
         if (error) {
-          console.error('Error fetching jobs:', error);
+          console.error('❌ Error fetching jobs:', error);
+          console.error('Error details:', JSON.stringify(error, null, 2));
           return;
         }
+
+        console.log(`📋 Found ${jobs?.length || 0} pending jobs`);
 
         if (!jobs || jobs.length === 0) {
           // Get recent jobs for logging context
