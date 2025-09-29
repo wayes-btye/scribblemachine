@@ -9,6 +9,7 @@ import { WorkspaceModeHandler } from '@/components/workspace/workspace-mode-hand
 import { useAuth } from '@/lib/auth/auth-provider'
 import { useRouter } from 'next/navigation'
 import { useEffect, Suspense } from 'react'
+import { BackgroundBlobs } from '@/components/ui/background-blobs'
 
 export default function WorkspacePage() {
   const { user, loading } = useAuth()
@@ -41,6 +42,9 @@ export default function WorkspacePage() {
 
   return (
     <div className="min-h-screen relative">
+      {/* Background blobs for visual appeal */}
+      <BackgroundBlobs intensity="subtle" />
+      
       {/* Handle URL mode parameter */}
       <Suspense fallback={null}>
         <WorkspaceModeHandler setMode={workspaceState.setMode} />
