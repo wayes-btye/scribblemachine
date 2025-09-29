@@ -18,6 +18,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      contents: read
+      statuses: write
     steps:
       - uses: actions/checkout@v4
 
