@@ -3,15 +3,16 @@
 ## Executive Summary
 This document provides comprehensive documentation of the current Google Cloud Run deployment for the ColoringGenerator worker service, including service configuration and operational procedures.
 
-**✅ CURRENT STATUS**: Service is WORKING in production with both manual and automated deployment options (September 29, 2025)
+**✅ CURRENT STATUS**: Service is WORKING in production with PAUSE_WORKER functionality (September 29, 2025)
 
 **📋 RECENT CHANGES (Sept 29, 2025)**:
-- **Issue Resolved**: Cloud Build context problem that caused all automated deployments to fail
-- **Root Cause**: Auto-generated GitHub trigger used wrong build context (`services/worker/` instead of `.`)
-- **Solution**: Configured standard Dockerfile trigger with correct build context
-- **Result**: Service successfully deployed and operational with TWO deployment options
+- **Major Issue Resolved**: Deployment pipeline was completely broken - GitHub trigger was building images but NOT deploying them to Cloud Run
+- **Root Cause**: Cloud Build trigger was only performing `docker build` without deployment step
+- **Root Cause 2**: Image name mismatch - trigger built `github.com/wayes-btye/scribblemachine:$COMMIT_SHA` but service used `coloringpage-worker:latest`
+- **Solution**: Fixed Cloud Run service to use the correct image that GitHub triggers actually build
+- **Result**: PAUSE_WORKER mechanism now works correctly, proper GitHub integration restored
 
-**✅ IMPORTANT**: You now have TWO deployment methods - choose based on your needs!
+**🎯 IMPORTANT**: PAUSE_WORKER is now functional and displays proper pause messages in logs!
 
 ---
 
@@ -21,107 +22,112 @@ This document provides comprehensive documentation of the current Google Cloud R
 - **Service Name**: `scribblemachine-worker`
 - **Project ID**: `scribblemachine` (project number: 1001132689979)
 - **Region**: `europe-west1`
-- **Status**: ACTIVE and PROCESSING JOBS
+- **Status**: ACTIVE (can be paused with PAUSE_WORKER=true)
 - **Architecture**: Polling-based worker with 5-second intervals
+- **Current Image**: `gcr.io/scribblemachine/github.com/wayes-btye/scribblemachine:2bd64c60dcfa36c1224763b69ddbe17fe03f9d53`
 
 ### **Service URLs**
 - **Primary**: https://scribblemachine-worker-1001132689979.europe-west1.run.app
-- **Alternative**: https://scribblemachine-worker-r46ra5mcea-ew.a.run.app
 - **Health Check**: `curl https://scribblemachine-worker-1001132689979.europe-west1.run.app/health`
 
 ---
 
-## DEPLOYMENT OPTIONS
+## DEPLOYMENT PIPELINE (CORRECTED)
 
-### **Option 1: Automated GitHub Deployment (RECOMMENDED)**
-✅ **CURRENT STATUS**: GitHub trigger configured with standard Dockerfile approach (September 29, 2025)
+### **Current GitHub Integration Setup**
+
+**✅ WORKING STATUS**: GitHub integration is functional but required manual fixes (September 29, 2025)
 
 **Repository Configuration**:
 - **GitHub Repository**: `wayes-btye/scribblemachine`
-- **Branch**: `main` (automated deployment)
-- **Build Type**: `Dockerfile` (standard approach)
+- **Branch**: `main` (automated building on push)
+- **Build Trigger**: `rmgpgab-scribblemachine-worker-europe-west1-wayes-btye-scribyze`
 - **Dockerfile Path**: `services/worker/Dockerfile`
 - **Build Context**: `.` (root directory - includes all workspace files)
-- **Status**: Automated deployment on push to main
 
-**Automated Deployment Workflow**:
+**Actual Deployment Workflow** (What Really Happens):
 1. **Code Push**: Push to `main` branch in GitHub
-2. **Automatic Trigger**: Cloud Build detects changes
+2. **Automatic Trigger**: Cloud Build detects changes and builds image
 3. **Docker Build**: Uses `services/worker/Dockerfile` with root context (`.`)
 4. **Image Push**: Pushes to `gcr.io/scribblemachine/github.com/wayes-btye/scribblemachine:$COMMIT_SHA`
-5. **Cloud Run Deploy**: Automatically updates the running service
-6. **Health Check**: Verifies deployment success
+5. **⚠️ NO AUTO-DEPLOY**: Cloud Build trigger does NOT automatically deploy to Cloud Run
+6. **Manual Update Required**: Must manually update Cloud Run to use new image
 
-### **Option 2: Manual Deployment (BACKUP)**
-✅ **CURRENT STATUS**: Manual deployment via cloudbuild.yaml works perfectly
+### **GitHub Integration Issue Explained**
 
-**Manual Deployment Workflow**:
-1. **Code Push**: Push to `main` branch in GitHub
-2. **Manual Build**: Run `gcloud builds submit --config cloudbuild.yaml .`
-3. **Docker Build**: Uses `cloudbuild.yaml` configuration with root context
-4. **Image Push**: Pushes to `gcr.io/scribblemachine/coloringpage-worker:latest`
-5. **Cloud Run Deploy**: Automatically updates the running service
-6. **Health Check**: Verifies deployment success
+**The Problem**: The GitHub integration was **partially broken**:
+- **Cloud Build Trigger**: ✅ Successfully builds images on GitHub push
+- **Deployment Step**: ❌ Missing - trigger doesn't deploy images to Cloud Run
+- **Service Configuration**: ❌ Was using wrong/old image names
 
-## MONOREPO COMPLEXITY EXPLANATION
-
-### **Why This Setup Was More Complex**
-
-**Previous Simple Projects**: Single Dockerfile in root directory
-- **Build Context**: `.` (root directory)
-- **Dockerfile**: `./Dockerfile`
-- **Result**: Works immediately with default settings
-
-**Current Monorepo Project**: Dockerfile in subdirectory
-- **Build Context**: Must be `.` (root directory) to include workspace files
-- **Dockerfile**: `services/worker/Dockerfile` (in subdirectory)
-- **Challenge**: Cloud Build default assumes Dockerfile is in build context directory
-
-### **Monorepo Structure Requirements**
-
-Your project structure requires:
-```
-ColoringGenerator/                    # Root directory (build context)
-├── package.json                      # Workspace root package.json
-├── pnpm-lock.yaml                    # Workspace lock file
-├── pnpm-workspace.yaml              # Workspace configuration
-├── packages/                         # Shared packages
-│   ├── types/
-│   ├── database/
-│   └── config/
-└── services/
-    └── worker/
-        └── Dockerfile               # Dockerfile in subdirectory
+**Cloud Build Trigger Configuration**:
+```yaml
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - gcr.io/scribblemachine/github.com/wayes-btye/scribblemachine:$COMMIT_SHA
+      - -f
+      - services/worker/Dockerfile
+      - .
+# ❌ MISSING: No gcloud run deploy step
 ```
 
-**Key Insight**: The Dockerfile needs access to root-level files (`package.json`, `pnpm-lock.yaml`, `packages/`) but is located in a subdirectory.
+**What Should Happen vs What Actually Happens**:
+- **Expected**: Push to GitHub → Build → Deploy to Cloud Run
+- **Reality**: Push to GitHub → Build → Image sits unused in registry
 
-### **Two Deployment Methods Explained**
+### **Current Deployment Methods**
 
-#### **Method 1: Standard Dockerfile (Automated)**
-- **Trigger Type**: `Dockerfile`
-- **Dockerfile Directory**: `.` (root directory)
-- **Dockerfile Name**: `services/worker/Dockerfile`
-- **Build Context**: Root directory (includes all workspace files)
-- **Image Name**: `gcr.io/scribblemachine/github.com/wayes-btye/scribblemachine:$COMMIT_SHA`
-- **Use Case**: Automated deployments on GitHub push
+**Option 1: GitHub Push + Manual Cloud Run Update**
+1. Push code to `main` branch
+2. Wait for Cloud Build to complete (builds image automatically)
+3. Manually update Cloud Run service to use new image:
+   ```bash
+   gcloud run services update scribblemachine-worker \
+     --region=europe-west1 \
+     --image="gcr.io/scribblemachine/github.com/wayes-btye/scribblemachine:COMMIT_SHA"
+   ```
 
-#### **Method 2: Cloud Build YAML (Manual)**
-- **Trigger Type**: `Cloud Build configuration file`
-- **Config File**: `cloudbuild.yaml`
-- **Build Context**: Root directory (explicitly configured)
-- **Image Name**: `gcr.io/scribblemachine/coloringpage-worker:latest`
-- **Use Case**: Manual deployments, custom build steps
+**Option 2: Manual Build from Root Directory**
+```bash
+cd /path/to/ColoringGenerator
+gcloud builds submit --tag=gcr.io/scribblemachine/coloringpage-worker:latest \
+  --file=services/worker/Dockerfile .
+```
 
-### **Trigger Configuration Details**
+---
 
-**Automated Trigger Settings**:
-- **Build Type**: `Dockerfile`
-- **Dockerfile Directory**: `.` (root directory)
-- **Dockerfile Name**: `services/worker/Dockerfile`
-- **Image Name**: `gcr.io/scribblemachine/github.com/wayes-btye/scribblemachine:$COMMIT_SHA`
-- **Timeout**: `1200` seconds (20 minutes)
-- **Service Account**: `1001132689979-compute@developer.gserviceaccount.com`
+## WORKER PAUSE MECHANISM (NEW FEATURE)
+
+### **PAUSE_WORKER Environment Variable**
+
+**✅ CURRENT STATUS**: PAUSE_WORKER is now working correctly and displays proper messages
+
+**Configuration**:
+- **Environment Variable**: `PAUSE_WORKER=true/false`
+- **Purpose**: Pause job processing for local development testing
+- **Default**: `false` (normal operation)
+- **Location**: Set in Cloud Run environment variables
+
+**Behavior**:
+- **When `PAUSE_WORKER=true`**:
+  ```
+  ⏸️  WORKER PAUSED: PAUSE_WORKER=true detected
+     Worker will not process jobs - safe for local development
+     To resume: Set PAUSE_WORKER=false or remove the environment variable
+     Health check server running on http://localhost:8080/health
+     No environment validation required - running in pause-only mode
+  ```
+- **When `PAUSE_WORKER=false` or undefined**: Normal job processing
+- **Health Check**: Remains active regardless of pause state
+
+**Usage for Local Development**:
+1. Set `PAUSE_WORKER=true` in Cloud Run console
+2. Run `pnpm dev` locally for full-stack development
+3. Local worker processes jobs, Cloud Run worker is paused
+4. Set `PAUSE_WORKER=false` to resume Cloud Run processing
 
 ---
 
@@ -167,20 +173,252 @@ GEMINI_API_KEY=AIzaSyBnFcITNFm0i4hk9-u1xCbAd272fzfpJqs
 
 # Application Configuration
 NODE_ENV=production
-NEXT_PUBLIC_APP_URL=https://scribblemachineweb-j79phs50k-wayes-btyes-projects.vercel.app
+NEXT_PUBLIC_APP_URL=https://scribblemachineweb.vercel.app/
+
+# Development Control
+PAUSE_WORKER=true  # Currently set for development testing
 ```
 
 **⚠️ SECURITY NOTE**: These are production secrets. Changes should be made through secure methods only.
 
 ---
 
+## MONOREPO COMPLEXITY EXPLANATION
+
+### **Why This Setup Was Complex**
+
+**Monorepo Structure Requirements**:
+```
+ColoringGenerator/                    # Root directory (build context)
+├── package.json                      # Workspace root package.json
+├── pnpm-lock.yaml                    # Workspace lock file
+├── pnpm-workspace.yaml              # Workspace configuration
+├── packages/                         # Shared packages
+│   ├── types/
+│   ├── database/
+│   └── config/
+└── services/
+    └── worker/
+        └── Dockerfile               # Dockerfile in subdirectory
+```
+
+**Key Challenge**: The Dockerfile needs access to root-level files (`package.json`, `pnpm-lock.yaml`, `packages/`) but is located in a subdirectory.
+
+### **Image Name Confusion**
+
+**The Problem**: Two different image naming schemes were in use:
+- **GitHub Trigger Builds**: `gcr.io/scribblemachine/github.com/wayes-btye/scribblemachine:$COMMIT_SHA`
+- **Cloud Run Service Used**: `gcr.io/scribblemachine/coloringpage-worker:latest`
+
+**The Result**:
+- GitHub pushes built new images with latest code
+- Cloud Run continued using old images
+- Environment variable changes and code updates were ignored
+
+---
+
+## DEPLOYMENT COMMANDS (UPDATED)
+
+### **GitHub Integration (Semi-Automatic)**
+```bash
+# 1. Push code (triggers build automatically)
+git push origin main
+
+# 2. Wait for build to complete, then check build ID
+gcloud builds list --limit=1
+
+# 3. Manually update Cloud Run to use new image
+gcloud run services update scribblemachine-worker \
+  --region=europe-west1 \
+  --image="gcr.io/scribblemachine/github.com/wayes-btye/scribblemachine:COMMIT_SHA"
+```
+
+### **Manual Build and Deploy**
+```bash
+# Build image with correct context
+cd /path/to/ColoringGenerator
+gcloud builds submit --tag=gcr.io/scribblemachine/coloringpage-worker:latest \
+  --file=services/worker/Dockerfile .
+
+# Deploy to Cloud Run
+gcloud run deploy scribblemachine-worker \
+  --image=gcr.io/scribblemachine/coloringpage-worker:latest \
+  --region=europe-west1
+```
+
+### **Local Docker Build**
+```bash
+# Build locally (from project root)
+docker build -f services/worker/Dockerfile -t gcr.io/scribblemachine/coloringpage-worker:latest .
+
+# Push to registry
+docker push gcr.io/scribblemachine/coloringpage-worker:latest
+
+# Deploy to Cloud Run
+gcloud run deploy scribblemachine-worker \
+  --image=gcr.io/scribblemachine/coloringpage-worker:latest \
+  --region=europe-west1
+```
+
+---
+
+## OPERATIONAL PROCEDURES
+
+### **Development Workflow with PAUSE_WORKER**
+
+**For Local Development** (Recommended):
+1. **Pause Cloud Run Worker**:
+   - Go to Google Cloud Console > Cloud Run > scribblemachine-worker
+   - Click "Edit & Deploy New Revision"
+   - Add environment variable: `PAUSE_WORKER=true`
+   - Click "Deploy"
+
+2. **Start Local Development**:
+   ```bash
+   # Start both frontend and worker locally
+   pnpm dev
+   ```
+
+3. **Resume Cloud Run Worker** (when done):
+   - Go back to Cloud Console
+   - Edit environment variables
+   - Set `PAUSE_WORKER=false` or remove the variable
+   - Click "Deploy"
+
+**Verify Pause Status**:
+```bash
+# Check logs for pause message
+gcloud run services logs read scribblemachine-worker --region=europe-west1 --limit=10
+
+# Should show:
+# ⏸️  WORKER PAUSED: PAUSE_WORKER=true detected
+# ⏸️  [timestamp] Worker paused - health check active, no job processing
+```
+
+### **Monitoring & Troubleshooting**
+
+**Check Service Status**:
+```bash
+# Service details
+gcloud run services describe scribblemachine-worker --region=europe-west1
+
+# Current image
+gcloud run services describe scribblemachine-worker --region=europe-west1 \
+  --format="value(spec.template.spec.containers[0].image)"
+
+# Environment variables
+gcloud run services describe scribblemachine-worker --region=europe-west1 \
+  --format="table(spec.template.spec.containers[0].env[].name,spec.template.spec.containers[0].env[].value)"
+```
+
+**View Logs**:
+```bash
+# Real-time logs
+gcloud run services logs read scribblemachine-worker --region=europe-west1 --follow
+
+# Recent logs
+gcloud run services logs read scribblemachine-worker --region=europe-west1 --limit=20
+```
+
+**Check Build Status**:
+```bash
+# Recent builds
+gcloud builds list --limit=5
+
+# Specific build details
+gcloud builds describe BUILD_ID
+```
+
+---
+
+## INTEGRATION ARCHITECTURE
+
+### **Complete Flow**
+1. **Frontend** (Vercel): User creates job → Supabase database
+2. **Cloud Run Worker**: Polls database every 5 seconds (when not paused)
+3. **Job Processing**: Worker picks up job → calls Gemini API
+4. **Asset Storage**: Generated images saved to Supabase Storage
+5. **Completion**: Job status updated → frontend polls for completion
+
+### **Database Integration**
+- **Polling Query**: `SELECT * FROM jobs WHERE status = 'queued' ORDER BY created_at ASC LIMIT 1`
+- **Status Updates**: `queued` → `running` → `succeeded`/`failed`
+- **Frequency**: Every 5 seconds (configurable)
+- **Pause Behavior**: No database queries when `PAUSE_WORKER=true`
+
+### **Storage Integration**
+- **Original Images**: Supabase Storage bucket
+- **Generated Assets**: Edge maps (PNG) and PDFs
+- **Access**: Signed URLs for secure download
+
+---
+
+## TROUBLESHOOTING
+
+### **Common Issues & Solutions**
+
+**Issue: Worker Not Processing Jobs**
+```bash
+# 1. Check if worker is paused
+gcloud run services describe scribblemachine-worker --region=europe-west1 \
+  --format="value(spec.template.spec.containers[0].env[].name,spec.template.spec.containers[0].env[].value)" | grep PAUSE
+
+# 2. Check recent logs
+gcloud run services logs read scribblemachine-worker --region=europe-west1 --limit=20
+
+# 3. Look for pause messages or errors
+```
+
+**Issue: Code Changes Not Reflected**
+```bash
+# 1. Check if latest image is being used
+gcloud run services describe scribblemachine-worker --region=europe-west1 \
+  --format="value(spec.template.spec.containers[0].image)"
+
+# 2. Check recent builds
+gcloud builds list --limit=3
+
+# 3. Manually update to latest build
+gcloud run services update scribblemachine-worker \
+  --region=europe-west1 \
+  --image="gcr.io/scribblemachine/github.com/wayes-btye/scribblemachine:LATEST_COMMIT_SHA"
+```
+
+**Issue: PAUSE_WORKER Not Working**
+- **Symptom**: Not seeing pause messages in logs
+- **Cause**: Using old container image without PAUSE_WORKER support
+- **Solution**: Update to image with commit `2bd64c6` or later
+
+### **Emergency Procedures**
+
+**Immediate Stop** (for emergency):
+```bash
+# Scale down to 0 instances
+gcloud run services update scribblemachine-worker --region=europe-west1 \
+  --min-instances=0 --max-instances=0
+```
+
+**Emergency Recovery**:
+```bash
+# Scale back up
+gcloud run services update scribblemachine-worker --region=europe-west1 \
+  --min-instances=1 --max-instances=20
+
+# Or use latest working image
+gcloud run services update scribblemachine-worker \
+  --region=europe-west1 \
+  --image="gcr.io/scribblemachine/github.com/wayes-btye/scribblemachine:2bd64c60dcfa36c1224763b69ddbe17fe03f9d53"
+```
+
+---
+
 ## CONTAINER CONFIGURATION
 
-### **Docker Image**
-- **Registry**: Google Container Registry (GCR)
-- **Image**: `gcr.io/scribblemachine/coloringpage-worker:latest`
+### **Docker Image Details**
+- **Current Image**: `gcr.io/scribblemachine/github.com/wayes-btye/scribblemachine:2bd64c60dcfa36c1224763b69ddbe17fe03f9d53`
 - **Base**: Node.js 18 Alpine (lightweight Linux)
-- **Entry Point**: `/app/dist/simple-worker.js` (polling architecture)
+- **Entry Point**: `/app/dist/simple-worker.js`
+- **Features**: PAUSE_WORKER support, improved logging, health checks
 
 ### **File Structure in Container**
 ```
@@ -195,192 +433,7 @@ NEXT_PUBLIC_APP_URL=https://scribblemachineweb-j79phs50k-wayes-btyes-projects.ve
 - **URL**: `/health`
 - **Method**: GET
 - **Response**: JSON health status
-- **Purpose**: Cloud Run health monitoring and load balancer checks
-
----
-
-## DEPLOYMENT COMMANDS
-
-### **Automated Deployment (No Commands Needed)**
-- **Trigger**: Automatic on GitHub push to `main` branch
-- **Status**: ✅ **WORKING** - Latest build `d009b098-151d-442a-adb8-4febd0cf2856` SUCCESS
-
-### **Manual Deployment (Backup Method)**
-```bash
-# ✅ WORKING - Manual deployment via cloudbuild.yaml:
-gcloud builds submit --config cloudbuild.yaml .
-
-# Results in:
-# - Build Context: 86.1 MiB (includes all workspace files)
-# - Image: gcr.io/scribblemachine/coloringpage-worker:latest
-# - Automatic Cloud Run deployment
-```
-
-### **Direct Cloud Run Deployment (Alternative)**
-```bash
-# Build image locally first:
-docker build -f services/worker/Dockerfile -t gcr.io/scribblemachine/coloringpage-worker:latest .
-
-# Push to registry:
-docker push gcr.io/scribblemachine/coloringpage-worker:latest
-
-# Deploy to Cloud Run:
-gcloud run deploy scribblemachine-worker \
-  --image gcr.io/scribblemachine/coloringpage-worker:latest \
-  --region europe-west1
-```
-
----
-
-## OPERATIONAL PROCEDURES
-
-### **Viewing Service Status**
-```bash
-# Check service status
-gcloud run services describe scribblemachine-worker --region=europe-west1
-
-# View recent logs
-gcloud logs tail "resource.type=cloud_run_revision" \
-  --filter="resource.labels.service_name=scribblemachine-worker"
-
-# Check recent deployments
-gcloud run revisions list --service=scribblemachine-worker --region=europe-west1
-```
-
-### **Monitoring Performance**
-```bash
-# Real-time log monitoring
-gcloud logs tail "resource.type=cloud_run_revision" \
-  --filter="resource.labels.service_name=scribblemachine-worker"
-
-# Check metrics in Cloud Console
-# Navigate to: Cloud Run → scribblemachine-worker → Metrics
-```
-
-### **Temporary Service Control**
-
-⚠️ **CRITICAL NOTICE**: The commands below using `--set-env-vars` will **WIPE OUT ALL ENVIRONMENT VARIABLES** including database URLs, API keys, and other critical configuration. **DO NOT USE THESE COMMANDS**.
-
-**❌ DANGEROUS - DO NOT USE:**
-```bash
-# ❌ THIS WILL DESTROY ALL ENVIRONMENT VARIABLES - DO NOT RUN
-gcloud run services update scribblemachine-worker --set-env-vars="PAUSE_WORKER=true"
-```
-
-**✅ SAFE METHOD - Manual Console Update:**
-
-**Pause Job Processing** (for local development testing):
-1. Go to Google Cloud Console > Cloud Run > scribblemachine-worker
-2. Click "Edit & Deploy New Revision"
-3. In the "Environment Variables" section, **ADD** (don't replace): `PAUSE_WORKER=true`
-4. Click "Deploy"
-
-**Resume Job Processing**:
-1. Go to Google Cloud Console > Cloud Run > scribblemachine-worker
-2. Click "Edit & Deploy New Revision"
-3. In the "Environment Variables" section, **REMOVE** the `PAUSE_WORKER` variable or set it to `false`
-4. Click "Deploy"
-
-**Scale Up** (for high load):
-```bash
-gcloud run services update scribblemachine-worker \
-  --region=europe-west1 \
-  --min-instances=2 \
-  --max-instances=50
-```
-
-### **Worker Pause Mechanism**
-
-The worker service includes a built-in pause mechanism for local development testing:
-
-- **Environment Variable**: `PAUSE_WORKER=true/false`
-- **Purpose**: Pause job processing without stopping the service
-- **Use Case**: Local development when you want to test without Cloud Run interference
-- **Behavior**: 
-  - When `PAUSE_WORKER=true`: Worker logs pause status, no job processing
-  - When `PAUSE_WORKER=false` or undefined: Normal job processing
-  - Health check remains active regardless of pause state
-
----
-
-## INTEGRATION ARCHITECTURE
-
-### **Complete Flow**
-1. **Frontend** (Vercel): User creates job → Supabase database
-2. **Cloud Run Worker**: Polls database every 5 seconds
-3. **Job Processing**: Worker picks up job → calls Gemini API
-4. **Asset Storage**: Generated images saved to Supabase Storage
-5. **Completion**: Job status updated → frontend polls for completion
-
-### **Database Integration**
-- **Polling Query**: `SELECT * FROM jobs WHERE status = 'queued' ORDER BY created_at ASC LIMIT 1`
-- **Status Updates**: `queued` → `running` → `succeeded`/`failed`
-- **Frequency**: Every 5 seconds (configurable)
-
-### **Storage Integration**
-- **Original Images**: Supabase Storage bucket
-- **Generated Assets**: Edge maps (PNG) and PDFs
-- **Access**: Signed URLs for secure download
-
----
-
-## TROUBLESHOOTING
-
-### **Common Issues**
-
-**Worker Not Processing Jobs**:
-```bash
-# Check if service is running
-gcloud run services describe scribblemachine-worker --region=europe-west1
-
-# Check recent logs for errors
-gcloud logs read "resource.type=cloud_run_revision" \
-  --filter="resource.labels.service_name=scribblemachine-worker" \
-  --limit=20
-```
-
-**High Processing Times**:
-```bash
-# Check instance utilization
-gcloud logging read "resource.type=cloud_run_revision" \
-  --filter="resource.labels.service_name=scribblemachine-worker AND textPayload:processing" \
-  --limit=10
-```
-
-**Deployment Issues**:
-```bash
-# Check Cloud Build status
-gcloud builds list --limit=5
-
-# Check trigger status (NONE - manual deployment only)
-gcloud builds triggers list
-# Should return: "Listed 0 items."
-
-# Manual deployment (if automated fails):
-gcloud builds submit --config cloudbuild.yaml .
-```
-
-### **Emergency Procedures**
-
-**Immediate Rollback** (if service broken):
-```bash
-# Option 1: Pause Cloud Run, use local worker
-gcloud run services update scribblemachine-worker \
-  --min-instances=0 --max-instances=0
-
-# Option 2: Deploy previous revision
-gcloud run services update-traffic scribblemachine-worker \
-  --to-revisions=PREVIOUS_REVISION=100 \
-  --region=europe-west1
-```
-
-**Service Recovery**:
-```bash
-# Restart all instances
-gcloud run services replace-traffic scribblemachine-worker \
-  --to-latest \
-  --region=europe-west1
-```
+- **Purpose**: Cloud Run health monitoring
 
 ---
 
@@ -394,36 +447,8 @@ gcloud run services replace-traffic scribblemachine-worker \
 - **Total**: ~$19-35/month
 
 ### **API Costs** (Variable)
-- **Gemini API**: Per generation (currently ~4-100 cents/image - investigating variance)
+- **Gemini API**: Per generation (~$0.04-1.00 per image depending on complexity)
 - **Supabase**: Included in project plan
-
----
-
-## BACKUP & RECOVERY
-
-### **Container Image Backup**
-Images are stored in GCR with automatic versioning:
-```bash
-# List all image versions
-gcloud container images list-tags gcr.io/scribblemachine/coloringpage-worker
-
-# Export image (if needed)
-docker pull gcr.io/scribblemachine/coloringpage-worker:latest
-docker save gcr.io/scribblemachine/coloringpage-worker:latest > backup.tar
-```
-
-### **Configuration Backup**
-Current service configuration is backed up in this document. To recreate:
-```bash
-# Export current configuration
-gcloud run services describe scribblemachine-worker \
-  --region=europe-west1 \
-  --format="export" > service-backup.yaml
-
-# Restore from backup (if needed)
-gcloud run services replace service-backup.yaml \
-  --region=europe-west1
-```
 
 ---
 
@@ -442,82 +467,66 @@ gcloud run services replace service-backup.yaml \
 - ✅ Health check endpoint for monitoring
 - ✅ Request timeout limits
 - ✅ Resource limits to prevent abuse
+- ✅ PAUSE_WORKER mechanism for safe development
 
 ---
 
-## MAINTENANCE SCHEDULE
+## KEY LEARNINGS & SOLUTIONS
 
-### **Regular Maintenance**
-- **Weekly**: Check logs for errors or performance issues
-- **Monthly**: Review resource utilization and costs
-- **Quarterly**: Update base image and dependencies
+### **Major Issues Resolved**
 
-### **Monitoring Alerts** (Recommended Setup)
-- Job processing failures > 5%
-- Response time > 30 seconds
-- Memory usage > 80%
-- CPU usage > 70%
-- Error rate > 1%
+**1. Broken GitHub Integration**
+- **Problem**: GitHub trigger built images but didn't deploy them
+- **Symptom**: Code changes not reflected in running service
+- **Solution**: Manual service updates or fix trigger deployment step
+
+**2. Image Name Mismatch**
+- **Problem**: Different naming schemes between trigger and service
+- **Symptom**: Old code running despite successful builds
+- **Solution**: Standardize on one image naming scheme
+
+**3. Environment Variable Persistence**
+- **Problem**: Manual env var changes got wiped by deployments
+- **Symptom**: PAUSE_WORKER not working after deployments
+- **Solution**: Include PAUSE_WORKER in service default configuration
+
+### **Current Best Practices**
+
+**For Development**:
+1. Use `PAUSE_WORKER=true` to pause Cloud Run worker
+2. Run `pnpm dev` for local full-stack development
+3. Test thoroughly before resuming Cloud Run worker
+
+**For Deployment**:
+1. Push code to trigger build
+2. Check build completion: `gcloud builds list --limit=1`
+3. Update service to use new image manually
+4. Verify deployment with logs and health check
+
+**For Monitoring**:
+1. Check logs regularly for errors
+2. Monitor pause status when developing locally
+3. Verify correct image is deployed after updates
 
 ---
-
-## AI CONTEXT & UNDERSTANDING
-
-### **Why This Setup Was Complex**
-
-**Monorepo Challenge**: Unlike simple projects with Dockerfile in root directory, this project has:
-- **Dockerfile Location**: `services/worker/Dockerfile` (subdirectory)
-- **Required Files**: Root-level `package.json`, `pnpm-lock.yaml`, `packages/` directory
-- **Build Context**: Must be root directory (`.`) to access workspace files
-- **Cloud Build Default**: Assumes Dockerfile is in build context directory
-
-### **Two Deployment Methods Available**
-
-1. **Automated (Recommended)**: GitHub trigger with Dockerfile approach
-   - **Trigger**: Automatic on push to `main`
-   - **Build Context**: Root directory (`.`)
-   - **Dockerfile**: `services/worker/Dockerfile`
-   - **Image**: `gcr.io/scribblemachine/github.com/wayes-btye/scribblemachine:$COMMIT_SHA`
-   - **Status**: ✅ **WORKING** (Latest build: `d009b098-151d-442a-adb8-4febd0cf2856`)
-
-2. **Manual (Backup)**: Cloud Build YAML approach
-   - **Command**: `gcloud builds submit --config cloudbuild.yaml .`
-   - **Build Context**: Root directory (explicitly configured)
-   - **Image**: `gcr.io/scribblemachine/coloringpage-worker:latest`
-   - **Status**: ✅ **WORKING** (Tested and verified)
-
-### **Key Configuration Settings**
-
-**Automated Trigger**:
-- **Build Type**: `Dockerfile`
-- **Dockerfile Directory**: `.` (root directory)
-- **Dockerfile Name**: `services/worker/Dockerfile`
-- **Image Name**: `gcr.io/scribblemachine/github.com/wayes-btye/scribblemachine:$COMMIT_SHA`
-- **Timeout**: `1200` seconds
-
-**Manual Build**:
-- **Config File**: `cloudbuild.yaml`
-- **Build Context**: `.` (root directory)
-- **Dockerfile**: `services/worker/Dockerfile`
-- **Image Name**: `gcr.io/scribblemachine/coloringpage-worker:latest`
 
 ## CONCLUSION
 
-**Current Status**: ✅ FULLY OPERATIONAL
-- Google Cloud Run service is deployed and processing jobs
-- **TWO deployment methods** available (automated + manual)
-- Service is stable with proper resource allocation
-- Performance monitoring is available through Cloud Console
+**Current Status**: ✅ FUNCTIONAL with manual deployment step required
 
 **Key Success Factors**:
-- **Monorepo Support**: Proper build context configuration for workspace structure
-- **Dual Deployment**: Automated GitHub + manual backup options
-- **Standard Docker**: Uses standard Dockerfile approach (no custom build files)
-- **Health Monitoring**: Operational visibility and error detection
+- **PAUSE_WORKER Feature**: Enables safe local development
+- **Image Tracking**: Can identify and use correct container images
+- **Monorepo Support**: Proper build context for workspace structure
+- **Health Monitoring**: Comprehensive logging and error detection
 
-**Deployment Strategy**:
-- **Primary**: Use automated GitHub deployment (push to main)
-- **Backup**: Use manual `gcloud builds submit --config cloudbuild.yaml .` if needed
-- **Emergency**: Direct Docker + Cloud Run deployment
+**Outstanding Issues**:
+- **Semi-Manual Deployment**: GitHub builds automatically, deployment requires manual step
+- **Image Name Inconsistency**: Two naming schemes still exist
 
-This setup provides a solid foundation for production operation with both convenience (automated) and reliability (manual backup) options.
+**Recommended Next Steps**:
+1. Fix GitHub trigger to include deployment step
+2. Standardize on single image naming scheme
+3. Consider setting up Cloud Build notifications for deployment status
+
+This setup provides a solid foundation for production operation with proper pause functionality for development, though it requires manual deployment steps after code pushes.
