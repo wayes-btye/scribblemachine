@@ -259,29 +259,27 @@ gcloud logs tail "resource.type=cloud_run_revision" \
 
 ### **Temporary Service Control**
 
-**Pause Job Processing** (for local development testing):
+⚠️ **CRITICAL NOTICE**: The commands below using `--set-env-vars` will **WIPE OUT ALL ENVIRONMENT VARIABLES** including database URLs, API keys, and other critical configuration. **DO NOT USE THESE COMMANDS**.
+
+**❌ DANGEROUS - DO NOT USE:**
 ```bash
-# Pause worker job processing while keeping service alive
-gcloud run services update scribblemachine-worker \
-  --region=europe-west1 \
-  --set-env-vars="PAUSE_WORKER=true"
+# ❌ THIS WILL DESTROY ALL ENVIRONMENT VARIABLES - DO NOT RUN
+gcloud run services update scribblemachine-worker --set-env-vars="PAUSE_WORKER=true"
 ```
+
+**✅ SAFE METHOD - Manual Console Update:**
+
+**Pause Job Processing** (for local development testing):
+1. Go to Google Cloud Console > Cloud Run > scribblemachine-worker
+2. Click "Edit & Deploy New Revision"
+3. In the "Environment Variables" section, **ADD** (don't replace): `PAUSE_WORKER=true`
+4. Click "Deploy"
 
 **Resume Job Processing**:
-```bash
-# Resume normal job processing
-gcloud run services update scribblemachine-worker \
-  --region=europe-west1 \
-  --set-env-vars="PAUSE_WORKER=false"
-```
-
-**Remove Pause Variable** (alternative to resume):
-```bash
-# Remove pause variable entirely (defaults to normal operation)
-gcloud run services update scribblemachine-worker \
-  --region=europe-west1 \
-  --remove-env-vars="PAUSE_WORKER"
-```
+1. Go to Google Cloud Console > Cloud Run > scribblemachine-worker
+2. Click "Edit & Deploy New Revision"
+3. In the "Environment Variables" section, **REMOVE** the `PAUSE_WORKER` variable or set it to `false`
+4. Click "Deploy"
 
 **Scale Up** (for high load):
 ```bash

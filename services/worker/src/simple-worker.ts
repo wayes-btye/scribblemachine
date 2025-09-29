@@ -162,16 +162,34 @@ async function main() {
       console.log('⏸️  WORKER PAUSED: PAUSE_WORKER=true detected');
       console.log('   Worker will not process jobs - safe for local development');
       console.log('   To resume: Set PAUSE_WORKER=false or remove the environment variable');
+      console.log('   Health check server running on http://localhost:8080/health');
+      console.log('   No environment validation required - running in pause-only mode');
 
-      // Keep the service alive but don't process jobs
-      setInterval(() => {
-        console.log('⏸️  Worker paused - no job processing');
+      // Keep the service alive with periodic health check logs (no Supabase connections)
+      const pauseInterval = setInterval(() => {
+        const timestamp = new Date().toISOString();
+        console.log(`⏸️  [${timestamp}] Worker paused - health check active, no job processing`);
       }, 30000); // Log every 30 seconds to show it's alive
 
-      return; // Exit early - don't start job processing
+      // Graceful shutdown handling for paused mode
+      process.on('SIGTERM', () => {
+        console.log('⏸️  SIGTERM received - shutting down paused worker gracefully');
+        clearInterval(pauseInterval);
+        process.exit(0);
+      });
+
+      process.on('SIGINT', () => {
+        console.log('⏸️  SIGINT received - shutting down paused worker gracefully');
+        clearInterval(pauseInterval);
+        process.exit(0);
+      });
+
+      // Keep the main process alive indefinitely when paused
+      await new Promise(() => {}); // This never resolves, keeping the process alive
+      return; // This line never executes, but kept for clarity
     }
 
-    // Validate environment variables
+    // Only validate environment variables if not paused
     const env = validateEnv(process.env);
     console.log('✅ Environment variables validated');
 

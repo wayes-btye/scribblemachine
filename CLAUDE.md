@@ -47,20 +47,26 @@ pnpm web:dev
 
 #### **Mode 2: Full-Stack Development (BACKEND TESTING)**
 **Use when**: Testing backend changes, API modifications, worker updates
-```bash
-# 1. Pause Cloud Run worker job processing
-gcloud run services update scribblemachine-worker \
-  --region=europe-west1 \
-  --set-env-vars="PAUSE_WORKER=true"
 
-# 2. Start both services locally
-pnpm dev
+⚠️ **CRITICAL**: PAUSE_WORKER environment variable must be set manually via Google Cloud Console UI to avoid overwriting other environment variables.
 
-# 3. After testing, resume Cloud Run worker
-gcloud run services update scribblemachine-worker \
-  --region=europe-west1 \
-  --set-env-vars="PAUSE_WORKER=false"
-```
+**Steps:**
+1. **Pause Cloud Run worker job processing (MANUAL PROCESS):**
+   - Go to Google Cloud Console > Cloud Run > scribblemachine-worker
+   - Click "Edit & Deploy New Revision"
+   - In the "Environment Variables" section, add: `PAUSE_WORKER=true`
+   - Click "Deploy" to apply changes
+
+2. **Start both services locally:**
+   ```bash
+   pnpm dev
+   ```
+
+3. **After testing, resume Cloud Run worker (MANUAL PROCESS):**
+   - Return to Cloud Console > Cloud Run > scribblemachine-worker
+   - Click "Edit & Deploy New Revision"
+   - Either remove the `PAUSE_WORKER` variable or set it to `false`
+   - Click "Deploy" to apply changes
 - Frontend: `http://localhost:3000`
 - Backend: `http://localhost:3001` (local)
 - **REQUIRES**: Cloud Run pause/resume management
@@ -68,14 +74,16 @@ gcloud run services update scribblemachine-worker \
 ### 🚨 **Critical Workflow Rules**
 
 **BEFORE backend testing:**
-1. **ALWAYS** pause Cloud Run worker job processing first
-2. Verify no production job processing is affected
-3. Run `pnpm dev` for full-stack testing
+1. **ALWAYS** manually pause Cloud Run worker via Google Cloud Console UI
+2. Add `PAUSE_WORKER=true` environment variable (preserves all other env vars)
+3. Verify no production job processing is affected
+4. Run `pnpm dev` for full-stack testing
 
 **AFTER backend testing:**
-1. **ALWAYS** resume Cloud Run worker job processing
-2. Verify production job processing is restored
-3. Switch back to `pnpm web:dev` for frontend work
+1. **ALWAYS** manually resume Cloud Run worker via Google Cloud Console UI
+2. Remove `PAUSE_WORKER` variable or set it to `false`
+3. Verify production job processing is restored
+4. Switch back to `pnpm web:dev` for frontend work
 
 **NEVER run `pnpm dev` while Cloud Run is active** - causes conflicts and unpredictable behavior.
 
