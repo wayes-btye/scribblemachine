@@ -1,9 +1,17 @@
 # Google Cloud Run Current Setup Documentation
 
 ## Executive Summary
-This document provides comprehensive documentation of the current Google Cloud Run deployment for the ColoringGenerator worker service, including the automated GitHub integration, service configuration, and operational procedures.
+This document provides comprehensive documentation of the current Google Cloud Run deployment for the ColoringGenerator worker service, including service configuration and operational procedures.
 
-**⚠️ CRITICAL**: This setup is currently WORKING in production. Any changes should be made with extreme caution to avoid breaking the live service.
+**✅ CURRENT STATUS**: Service is WORKING in production with manual deployment process (September 29, 2025)
+
+**📋 RECENT CHANGES (Sept 29, 2025)**:
+- **Issue Resolved**: Cloud Build context problem that caused all automated deployments to fail
+- **Root Cause**: Auto-generated GitHub trigger used wrong build context (`services/worker/` instead of `.`)
+- **Solution**: Removed broken trigger, documented working manual deployment process
+- **Result**: Service successfully deployed and operational, manual builds work perfectly
+
+**⚠️ IMPORTANT**: GitHub auto-deployment is currently DISABLED - use manual deployment commands below.
 
 ---
 
@@ -23,34 +31,43 @@ This document provides comprehensive documentation of the current Google Cloud R
 
 ---
 
-## GITHUB INTEGRATION (CONFIRMED ACTIVE)
+## GITHUB INTEGRATION (MANUAL DEPLOY REQUIRED)
 
 ### **Automatic Deployment Setup**
-✅ **CONFIRMED**: GitHub integration is ACTIVE and working via Google Cloud Build
+⚠️ **CURRENT STATUS**: GitHub trigger REMOVED due to build context issues (resolved September 29, 2025)
 
 **Repository Configuration**:
 - **GitHub Repository**: `wayes-btye/scribblemachine`
-- **Branch**: `main` (auto-deploys on push)
-- **Trigger Name**: `rmgpgab-scribblemachine-worker-europe-west1-wayes-btye-scribdsp`
-- **Trigger ID**: `b605fbb4-db8a-4c29-af7f-17a222d24730`
-- **Status**: ENABLED
+- **Branch**: `main` (manual deploy required)
+- **Previous Trigger**: `b605fbb4-db8a-4c29-af7f-17a222d24730` (DELETED - had wrong build context)
+- **Status**: Manual deployment only (see deployment commands below)
 
-### **Deployment Workflow**
-1. **Code Push**: Push to `main` branch in GitHub
-2. **Cloud Build Trigger**: Automatically triggered by GitHub webhook
-3. **Docker Build**: Uses `/cloudbuild.yaml` configuration
+### **Current Deployment Workflow (MANUAL)**
+1. **Code Push**: Push to `main` branch in GitHub (no automatic trigger)
+2. **Manual Build**: Run `gcloud builds submit --config cloudbuild.yaml .`
+3. **Docker Build**: Uses `/cloudbuild.yaml` configuration with correct root context
 4. **Image Push**: Pushes to `gcr.io/scribblemachine/coloringpage-worker:latest`
 5. **Cloud Run Deploy**: Automatically updates the running service
 6. **Health Check**: Verifies deployment success
 
-### **Build Configuration**
+### **Working Build Configuration**
 Location: `/cloudbuild.yaml` (in repository root)
 ```yaml
-# Note: Exact configuration should be verified in repository
-# This builds from repository root context, not just worker service
+# ✅ VERIFIED WORKING CONFIGURATION (September 29, 2025)
+# This builds from repository root context (86.1 MiB), includes all workspace files
+# Build Context: . (root directory, NOT services/worker/)
+# Dockerfile: services/worker/Dockerfile
+# Result: Successfully finds pnpm-lock.yaml, pnpm-workspace.yaml, package.json
 ```
 
-**⚠️ IMPORTANT**: Any changes to `main` branch will trigger automatic redeployment to production.
+### **Deployment Commands**
+```bash
+# ✅ WORKING - Use this for deployments:
+gcloud builds submit --config cloudbuild.yaml .
+
+# ✅ Alternative - Direct Cloud Run deployment:
+# (First build image locally, then deploy)
+```
 
 ---
 
@@ -230,8 +247,12 @@ gcloud logging read "resource.type=cloud_run_revision" \
 # Check Cloud Build status
 gcloud builds list --limit=5
 
-# Check trigger status
-gcloud builds triggers describe b605fbb4-db8a-4c29-af7f-17a222d24730
+# Check trigger status (NONE - manual deployment only)
+gcloud builds triggers list
+# Should return: "Listed 0 items."
+
+# Manual deployment (if automated fails):
+gcloud builds submit --config cloudbuild.yaml .
 ```
 
 ### **Emergency Procedures**
