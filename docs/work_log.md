@@ -804,3 +804,13 @@ This file serves as a development scratchpad for tracking progress, notes, and d
 **Notes:**
 - Feature now production-ready with all original UX issues resolved in 2-3 hour timeframe
 
+### [2025-09-30T12:00:00Z] — Critical Performance Investigation
+**Context:** Production jobs taking 1020+ seconds vs 7-11 seconds locally - 146x performance degradation
+**What changed:**
+- Identified root cause: Multiple Cloud Run instances processing same jobs simultaneously
+- Created comprehensive performance investigation report with evidence and solutions
+- Confirmed PgBoss architecture mismatch with Cloud Run horizontal scaling
+**Leftover:**
+- Implement immediate fix (force single Cloud Run instance)
+- Plan long-term distributed queue migration (Cloud Tasks/Pub/Sub)
+
