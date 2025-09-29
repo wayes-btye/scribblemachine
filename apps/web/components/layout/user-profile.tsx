@@ -82,7 +82,7 @@ export function UserProfile() {
         {creditsLoading ? (
           <Skeleton className="h-6 w-16" />
         ) : (
-          <Badge variant="secondary" className="bg-brand-warm-orange/10 text-brand-warm-orange border-brand-warm-orange/20">
+          <Badge variant="secondary" className="bg-gradient-to-r from-orange-500/10 to-yellow-500/10 text-orange-600 border-orange-500/20">
             <Coins className="w-3 h-3 mr-1" />
             {credits?.balance ?? 0} credits
           </Badge>
@@ -94,11 +94,11 @@ export function UserProfile() {
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
-            className="relative h-8 w-8 rounded-full hover:bg-brand-cream"
+            className="relative h-8 w-8 rounded-full hover:bg-white/20"
           >
             <Avatar className="h-8 w-8">
               <AvatarImage src={user.user_metadata?.avatar_url} alt={user.email || ''} />
-              <AvatarFallback className="bg-brand-warm-blue text-white">
+              <AvatarFallback className="bg-gradient-to-br from-purple-500 to-blue-500 text-white">
                 {getInitials(user.email || 'U')}
               </AvatarFallback>
             </Avatar>
@@ -119,14 +119,14 @@ export function UserProfile() {
 
           {/* Credits (mobile) */}
           <div className="sm:hidden">
-            <DropdownMenuItem className="focus:bg-brand-cream/50">
+            <DropdownMenuItem className="focus:bg-white/20">
               <CreditCard className="mr-2 h-4 w-4" />
               <span>Credits: {credits?.balance ?? 0}</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
           </div>
 
-          <DropdownMenuItem className="focus:bg-brand-cream/50">
+          <DropdownMenuItem className="focus:bg-white/20">
             <User className="mr-2 h-4 w-4" />
             <span>Profile</span>
           </DropdownMenuItem>

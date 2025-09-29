@@ -3,10 +3,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useAuth } from '@/lib/auth/auth-provider'
-import { Button } from '@/components/ui/button'
 import { UserProfile } from '@/components/layout/user-profile'
 import { MagicLinkForm } from '@/components/auth/magic-link-form'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { AuthenticatedLink } from '@/components/auth/authenticated-link'
 import { Sparkles } from 'lucide-react'
 import { useState } from 'react'
 
@@ -45,7 +45,7 @@ export function Header() {
                     Sign In
                   </button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-md border-0 p-0">
+                <DialogContent className="sm:max-w-md bg-white/95 backdrop-blur-sm border border-white/20 shadow-xl">
                   <MagicLinkForm
                     onSuccess={() => {
                       setAuthDialogOpen(false)
@@ -53,12 +53,12 @@ export function Header() {
                   />
                 </DialogContent>
               </Dialog>
-              <Link href="/workspace">
+              <AuthenticatedLink href="/workspace">
                 <button className="btn-primary flex items-center">
                   <Sparkles className="w-5 h-5 mr-2" />
                   Start Creating
                 </button>
-              </Link>
+              </AuthenticatedLink>
             </>
           )}
         </div>

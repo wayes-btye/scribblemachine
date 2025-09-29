@@ -1,10 +1,10 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { Upload, Sparkles, Camera, Lightbulb, Zap, Palette, Heart } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect } from 'react'
+import { AuthenticatedLink } from '@/components/auth/authenticated-link'
 
 export default function Home() {
   useEffect(() => {
@@ -17,24 +17,26 @@ export default function Home() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.style.opacity = '1'
-          entry.target.style.transform = 'translateY(0) translateX(0) scale(1)'
+          const target = entry.target as HTMLElement
+          target.style.opacity = '1'
+          target.style.transform = 'translateY(0) translateX(0) scale(1)'
         }
       })
     }, observerOptions)
 
     // Observe all animated elements
     document.querySelectorAll('.fade-in-up, .scale-in').forEach((el, index) => {
-      el.style.opacity = '0'
+      const element = el as HTMLElement
+      element.style.opacity = '0'
 
-      if (el.classList.contains('fade-in-up')) {
-        el.style.transform = 'translateY(30px)'
-      } else if (el.classList.contains('scale-in')) {
-        el.style.transform = 'scale(0.9)'
+      if (element.classList.contains('fade-in-up')) {
+        element.style.transform = 'translateY(30px)'
+      } else if (element.classList.contains('scale-in')) {
+        element.style.transform = 'scale(0.9)'
       }
 
-      el.style.transition = `opacity 0.8s ease-out ${index * 0.1}s, transform 0.8s ease-out ${index * 0.1}s`
-      observer.observe(el)
+      element.style.transition = `opacity 0.8s ease-out ${index * 0.1}s, transform 0.8s ease-out ${index * 0.1}s`
+      observer.observe(element)
     })
 
     return () => observer.disconnect()
@@ -179,24 +181,18 @@ export default function Home() {
 
                 {/* Dual-Mode CTA Buttons */}
                 <div className="grid sm:grid-cols-2 gap-4 mb-12 fade-in-up delay-300">
-                  <Link href="/workspace">
+                  <AuthenticatedLink href="/workspace?mode=upload">
                     <button className="btn-primary flex items-center justify-center text-lg px-6 py-4 relative w-full">
                       <Camera className="w-6 h-6 mr-3" />
-                      <div className="text-left">
-                        <div className="font-bold">Upload Photo</div>
-                        <div className="text-sm opacity-90">Turn memories into art</div>
-                      </div>
+                      <span className="font-bold">Upload Photo</span>
                     </button>
-                  </Link>
-                  <Link href="/workspace">
+                  </AuthenticatedLink>
+                  <AuthenticatedLink href="/workspace?mode=prompt">
                     <button className="btn-secondary flex items-center justify-center text-lg px-6 py-4 relative w-full">
                       <Lightbulb className="w-6 h-6 mr-3" />
-                      <div className="text-left">
-                        <div className="font-bold">Imagine Ideas</div>
-                        <div className="text-sm opacity-90">Describe your dreams</div>
-                      </div>
+                      <span className="font-bold">Imagine Ideas</span>
                     </button>
-                  </Link>
+                  </AuthenticatedLink>
                 </div>
 
                 {/* Enhanced trust indicators */}

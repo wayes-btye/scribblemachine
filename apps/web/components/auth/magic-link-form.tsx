@@ -74,8 +74,8 @@ export function MagicLinkForm({ onSuccess }: MagicLinkFormProps) {
     return (
       <Card className="w-full max-w-md mx-auto">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-4 w-12 h-12 bg-brand-warm-blue/10 rounded-full flex items-center justify-center">
-            <Mail className="w-6 h-6 text-brand-warm-blue" />
+          <div className="mx-auto mb-4 w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center">
+            <Mail className="w-6 h-6 text-blue-600" />
           </div>
           <CardTitle className="text-xl">Check your email</CardTitle>
           <CardDescription>
@@ -105,8 +105,8 @@ export function MagicLinkForm({ onSuccess }: MagicLinkFormProps) {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader className="text-center">
-        <div className="mx-auto mb-4 w-12 h-12 bg-brand-warm-blue/10 rounded-full flex items-center justify-center">
-          <Mail className="w-6 h-6 text-brand-warm-blue" />
+        <div className="mx-auto mb-4 w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center">
+          <Mail className="w-6 h-6 text-blue-600" />
         </div>
         <CardTitle className="text-xl">Sign in to Scribble Machine</CardTitle>
         <CardDescription>
@@ -131,7 +131,7 @@ export function MagicLinkForm({ onSuccess }: MagicLinkFormProps) {
 
           <Button
             type="submit"
-            className="w-full bg-brand-warm-blue hover:bg-brand-warm-blue/90"
+            className="w-full btn-primary"
             disabled={isSubmitting}
           >
             {isSubmitting ? (

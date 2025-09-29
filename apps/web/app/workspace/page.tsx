@@ -6,13 +6,14 @@ import { ModeToggle } from '@/components/workspace/mode-toggle'
 import { WorkspaceLeftPane } from '@/components/workspace/workspace-left-pane'
 import { WorkspaceRightPane } from '@/components/workspace/workspace-right-pane'
 import { useAuth } from '@/lib/auth/auth-provider'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
 export default function WorkspacePage() {
   const { user, loading } = useAuth()
   const workspaceState = useWorkspaceState()
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   // Redirect to home if not authenticated (but only after loading is complete)
   useEffect(() => {
@@ -20,6 +21,14 @@ export default function WorkspacePage() {
       router.push('/')
     }
   }, [user, loading, router])
+
+  // Set mode from URL parameter
+  useEffect(() => {
+    const mode = searchParams.get('mode')
+    if (mode && (mode === 'upload' || mode === 'prompt')) {
+      workspaceState.setMode(mode)
+    }
+  }, [searchParams, workspaceState.setMode])
 
   // Show loading while checking authentication
   if (loading) {
