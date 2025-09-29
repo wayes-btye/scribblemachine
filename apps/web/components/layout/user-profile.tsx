@@ -104,13 +104,13 @@ export function UserProfile() {
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-64" align="end" forceMount>
-          <DropdownMenuLabel className="font-normal">
+        <DropdownMenuContent className="w-64 bg-white border border-gray-200 shadow-2xl" align="end" forceMount>
+          <DropdownMenuLabel className="font-normal text-gray-900">
             <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none">
+              <p className="text-sm font-medium leading-none text-gray-900">
                 {user.user_metadata?.full_name || 'User'}
               </p>
-              <p className="text-xs leading-none text-muted-foreground">
+              <p className="text-xs leading-none text-gray-500">
                 {user.email}
               </p>
             </div>
@@ -119,21 +119,21 @@ export function UserProfile() {
 
           {/* Credits (mobile) */}
           <div className="sm:hidden">
-            <DropdownMenuItem className="focus:bg-white/20">
+            <DropdownMenuItem className="focus:bg-gray-100 text-gray-900 hover:bg-gray-50">
               <CreditCard className="mr-2 h-4 w-4" />
               <span>Credits: {credits?.balance ?? 0}</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
           </div>
 
-          <DropdownMenuItem className="focus:bg-white/20">
+          <DropdownMenuItem className="focus:bg-gray-100 text-gray-900 hover:bg-gray-50">
             <User className="mr-2 h-4 w-4" />
             <span>Profile</span>
           </DropdownMenuItem>
 
           <GetCreditsButton
             variant="ghost"
-            className="w-full justify-start p-2 h-auto font-normal"
+            className="w-full justify-start p-2 h-auto font-normal text-gray-900 hover:bg-gray-100"
             onCreditsUpdated={fetchCredits}
           >
             <CreditCard className="mr-2 h-4 w-4" />
@@ -143,7 +143,7 @@ export function UserProfile() {
           <DropdownMenuSeparator />
 
           <DropdownMenuItem
-            className="focus:bg-destructive/10 focus:text-destructive cursor-pointer"
+            className="focus:bg-red-50 focus:text-red-600 cursor-pointer text-gray-900 hover:bg-red-50"
             onSelect={handleSignOut}
           >
             <LogOut className="mr-2 h-4 w-4" />

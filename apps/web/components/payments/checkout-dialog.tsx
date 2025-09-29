@@ -111,7 +111,7 @@ export function CheckoutDialog({ children, onCreditsUpdated: _onCreditsUpdated }
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md bg-white border border-gray-200 shadow-2xl">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Coins className="h-5 w-5 text-brand-warm-orange" />
@@ -126,9 +126,8 @@ export function CheckoutDialog({ children, onCreditsUpdated: _onCreditsUpdated }
           {CREDIT_PACKS.map((pack) => (
             <Card
               key={pack.id}
-              className={`relative cursor-pointer transition-all hover:shadow-md ${
-                pack.popular ? 'ring-2 ring-brand-warm-orange ring-opacity-50' : ''
-              }`}
+              className={`relative cursor-pointer transition-all hover:shadow-md ${pack.popular ? 'ring-2 ring-brand-warm-orange ring-opacity-50' : ''
+                }`}
             >
               {pack.popular && (
                 <Badge className="absolute -top-2 left-4 bg-brand-warm-orange text-white">

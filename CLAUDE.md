@@ -30,24 +30,86 @@ This is a Children's Coloring Page Generator web application that converts image
 └── supabase/                   # Database migrations and setup
 ```
 
-## ⚠️ Process Management: Restart Only When Necessary
+## ⚠️ Development Environment Strategy
 
-**RESTART WEB APP (`pnpm web:dev`) ONLY when:**
-- Environment changes (.env files)
-- Config changes (next.config.js, package.json)
-- New dependencies installed
-- Port conflicts or server errors
+**CURRENT SETUP**: Backend runs on Google Cloud Run (production), frontend runs locally.
 
-**RESTART WORKER (`pnpm worker:dev`) ONLY when:**
-- Database schema changes
-- Worker code changes (src/index.ts, job handlers)
-- Environment changes affecting database/AI APIs
+### 🎯 **Development Modes**
 
-**RESTART BOTH (`pnpm dev`) ONLY when:**
-- First time starting development
-- Major dependency or config changes
+#### **Mode 1: Frontend-Only Development (DEFAULT)**
+**Use when**: Working on UI, components, pages, styling
+```bash
+pnpm web:dev
+```
+- Frontend: `http://localhost:3000`
+- Backend: Cloud Run (production)
+- **SAFE**: No backend conflicts
 
-**Normal code changes** (React components, pages, styles) use hot reload - no restart needed.
+#### **Mode 2: Full-Stack Development (BACKEND TESTING)**
+**Use when**: Testing backend changes, API modifications, worker updates
+```bash
+# 1. Scale down Cloud Run to 0 instances
+gcloud run services update worker --region=europe-west1 --min-instances=0 --max-instances=0
+
+# 2. Start both services locally
+pnpm dev
+
+# 3. After testing, scale Cloud Run back up
+gcloud run services update worker --region=europe-west1 --min-instances=1 --max-instances=10
+```
+- Frontend: `http://localhost:3000`
+- Backend: `http://localhost:3001` (local)
+- **REQUIRES**: Cloud Run scaling management
+
+### 🚨 **Critical Workflow Rules**
+
+**BEFORE backend testing:**
+1. **ALWAYS** scale Cloud Run to 0 instances first
+2. Verify no production traffic is affected
+3. Run `pnpm dev` for full-stack testing
+
+**AFTER backend testing:**
+1. **ALWAYS** scale Cloud Run back to normal (1-10 instances)
+2. Verify production is restored
+3. Switch back to `pnpm web:dev` for frontend work
+
+**NEVER run `pnpm dev` while Cloud Run is active** - causes conflicts and unpredictable behavior.
+
+### 🔧 **Cloud Run Management Commands**
+
+**Check current status:**
+```bash
+gcloud run services describe worker --region=europe-west1
+```
+
+**Scale down for backend testing:**
+```bash
+gcloud run services update worker --region=europe-west1 --min-instances=0 --max-instances=0
+```
+
+**Scale back up after testing:**
+```bash
+gcloud run services update worker --region=europe-west1 --min-instances=1 --max-instances=10
+```
+
+**Emergency restore (if production is down):**
+```bash
+gcloud run services update worker --region=europe-west1 --min-instances=1 --max-instances=10
+```
+
+### 📋 **Backend Testing Checklist**
+
+**BEFORE testing:**
+- [ ] Check if anyone else is using the system
+- [ ] Scale Cloud Run to 0 instances
+- [ ] Verify no production traffic
+- [ ] Document what you're testing
+
+**AFTER testing:**
+- [ ] Scale Cloud Run back to normal
+- [ ] Verify production is restored
+- [ ] Test production functionality
+- [ ] Document any issues found
 
 ## ⚠️ CRITICAL WARNING: Process Killing
 

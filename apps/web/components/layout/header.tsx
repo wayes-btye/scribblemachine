@@ -47,7 +47,7 @@ export function Header() {
                       Sign In
                     </button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-md bg-white/95 backdrop-blur-sm border border-white/20 shadow-xl">
+                  <DialogContent className="sm:max-w-md bg-white border border-gray-200 shadow-2xl">
                     <MagicLinkForm
                       onSuccess={() => {
                         setAuthDialogOpen(false)
