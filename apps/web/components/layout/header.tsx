@@ -15,57 +15,35 @@ export function Header() {
   const [authDialogOpen, setAuthDialogOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity logo-header">
-          <Image
-            src="/assets/icons/scribble-icon.svg"
-            alt="Scribble Machine"
-            width={32}
-            height={32}
-            className="h-8 w-8"
-          />
-          <span className="font-bold text-xl text-gray-900">
-            Scribble Machine
-          </span>
-        </Link>
-
-        {/* Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link
-            href="/"
-            className="text-sm font-medium text-gray-600 hover:text-brand-warm-blue transition-colors"
-          >
-            Home
+    <header className="relative z-60 py-4 px-4">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Large Logo */}
+        <div className="flex items-center transition-all duration-300 hover:scale-105 hover:rotate-1 fade-in-up">
+          <Link href="/">
+            <Image
+              src="/assets/ScribbleMachinecom.svg"
+              alt="ScribbleMachine.com"
+              width={280}
+              height={112}
+              className="w-auto"
+              style={{ height: '7rem' }}
+            />
           </Link>
-          <Link
-            href="/gallery"
-            className="text-sm font-medium text-gray-600 hover:text-brand-warm-blue transition-colors"
-          >
-            Gallery
-          </Link>
-          <Link
-            href="/how-it-works"
-            className="text-sm font-medium text-gray-600 hover:text-brand-warm-blue transition-colors"
-          >
-            How It Works
-          </Link>
-        </nav>
+        </div>
 
         {/* Auth Section */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-6 fade-in-up delay-200">
           {loading ? (
-            <div className="h-9 w-24 bg-gray-200 animate-pulse rounded-md" />
+            <div className="h-12 w-32 bg-white/20 animate-pulse rounded-lg" />
           ) : user ? (
             <UserProfile />
           ) : (
             <>
               <Dialog open={authDialogOpen} onOpenChange={setAuthDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button variant="outline" className="border-brand-warm-orange text-brand-warm-orange hover:bg-brand-warm-orange/10">
+                  <button className="text-lg font-medium px-6 py-3 hover:bg-white/10 rounded-lg transition-all duration-300 text-foreground">
                     Sign In
-                  </Button>
+                  </button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md border-0 p-0">
                   <MagicLinkForm
@@ -76,10 +54,10 @@ export function Header() {
                 </DialogContent>
               </Dialog>
               <Link href="/workspace">
-                <Button className="bg-brand-warm-blue hover:bg-brand-warm-blue/90">
-                  <Sparkles className="w-4 h-4 mr-2" />
+                <button className="btn-primary flex items-center">
+                  <Sparkles className="w-5 h-5 mr-2" />
                   Start Creating
-                </Button>
+                </button>
               </Link>
             </>
           )}

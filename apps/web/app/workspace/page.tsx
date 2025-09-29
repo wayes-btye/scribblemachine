@@ -24,10 +24,10 @@ export default function WorkspacePage() {
   // Show loading while checking authentication
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-brand-cream via-brand-soft-blue/10 to-brand-soft-pink/10 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin h-8 w-8 border-2 border-brand-warm-blue border-t-transparent rounded-full mx-auto mb-4" />
-          <p className="text-gray-600">Loading...</p>
+      <div className="min-h-screen relative flex items-center justify-center">
+        <div className="text-center bg-white/85 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+          <div className="animate-spin h-12 w-12 border-3 border-primary border-t-transparent rounded-full mx-auto mb-6" />
+          <p className="text-muted-foreground text-lg font-medium">Loading your creative workspace...</p>
         </div>
       </div>
     )
@@ -39,14 +39,14 @@ export default function WorkspacePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-brand-cream via-brand-soft-blue/10 to-brand-soft-pink/10">
+    <div className="min-h-screen relative">
       <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         <div className="max-w-6xl mx-auto">
-          {/* Header with Mode Toggle - Sticky on mobile for better UX */}
-          <div className="sticky top-0 bg-gradient-to-br from-brand-cream/95 via-brand-soft-blue/5 to-brand-soft-pink/5 backdrop-blur-sm z-10 -mx-3 sm:mx-0 px-3 sm:px-0 py-4 sm:py-0 sm:relative sm:bg-transparent sm:backdrop-blur-none text-center mb-6 sm:mb-8">
+          {/* Header with Mode Toggle - Styled with new design system */}
+          <div className="sticky top-0 bg-white/85 backdrop-blur-sm z-10 -mx-3 sm:mx-0 px-3 sm:px-0 py-4 sm:py-0 sm:relative sm:bg-transparent sm:backdrop-blur-none text-center mb-6 sm:mb-8 rounded-xl border border-white/20">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
-              Create Your{' '}
-              <span className="text-transparent bg-gradient-to-r from-brand-warm-blue to-brand-warm-orange bg-clip-text">
+              <span className="modern-sans">Create Your</span>{' '}
+              <span className="handwritten bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                 Coloring Page
               </span>
             </h1>

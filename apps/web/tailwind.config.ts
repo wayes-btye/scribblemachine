@@ -17,47 +17,47 @@ const config: Config = {
   	},
   	extend: {
   		colors: {
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
+  			border: 'oklch(var(--border))',
+  			input: 'oklch(var(--input))',
+  			ring: 'oklch(var(--ring))',
+  			background: 'oklch(var(--background))',
+  			foreground: 'oklch(var(--foreground))',
   			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
+  				DEFAULT: 'oklch(var(--primary))',
+  				foreground: 'oklch(var(--primary-foreground))'
   			},
   			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
+  				DEFAULT: 'oklch(var(--secondary))',
+  				foreground: 'oklch(var(--secondary-foreground))'
   			},
   			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
+  				DEFAULT: 'oklch(var(--destructive))',
+  				foreground: 'oklch(var(--destructive-foreground))'
   			},
   			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
+  				DEFAULT: 'oklch(var(--muted))',
+  				foreground: 'oklch(var(--muted-foreground))'
   			},
   			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
+  				DEFAULT: 'oklch(var(--accent))',
+  				foreground: 'oklch(var(--accent-foreground))'
   			},
   			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
+  				DEFAULT: 'oklch(var(--popover))',
+  				foreground: 'oklch(var(--popover-foreground))'
   			},
   			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
+  				DEFAULT: 'oklch(var(--card))',
+  				foreground: 'oklch(var(--card-foreground))'
   			},
   			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
+  				'1': 'oklch(var(--chart-1))',
+  				'2': 'oklch(var(--chart-2))',
+  				'3': 'oklch(var(--chart-3))',
+  				'4': 'oklch(var(--chart-4))',
+  				'5': 'oklch(var(--chart-5))'
   			},
-  			// Brand colors from UI mockups
+  			// Legacy brand colors (keeping for compatibility)
   			brand: {
   				cream: '#F8F5F0',
   				'warm-blue': '#4A90B8',
@@ -69,10 +69,34 @@ const config: Config = {
   				'soft-purple': '#DDA0DD'
   			}
   		},
+  		fontFamily: {
+  			sans: ['var(--font-sans)', 'Inter', 'sans-serif'],
+  			serif: ['var(--font-serif)', 'Architects Daughter', 'cursive'],
+  			mono: ['var(--font-mono)', 'DM Sans', 'monospace'],
+  			'space-grotesk': ['Space Grotesk', 'sans-serif'],
+  			'plus-jakarta': ['Plus Jakarta Sans', 'sans-serif'],
+  		},
   		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
+  			lg: 'var(--radius-lg)',
+  			md: 'var(--radius-md)',
+  			sm: 'var(--radius-sm)',
+  			xl: 'var(--radius-xl)'
+  		},
+  		boxShadow: {
+  			'2xs': 'var(--shadow-2xs)',
+  			'xs': 'var(--shadow-xs)',
+  			'sm': 'var(--shadow-sm)',
+  			'DEFAULT': 'var(--shadow)',
+  			'md': 'var(--shadow-md)',
+  			'lg': 'var(--shadow-lg)',
+  			'xl': 'var(--shadow-xl)',
+  			'2xl': 'var(--shadow-2xl)',
+  		},
+  		backgroundImage: {
+  			'gradient-bg': 'var(--gradient-bg)',
+  			'gradient-card': 'var(--gradient-card)',
+  			'gradient-hero': 'var(--gradient-hero)',
+  			'gradient-accent': 'var(--gradient-accent)',
   		},
   		keyframes: {
   			'accordion-down': {
@@ -90,11 +114,47 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
+  			},
+  			'creative-paint-float-1': {
+  				'0%': {
+  					opacity: '0.26',
+  					transform: 'translateY(-16px) translateX(-6px) scale(0.48) rotate(4deg)',
+  					borderRadius: '62% 38% 48% 72%',
+  					filter: 'blur(2.8px)'
+  				},
+  				'50%': {
+  					opacity: '0.36',
+  					transform: 'translateY(32px) translateX(10px) scale(0.68) rotate(15deg)',
+  					borderRadius: '48% 52% 62% 38%',
+  					filter: 'blur(1.8px)'
+  				},
+  				'100%': {
+  					opacity: '0.26',
+  					transform: 'translateY(-16px) translateX(-6px) scale(0.48) rotate(31deg)',
+  					borderRadius: '62% 38% 48% 72%',
+  					filter: 'blur(2.8px)'
+  				}
+  			},
+  			'fade-in-up': {
+  				'0%': { opacity: '0', transform: 'translateY(30px)' },
+  				'100%': { opacity: '1', transform: 'translateY(0)' }
+  			},
+  			'scale-in': {
+  				'0%': { opacity: '0', transform: 'scale(0.9)' },
+  				'100%': { opacity: '1', transform: 'scale(1)' }
+  			},
+  			'logo-float': {
+  				'0%, 100%': { transform: 'translateY(0px) scale(1)' },
+  				'50%': { transform: 'translateY(-10px) scale(1.02)' }
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'creative-paint-float-1': 'creative-paint-float-1 16s ease-in-out infinite',
+  			'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
+  			'scale-in': 'scale-in 0.8s ease-out forwards',
+  			'logo-float': 'logo-float 4s ease-in-out infinite'
   		}
   	}
   },
