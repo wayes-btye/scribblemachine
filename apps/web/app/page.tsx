@@ -222,7 +222,7 @@ export default function Home() {
                     alt="Magical coloring book"
                     width={600}
                     height={600}
-                    className="w-full rounded-2xl"
+                    className="w-full rounded-2xl hero-book cursor-pointer"
                     style={{
                       filter: 'drop-shadow(0 25px 50px oklch(0.15 0.12 260 / 0.25)) drop-shadow(0 10px 20px oklch(0.15 0.12 260 / 0.15))',
                       transform: 'perspective(1000px) rotateY(-5deg) rotateX(2deg)',
@@ -327,9 +327,9 @@ export default function Home() {
                   Join thousands of families creating magical coloring moments every day!
                 </p>
                 <Link href="/workspace">
-                  <button className="btn-primary text-lg px-8 py-4">
-                    <Sparkles className="w-6 h-6 mr-2" />
-                    Start Creating Now
+                  <button className="btn-primary text-lg px-8 py-4 inline-flex items-center justify-center">
+                    <Sparkles className="w-6 h-6 mr-2 flex-shrink-0" />
+                    <span className="whitespace-nowrap">Start Creating Now</span>
                   </button>
                 </Link>
               </div>

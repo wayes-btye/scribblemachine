@@ -54,6 +54,19 @@
         "-y",
         "@vercel/mcp@latest"
       ]
+    },
+    "cloud-run": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@google-cloud/cloud-run-mcp"
+      ],
+      "env": {
+        "GOOGLE_CLOUD_PROJECT": "scribblemachine"
+      }
     }
   }
 }

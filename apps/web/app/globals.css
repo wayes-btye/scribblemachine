@@ -150,31 +150,31 @@
   /* Creative Paint Dreams Animation System */
   @keyframes creativePaintFloat1 {
     0% {
-      opacity: 0.26;
+      opacity: 0.45;
       transform: translateY(-16px) translateX(-6px) scale(0.48) rotate(4deg);
       border-radius: 62% 38% 48% 72%;
       filter: blur(2.8px);
     }
     25% {
-      opacity: 0.29;
+      opacity: 0.52;
       transform: translateY(-5px) translateX(-2px) scale(0.52) rotate(7deg);
       border-radius: 58% 42% 52% 68%;
       filter: blur(2.6px);
     }
     50% {
-      opacity: 0.36;
+      opacity: 0.65;
       transform: translateY(32px) translateX(10px) scale(0.68) rotate(15deg);
       border-radius: 48% 52% 62% 38%;
       filter: blur(1.8px);
     }
     75% {
-      opacity: 0.29;
+      opacity: 0.52;
       transform: translateY(-5px) translateX(-2px) scale(0.52) rotate(23deg);
       border-radius: 58% 42% 52% 68%;
       filter: blur(2.6px);
     }
     100% {
-      opacity: 0.26;
+      opacity: 0.45;
       transform: translateY(-16px) translateX(-6px) scale(0.48) rotate(31deg);
       border-radius: 62% 38% 48% 72%;
       filter: blur(2.8px);
@@ -183,31 +183,31 @@
 
   @keyframes creativePaintFloat2 {
     0% {
-      opacity: 0.24;
+      opacity: 0.42;
       transform: translateX(22px) translateY(-15px) scale(0.42) rotate(-7deg);
       border-radius: 66% 34% 44% 56%;
       filter: blur(2.8px);
     }
     25% {
-      opacity: 0.27;
+      opacity: 0.48;
       transform: translateX(8px) translateY(-6px) scale(0.46) rotate(-9deg);
       border-radius: 62% 38% 48% 52%;
       filter: blur(2.6px);
     }
     50% {
-      opacity: 0.34;
+      opacity: 0.58;
       transform: translateX(-22px) translateY(26px) scale(0.58) rotate(-11deg);
       border-radius: 34% 66% 56% 44%;
       filter: blur(1.8px);
     }
     75% {
-      opacity: 0.27;
+      opacity: 0.48;
       transform: translateX(8px) translateY(-6px) scale(0.46) rotate(-20deg);
       border-radius: 62% 38% 48% 52%;
       filter: blur(2.6px);
     }
     100% {
-      opacity: 0.24;
+      opacity: 0.42;
       transform: translateX(22px) translateY(-15px) scale(0.42) rotate(-29deg);
       border-radius: 66% 34% 44% 56%;
       filter: blur(2.8px);
@@ -216,12 +216,12 @@
 
   @keyframes enhancedColorBleed {
     0%, 100% {
-      opacity: 0.14;
+      opacity: 0.32;
       transform: scale(0.84) translateX(-3.5px);
       background-size: 100% 100%;
     }
     50% {
-      opacity: 0.23;
+      opacity: 0.46;
       transform: scale(1.05) translateX(2.5px);
       background-size: 110% 110%;
     }
@@ -229,12 +229,12 @@
 
   @keyframes enhancedColorBleed2 {
     0%, 100% {
-      opacity: 0.11;
+      opacity: 0.28;
       transform: scale(0.91) translateY(-2.5px);
       background-size: 100% 100%;
     }
     50% {
-      opacity: 0.18;
+      opacity: 0.38;
       transform: scale(1.03) translateY(1.5px);
       background-size: 106% 106%;
     }
@@ -242,27 +242,27 @@
 
   @keyframes elegantWatercolorFade {
     0% {
-      opacity: 0.20;
+      opacity: 0.38;
       transform: scale(0.82) rotate(2.5deg) translateX(4.5px);
       filter: blur(2.8px) saturate(1.15);
     }
     25% {
-      opacity: 0.24;
+      opacity: 0.44;
       transform: scale(0.92) rotate(1deg) translateX(5.5px);
       filter: blur(3.3px) saturate(1.08);
     }
     50% {
-      opacity: 0.28;
+      opacity: 0.52;
       transform: scale(1.02) rotate(-1.5deg) translateX(6.5px);
       filter: blur(3.8px) saturate(1.0);
     }
     75% {
-      opacity: 0.23;
+      opacity: 0.42;
       transform: scale(0.88) rotate(0.5deg) translateX(5.5px);
       filter: blur(3.0px) saturate(1.12);
     }
     100% {
-      opacity: 0.20;
+      opacity: 0.38;
       transform: scale(0.82) rotate(2.5deg) translateX(4.5px);
       filter: blur(2.8px) saturate(1.15);
     }
@@ -272,22 +272,22 @@
     0%, 100% {
       clip-path: ellipse(34% 46% at 16% 16%);
       transform: rotate(0deg);
-      opacity: 0.14;
+      opacity: 0.35;
     }
     25% {
       clip-path: ellipse(46% 34% at 74% 20%);
       transform: rotate(90deg);
-      opacity: 0.23;
+      opacity: 0.48;
     }
     50% {
       clip-path: ellipse(41% 51% at 80% 74%);
       transform: rotate(180deg);
-      opacity: 0.20;
+      opacity: 0.42;
     }
     75% {
       clip-path: ellipse(51% 39% at 20% 80%);
       transform: rotate(270deg);
-      opacity: 0.17;
+      opacity: 0.38;
     }
   }
 
@@ -323,27 +323,39 @@
 
   /* Animation Classes */
   .creative-paint-float-1 {
-    animation: creativePaintFloat1 16s ease-in-out infinite;
+    animation: creativePaintFloat1 12s ease-in-out infinite;
+    animation-fill-mode: both;
+    animation-play-state: running;
   }
 
   .creative-paint-float-2 {
-    animation: creativePaintFloat2 20s ease-in-out infinite;
+    animation: creativePaintFloat2 14s ease-in-out infinite;
+    animation-fill-mode: both;
+    animation-play-state: running;
   }
 
   .enhanced-color-bleed {
-    animation: enhancedColorBleed 23s ease-in-out infinite;
+    animation: enhancedColorBleed 15s ease-in-out infinite;
+    animation-fill-mode: both;
+    animation-play-state: running;
   }
 
   .enhanced-color-bleed-2 {
-    animation: enhancedColorBleed2 20.5s ease-in-out infinite;
+    animation: enhancedColorBleed2 13s ease-in-out infinite;
+    animation-fill-mode: both;
+    animation-play-state: running;
   }
 
   .elegant-watercolor-fade {
-    animation: elegantWatercolorFade 16.5s ease-in-out infinite;
+    animation: elegantWatercolorFade 11s ease-in-out infinite;
+    animation-fill-mode: both;
+    animation-play-state: running;
   }
 
   .elegant-corner-float {
-    animation: elegantCornerFloat 29s ease-in-out infinite;
+    animation: elegantCornerFloat 18s ease-in-out infinite;
+    animation-fill-mode: both;
+    animation-play-state: running;
   }
 
   .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
@@ -352,6 +364,39 @@
   .icon-float { animation: iconFloat 3s ease-in-out infinite; }
   .icon-pulse { animation: iconPulse 2s ease-in-out infinite; }
   .icon-rotate { animation: iconRotate 20s linear infinite; }
+
+  /* Hero book hover animation */
+  .hero-book:hover {
+    transform: perspective(1000px) rotateY(-2deg) rotateX(1deg) scale(1.02) !important;
+    filter: drop-shadow(0 35px 70px oklch(0.15 0.12 260 / 0.3)) drop-shadow(0 15px 30px oklch(0.15 0.12 260 / 0.2)) !important;
+  }
+
+  /* Mobile Performance Optimization */
+  @media (max-width: 768px) {
+    /* Reduce number of animated blobs on mobile for performance - keep more visible */
+    .paint-dreams > div:nth-child(n+10) {
+      display: none;
+    }
+
+    /* Reduce animation complexity on mobile */
+    .creative-paint-float-1,
+    .creative-paint-float-2 {
+      animation-duration: 10s;
+    }
+
+    .enhanced-color-bleed,
+    .enhanced-color-bleed-2 {
+      animation-duration: 12s;
+    }
+
+    .elegant-watercolor-fade {
+      animation-duration: 9s;
+    }
+
+    .elegant-corner-float {
+      animation-duration: 14s;
+    }
+  }
 
   /* Staggered Animation Delays */
   .delay-100 { animation-delay: 0.1s; }

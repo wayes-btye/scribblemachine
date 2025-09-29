@@ -163,6 +163,23 @@ Key types defined in `packages/types/src/index.ts`:
 2. Configure Supabase, Gemini API, and Stripe keys
 3. Run `pnpm install` to install all dependencies
 
+### 🚨 Build-Before-Push Rule
+**CRITICAL**: Before pushing to main, always run `pnpm run build:vercel` locally and ensure it completes successfully.
+
+**Simple workflow:**
+1. Make changes
+2. Test locally (`pnpm dev`)
+3. **Run `pnpm run build:vercel`** - must complete without errors
+4. Commit and push
+
+This prevents:
+- Vercel deployment failures
+- Build hanging issues (like useSearchParams without Suspense)
+- Wasted CI/CD resources
+- Broken production deployments
+
+The `build:vercel` command uses the exact same build process that Vercel will use, so if it works locally, it should work in production.
+
 ### Code Organization
 - All packages use workspace dependencies (`workspace:*`)
 - Strict TypeScript configuration across all packages
