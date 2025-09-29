@@ -27,6 +27,43 @@ interface ExtendedJob extends Omit<Job, 'params_json'> {
   params_json: ExtendedJobParams;
 }
 
+// Smart logging class to reduce noise while maintaining observability
+class WorkerLogger {
+  private lastJobState: 'idle' | 'active' = 'idle';
+  private lastIdleLogTime = 0;
+  private idleLogInterval = 5 * 60 * 1000; // Log idle state every 5 minutes
+  private consecutiveIdleCount = 0;
+
+  logJobState(jobs: any[], recentJobs: any[]) {
+    const timestamp = new Date().toISOString();
+    const hasJobs = jobs.length > 0;
+    const currentState = hasJobs ? 'active' : 'idle';
+
+    // Always log state changes
+    if (currentState !== this.lastJobState) {
+      if (currentState === 'active') {
+        console.log(`[${timestamp}] 🟢 Jobs detected after ${this.consecutiveIdleCount} idle checks`);
+        this.consecutiveIdleCount = 0;
+      } else {
+        console.log(`[${timestamp}] 🟡 No queued jobs found`);
+      }
+      this.lastJobState = currentState;
+    }
+
+    // For idle state: periodic summary logs
+    if (currentState === 'idle') {
+      this.consecutiveIdleCount++;
+      const now = Date.now();
+
+      if (now - this.lastIdleLogTime > this.idleLogInterval) {
+        console.log(`[${timestamp}] 📊 SUMMARY: ${this.consecutiveIdleCount} idle checks (${this.idleLogInterval/60000}min). Recent jobs:`,
+          recentJobs?.map((j: any) => `${j.id.substring(0, 8)}:${j.status}${j.params_json?.edit_parent_id ? ':EDIT' : ''}`).slice(0, 3) || 'none');
+        this.lastIdleLogTime = now;
+      }
+    }
+  }
+}
+
 async function createPDFFromPNG(pngBuffer: Buffer): Promise<Buffer> {
   // Use A4 as default paper size (8.27 x 11.69 inches = 595 x 842 points)
   const paperWidth = 595;
@@ -139,6 +176,9 @@ async function main() {
 
     console.log('🚀 Simple polling worker started - checking for jobs every 5 seconds');
 
+    // Initialize smart logger
+    const logger = new WorkerLogger();
+
     // Poll for jobs every 5 seconds
     setInterval(async () => {
       try {
@@ -156,18 +196,20 @@ async function main() {
         }
 
         if (!jobs || jobs.length === 0) {
-          // Enhanced debug: Check total job counts periodically
+          // Get recent jobs for logging context
           const { data: recentJobs } = await supabase
             .from('jobs')
             .select('id, status, created_at, params_json')
             .order('created_at', { ascending: false })
             .limit(5);
 
-          const timestamp = new Date().toISOString();
-          console.log(`[${timestamp}] 📊 No queued jobs. Recent jobs:`,
-            recentJobs?.map((j: any) => `${j.id.substring(0, 8)}:${j.status}${j.params_json?.edit_parent_id ? ':EDIT' : ''}`) || 'none');
+          // Use smart logger to reduce noise
+          logger.logJobState([], recentJobs || []);
           return; // No jobs to process
         }
+
+        // Log transition to active state
+        logger.logJobState(jobs, []);
 
         const job = jobs[0] as ExtendedJob;
         const jobType = job.params_json.edit_parent_id ? 'EDIT' :
