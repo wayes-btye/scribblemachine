@@ -1,12 +1,13 @@
 name: Deploy Web App
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'apps/web/**'
-      - 'packages/**'
-      - '.github/workflows/deploy-web.yml'
+  # Temporarily disabled due to Vercel project configuration
+  # push:
+  #   branches: [main]
+  #   paths:
+  #     - 'apps/web/**'
+  #     - 'packages/**'
+  #     - '.github/workflows/deploy-web.yml'
   workflow_dispatch:
 
 env:

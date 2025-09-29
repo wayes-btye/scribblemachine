@@ -13,6 +13,7 @@
     "test:gemini:generate": "tsx src/test-gemini-image-generation.ts",
     "test:gemini:generate:full": "tsx src/test-gemini-image-generation.ts",
     "test:pdf": "tsx src/test-pdf.ts",
+    "test:text-to-image": "tsx src/test-text-to-image.ts",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist .turbo"
   },

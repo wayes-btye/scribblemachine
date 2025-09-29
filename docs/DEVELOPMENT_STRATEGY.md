@@ -28,6 +28,69 @@
 
 **Root Cause**: Backend runs on Cloud Run (production), making it impossible to test local backend changes safely.
 
+### **NEWLY DISCOVERED CRITICAL ISSUE: Worker Conflicts**
+
+**Additional Problem**: Local development workers are running simultaneously with production Cloud Run workers, causing:
+
+1. **Database Resource Competition**
+   - Both workers poll the same `jobs` table with `status = 'queued'`
+   - Race conditions where both workers can pick up the same job
+   - Local worker "steals" jobs intended for production processing
+
+2. **Performance Degradation**
+   - **Theory Confirmed**: API request slowness likely caused by worker conflicts
+   - Jobs processed by local worker instead of optimized Cloud Run worker
+   - Inconsistent processing times due to resource competition
+
+3. **Resource Waste & Cost Impact**
+   - Duplicate Gemini API calls consuming quota
+   - Storage conflicts with identical upload paths
+   - Credit system interference between workers
+
+4. **Production Data Contamination**
+   - Local worker processes real user production jobs
+   - Debug logs mixed with production job processing
+   - Inconsistent behavior between local and Cloud Run versions
+
+**Evidence**: Process analysis shows multiple worker instances running:
+- Process 33000: `tsx watch src/simple-worker.ts` (local)
+- Process 4276: `tsx watch src/simple-worker.ts` (local duplicate)
+- Process 24060: `pnpm --parallel -r run dev` (includes worker)
+- Cloud Run: `scribblemachine-worker` (production)
+
+## 🚨 IMMEDIATE ACTION REQUIRED
+
+### **Stop Conflicting Workers NOW**
+
+```bash
+# Kill all local worker processes immediately
+taskkill /F /PID 33000
+taskkill /F /PID 4276
+taskkill /F /PID 24060
+
+# Verify no worker processes are running
+tasklist | findstr /i "tsx"
+tasklist | findstr /i "simple-worker"
+```
+
+**Why This Is Critical:**
+- Your API slowness theory is likely correct
+- Local workers are competing with production Cloud Run workers
+- This explains inconsistent performance (sometimes fast, sometimes slow)
+- Production jobs are being processed by local development environment
+
+### **Safe Development Mode**
+
+```bash
+# ONLY run frontend for UI development
+pnpm web:dev
+
+# NEVER run these commands while Cloud Run is active:
+# pnpm dev          # Starts local worker
+# pnpm worker:dev   # Starts local worker
+# pnpm --parallel -r run dev  # Starts both frontend and worker
+```
+
 ## 🎯 Proposed Development Strategy
 
 ### Phase 1: Immediate Solution (Current)
