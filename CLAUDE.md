@@ -168,12 +168,23 @@ Port migration = authentication broken. Always verify `http://localhost:3000` re
 ## Key Commands
 
 ### Development
+
+**⚠️ IMPORTANT: Command Directory Context**
+- **From ROOT directory**: Use `pnpm dev`, `pnpm web:dev`, `pnpm worker:dev`
+- **From services/worker directory**: Use `pnpm dev` (NOT `pnpm worker:dev`)
+- **From apps/web directory**: Use `pnpm dev` (NOT `pnpm web:dev`)
+
+**Root Directory Commands:**
 - `pnpm dev` - Start all services in parallel (web app + worker)
 - `pnpm web:dev` - Start only web app on http://localhost:3000
 - `pnpm worker:dev` - Start only worker service
 - `pnpm build` - Build all services for production
 - `pnpm lint` - Run linting across all packages
 - `pnpm type-check` - Type check all packages
+
+**Individual Service Commands:**
+- `cd services/worker && pnpm dev` - Start worker service only
+- `cd apps/web && pnpm dev` - Start web app only
 
 ### Database (Supabase)
 - `npx supabase start` - Start local Supabase (optional for development)
