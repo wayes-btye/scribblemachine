@@ -18,8 +18,8 @@ const envSchema = z.object({
   STRIPE_SECRET_KEY: z.string().optional(),
   STRIPE_WEBHOOK_SECRET: z.string().optional(),
 
-  // App URLs
-  NEXT_PUBLIC_APP_URL: z.string().url().default('http://localhost:3000'),
+  // App URLs - No default to prevent production issues
+  NEXT_PUBLIC_APP_URL: z.string().url(),
 
   // Storage
   STORAGE_TTL_ORIGINALS_DAYS: z.coerce.number().default(30),
