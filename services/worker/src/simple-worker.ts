@@ -56,7 +56,7 @@ class WorkerLogger {
       const now = Date.now();
 
       if (now - this.lastIdleLogTime > this.idleLogInterval) {
-        console.log(`[${timestamp}] 📊 SUMMARY: ${this.consecutiveIdleCount} idle checks (${this.idleLogInterval/60000}min). Recent jobs:`,
+        console.log(`[${timestamp}] 📊 SUMMARY: ${this.consecutiveIdleCount} idle checks (${this.idleLogInterval / 60000}min). Recent jobs:`,
           recentJobs?.map((j: any) => `${j.id.substring(0, 8)}:${j.status}${j.params_json?.edit_parent_id ? ':EDIT' : ''}`).slice(0, 3) || 'none');
         this.lastIdleLogTime = now;
       }
@@ -155,6 +155,21 @@ async function main() {
   try {
     // Start health check server for Cloud Run
     startHealthCheckServer();
+
+    // Check for pause mechanism (for local development testing)
+    const pauseWorker = process.env.PAUSE_WORKER === 'true';
+    if (pauseWorker) {
+      console.log('⏸️  WORKER PAUSED: PAUSE_WORKER=true detected');
+      console.log('   Worker will not process jobs - safe for local development');
+      console.log('   To resume: Set PAUSE_WORKER=false or remove the environment variable');
+
+      // Keep the service alive but don't process jobs
+      setInterval(() => {
+        console.log('⏸️  Worker paused - no job processing');
+      }, 30000); // Log every 30 seconds to show it's alive
+
+      return; // Exit early - don't start job processing
+    }
 
     // Validate environment variables
     const env = validateEnv(process.env);

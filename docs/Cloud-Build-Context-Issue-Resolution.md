@@ -2,8 +2,8 @@
 
 ## 🎯 **CURRENT SITUATION**
 **Date**: 2025-09-29
-**Time**: 13:50 UTC
-**Status**: ✅ RESOLVED - Build issues fixed and service deployed successfully
+**Time**: 15:15 UTC
+**Status**: ✅ RESOLVED - Standard Dockerfile approach implemented, no cloudbuild.yaml needed
 
 ## 📋 **WHAT WE'VE ACCOMPLISHED**
 
@@ -24,17 +24,14 @@
    - All package files (`pnpm-lock.yaml`, `package.json`, etc.) copy successfully
    - Build completes successfully locally
 
-### 🔄 **CURRENT ISSUE: Cloud Run Build Context Problem**
+### ✅ **SOLUTION: Standard Dockerfile Approach**
 
-**Problem**: Cloud Run builds failing with:
-```
-COPY failed: file not found in build context: stat pnpm-lock.yaml: file does not exist
-Sending build context to Docker daemon 158.7kB
-```
+**Problem Solved**: Cloud Run builds now work with standard Dockerfile approach
+- **No cloudbuild.yaml needed**: Direct Dockerfile deployment works
+- **Standard Process**: Local Docker → GitHub → Cloud Run (as expected)
+- **Build Context Fixed**: Set to root directory (`.`) instead of `services/worker/`
 
-**Root Cause**: Conflicting `.dockerignore` files causing build context to exclude necessary files
-- Local Docker: Works (build context includes all files)
-- Cloud Build: Fails (only 158.7kB context - missing workspace files)
+**Key Insight**: The issue was build context configuration, not the Dockerfile itself
 
 ## 🛠️ **ROOT CAUSE & SOLUTION**
 
@@ -74,27 +71,27 @@ The auto-generated GitHub trigger was using **wrong build context**:
 - **Image**: `gcr.io/scribblemachine/coloringpage-worker:latest`
 - **Context Size**: 86.1 MiB (vs broken 32.53MB)
 
-## 🎯 **DEPLOYMENT COMMANDS FOR FUTURE USE**
+## 🎯 **STANDARD DEPLOYMENT APPROACH**
 
-### **✅ WORKING SOLUTION (Manual Deploy)**
+### **✅ RECOMMENDED: Standard Dockerfile Deployment**
+**No manual commands needed!** Use Google Cloud Console UI:
+
+1. **Go to Cloud Build > Triggers**
+2. **Edit existing trigger** (or create new one)
+3. **Configure these settings**:
+   - **Source**: GitHub repository `wayes-btye/scribblemachine`
+   - **Branch**: `^main$`
+   - **Build Type**: `Dockerfile`
+   - **Dockerfile Path**: `services/worker/Dockerfile`
+   - **Build Context Directory**: `.` (ROOT DIRECTORY) ⚠️ KEY SETTING
+   - **Service Name**: `scribblemachine-worker`
+   - **Region**: `europe-west1`
+
+### **✅ ALTERNATIVE: Manual Deploy (Backup)**
 ```bash
-# This command WORKS and should be used for deployments:
+# Only use if automated trigger fails:
 gcloud builds submit --config cloudbuild.yaml .
-
-# Results in successful build with:
-# - Build Context: 86.1 MiB (includes all workspace files)
-# - All COPY commands work (pnpm-lock.yaml, etc.)
-# - Full Docker build pipeline succeeds
-# - Automatic deployment to Cloud Run
 ```
-
-### **🔧 AUTOMATED TRIGGER (Future Setup)**
-The GitHub trigger needs to be set up via Google Cloud Console UI:
-1. Go to **Cloud Build > Triggers**
-2. **Connect Repository** → GitHub → `wayes-btye/scribblemachine`
-3. **Configuration Type**: Cloud Build configuration file (YAML or JSON)
-4. **Cloud Build configuration file location**: `cloudbuild.yaml`
-5. **Branch**: `^main$`
 
 ### **MANUAL CLOUD RUN DEPLOY (Backup Plan)**
 If automated builds still fail, use Google Cloud Console UI:

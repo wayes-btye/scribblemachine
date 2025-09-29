@@ -9,7 +9,7 @@ This is a Children's Coloring Page Generator web application that converts image
 
 ## Tech Stack & Architecture
 - **Frontend**: Next.js 14 with App Router, Tailwind CSS, shadcn/ui components
-- **Worker Service**: Node.js/TypeScript with pg-boss job queue
+- **Worker Service**: Node.js/TypeScript with polling-based job processing
 - **Database**: Supabase (PostgreSQL) with Row Level Security
 - **Storage**: Supabase Storage for images with signed URLs
 - **AI**: Google Gemini image generation API
@@ -32,7 +32,7 @@ This is a Children's Coloring Page Generator web application that converts image
 
 ## ⚠️ Development Environment Strategy
 
-**CURRENT SETUP**: Backend runs on Google Cloud Run (production), frontend runs locally.
+**CURRENT SETUP**: Backend runs on Google Cloud Run (production), frontend runs locally. Worker includes pause mechanism for local development testing.
 
 ### 🎯 **Development Modes**
 
@@ -48,29 +48,33 @@ pnpm web:dev
 #### **Mode 2: Full-Stack Development (BACKEND TESTING)**
 **Use when**: Testing backend changes, API modifications, worker updates
 ```bash
-# 1. Scale down Cloud Run to 0 instances
-gcloud run services update worker --region=europe-west1 --min-instances=0 --max-instances=0
+# 1. Pause Cloud Run worker job processing
+gcloud run services update scribblemachine-worker \
+  --region=europe-west1 \
+  --set-env-vars="PAUSE_WORKER=true"
 
 # 2. Start both services locally
 pnpm dev
 
-# 3. After testing, scale Cloud Run back up
-gcloud run services update worker --region=europe-west1 --min-instances=1 --max-instances=10
+# 3. After testing, resume Cloud Run worker
+gcloud run services update scribblemachine-worker \
+  --region=europe-west1 \
+  --set-env-vars="PAUSE_WORKER=false"
 ```
 - Frontend: `http://localhost:3000`
 - Backend: `http://localhost:3001` (local)
-- **REQUIRES**: Cloud Run scaling management
+- **REQUIRES**: Cloud Run pause/resume management
 
 ### 🚨 **Critical Workflow Rules**
 
 **BEFORE backend testing:**
-1. **ALWAYS** scale Cloud Run to 0 instances first
-2. Verify no production traffic is affected
+1. **ALWAYS** pause Cloud Run worker job processing first
+2. Verify no production job processing is affected
 3. Run `pnpm dev` for full-stack testing
 
 **AFTER backend testing:**
-1. **ALWAYS** scale Cloud Run back to normal (1-10 instances)
-2. Verify production is restored
+1. **ALWAYS** resume Cloud Run worker job processing
+2. Verify production job processing is restored
 3. Switch back to `pnpm web:dev` for frontend work
 
 **NEVER run `pnpm dev` while Cloud Run is active** - causes conflicts and unpredictable behavior.

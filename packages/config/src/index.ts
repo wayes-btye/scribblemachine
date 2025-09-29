@@ -25,6 +25,11 @@ const envSchema = z.object({
   STORAGE_TTL_ORIGINALS_DAYS: z.coerce.number().default(30),
   STORAGE_TTL_INTERMEDIATES_HOURS: z.coerce.number().default(48),
   STORAGE_TTL_ARTIFACTS_DAYS: z.coerce.number().default(90),
+
+  // Worker Control (for local development testing)
+  // Set PAUSE_WORKER=true to pause job processing without stopping the service
+  // Useful for local development when you want to test without Cloud Run interference
+  PAUSE_WORKER: z.enum(['true', 'false']).optional(),
 });
 
 export function validateEnv(env: NodeJS.ProcessEnv) {
