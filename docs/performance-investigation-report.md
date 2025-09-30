@@ -41,6 +41,41 @@ From `1020s-processing-cloud-run-logs.json`:
 
 **The same job was processed MULTIPLE TIMES by different Cloud Run instances!**
 
+### 🔍 Supabase Log Analysis: Definitive Proof
+
+Analysis of Supabase Edge and Storage logs for job `d92ce920-6b8b-428e-b349-70377a232bca` provides **irrefutable evidence** of the race condition:
+
+#### **Multiple Job Status Updates (Smoking Gun)**
+```
+PATCH /rest/v1/jobs?id=eq.d92ce920-6b8b-428e-b349-70377a232bca | 1759188766555000
+PATCH /rest/v1/jobs?id=eq.d92ce920-6b8b-428e-b349-70377a232bca | 1759188758562000
+PATCH /rest/v1/jobs?id=eq.d92ce920-6b8b-428e-b349-70377a232bca | 1759188551158000
+PATCH /rest/v1/jobs?id=eq.d92ce920-6b8b-428e-b349-70377a232bca | 1759188438955000
+```
+**Translation:** Same job updated **4+ times** by different Cloud Run instances (different request IDs).
+
+#### **Resource Multiplication Evidence**
+- **Edge Map Uploads:** `edge.png` created/uploaded **6 times** during single job
+- **PDF Generation:** `coloring_page.pdf` generated **3 times** by different workers
+- **Admin Cleanup:** Multiple `[Admin]: ObjectAdminDelete` operations cleaning up duplicate files
+
+#### **Frontend Suffering**
+83 consecutive GET requests polling job status every ~2 seconds for 12+ minutes:
+```
+GET /rest/v1/jobs?select=*&id=eq.d92ce920-6b8b-428e-b349-70377a232bca
+(Lines 18-101 in edge logs - frontend waiting for completion)
+```
+
+#### **IP Address Evidence**
+- `34.96.41.121` - Multiple PATCH requests (different Cloud Run worker instances)
+- `34.204.179.206` - All GET requests (frontend polling from single source)
+
+**Confirmed Impact:**
+- **API Waste:** 6x Gemini API calls for same image
+- **Storage Waste:** Multiple duplicate files uploaded and cleaned up
+- **Performance:** 12.6 minutes total duration (should be 7-11 seconds)
+- **Cost:** 6x AI processing costs + storage overhead
+
 ## 🔍 Technical Root Cause Analysis
 
 ### 1. Cloud Run Scaling Configuration
