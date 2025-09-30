@@ -1,0 +1,25 @@
+# Dockerfile for Cloud Run Gemini API Latency Test
+FROM node:20-slim
+
+WORKDIR /app
+
+# Copy package file
+COPY package.test.json package.json
+
+# Install dependencies
+RUN npm install --omit=dev
+
+# Copy and compile source code inline
+COPY src/cloud-run-gemini-test.ts ./
+
+# Install TypeScript temporarily for compilation
+RUN npm install -g typescript && \
+    tsc cloud-run-gemini-test.ts --outDir . --module commonjs --target es2020 --esModuleInterop && \
+    rm cloud-run-gemini-test.ts && \
+    npm uninstall -g typescript
+
+# Expose port
+EXPOSE 8080
+
+# Run the test server
+CMD ["node", "cloud-run-gemini-test.js"]

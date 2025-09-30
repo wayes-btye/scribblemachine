@@ -1,0 +1,4302 @@
+[
+  {
+    "insertId": "68db7dd1000ed371591795b9",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:57.984809279Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:50:57.971633Z"
+  },
+  {
+    "insertId": "68db7dd10005b590acf62c6e",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:57.650784053Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:50:57.374160Z"
+  },
+  {
+    "insertId": "68db7dcd00042a1f98ff0df1",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:53.322703626Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:50:53.272927Z"
+  },
+  {
+    "insertId": "68db7dcc0005b2c4934e40db",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:52.655350709Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:50:52.373444Z"
+  },
+  {
+    "insertId": "68db7dc7000ed82a9bcd2098",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:47.993471319Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:50:47.972842Z"
+  },
+  {
+    "insertId": "68db7dc70005abc76c1d9724",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:47.663345952Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:50:47.371655Z"
+  },
+  {
+    "insertId": "68db7dc30005ad454445f28b",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:43.664696677Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:50:43.372037Z"
+  },
+  {
+    "insertId": "68db7dc2000429b9b444108b",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:42.332590898Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:50:42.272825Z"
+  },
+  {
+    "insertId": "68db7dbf0005d1a0adc6f35d",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:39.667118574Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:50:39.381344Z"
+  },
+  {
+    "insertId": "68db7dbd00012812f5ba5e2c",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:37.336646071Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:50:37.075794Z"
+  },
+  {
+    "insertId": "68db7db80005ad4654a7446d",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:32.674385606Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:50:32.372038Z"
+  },
+  {
+    "insertId": "68db7db8000122a7651e6ff4",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:32.341511531Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:50:32.074407Z"
+  },
+  {
+    "insertId": "68db7db4000ed6b8d158bca1",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:29.011176583Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "[2025-09-30T06:50:28.774Z] ? SUMMARY: 84 idle checks (5min). Recent jobs: [ 'fb81ea57:succeeded', 'd92ce920:succeeded', 'c2442695:succeeded' ]",
+    "timestamp": "2025-09-30T06:50:28.972472Z"
+  },
+  {
+    "insertId": "68db7db3000734bf761364a2",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:27.677564109Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:50:27.472255Z"
+  },
+  {
+    "insertId": "68db7db300011f8422eeb38f",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:27.345741590Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:50:27.073604Z"
+  },
+  {
+    "insertId": "68db7dae0008bcf6cea4182d",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:22.684786580Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:50:22.572662Z"
+  },
+  {
+    "insertId": "68db7dae00011a331eda54e3",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:22.350264777Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:50:22.072243Z"
+  },
+  {
+    "insertId": "68db7da9000d4e6e98217fad",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:18.016911844Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:50:17.872046Z"
+  },
+  {
+    "insertId": "68db7da9000118a86774dc38",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:17.355426116Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:50:17.071848Z"
+  },
+  {
+    "insertId": "68db7da7000a416a63593ac3",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:15.688778001Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:50:15.672106Z"
+  },
+  {
+    "insertId": "68db7da7000118b1970da112",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:15.355757782Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "   Cost: $0.039",
+    "timestamp": "2025-09-30T06:50:15.071857Z"
+  },
+  {
+    "insertId": "68db7da70001185ecbef56e1",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:15.355757782Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "   Response time: 381801ms",
+    "timestamp": "2025-09-30T06:50:15.071774Z"
+  },
+  {
+    "insertId": "68db7da700011812874524db",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:15.355757782Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "   Model: gemini-2.5-flash-image-preview",
+    "timestamp": "2025-09-30T06:50:15.071698Z"
+  },
+  {
+    "insertId": "68db7da7000117bea80a76a2",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:15.355757782Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Job fb81ea57-f50e-40f5-9a5a-cf7554b8379f completed successfully in 544200ms",
+    "timestamp": "2025-09-30T06:50:15.071614Z"
+  },
+  {
+    "insertId": "68db7da3000d5e8d89e08e5a",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:12.026205505Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:50:11.876173Z"
+  },
+  {
+    "insertId": "68db7da20005c533ebd40f17",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:10.693484511Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:50:10.378163Z"
+  },
+  {
+    "insertId": "68db7d9e00073425c6eb52f7",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:06.694525990Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:50:06.472101Z"
+  },
+  {
+    "insertId": "68db7d9b000736ad146e0881",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:03.701802378Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "  ? Created PDF asset: 230ed61d-298b-4fd4-a96d-9edd5464bdf0 (293KB)",
+    "timestamp": "2025-09-30T06:50:03.472749Z"
+  },
+  {
+    "insertId": "68db7d990002a06c274e5c6d",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:50:01.370347229Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:50:01.172140Z"
+  },
+  {
+    "insertId": "68db7d96000d4d4fe0bae741",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:49:59.038539330Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:49:58.871759Z"
+  },
+  {
+    "insertId": "68db7d95000117a24fb297d9",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:49:57.373382039Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:49:57.071586Z"
+  },
+  {
+    "insertId": "68db7d920002a0b2b70743bb",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:49:54.377639154Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:49:54.172210Z"
+  },
+  {
+    "insertId": "68db7d910005abf85be69417",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:49:53.376908378Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:49:53.371704Z"
+  },
+  {
+    "insertId": "68db7d6e000ed57a39a3a22c",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:49:19.063548139Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:49:18.972154Z"
+  },
+  {
+    "insertId": "68db7d6c000d4be9ea8daf75",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:49:17.066247079Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:49:16.871401Z"
+  },
+  {
+    "insertId": "68db7d6b000d5acb5869fab5",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:49:16.067288367Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:49:15.875211Z"
+  },
+  {
+    "insertId": "68db7d620001190101b60206",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:49:06.072936335Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:49:06.071937Z"
+  },
+  {
+    "insertId": "68db7d560002a050a150ab28",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:54.244763727Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:48:54.172112Z"
+  },
+  {
+    "insertId": "68db7d510008c6f89f1ecc64",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:49.580189394Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:48:49.575224Z"
+  },
+  {
+    "insertId": "68db7d460008ba5474025f41",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:38.762116241Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:48:38.571988Z"
+  },
+  {
+    "insertId": "68db7d42000ed2df86564ae0",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:35.096973165Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:48:34.971487Z"
+  },
+  {
+    "insertId": "68db7d4000011d7c0590a7ac",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:32.096924852Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:48:32.073084Z"
+  },
+  {
+    "insertId": "68db7d3d000a3f0d77ab796c",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:29.769115943Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:48:29.671501Z"
+  },
+  {
+    "insertId": "68db7d36000732ed046212ca",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:22.776546587Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:48:22.471789Z"
+  },
+  {
+    "insertId": "68db7d3100029f4032237cad",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:17.446482958Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:48:17.171840Z"
+  },
+  {
+    "insertId": "68db7d2e0002a0c7d171de41",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:14.449902734Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:48:14.172231Z"
+  },
+  {
+    "insertId": "68db7d2c000bc88b167b9b64",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:12.783495553Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:48:12.772235Z"
+  },
+  {
+    "insertId": "68db7d28000ed402bbed09b8",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:09.121403235Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "  ? Generating PDF from coloring page...",
+    "timestamp": "2025-09-30T06:48:08.971778Z"
+  },
+  {
+    "insertId": "68db7d28000bc891aa8f2652",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:08.787746954Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "  ? Created edge_map asset: b784f13b-8c23-4e0f-a6d7-f1a06f1f9a40",
+    "timestamp": "2025-09-30T06:48:08.772241Z"
+  },
+  {
+    "insertId": "68db7d27000d5172609d4550",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:08.122325182Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:48:07.872818Z"
+  },
+  {
+    "insertId": "68db7d2700029d76da8355ad",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:48:07.454189753Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:48:07.171382Z"
+  },
+  {
+    "insertId": "68db7d1f000a4114c35cc7b7",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:59.794929674Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:47:59.672020Z"
+  },
+  {
+    "insertId": "68db7d1d0005ad82beba62cc",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:57.460579988Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:47:57.372098Z"
+  },
+  {
+    "insertId": "68db7d18000bc60ea937c4d9",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:52.801522935Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:47:52.771598Z"
+  },
+  {
+    "insertId": "68db7d1400073245dd76004d",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:48.805523166Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:47:48.471621Z"
+  },
+  {
+    "insertId": "68db7d0f000732e4bc7eafe1",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:43.476733807Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:47:43.471780Z"
+  },
+  {
+    "insertId": "68db7cfe0008cbd3aa88d329",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:26.690116922Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:47:26.576467Z"
+  },
+  {
+    "insertId": "68db7cfc000733bded0bf9df",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:24.695673725Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:47:24.471997Z"
+  },
+  {
+    "insertId": "68db7cfa000a45b91a58454f",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:22.696541298Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:47:22.673209Z"
+  },
+  {
+    "insertId": "68db7cf9000733aa9aa560a8",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:21.695073847Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:47:21.471978Z"
+  },
+  {
+    "insertId": "68db7cf60008d3007c67a0ca",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:18.696415993Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:47:18.578304Z"
+  },
+  {
+    "insertId": "68db7cf200011767ec3b30a3",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:14.367943841Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:47:14.071527Z"
+  },
+  {
+    "insertId": "68db7cf1000118b132560906",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:13.369824279Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:47:13.071857Z"
+  },
+  {
+    "insertId": "68db7cea0008bb11ea04b2c5",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:06.710033867Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:47:06.572177Z"
+  },
+  {
+    "insertId": "68db7ce3000ed28c25a51b57",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:47:00.049696015Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:46:59.971404Z"
+  },
+  {
+    "insertId": "68db7cdf000a3fde8a7557b6",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:55.719857686Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:46:55.671710Z"
+  },
+  {
+    "insertId": "68db7cda000d53e434beef91",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:51.058061260Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:46:50.873444Z"
+  },
+  {
+    "insertId": "68db7cd800044f14cf3dc43e",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:48.391121581Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:46:48.282388Z"
+  },
+  {
+    "insertId": "68db7cd6000d4c2320c950c5",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:47.066193431Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:46:46.871459Z"
+  },
+  {
+    "insertId": "68db7cd0000758591a915c38",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:40.735075094Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:46:40.481369Z"
+  },
+  {
+    "insertId": "68db7ccd000ed2db7cb8df62",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:38.069961922Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:46:37.971483Z"
+  },
+  {
+    "insertId": "68db7cc90002a017807124ff",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:33.407072004Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:46:33.172055Z"
+  },
+  {
+    "insertId": "68db7cc8000733f90685815e",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:32.740442219Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:46:32.472057Z"
+  },
+  {
+    "insertId": "68db7cc300074685575e95b4",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:27.746323732Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:46:27.476805Z"
+  },
+  {
+    "insertId": "68db7cbf00029d918219f63c",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:23.415534992Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:46:23.171409Z"
+  },
+  {
+    "insertId": "68db7cbe00029fd7359ca310",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:22.417496229Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:46:22.171991Z"
+  },
+  {
+    "insertId": "68db7cbc000425914d875c92",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:20.418013157Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:46:20.271761Z"
+  },
+  {
+    "insertId": "68db7cb6000bc6571da77f36",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:15.089703509Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:46:14.771671Z"
+  },
+  {
+    "insertId": "68db7cb200016848dee79539",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:10.424151678Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:46:10.092232Z"
+  },
+  {
+    "insertId": "68db7cb100075c7230e758bd",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:09.762550876Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:46:09.482418Z"
+  },
+  {
+    "insertId": "68db7cad0005ae9280d9391a",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:05.432051892Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:46:05.372370Z"
+  },
+  {
+    "insertId": "68db7cac0005ad9b8c772e15",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:04.434182813Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:46:04.372123Z"
+  },
+  {
+    "insertId": "68db7caa0008b94e55166208",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:46:02.768524538Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:46:02.571726Z"
+  },
+  {
+    "insertId": "68db7ca70005abd982fb5a5f",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:59.437763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:45:59.371673Z"
+  },
+  {
+    "insertId": "68db7ca40002a01e1e662a41",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:56.440577306Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:45:56.172062Z"
+  },
+  {
+    "insertId": "68db7ca200029f8dcdc12b1f",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:54.442101564Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:45:54.171917Z"
+  },
+  {
+    "insertId": "68db7c9e000bcc0418ddd765",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:50.779014662Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:45:50.773124Z"
+  },
+  {
+    "insertId": "68db7c9d00011a5030c8c584",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:49.111978437Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:45:49.072272Z"
+  },
+  {
+    "insertId": "68db7c99000a41727494c564",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:45.784051637Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:45:45.672114Z"
+  },
+  {
+    "insertId": "68db7c980002a7223156c7e4",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:44.450439523Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:45:44.173858Z"
+  },
+  {
+    "insertId": "68db7c950008b9a4e99f72ab",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:41.786795936Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:45:41.571812Z"
+  },
+  {
+    "insertId": "68db7c92000bc618efe3e2c1",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:38.790087049Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:45:38.771608Z"
+  },
+  {
+    "insertId": "68db7c8f000426dc6d653479",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:35.451942880Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:45:35.272092Z"
+  },
+  {
+    "insertId": "68db7c8d000734c36386039f",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:33.786632032Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:45:33.472259Z"
+  },
+  {
+    "insertId": "68db7c89000ed260aa6c3fb4",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:30.120315411Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:45:29.971360Z"
+  },
+  {
+    "insertId": "68db7c88000733304cce4d2b",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:28.792610834Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:45:28.471856Z"
+  },
+  {
+    "insertId": "68db7c860002a6ce3a4204c5",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:26.457464357Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "[2025-09-30T06:45:26.072Z] ? SUMMARY: 46 idle checks (5min). Recent jobs: [ 'fb81ea57:running', 'd92ce920:succeeded', 'c2442695:succeeded' ]",
+    "timestamp": "2025-09-30T06:45:26.173774Z"
+  },
+  {
+    "insertId": "68db7c840005ac212cae4f06",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:24.462713235Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:45:24.371745Z"
+  },
+  {
+    "insertId": "68db7c8300011b1f18c13e3c",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:23.126294835Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:45:23.072479Z"
+  },
+  {
+    "insertId": "68db7c7f000733df2dee01c7",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:19.782579626Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:45:19.472031Z"
+  },
+  {
+    "insertId": "68db7c7e000119c4790c1146",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:18.115923471Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:45:18.072132Z"
+  },
+  {
+    "insertId": "68db7c7b000a3e82f4228149",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:15.781850062Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:45:15.671362Z"
+  },
+  {
+    "insertId": "68db7c780008bd3ebe646d51",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:12.785436562Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:45:12.572734Z"
+  },
+  {
+    "insertId": "68db7c74000731efed2ec680",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:08.788140187Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:45:08.471535Z"
+  },
+  {
+    "insertId": "68db7c72000d4ce1adcc90f0",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:07.123560354Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:45:06.871649Z"
+  },
+  {
+    "insertId": "68db7c700005ac825f8f9234",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:04.459173847Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:45:04.371842Z"
+  },
+  {
+    "insertId": "68db7c6c000ed5b4f16c6b97",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:45:01.128538424Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:45:00.972212Z"
+  },
+  {
+    "insertId": "68db7c68000a3f7b18741bea",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:56.799671311Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:44:56.671611Z"
+  },
+  {
+    "insertId": "68db7c67000ed52c3cd27945",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:56.134912640Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:44:55.972076Z"
+  },
+  {
+    "insertId": "68db7c630008bcf14b689033",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:51.803833452Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:44:51.572657Z"
+  },
+  {
+    "insertId": "68db7c62000a3ea0a54bc29e",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:50.804439621Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:44:50.671392Z"
+  },
+  {
+    "insertId": "68db7c5f000bc64a1dd50125",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:47.806127094Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:44:47.771658Z"
+  },
+  {
+    "insertId": "68db7c5d0008b9c6b2986f00",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:45.807276212Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:44:45.571846Z"
+  },
+  {
+    "insertId": "68db7c5b000119b0c1e17d00",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:43.143400279Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:44:43.072112Z"
+  },
+  {
+    "insertId": "68db7c580008b915622ef74e",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:40.814332416Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:44:40.571669Z"
+  },
+  {
+    "insertId": "68db7c54000a3f699dcddb14",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:36.817371312Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:44:36.671593Z"
+  },
+  {
+    "insertId": "68db7c530005abe9f0e405b4",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:35.485384359Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:44:35.371689Z"
+  },
+  {
+    "insertId": "68db7c4f000bc8089edbebc3",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:31.822798357Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:44:31.772104Z"
+  },
+  {
+    "insertId": "68db7c4e0002a2e0b3d3957e",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:30.488578636Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:44:30.172768Z"
+  },
+  {
+    "insertId": "68db7c4c000427eff2baa89a",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:28.490168597Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:44:28.272367Z"
+  },
+  {
+    "insertId": "68db7c49000119c275eb60b7",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:25.160419855Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:44:25.072130Z"
+  },
+  {
+    "insertId": "68db7c470008b804765a2a6f",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:23.830761044Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:44:23.571396Z"
+  },
+  {
+    "insertId": "68db7c4000029fa5b4f5d8a5",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:16.502570153Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:44:16.171941Z"
+  },
+  {
+    "insertId": "68db7c370007316b823ec3b6",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:07.510204445Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:44:07.471403Z"
+  },
+  {
+    "insertId": "68db7c3500029f6ce70c73a9",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:05.181594169Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:44:05.171884Z"
+  },
+  {
+    "insertId": "68db7c32000bc664ce3adb6d",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:02.845806496Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:44:02.771684Z"
+  },
+  {
+    "insertId": "68db7c3000011769f8f3dab9",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:44:00.186175434Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:44:00.071529Z"
+  },
+  {
+    "insertId": "68db7c2d0005acc74514e6d8",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:57.518109665Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:43:57.371911Z"
+  },
+  {
+    "insertId": "68db7c2a000425976ad1ffb6",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:54.524262797Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:43:54.271767Z"
+  },
+  {
+    "insertId": "68db7c29000bc52aaa01573e",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:53.854806520Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:43:53.771370Z"
+  },
+  {
+    "insertId": "68db7c25000425845faa2799",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:49.523303360Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:43:49.271748Z"
+  },
+  {
+    "insertId": "68db7c24000bc60549bdfbf2",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:48.860793985Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:43:48.771589Z"
+  },
+  {
+    "insertId": "68db7c1f000d4d89e540fb77",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:44.198936807Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:43:43.871817Z"
+  },
+  {
+    "insertId": "68db7c1e0007348d00983c66",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:42.536080567Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:43:42.472205Z"
+  },
+  {
+    "insertId": "68db7c1a000a3f6e879218f6",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:38.869108283Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:43:38.671598Z"
+  },
+  {
+    "insertId": "68db7c1600073354882a163c",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:34.542544019Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:43:34.471892Z"
+  },
+  {
+    "insertId": "68db7c130005ae94950ac1ab",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:31.542894284Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:43:31.372372Z"
+  },
+  {
+    "insertId": "68db7c11000bd0ef8a344ae5",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:29.879069200Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:43:29.774383Z"
+  },
+  {
+    "insertId": "68db7c0e000423c3e54ae49b",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:26.548837769Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:43:26.271299Z"
+  },
+  {
+    "insertId": "68db7c0a000d4cb7373ed50e",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:22.888823436Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:43:22.871607Z"
+  },
+  {
+    "insertId": "68db7c0900029d659ec7ad79",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:21.215918728Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:43:21.171365Z"
+  },
+  {
+    "insertId": "68db7c06000424b78cc742a0",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:18.554783494Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:43:18.271543Z"
+  },
+  {
+    "insertId": "68db7c03000d4f10174e8e57",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:15.889904631Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:43:15.872208Z"
+  },
+  {
+    "insertId": "68db7c00000ed2df4468bca5",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:13.223185487Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:43:12.971487Z"
+  },
+  {
+    "insertId": "68db7bfd000d4e3f527fdddb",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:09.895503738Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:43:09.871999Z"
+  },
+  {
+    "insertId": "68db7bfb0002a02dfe1856bc",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:07.232783991Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:43:07.172077Z"
+  },
+  {
+    "insertId": "68db7bf9000117a67a8ba594",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:05.231743083Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:43:05.071590Z"
+  },
+  {
+    "insertId": "68db7bf50008ba53f6b39ff0",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:43:01.902543351Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:43:01.571987Z"
+  },
+  {
+    "insertId": "68db7bf3000bc5715b3a87a5",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:59.905935415Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:42:59.771441Z"
+  },
+  {
+    "insertId": "68db7bf00002a4fc14811494",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:56.242675693Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:42:56.173308Z"
+  },
+  {
+    "insertId": "68db7bee00042705fa05f493",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:54.577815802Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:42:54.272133Z"
+  },
+  {
+    "insertId": "68db7bea0008c63b3c1f0318",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:50.581060498Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:42:50.575035Z"
+  },
+  {
+    "insertId": "68db7be90002a26992fb660a",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:49.245449973Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:42:49.172649Z"
+  },
+  {
+    "insertId": "68db7be6000ed46abbc4e82a",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:47.250216985Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:42:46.971882Z"
+  },
+  {
+    "insertId": "68db7be400029ee1cd130e50",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:44.253549034Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:42:44.171745Z"
+  },
+  {
+    "insertId": "68db7be00008bb4f760e35b0",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:40.590004478Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:42:40.572239Z"
+  },
+  {
+    "insertId": "68db7bde000d4f111dc430e5",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:38.922016581Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:42:38.872209Z"
+  },
+  {
+    "insertId": "68db7bdc0005bb8511895eab",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:36.588660858Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:42:36.375685Z"
+  },
+  {
+    "insertId": "68db7bd9000a43ad7c7c8c2b",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:33.925947035Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:42:33.672685Z"
+  },
+  {
+    "insertId": "68db7bd70004244d74b902c3",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:31.596705765Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:42:31.271437Z"
+  },
+  {
+    "insertId": "68db7bd4000a40ceceb88bf8",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:28.935523667Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:42:28.671950Z"
+  },
+  {
+    "insertId": "68db7bd100029feb6bce9227",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:25.265897225Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:42:25.172011Z"
+  },
+  {
+    "insertId": "68db7bcf000a4052fbcf56a6",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:23.935425228Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:42:23.671826Z"
+  },
+  {
+    "insertId": "68db7bcb000bcaf07bad4313",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:19.938376068Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:42:19.772848Z"
+  },
+  {
+    "insertId": "68db7bc9000d4db7833171bb",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:17.940357963Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:42:17.871863Z"
+  },
+  {
+    "insertId": "68db7bc60008bda9fe1d5939",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:14.608436492Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:42:14.572841Z"
+  },
+  {
+    "insertId": "68db7bc4000a41a9dab9bec7",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:12.945594603Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:42:12.672169Z"
+  },
+  {
+    "insertId": "68db7bc10008baaefa90b905",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:09.612147716Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:42:09.572078Z"
+  },
+  {
+    "insertId": "68db7bbf0007328512eae86a",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:07.616245813Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:42:07.471685Z"
+  },
+  {
+    "insertId": "68db7bba000a404bb1260de9",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:02.951632231Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:42:02.671819Z"
+  },
+  {
+    "insertId": "68db7bb9000d4fdbea9d61a0",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:42:01.952890780Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:42:01.872411Z"
+  },
+  {
+    "insertId": "68db7bb70008bfb779c12419",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:59.621895280Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:41:59.573367Z"
+  },
+  {
+    "insertId": "68db7bb400029ff5d3c81a9c",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:56.292977886Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:41:56.172021Z"
+  },
+  {
+    "insertId": "68db7bb0000a41e45ea54c1c",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:52.960884943Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:41:52.672228Z"
+  },
+  {
+    "insertId": "68db7bae000d5295dbb89928",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:50.964106118Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:41:50.873109Z"
+  },
+  {
+    "insertId": "68db7ba90007319a0dc02458",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:45.633712Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:41:45.471450Z"
+  },
+  {
+    "insertId": "68db7ba5000a3f44bfab4878",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:41.966717652Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:41:41.671556Z"
+  },
+  {
+    "insertId": "68db7ba10005b0f78f12f121",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:37.640228426Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:41:37.372983Z"
+  },
+  {
+    "insertId": "68db7ba000011a088ad4710d",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:36.306708035Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:41:36.072200Z"
+  },
+  {
+    "insertId": "68db7b9c00029eb3baabd521",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:32.309086083Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:41:32.171699Z"
+  },
+  {
+    "insertId": "68db7b9a000d59fb80bc03f5",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:30.978381424Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:41:30.875003Z"
+  },
+  {
+    "insertId": "68db7b99000bc7fff1667b32",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:29.979279443Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:41:29.772095Z"
+  },
+  {
+    "insertId": "68db7b940002aa5fa6d20de2",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:24.320573798Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:41:24.174687Z"
+  },
+  {
+    "insertId": "68db7b910008b9467a021eb3",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:21.656207626Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:41:21.571718Z"
+  },
+  {
+    "insertId": "68db7b8f000117f75660cad5",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:19.323808768Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:41:19.071671Z"
+  },
+  {
+    "insertId": "68db7b89000a3f5a5e80b151",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:13.995738019Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:41:13.671578Z"
+  },
+  {
+    "insertId": "68db7b87000ed9c7c095f5fa",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:11.998424161Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:41:11.973255Z"
+  },
+  {
+    "insertId": "68db7b86000d4e93e7608ecc",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:10.994757595Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "  Sending text request to Gemini (standard, medium)",
+    "timestamp": "2025-09-30T06:41:10.872083Z"
+  },
+  {
+    "insertId": "68db7b86000d4ddd3b870f52",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:10.994757595Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "  Text prompt: \"A pirate ship sailing volcano\"",
+    "timestamp": "2025-09-30T06:41:10.871901Z"
+  },
+  {
+    "insertId": "68db7b86000117885759422b",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:10.326812326Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "[2025-09-30T06:41:09.972Z] ? No queued jobs found",
+    "timestamp": "2025-09-30T06:41:10.071560Z"
+  },
+  {
+    "insertId": "68db7b84000732729320fe3d",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:08.663435563Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Processing TEXT job fb81ea57-f50e-40f5-9a5a-cf7554b8379f for user 979a0520-b212-4865-bbcb-e524d639e337",
+    "timestamp": "2025-09-30T06:41:08.471666Z"
+  },
+  {
+    "insertId": "68db7b840007313e9141c7e5",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:08.663435563Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "[2025-09-30T06:41:08.274Z] ? Jobs detected after 10 idle checks",
+    "timestamp": "2025-09-30T06:41:08.471358Z"
+  },
+  {
+    "insertId": "68db7b8400042b14a5396541",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:08.330616003Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 1 pending jobs",
+    "timestamp": "2025-09-30T06:41:08.273172Z"
+  },
+  {
+    "insertId": "68db7b810005ade4f1efc4ea",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:05.663377091Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:41:05.372196Z"
+  },
+  {
+    "insertId": "68db7b7f000bc5d2d9836f76",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:04.000104225Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:41:03.771538Z"
+  },
+  {
+    "insertId": "68db7b7c00042e227401a3e6",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:41:00.334402581Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:41:00.273954Z"
+  },
+  {
+    "insertId": "68db7b77000d69b340bd409d",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:56.000310426Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:40:55.879027Z"
+  },
+  {
+    "insertId": "68db7b770004289bcae80152",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:55.338490027Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:40:55.272539Z"
+  },
+  {
+    "insertId": "68db7b730005abe3e9629d42",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:51.673665896Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:40:51.371683Z"
+  },
+  {
+    "insertId": "68db7b72000428fcb69129af",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:50.340844354Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:40:50.272636Z"
+  },
+  {
+    "insertId": "68db7b6e000bc62c3e991057",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:47.010075329Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:40:46.771628Z"
+  },
+  {
+    "insertId": "68db7b6d000425203390d27f",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:45.345129193Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:40:45.271648Z"
+  },
+  {
+    "insertId": "68db7b69000a43471a0b21cf",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:41.681396820Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:40:41.672583Z"
+  },
+  {
+    "insertId": "68db7b6800029f4911f31f27",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:40.349308240Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:40:40.171849Z"
+  },
+  {
+    "insertId": "68db7b65000d4f292584c7de",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:38.019257963Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:40:37.872233Z"
+  },
+  {
+    "insertId": "68db7b62000bc9620e869fa2",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:35.021446032Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:40:34.772450Z"
+  },
+  {
+    "insertId": "68db7b610007346a11daabe9",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:33.690615947Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:40:33.472170Z"
+  },
+  {
+    "insertId": "68db7b5a0004274facbbf32f",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:26.363550902Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:40:26.272207Z"
+  },
+  {
+    "insertId": "68db7b5800042718370f62a7",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:24.364919966Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:40:24.272152Z"
+  },
+  {
+    "insertId": "68db7b570005ac9eec4fd7da",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:23.696926969Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "[2025-09-30T06:40:22.572Z] ? SUMMARY: 1 idle checks (5min). Recent jobs: [ 'd92ce920:succeeded', 'c2442695:succeeded', '55f7631f:succeeded' ]",
+    "timestamp": "2025-09-30T06:40:23.371870Z"
+  },
+  {
+    "insertId": "68db7b53000733d1610c8ae7",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:19.704295471Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:40:19.472017Z"
+  },
+  {
+    "insertId": "68db7b52000d51cfde72d5dc",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:19.037675506Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:40:18.872911Z"
+  },
+  {
+    "insertId": "68db7b4c000119510968f458",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:12.375113254Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:40:12.072017Z"
+  },
+  {
+    "insertId": "68db7b480008ba4c3d4115b5",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:08.704300165Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Found 0 pending jobs",
+    "timestamp": "2025-09-30T06:40:08.571980Z"
+  },
+  {
+    "insertId": "68db7b460005ad3a4f798d1a",
+    "labels": {
+      "instanceId": "0069c7a988b05e30496c266a37446d247518a1483dc89c50959d9e53df30102dec55fcc9bc68c0326085f9a05fa750bda5465df78f9f2520a416afa4fe6bed86d1e65f7ac95f9cfa4c5dca59a40b35"
+    },
+    "logName": "projects/scribblemachine/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2025-09-30T06:40:06.377969086Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "scribblemachine-worker",
+        "location": "europe-west1",
+        "project_id": "scribblemachine",
+        "revision_name": "scribblemachine-worker-00031-pbk",
+        "service_name": "scribblemachine-worker"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "? Fetching pending jobs...",
+    "timestamp": "2025-09-30T06:40:06.372026Z"
+  }
+]

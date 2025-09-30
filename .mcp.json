@@ -42,7 +42,7 @@
         "@supabase/mcp-server-supabase@latest"
       ],
       "env": {
-        "SUPABASE_ACCESS_TOKEN": "sbp_4cd30d18d09eed63988af406c752348bda561900"
+        "SUPABASE_ACCESS_TOKEN": "sbp_b4a5743522d2092e75dd6adea5d5b01c101d6765"
       }
     },
     "vercel": {

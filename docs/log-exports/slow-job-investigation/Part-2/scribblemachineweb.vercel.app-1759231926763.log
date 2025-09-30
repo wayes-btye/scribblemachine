@@ -1,0 +1,21 @@
+page-41aae6da7e4ad048.js:1   🚀 Starting immediate first poll...
+page-41aae6da7e4ad048.js:1   ⏰ Setting up 2-second polling interval
+page-41aae6da7e4ad048.js:1 📥 JOB STATUS CHANGED:
+page-41aae6da7e4ad048.js:1   Job ID: 669592dd-949e-4307-83e6-80e3277897f6
+page-41aae6da7e4ad048.js:1   Status: running
+page-41aae6da7e4ad048.js:1   Is edit job: false
+page-41aae6da7e4ad048.js:1   Edit prompt: undefined
+page-41aae6da7e4ad048.js:1   🛑 Cleaning up polling interval for job: 669592dd-949e-4307-83e6-80e3277897f6
+page-41aae6da7e4ad048.js:1   🚀 Starting immediate first poll...
+page-41aae6da7e4ad048.js:1   ⏰ Setting up 2-second polling interval
+page-41aae6da7e4ad048.js:1   🛑 Cleaning up polling interval for job: 669592dd-949e-4307-83e6-80e3277897f6
+page-41aae6da7e4ad048.js:1   🚀 Starting immediate first poll...
+page-41aae6da7e4ad048.js:1   ⏰ Setting up 2-second polling interval
+page-41aae6da7e4ad048.js:1 📥 JOB STATUS CHANGED:
+page-41aae6da7e4ad048.js:1   Job ID: 669592dd-949e-4307-83e6-80e3277897f6
+page-41aae6da7e4ad048.js:1   Status: succeeded
+page-41aae6da7e4ad048.js:1   Is edit job: false
+page-41aae6da7e4ad048.js:1   Edit prompt: undefined
+page-41aae6da7e4ad048.js:1   🎯 JOB COMPLETED: succeeded - calling onComplete
+page-41aae6da7e4ad048.js:1   🛑 Cleaning up polling interval for job: 669592dd-949e-4307-83e6-80e3277897f6
+page-41aae6da7e4ad048.js:1 [DEBUG] Image loaded successfully for job 669592dd-949e-4307-83e6-80e3277897f6

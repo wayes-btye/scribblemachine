@@ -1,7 +1,7 @@
 Test Prompt: A princess castle
 Complexity: simple
 Target Age: 4-6
-Response Time: 5009ms
+Response Time: 4251ms
 Full Prompt: Create a simple black and white coloring page of a princess castle for children ages 4-6. Use very basic shapes with minimal detail. The castle should have simple towers, a door, and maybe some windows. Use thick, bold black outlines (3-4px width) on a pure white background. Remove all colors, shading, and textures. Make large, easy-to-color regions that are perfect for crayons. Simple cartoon style suitable for young children's coloring books.
 
 Text Response:
