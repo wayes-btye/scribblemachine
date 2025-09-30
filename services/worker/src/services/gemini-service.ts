@@ -307,6 +307,10 @@ export class GeminiService {
 
     for (let attempt = 0; attempt <= this.config.maxRetries; attempt++) {
       try {
+        // ⏱️  START TIMING: Gemini API call
+        const geminiStartTime = Date.now();
+        console.log(`⏱️  [Gemini API] Starting image generation (attempt ${attempt + 1}/${this.config.maxRetries + 1})`);
+
         const result = await model.generateContent([
           {
             inlineData: {
@@ -316,6 +320,20 @@ export class GeminiService {
           },
           prompt
         ]);
+
+        // ⏱️  END TIMING: Gemini API call
+        const geminiDuration = Date.now() - geminiStartTime;
+        console.log(`⏱️  [Gemini API] Response received in ${geminiDuration}ms (${(geminiDuration / 1000).toFixed(1)}s)`);
+
+        // 🐢 Warn if slow
+        if (geminiDuration > 10000) {
+          console.warn(`🐢 [Gemini API] SLOW RESPONSE: ${geminiDuration}ms - Expected <10s`);
+        }
+
+        // 🚨 Critical if extremely slow
+        if (geminiDuration > 60000) {
+          console.error(`🚨 [Gemini API] CRITICAL LATENCY: ${geminiDuration}ms - This should be investigated`);
+        }
 
         const response = await result.response;
         const candidates = response.candidates;
@@ -512,11 +530,29 @@ export class GeminiService {
 
     for (let attempt = 0; attempt <= this.config.maxRetries; attempt++) {
       try {
+        // ⏱️  START TIMING: Gemini API call (text-to-image)
+        const geminiStartTime = Date.now();
+        console.log(`⏱️  [Gemini API Text] Starting text-to-image generation (attempt ${attempt + 1}/${this.config.maxRetries + 1})`);
+
         const result = await model.generateContent([
           {
             text: prompt
           }
         ]);
+
+        // ⏱️  END TIMING: Gemini API call
+        const geminiDuration = Date.now() - geminiStartTime;
+        console.log(`⏱️  [Gemini API Text] Response received in ${geminiDuration}ms (${(geminiDuration / 1000).toFixed(1)}s)`);
+
+        // 🐢 Warn if slow
+        if (geminiDuration > 10000) {
+          console.warn(`🐢 [Gemini API Text] SLOW RESPONSE: ${geminiDuration}ms - Expected <10s`);
+        }
+
+        // 🚨 Critical if extremely slow
+        if (geminiDuration > 60000) {
+          console.error(`🚨 [Gemini API Text] CRITICAL LATENCY: ${geminiDuration}ms - This should be investigated`);
+        }
 
         const response = await result.response;
         const candidates = response.candidates;
