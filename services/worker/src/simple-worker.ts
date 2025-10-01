@@ -301,11 +301,9 @@ async function main() {
 
 async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeof createSupabaseAdminClient>, geminiService: any) {
   const startTime = Date.now();
-  console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] START - Total job processing`);
 
   try {
     let result;
-    let stepTimer = Date.now();
 
     // Check if this is a text-based job or image-based job
     if (job.params_json.text_prompt) {
@@ -321,36 +319,27 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
       console.log(`  Sending text request to Gemini (${job.params_json.complexity}, ${job.params_json.line_thickness})`);
 
       // Generate coloring page from text with Gemini
-      stepTimer = Date.now();
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 1: Calling Gemini text-to-image API...`);
       result = await geminiService.generateColoringPageFromText(textRequest);
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 1 DONE: Gemini API returned in ${Date.now() - stepTimer}ms`);
 
     } else if (job.params_json.edit_parent_id && job.params_json.edit_prompt) {
       // Edit existing coloring page
       console.log(`  Edit request: "${job.params_json.edit_prompt}" for parent job ${job.params_json.edit_parent_id}`);
 
       // Debug: Check all assets for this source ID
-      stepTimer = Date.now();
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 1a: Fetching source asset metadata...`);
       const { data: allAssets } = await supabase
         .from('assets')
         .select('id, kind, storage_path, user_id')
         .eq('id', job.params_json.edit_source_asset_id!);
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 1a DONE: Asset metadata fetched in ${Date.now() - stepTimer}ms`);
 
       console.log(`🔍 DEBUG: Assets for source ID ${job.params_json.edit_source_asset_id}:`, allAssets);
 
       // Get the source edge map asset for editing
-      stepTimer = Date.now();
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 1b: Fetching edge map asset...`);
       const { data: sourceAsset, error: sourceAssetError } = await supabase
         .from('assets')
         .select('storage_path')
         .eq('id', job.params_json.edit_source_asset_id!)
         .eq('kind', 'edge_map')
         .single();
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 1b DONE: Edge map asset query in ${Date.now() - stepTimer}ms`);
 
       console.log(`🔍 DEBUG: Edge map lookup result:`, { sourceAsset, error: sourceAssetError });
 
@@ -368,8 +357,6 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
       }
 
       // Download the existing coloring page
-      stepTimer = Date.now();
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 2: Downloading existing coloring page from storage...`);
       const { data: imageData, error: downloadError } = await supabase.storage
         .from('intermediates')
         .download((sourceAsset as any).storage_path);
@@ -377,14 +364,10 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
       if (downloadError || !imageData) {
         throw new Error('Failed to download existing coloring page for editing');
       }
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 2 DONE: Download completed in ${Date.now() - stepTimer}ms`);
 
       // Convert to base64 for Gemini service
-      stepTimer = Date.now();
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 3: Converting image to base64...`);
       const buffer = Buffer.from(await imageData.arrayBuffer());
       const base64Image = buffer.toString('base64');
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 3 DONE: Base64 conversion in ${Date.now() - stepTimer}ms`);
 
       // Create Gemini edit request
       const editRequest: EditRequest = {
@@ -399,17 +382,12 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
       console.log(`  Sending edit request to Gemini (${job.params_json.complexity}, ${job.params_json.line_thickness})`);
 
       // Edit coloring page with Gemini
-      stepTimer = Date.now();
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 4: Calling Gemini edit API...`);
       result = await geminiService.editColoringPage(editRequest);
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 4 DONE: Gemini edit API returned in ${Date.now() - stepTimer}ms`);
 
     } else if (job.params_json.asset_id) {
       // Image-to-image generation (existing logic)
 
       // Get original asset
-      stepTimer = Date.now();
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 1: Fetching original asset metadata...`);
       const { data: asset, error: assetError } = await supabase
         .from('assets')
         .select('storage_path')
@@ -420,11 +398,8 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
       if (assetError || !asset) {
         throw new Error(`Original asset ${job.params_json.asset_id} not found`);
       }
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 1 DONE: Asset metadata fetched in ${Date.now() - stepTimer}ms`);
 
       // Download original image
-      stepTimer = Date.now();
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 2: Downloading original image from storage...`);
       const { data: imageData, error: downloadError } = await supabase.storage
         .from('originals')
         .download((asset as any).storage_path);
@@ -432,14 +407,10 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
       if (downloadError || !imageData) {
         throw new Error('Failed to download original image');
       }
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 2 DONE: Download completed in ${Date.now() - stepTimer}ms`);
 
       // Convert to base64 for Gemini service
-      stepTimer = Date.now();
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 3: Converting image to base64...`);
       const buffer = Buffer.from(await imageData.arrayBuffer());
       const base64Image = buffer.toString('base64');
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 3 DONE: Base64 conversion in ${Date.now() - stepTimer}ms`);
 
       // Create Gemini generation request
       const geminiRequest: GenerationRequest = {
@@ -452,10 +423,7 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
       console.log(`  Sending image request to Gemini (${job.params_json.complexity}, ${job.params_json.line_thickness})`);
 
       // Generate coloring page with Gemini
-      stepTimer = Date.now();
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 4: Calling Gemini image-to-image API...`);
       result = await geminiService.generateColoringPage(geminiRequest);
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 4 DONE: Gemini API returned in ${Date.now() - stepTimer}ms`);
 
     } else {
       throw new Error('Job must have either text_prompt, asset_id, or edit_parent_id with edit_prompt');
@@ -466,8 +434,6 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
     }
 
     // Upload generated edge map
-    stepTimer = Date.now();
-    console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 5: Uploading edge map to storage...`);
     const edgeMapBuffer = Buffer.from(result.imageBase64, 'base64');
     const edgeMapPath = `${job.user_id}/${job.id}/edge.png`;
 
@@ -481,11 +447,8 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
     if (uploadError) {
       throw new Error(`Failed to upload edge map: ${uploadError.message}`);
     }
-    console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 5 DONE: Edge map uploaded in ${Date.now() - stepTimer}ms`);
 
     // Create edge map asset record with proper UUID
-    stepTimer = Date.now();
-    console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 6: Creating edge map asset record...`);
     const edgeAssetId = uuidv4();
     const { error: insertError } = await (supabase as any).from('assets').insert({
       id: edgeAssetId,
@@ -500,22 +463,16 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
       console.error('Failed to create edge_map asset record:', insertError);
       throw new Error(`Failed to create edge_map asset: ${insertError.message}`);
     }
-    console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 6 DONE: Asset record created in ${Date.now() - stepTimer}ms`);
+
     console.log(`  ✅ Created edge_map asset: ${edgeAssetId}`);
 
     // Generate PDF from the PNG coloring page
     console.log(`  📄 Generating PDF from coloring page...`);
     try {
-      stepTimer = Date.now();
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 7: Generating PDF from PNG...`);
       const pdfBuffer = await createPDFFromPNG(edgeMapBuffer);
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 7 DONE: PDF generated in ${Date.now() - stepTimer}ms`);
-
       const pdfPath = `${job.user_id}/${job.id}/coloring_page.pdf`;
 
       // Upload PDF to artifacts bucket
-      stepTimer = Date.now();
-      console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 8: Uploading PDF to storage...`);
       const { error: pdfUploadError } = await supabase.storage
         .from('artifacts')
         .upload(pdfPath, pdfBuffer, {
@@ -526,11 +483,7 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
       if (pdfUploadError) {
         console.warn(`⚠️ PDF upload failed (non-blocking): ${pdfUploadError.message}`);
       } else {
-        console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 8 DONE: PDF uploaded in ${Date.now() - stepTimer}ms`);
-
         // Create PDF asset record
-        stepTimer = Date.now();
-        console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 9: Creating PDF asset record...`);
         const pdfAssetId = uuidv4();
         const { error: pdfInsertError } = await (supabase as any).from('assets').insert({
           id: pdfAssetId,
@@ -544,7 +497,6 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
         if (pdfInsertError) {
           console.warn(`⚠️ PDF asset record failed (non-blocking): ${pdfInsertError.message}`);
         } else {
-          console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 9 DONE: PDF asset record created in ${Date.now() - stepTimer}ms`);
           console.log(`  ✅ Created PDF asset: ${pdfAssetId} (${Math.round(pdfBuffer.length / 1024)}KB)`);
         }
       }
@@ -553,8 +505,6 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
     }
 
     // Update job as completed with metadata
-    stepTimer = Date.now();
-    console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 10: Updating job status to succeeded...`);
     await (supabase as any)
       .from('jobs')
       .update({
@@ -564,10 +514,8 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
         cost_cents: Math.round(result.metadata.cost * 100)
       })
       .eq('id', job.id);
-    console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] Step 10 DONE: Job status updated in ${Date.now() - stepTimer}ms`);
 
     const totalTime = Date.now() - startTime;
-    console.log(`⏱️  [JOB ${job.id.slice(0, 8)}] COMPLETE - Total processing time: ${totalTime}ms (${(totalTime / 1000).toFixed(1)}s)`);
     console.log(`✅ Job ${job.id} completed successfully in ${totalTime}ms`);
     console.log(`   Model: ${result.metadata.model}`);
     console.log(`   Response time: ${result.metadata.responseTimeMs}ms`);

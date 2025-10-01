@@ -101,6 +101,9 @@ export function TextPromptForm({ onGenerationStart, disabled = false }: TextProm
   const selectedThickness = form.watch('lineThickness')
   const textPrompt = form.watch('textPrompt')
 
+  // Single-focus principle: Only show parameters after user enters text
+  const hasEnteredText = textPrompt.trim().length > 0
+
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
       {/* Text Prompt Input */}
@@ -117,7 +120,7 @@ export function TextPromptForm({ onGenerationStart, disabled = false }: TextProm
           <Textarea
             {...form.register('textPrompt')}
             placeholder="A friendly dinosaur in a garden with flowers..."
-            className="min-h-[100px] resize-none"
+            className="min-h-[100px] resize-none placeholder:text-gray-400 placeholder:italic"
             disabled={disabled || generating}
             data-testid="text-prompt-input"
             aria-label="Describe your coloring page idea"
@@ -131,20 +134,20 @@ export function TextPromptForm({ onGenerationStart, disabled = false }: TextProm
             )}
           </div>
 
-          {/* Example Prompts */}
-          <div className="space-y-2">
-            <p className="text-xs font-medium text-gray-600">💡 Need inspiration? Try one of these:</p>
-            <div className="grid grid-cols-2 gap-2" role="group" aria-label="Example prompts">
+          {/* Compact Example Prompts */}
+          <div className="space-y-1.5">
+            <p className="text-xs font-medium text-gray-600">💡 Need inspiration?</p>
+            <div className="flex flex-wrap gap-1.5" role="group" aria-label="Example prompts">
               {examplePrompts.map((example, index) => (
                 <button
                   key={index}
                   type="button"
                   onClick={() => form.setValue('textPrompt', example)}
-                  className="text-left text-xs p-2 rounded-md bg-gray-50 hover:bg-gray-100 transition-colors focus:ring-2 focus:ring-brand-warm-orange focus:outline-none"
+                  className="text-xs px-2 py-1 rounded-md bg-gray-100 hover:bg-brand-warm-orange hover:text-white transition-colors focus:ring-2 focus:ring-brand-warm-orange focus:outline-none"
                   disabled={disabled || generating}
                   aria-label={`Use example prompt: ${example}`}
                 >
-                  "{example}"
+                  {example}
                 </button>
               ))}
             </div>
@@ -152,38 +155,43 @@ export function TextPromptForm({ onGenerationStart, disabled = false }: TextProm
         </div>
       </div>
 
-      <Separator />
+      {/* Only show parameters and generate button after text is entered */}
+      {hasEnteredText && (
+        <>
+          <div className="pt-4">
+            {/* Unified Parameter Controls */}
+            <ParameterControls
+              complexity={selectedComplexity}
+              lineThickness={selectedThickness}
+              onComplexityChange={(value) => form.setValue('complexity', value)}
+              onLineThicknessChange={(value) => form.setValue('lineThickness', value)}
+              disabled={disabled || generating}
+              compact={true}
+            />
+          </div>
 
-      {/* Unified Parameter Controls */}
-      <ParameterControls
-        complexity={selectedComplexity}
-        lineThickness={selectedThickness}
-        onComplexityChange={(value) => form.setValue('complexity', value)}
-        onLineThicknessChange={(value) => form.setValue('lineThickness', value)}
-        disabled={disabled || generating}
-        compact={true}
-      />
-
-      {/* Generate Button */}
-      <Button
-        type="submit"
-        size="lg"
-        className="w-full bg-gradient-to-r from-brand-warm-blue to-brand-warm-orange hover:from-brand-warm-blue/90 hover:to-brand-warm-orange/90 text-white"
-        disabled={disabled || generating || !textPrompt.trim()}
-        data-testid="generate-button"
-      >
-        {generating ? (
-          <>
-            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-            Creating Your Coloring Page...
-          </>
-        ) : (
-          <>
-            <Sparkles className="mr-2 h-4 w-4" />
-            Generate Coloring Page (1 Credit)
-          </>
-        )}
-      </Button>
+          {/* Generate Button */}
+          <Button
+            type="submit"
+            size="lg"
+            className="w-full bg-brand-warm-orange hover:bg-brand-warm-orange/90 text-white font-semibold mt-4"
+            disabled={disabled || generating || !textPrompt.trim()}
+            data-testid="generate-button"
+          >
+            {generating ? (
+              <>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                Creating Your Coloring Page...
+              </>
+            ) : (
+              <>
+                <Sparkles className="mr-2 h-4 w-4" />
+                Generate Coloring Page (1 Credit)
+              </>
+            )}
+          </Button>
+        </>
+      )}
     </form>
   )
 }

@@ -224,15 +224,6 @@ export function FileUploader({ onUploadComplete, disabled }: FileUploaderProps) 
         </Alert>
       )}
 
-      {/* File Requirements */}
-      <div className="text-xs text-gray-500 bg-gray-50 p-3 rounded-md">
-        <p className="font-medium mb-1">Best results:</p>
-        <ul className="space-y-1">
-          <li>• Clear, high-contrast images work best</li>
-          <li>• Photos with simple backgrounds are ideal</li>
-          <li>• Avoid very dark or very light images</li>
-        </ul>
-      </div>
     </div>
   )
 }

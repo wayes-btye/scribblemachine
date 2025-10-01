@@ -25,68 +25,60 @@ export function WorkspaceLeftPane({ workspaceState }: WorkspaceLeftPaneProps) {
 
   // Show mode selection if no mode is selected
   if (!mode) {
-    return (
-      <div className="space-y-4 sm:space-y-6">
-        <Card className="p-4 sm:p-8 text-center">
-          <div className="space-y-4">
-            <div className="text-4xl sm:text-6xl">🎨</div>
-            <h2 className="text-lg sm:text-xl font-semibold">Get Started</h2>
-            <p className="text-gray-600 text-sm sm:text-base">
-              Choose how you'd like to create your coloring page using the toggle above
-            </p>
-          </div>
-        </Card>
-      </div>
-    )
+    return null // Mode toggle handles this state
   }
 
   // Upload mode workflow
   if (mode === 'upload') {
     return (
-      <div className="space-y-4 sm:space-y-6">
-        {/* Step 1: Upload - Hide after successful upload */}
+      <div className="max-w-2xl mx-auto">
+        {/* Step 1: Upload - Single Focus */}
         {!data.uploadedImage && (
-          <Card className="p-4 sm:p-6 transition-all duration-300 ease-out">
-            <h2 className="text-lg sm:text-xl font-semibold mb-4">1. Upload Your Image</h2>
+          <div className="transition-all duration-300 ease-out">
+            <div className="text-center mb-4">
+              <h3 className="text-lg font-semibold mb-1">Upload Your Image</h3>
+              <p className="text-sm text-gray-600">Choose a photo to transform into a coloring page</p>
+            </div>
             <FileUploader
               onUploadComplete={(assetId: string, imageUrl: string) => {
                 setUploadedImage(assetId, imageUrl)
               }}
               disabled={isLoading}
             />
-          </Card>
+            {/* Best practices hint */}
+            <div className="mt-3 text-xs text-gray-500 space-y-1">
+              <p>✓ Clear, high-contrast images work best</p>
+              <p>✓ Simple backgrounds are ideal</p>
+            </div>
+          </div>
         )}
 
-        {/* Step 1 Completed - Show condensed confirmation when upload is done */}
+        {/* Step 2: Parameters (only show after upload) - Single Focus */}
         {data.uploadedImage && step === 'input' && (
-          <Card className="p-3 sm:p-4 bg-green-50 border-green-200 transition-all duration-300 ease-out animate-in slide-in-from-top-2 fade-in-0">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 text-sm font-semibold">✓</span>
+          <div className="space-y-4">
+            {/* Compact Success Indicator */}
+            <div className="p-3 bg-green-50 border border-green-200 rounded-lg flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                  <span className="text-green-600 text-xs font-semibold">✓</span>
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-green-800">Image uploaded successfully</p>
-                  <p className="text-xs text-green-600">Ready for processing</p>
-                </div>
+                <p className="text-sm text-green-800">Image uploaded</p>
               </div>
               <button
-                onClick={() => {
-                  // Reset to re-upload
-                  setUploadedImage('', '')
-                }}
-                className="text-xs text-green-600 hover:text-green-800 underline transition-colors duration-200"
+                onClick={() => setUploadedImage('', '')}
+                className="text-xs text-green-600 hover:text-green-800 underline"
               >
-                Change image
+                Change
               </button>
             </div>
-          </Card>
-        )}
 
-        {/* Step 2: Parameters (only show after upload) */}
-        {data.uploadedImage && step === 'input' && (
-          <Card className="p-4 sm:p-6">
-            <h2 className="text-lg sm:text-xl font-semibold mb-4">2. Choose Your Style</h2>
+            {/* Section Heading */}
+            <div className="text-center pt-2">
+              <h3 className="text-lg font-semibold mb-1">Choose Your Style</h3>
+              <p className="text-sm text-gray-600">Select complexity and line thickness</p>
+            </div>
+
+            {/* Parameter Form - Now the main focus */}
             <ParameterForm
               assetId={data.uploadedImage.assetId}
               onGenerationStart={(job) => {
@@ -94,7 +86,7 @@ export function WorkspaceLeftPane({ workspaceState }: WorkspaceLeftPaneProps) {
               }}
               disabled={isLoading}
             />
-          </Card>
+          </div>
         )}
       </div>
     )
@@ -103,46 +95,15 @@ export function WorkspaceLeftPane({ workspaceState }: WorkspaceLeftPaneProps) {
   // Prompt mode workflow
   if (mode === 'prompt') {
     return (
-      <div className="space-y-4 sm:space-y-6">
-        {/* Step 1: Prompt - Hide after successful submission */}
-        {!data.textPrompt && (
-          <Card className="p-4 sm:p-6 transition-all duration-300 ease-out">
-            <h2 className="text-lg sm:text-xl font-semibold mb-4">1. Describe Your Idea</h2>
-            <TextPromptForm
-              onGenerationStart={(job, prompt) => {
-                setTextPrompt(prompt)
-                startGeneration(job)
-              }}
-              disabled={isLoading}
-            />
-          </Card>
-        )}
-
-        {/* Step 1 Completed - Show condensed confirmation when prompt is submitted */}
-        {data.textPrompt && step === 'input' && (
-          <Card className="p-3 sm:p-4 bg-green-50 border-green-200 transition-all duration-300 ease-out animate-in slide-in-from-top-2 fade-in-0">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 text-sm font-semibold">✓</span>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-green-800">Idea submitted successfully</p>
-                  <p className="text-xs text-green-600">"{data.textPrompt}"</p>
-                </div>
-              </div>
-              <button
-                onClick={() => {
-                  // Reset to re-enter prompt
-                  setTextPrompt('')
-                }}
-                className="text-xs text-green-600 hover:text-green-800 underline transition-colors duration-200"
-              >
-                Change idea
-              </button>
-            </div>
-          </Card>
-        )}
+      <div className="max-w-2xl mx-auto">
+        {/* Text Prompt - Single Focus */}
+        <TextPromptForm
+          onGenerationStart={(job, prompt) => {
+            setTextPrompt(prompt)
+            startGeneration(job)
+          }}
+          disabled={isLoading}
+        />
       </div>
     )
   }

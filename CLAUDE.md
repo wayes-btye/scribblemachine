@@ -32,96 +32,40 @@ This is a Children's Coloring Page Generator web application that converts image
 
 ## ⚠️ Development Environment Strategy
 
-**CURRENT SETUP**: Backend runs on Google Cloud Run (production), frontend runs locally. Worker includes pause mechanism for local development testing.
+**PRODUCTION SETUP**:
+- **Frontend**: Deployed on Vercel at https://scribblemachineweb.vercel.app
+- **Worker**: Cloud Run (`scribblemachine-worker`) in europe-west1, polling database every 5 seconds
+- **Architecture**: Simple polling worker (not pg-boss), processes jobs sequentially
 
 ### 🎯 **Development Modes**
 
 #### **Mode 1: Frontend-Only Development (DEFAULT)**
-**Use when**: Working on UI, components, pages, styling
+**Always use this unless explicitly working on worker code.**
 ```bash
 pnpm web:dev
 ```
-- Frontend: `http://localhost:3000`
-- Backend: Cloud Run (production)
-- **SAFE**: No backend conflicts
+- Frontend: `http://localhost:3000` (required for Supabase auth)
+- Worker: Cloud Run (production) - **DO NOT TOUCH**
+- **SAFE**: No backend conflicts, separate concerns
 
-#### **Mode 2: Full-Stack Development (BACKEND TESTING)**
-**Use when**: Testing backend changes, API modifications, worker updates
+#### **Mode 2: Worker Development (EXPLICIT USER REQUEST ONLY)**
+**Only use when user explicitly says to work on worker/backend code.**
 
-⚠️ **CRITICAL**: PAUSE_WORKER environment variable must be set manually via Google Cloud Console UI to avoid overwriting other environment variables.
+🚨 **CRITICAL**: Before running `pnpm dev`, user MUST manually pause Cloud Run worker:
+- Google Cloud Console > Cloud Run > scribblemachine-worker
+- Add environment variable: `PAUSE_WORKER=true`
+- Deploy changes
 
-**Steps:**
-1. **Pause Cloud Run worker job processing (MANUAL PROCESS):**
-   - Go to Google Cloud Console > Cloud Run > scribblemachine-worker
-   - Click "Edit & Deploy New Revision"
-   - In the "Environment Variables" section, add: `PAUSE_WORKER=true`
-   - Click "Deploy" to apply changes
-
-2. **Start both services locally:**
-   ```bash
-   pnpm dev
-   ```
-
-3. **After testing, resume Cloud Run worker (MANUAL PROCESS):**
-   - Return to Cloud Console > Cloud Run > scribblemachine-worker
-   - Click "Edit & Deploy New Revision"
-   - Either remove the `PAUSE_WORKER` variable or set it to `false`
-   - Click "Deploy" to apply changes
-- Frontend: `http://localhost:3000`
-- Backend: `http://localhost:3001` (local)
-- **REQUIRES**: Cloud Run pause/resume management
-
-### 🚨 **Critical Workflow Rules**
-
-**BEFORE backend testing:**
-1. **ALWAYS** manually pause Cloud Run worker via Google Cloud Console UI
-2. Add `PAUSE_WORKER=true` environment variable (preserves all other env vars)
-3. Verify no production job processing is affected
-4. Run `pnpm dev` for full-stack testing
-
-**AFTER backend testing:**
-1. **ALWAYS** manually resume Cloud Run worker via Google Cloud Console UI
-2. Remove `PAUSE_WORKER` variable or set it to `false`
-3. Verify production job processing is restored
-4. Switch back to `pnpm web:dev` for frontend work
-
-**NEVER run `pnpm dev` while Cloud Run is active** - causes conflicts and unpredictable behavior.
-
-### 🔧 **Cloud Run Management Commands**
-
-**Check current status:**
+Then run:
 ```bash
-gcloud run services describe worker --region=europe-west1
+pnpm dev  # Starts both frontend (3000) and worker (local)
 ```
 
-**Scale down for backend testing:**
-```bash
-gcloud run services update worker --region=europe-west1 --min-instances=0 --max-instances=0
-```
+**After testing, user MUST manually resume Cloud Run:**
+- Remove `PAUSE_WORKER` or set to `false`
+- Deploy changes
 
-**Scale back up after testing:**
-```bash
-gcloud run services update worker --region=europe-west1 --min-instances=1 --max-instances=10
-```
-
-**Emergency restore (if production is down):**
-```bash
-gcloud run services update worker --region=europe-west1 --min-instances=1 --max-instances=10
-```
-
-### 📋 **Backend Testing Checklist**
-
-**BEFORE testing:**
-- [ ] Check if anyone else is using the system
-- [ ] Scale Cloud Run to 0 instances
-- [ ] Verify no production traffic
-- [ ] Document what you're testing
-
-**AFTER testing:**
-- [ ] Scale Cloud Run back to normal
-- [ ] Verify production is restored
-- [ ] Test production functionality
-- [ ] Document any issues found
+⚠️ **NEVER run `pnpm dev` without user explicitly requesting worker development** - causes database polling conflicts.
 
 ## ⚠️ CRITICAL WARNING: Process Killing
 
@@ -218,12 +162,12 @@ Port migration = authentication broken. Always verify `http://localhost:3000` re
 - React Dropzone for file uploads
 
 ### Worker Service (`services/worker`)
-- pg-boss PostgreSQL-based job queue
-- Three main worker types:
-  - `ingest` - Process uploaded images
-  - `generate` - Generate coloring pages with Gemini API
-  - `pdf` - Create PDF exports with PDFKit
+- Simple polling worker (polls `jobs` table every 5 seconds)
+- Sequential job processing (one at a time)
+- Gemini API integration for coloring page generation
 - Sharp for image preprocessing
+- PDFKit for PDF generation
+- CPU throttling disabled (`--no-cpu-throttling`) for performance
 - Graceful shutdown handling
 
 ### Shared Packages
@@ -272,17 +216,22 @@ The `build:vercel` command uses the exact same build process that Vercel will us
 - Environment validation ensures consistent configuration
 
 ### Job Processing Pipeline
-1. **Ingest**: Upload handling, image preprocessing with Sharp
-2. **Generate**: Gemini API integration for coloring page generation
-3. **PDF**: Export to PDF with proper DPI for printing (A4/Letter sizes)
+1. **Image Upload**: User uploads via frontend → Supabase Storage
+2. **Job Creation**: Frontend creates job record in database (status: `queued`)
+3. **Worker Polling**: Cloud Run worker picks up job every 5 seconds
+4. **Processing**: Gemini API generates coloring page (4-6 seconds)
+5. **PDF Export**: Creates printable PDF with proper DPI
+6. **Completion**: Updates job status to `succeeded`, stores assets in Supabase Storage
 
 ## Critical Implementation Notes
 
-1. **Job Queue**: Uses pg-boss with PostgreSQL for reliable job processing
-2. **Error Handling**: Retry limit of 2 with 1-second delay, 1-hour expiration
-3. **Type Safety**: Shared types package ensures consistency between services
-4. **Environment**: Zod validation for all environment variables
-5. **Graceful Shutdown**: SIGINT handling for clean worker shutdown
+1. **Architecture**: Simple polling worker (not pg-boss) - polling every 5 seconds
+2. **Performance**: CPU throttling disabled on Cloud Run for 58x speed improvement (6s jobs vs 346s)
+3. **Deployment**: Frontend on Vercel, Worker on Cloud Run (europe-west1, service: `scribblemachine-worker`)
+4. **Type Safety**: Shared types package ensures consistency between services
+5. **Environment**: Zod validation for all environment variables
+
+📖 **Detailed deployment docs**: See `docs/Cloud-Run-Performance-SOLVED-Final-Analysis.md` and `docs/Google-Cloud-Run-Current-Setup.md`
 
 ## Work Log & Scratchpad
 **IMPORTANT**: Always maintain `docs/work_log.md` following the tasklog-instructions format:

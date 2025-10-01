@@ -22,26 +22,9 @@ export function WorkspaceRightPane({ workspaceState }: WorkspaceRightPaneProps) 
     reset
   } = workspaceState
 
-  // Show mode explanation when no mode is selected
+  // Don't show anything when no mode is selected (mode toggle handles this)
   if (!mode) {
-    return (
-      <div className="space-y-4 sm:space-y-6">
-        <Card className="p-4 sm:p-8 text-center">
-          <div className="space-y-4">
-            <div className="text-3xl sm:text-4xl">✨</div>
-            <h3 className="text-base sm:text-lg font-medium">Two Ways to Create</h3>
-            <div className="grid grid-cols-1 gap-3 sm:gap-4 text-sm text-gray-600">
-              <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
-                <strong>Upload Photo:</strong> Turn your photos into beautiful coloring pages
-              </div>
-              <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
-                <strong>Imagine Idea:</strong> Describe what you want and let AI create it
-              </div>
-            </div>
-          </div>
-        </Card>
-      </div>
-    )
+    return null
   }
 
   return (
@@ -122,25 +105,7 @@ export function WorkspaceRightPane({ workspaceState }: WorkspaceRightPaneProps) 
         </Card>
       )}
 
-      {/* Empty state for input step */}
-      {step === 'input' && !data.uploadedImage && !data.textPrompt && (
-        <Card className="p-4 sm:p-8 text-center">
-          <div className="space-y-4">
-            <div className="text-3xl sm:text-4xl">
-              {mode === 'upload' ? '📸' : '💭'}
-            </div>
-            <h3 className="text-base sm:text-lg font-medium">
-              {mode === 'upload' ? 'Upload an Image' : 'Share Your Idea'}
-            </h3>
-            <p className="text-gray-600 text-sm">
-              {mode === 'upload'
-                ? 'Your original image will appear here once uploaded'
-                : 'Your creative prompt will appear here once entered'
-              }
-            </p>
-          </div>
-        </Card>
-      )}
+      {/* Don't show placeholder - keep focus on main input */}
     </div>
   )
 }
