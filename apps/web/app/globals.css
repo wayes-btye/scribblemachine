@@ -425,6 +425,68 @@
     .elegant-corner-float {
       animation-duration: 14s;
     }
+
+    /* CRITICAL: Disable expensive backdrop-blur on mobile */
+    .backdrop-blur-sm,
+    .backdrop-blur,
+    .backdrop-blur-md,
+    .backdrop-blur-lg {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    /* CRITICAL: Convert gradient text to solid colors on mobile */
+    .bg-gradient-to-r.bg-clip-text {
+      background: none !important;
+      -webkit-background-clip: unset !important;
+      background-clip: unset !important;
+      -webkit-text-fill-color: unset !important;
+    }
+
+    /* Assign solid colors to gradient text elements */
+    .from-purple-600.to-pink-600.bg-clip-text {
+      color: rgb(147 51 234) !important; /* purple-600 */
+    }
+
+    .from-orange-500.to-red-500.bg-clip-text {
+      color: rgb(249 115 22) !important; /* orange-500 */
+    }
+
+    .from-blue-600.to-teal-600.bg-clip-text {
+      color: rgb(37 99 235) !important; /* blue-600 */
+    }
+
+    /* Simplify hero image transforms on mobile */
+    .hero-book {
+      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.15)) !important;
+      transform: none !important;
+    }
+
+    /* Disable hover effects on touch devices */
+    @media (hover: none) and (pointer: coarse) {
+      .hover\:transform,
+      .hover\:-translate-y-2,
+      .hover\:shadow-xl,
+      .group-hover\:translate-x-full {
+        transform: none !important;
+        box-shadow: none !important;
+      }
+
+      .group:hover .group-hover\:translate-x-full {
+        transform: none !important;
+      }
+    }
+
+    /* Simplify gradient backgrounds on mobile */
+    .bg-gradient-to-br {
+      background: linear-gradient(135deg, var(--primary), var(--primary)) !important;
+    }
+
+    /* Reduce filter complexity */
+    .drop-shadow-2xl,
+    .drop-shadow-xl {
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15)) !important;
+    }
   }
 
   /* Staggered Animation Delays */

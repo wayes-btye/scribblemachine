@@ -113,6 +113,9 @@ export default function Home() {
                     alt="Magical coloring book"
                     width={600}
                     height={600}
+                    priority
+                    quality={85}
+                    sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 600px"
                     className="w-full rounded-2xl hero-book cursor-pointer"
                     style={{
                       filter: 'drop-shadow(0 25px 50px oklch(0.15 0.12 260 / 0.25)) drop-shadow(0 10px 20px oklch(0.15 0.12 260 / 0.15))',
