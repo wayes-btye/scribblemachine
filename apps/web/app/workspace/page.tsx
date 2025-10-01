@@ -48,7 +48,7 @@ export default function WorkspacePage() {
 
       {/* Handle URL mode parameter */}
       <Suspense fallback={null}>
-        <WorkspaceModeHandler setMode={workspaceState.setMode} />
+        <WorkspaceModeHandler setMode={workspaceState.setMode} currentMode={workspaceState.mode} />
       </Suspense>
 
       <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6">
