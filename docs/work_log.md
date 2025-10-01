@@ -814,3 +814,12 @@ This file serves as a development scratchpad for tracking progress, notes, and d
 - Implement immediate fix (force single Cloud Run instance)
 - Plan long-term distributed queue migration (Cloud Tasks/Pub/Sub)
 
+### [2025-10-01T09:30:00Z] — Task/Event
+**Context:** Fix loading state positioning in prompt mode (Imagine Idea workflow)
+**What changed:**
+- Identified issue: Loading indicator appeared below input form instead of replacing it
+- Fixed workspace-left-pane.tsx to show GenerationProgress in-place during generation (prompt mode)
+- Updated workspace-right-pane.tsx to only show loading in right pane for upload mode (preserves image context)
+- Tested with Playwright MCP: loading now appears in-place, following single-focus UI principle
+**Leftover:**
+- Continue monitoring for any edge cases in loading state transitions

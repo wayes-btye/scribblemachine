@@ -53,7 +53,7 @@ export function WorkspaceTimeline({ mode, step, hasInput }: WorkspaceTimelinePro
   const steps: TimelineStep[] = [
     {
       id: 1,
-      label: mode === 'upload' ? 'Upload Photo' : mode === 'prompt' ? 'Describe Idea' : 'Get Started',
+      label: mode === 'upload' ? 'Upload Photo' : mode === 'prompt' ? 'Describe Your Idea' : 'Get Started',
       icon: mode === 'upload' ? <Upload className="h-4 w-4" /> : <Sparkles className="h-4 w-4" />,
       status: getStepStatus(1)
     },
@@ -74,17 +74,14 @@ export function WorkspaceTimeline({ mode, step, hasInput }: WorkspaceTimelinePro
   return (
     <div className="relative w-full max-w-2xl mx-auto py-4">
       {/* Timeline container */}
-      <div className="relative flex items-center justify-between px-10 opacity-80">
-        {/* Connection line - centered with icon circles */}
-        <div className="absolute left-10 right-10 h-0.5 bg-gray-200"
-             style={{ top: '50%', transform: 'translateY(-50%)', zIndex: 0 }} />
+      <div className="relative flex items-start justify-between px-10 opacity-80">
+        {/* Connection line - absolutely positioned at circle center (20px from top = half of 40px circle) */}
+        <div className="absolute left-10 right-10 h-0.5 bg-gray-200 top-[20px]" style={{ zIndex: 0 }} />
 
-        {/* Active progress line - centered with icon circles */}
+        {/* Active progress line - absolutely positioned at circle center */}
         <div
-          className="absolute left-10 h-0.5 bg-gradient-to-r from-brand-warm-blue to-brand-warm-orange transition-all duration-500 ease-out"
+          className="absolute left-10 h-0.5 bg-gradient-to-r from-brand-warm-blue to-brand-warm-orange transition-all duration-500 ease-out top-[20px]"
           style={{
-            top: '50%',
-            transform: 'translateY(-50%)',
             width:
               step === 'input' && hasInput ? 'calc(25% - 2.5rem)' : // Input provided
               step === 'input' ? '0%' :                              // No input yet

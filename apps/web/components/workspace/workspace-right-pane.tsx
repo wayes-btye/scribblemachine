@@ -54,7 +54,8 @@ export function WorkspaceRightPane({ workspaceState }: WorkspaceRightPaneProps) 
       )}
 
       {/* Generating step - Show progress with context preservation */}
-      {(step === 'generating' || step === 'editing') && data.currentJob && (
+      {/* For prompt mode, loading appears in left pane (in-place). For upload mode, show here with context */}
+      {(step === 'generating' || step === 'editing') && data.currentJob && mode === 'upload' && (
         <Card className="p-4 sm:p-6">
           <h2 className="text-lg sm:text-xl font-semibold mb-4">
             {step === 'editing' ? 'Edit Progress' : 'Generation Progress'}

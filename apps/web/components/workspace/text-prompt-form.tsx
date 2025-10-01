@@ -106,51 +106,41 @@ export function TextPromptForm({ onGenerationStart, disabled = false }: TextProm
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-      {/* Text Prompt Input */}
-      <div className="space-y-4">
-        <div>
-          <h3 className="text-lg font-medium flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-brand-warm-orange" />
-            Describe Your Idea
-          </h3>
-          <p className="text-sm text-gray-600">What would you like to color?</p>
+      {/* Text Prompt Input - Clean, focused design */}
+      <div className="space-y-3">
+        <Textarea
+          {...form.register('textPrompt')}
+          placeholder="Describe your coloring page idea... (e.g., A friendly dinosaur in a garden with flowers)"
+          className="min-h-[120px] resize-none placeholder:text-gray-400 placeholder:italic text-base"
+          disabled={disabled || generating}
+          data-testid="text-prompt-input"
+          aria-label="Describe your coloring page idea"
+          aria-describedby="text-prompt-help"
+        />
+
+        <div className="flex justify-between text-xs text-gray-500">
+          <span id="text-prompt-help">{textPrompt.length}/500 characters</span>
+          {form.formState.errors.textPrompt && (
+            <span className="text-red-500">{form.formState.errors.textPrompt.message}</span>
+          )}
         </div>
 
-        <div className="space-y-3">
-          <Textarea
-            {...form.register('textPrompt')}
-            placeholder="A friendly dinosaur in a garden with flowers..."
-            className="min-h-[100px] resize-none placeholder:text-gray-400 placeholder:italic"
-            disabled={disabled || generating}
-            data-testid="text-prompt-input"
-            aria-label="Describe your coloring page idea"
-            aria-describedby="text-prompt-help"
-          />
-
-          <div className="flex justify-between text-xs text-gray-500">
-            <span id="text-prompt-help">{textPrompt.length}/500 characters</span>
-            {form.formState.errors.textPrompt && (
-              <span className="text-red-500">{form.formState.errors.textPrompt.message}</span>
-            )}
-          </div>
-
-          {/* Compact Example Prompts */}
-          <div className="space-y-1.5">
-            <p className="text-xs font-medium text-gray-600">💡 Need inspiration?</p>
-            <div className="flex flex-wrap gap-1.5" role="group" aria-label="Example prompts">
-              {examplePrompts.map((example, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  onClick={() => form.setValue('textPrompt', example)}
-                  className="text-xs px-2 py-1 rounded-md bg-gray-100 hover:bg-brand-warm-orange hover:text-white transition-colors focus:ring-2 focus:ring-brand-warm-orange focus:outline-none"
-                  disabled={disabled || generating}
-                  aria-label={`Use example prompt: ${example}`}
-                >
-                  {example}
-                </button>
-              ))}
-            </div>
+        {/* Compact Example Prompts */}
+        <div className="space-y-1.5">
+          <p className="text-xs font-medium text-gray-600">💡 Need inspiration?</p>
+          <div className="flex flex-wrap gap-1.5" role="group" aria-label="Example prompts">
+            {examplePrompts.map((example, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => form.setValue('textPrompt', example)}
+                className="text-xs px-2 py-1 rounded-md bg-gray-100 hover:bg-brand-warm-orange hover:text-white transition-colors focus:ring-2 focus:ring-brand-warm-orange focus:outline-none"
+                disabled={disabled || generating}
+                aria-label={`Use example prompt: ${example}`}
+              >
+                {example}
+              </button>
+            ))}
           </div>
         </div>
       </div>

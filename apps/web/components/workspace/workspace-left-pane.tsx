@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card'
 import { FileUploader } from '@/components/workspace/file-uploader'
 import { ParameterForm } from '@/components/workspace/parameter-form'
 import { TextPromptForm } from '@/components/workspace/text-prompt-form'
+import { GenerationProgress } from '@/components/workspace/generation-progress'
 import { useWorkspaceState } from '@/hooks/use-workspace-state'
 
 type UseWorkspaceStateReturn = ReturnType<typeof useWorkspaceState>
@@ -30,6 +31,11 @@ export function WorkspaceLeftPane({ workspaceState }: WorkspaceLeftPaneProps) {
 
   // Upload mode workflow
   if (mode === 'upload') {
+    // CRITICAL: Hide input form when viewing result or editing - single focus principle
+    if (step === 'result' || step === 'editing') {
+      return null
+    }
+
     return (
       <div className="max-w-2xl mx-auto">
         {/* Step 1: Upload - Single Focus */}
@@ -94,6 +100,25 @@ export function WorkspaceLeftPane({ workspaceState }: WorkspaceLeftPaneProps) {
 
   // Prompt mode workflow
   if (mode === 'prompt') {
+    // CRITICAL: Hide input form when viewing result or editing - single focus principle
+    if (step === 'result' || step === 'editing') {
+      return null
+    }
+
+    // Show loading in-place during generation
+    if (step === 'generating' && data.currentJob) {
+      return (
+        <div className="max-w-2xl mx-auto">
+          <GenerationProgress
+            job={data.currentJob}
+            onComplete={(completedJob) => {
+              workspaceState.completeGeneration(completedJob)
+            }}
+          />
+        </div>
+      )
+    }
+
     return (
       <div className="max-w-2xl mx-auto">
         {/* Text Prompt - Single Focus */}

@@ -1,0 +1,4 @@
+You will use the file `docs/log-exports/workspace-screenshots/scribble_machine_coloring_page_flow_ui_notes.md` to understand the steps of the workspace page and you will check all images inside the root of `docs/log-exports/workspace-screenshots` alongside the UI problems refrenced inside `docs/log-exports/workspace-screenshots/scribble_machine_ux_problems_only_with_file_refs.md`
+
+You will redesign as per the problem stated. You will come up with your own solutions to these problems and you will try to stick to the Shadcn components where possible. Where it's not possible, you may identify and fine new ones or even create your own/modifying template. However, there may be a need to change the workflow, the steps, and you will do this accordingly. This is only a UI exercise, and you will not use any additional sub-agents as part of the process. Focus onthe priority of the problem, ignore problem #10 which marked as 5/5 severity as that wont happen anymore.
+
