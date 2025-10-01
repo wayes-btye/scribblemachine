@@ -63,3 +63,6 @@ Thumbs.db
 .specstory/
 .cursorindexingignore
 .vercel
+
+# Worktrees (development branches)
+trees/
