@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 // import { Progress } from '@/components/ui/progress' // Available for future progress display
-import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Clock, CheckCircle, XCircle, Loader2, AlertCircle } from 'lucide-react'
 import { LottieLoader } from '@/components/ui/lottie-loader'
@@ -142,52 +141,37 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
   const formattedTime = Math.floor(elapsedTime / 1000)
 
   return (
-    <div className="space-y-6" data-testid="generation-progress">
-      {/* Enhanced Lottie Animation Loading - More compact and visually appealing */}
-      <div className="text-center">
-        <LottieLoader
-          theme={config.theme}
-          progress={config.progress}
-          message={config.playfulMessage}
-          size="lg"
-          showProgress={false}
-          className="mb-6"
-        />
+    <div className="space-y-3" data-testid="generation-progress">
+      {/* Compact Lottie Animation Only */}
+      <LottieLoader
+        theme={config.theme}
+        progress={config.progress}
+        message={config.playfulMessage}
+        size="md"
+        showProgress={false}
+        className="mb-4"
+      />
 
-        {/* Status Header - More prominent and better styled */}
-        <div className="flex items-center justify-center gap-3 mb-3">
-          <div className={`p-3 rounded-full ${config.color} text-white shadow-lg`}>
-            <Icon className={`h-5 w-5 ${job.status === 'running' ? 'animate-spin' : ''}`} />
-          </div>
-          <div className="flex items-center gap-3">
-            <h3 className="font-semibold text-xl" data-testid="job-status">
-              {config.label}
-            </h3>
-            <Badge variant="outline" className="text-sm px-3 py-1">
-              {formattedTime}s
-            </Badge>
-          </div>
+      {/* Minimal Status Info */}
+      <div className="flex items-center justify-center gap-2">
+        <div className={`p-1.5 rounded-full ${config.color} text-white`}>
+          <Icon className={`h-3 w-3 ${job.status === 'running' ? 'animate-spin' : ''}`} />
         </div>
-
-        <p className="text-gray-600 text-base mb-6">{config.description}</p>
+        <span className="text-sm font-medium text-gray-700" data-testid="job-status">
+          {config.label}
+        </span>
+        <span className="text-xs text-gray-500">
+          {formattedTime}s
+        </span>
       </div>
 
-      {/* Job Details */}
-      <div className="bg-gray-50 p-3 rounded-lg text-sm">
-        <div className="grid grid-cols-2 gap-2">
-          <div>
-            <span className="text-gray-600">Job ID:</span>
-            <br />
-            <span className="font-mono text-xs">{job.id?.slice(0, 8) || 'Unknown'}...</span>
-          </div>
-          <div>
-            <span className="text-gray-600">Parameters:</span>
-            <br />
-            <span className="capitalize">
-              {job.params_json?.complexity || 'Unknown'} • {job.params_json?.line_thickness || 'Unknown'}
-            </span>
-          </div>
-        </div>
+      {/* Compact Job Details */}
+      <div className="text-center text-xs text-gray-500">
+        <span className="font-mono">{job.id?.slice(0, 8) || 'Unknown'}...</span>
+        <span className="mx-2">•</span>
+        <span className="capitalize">
+          {job.params_json?.complexity || 'Unknown'} • {job.params_json?.line_thickness || 'Unknown'}
+        </span>
       </div>
 
       {/* Error Display */}

@@ -101,9 +101,11 @@ export default function WorkspacePage() {
             </div>
           </div>
 
-          {/* Preview/Result Area - Below main container */}
+          {/* Preview/Result Area - Below main container with enhanced visibility */}
           <div className="mt-8">
-            <WorkspaceRightPane workspaceState={workspaceState} />
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-white/30 p-1">
+              <WorkspaceRightPane workspaceState={workspaceState} />
+            </div>
           </div>
         </div>
       </div>
