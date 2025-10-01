@@ -9,35 +9,30 @@ import { BackgroundBlobs } from '@/components/ui/background-blobs'
 
 export default function Home() {
   useEffect(() => {
-    // Professional intersection observer for scroll animations
+    // Optimized intersection observer for scroll animations
     const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
     }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const target = entry.target as HTMLElement
-          target.style.opacity = '1'
-          target.style.transform = 'translateY(0) translateX(0) scale(1)'
+          // Add class instead of inline styles to avoid layout thrashing
+          target.classList.add('animate-visible')
+          // Disconnect after animation to improve performance
+          observer.unobserve(target)
         }
       })
     }, observerOptions)
 
-    // Observe all animated elements
-    document.querySelectorAll('.fade-in-up, .scale-in').forEach((el, index) => {
-      const element = el as HTMLElement
-      element.style.opacity = '0'
-
-      if (element.classList.contains('fade-in-up')) {
-        element.style.transform = 'translateY(30px)'
-      } else if (element.classList.contains('scale-in')) {
-        element.style.transform = 'scale(0.9)'
-      }
-
-      element.style.transition = `opacity 0.8s ease-out ${index * 0.1}s, transform 0.8s ease-out ${index * 0.1}s`
-      observer.observe(element)
+    // Batch DOM reads/writes to avoid layout thrashing
+    requestAnimationFrame(() => {
+      const elements = document.querySelectorAll('.fade-in-up, .scale-in')
+      elements.forEach((el) => {
+        observer.observe(el)
+      })
     })
 
     return () => observer.disconnect()

@@ -19,7 +19,11 @@ export function BackgroundBlobs({ className = '', intensity = 'normal' }: Backgr
   const opacityMultiplier = getOpacityMultiplier()
 
   return (
-    <div className={`fixed top-0 left-0 w-full h-full pointer-events-none z-[5] overflow-hidden ${className}`}>
+    <div className={`fixed top-0 left-0 w-full h-full pointer-events-none z-[5] overflow-hidden ${className}`}
+         style={{
+           willChange: 'transform, opacity',
+           transform: 'translateZ(0)'
+         }}>
       {/* Creative paint drops */}
       <div className="absolute top-[11%] left-[6%] w-[78px] h-[78px] rounded-full creative-paint-float-1"
            style={{

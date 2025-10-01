@@ -122,6 +122,9 @@
     background: var(--gradient-bg) !important;
     min-height: 100vh !important;
     position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   /* Typography Classes */
@@ -151,31 +154,31 @@
   @keyframes creativePaintFloat1 {
     0% {
       opacity: 0.45;
-      transform: translateY(-16px) translateX(-6px) scale(0.48) rotate(4deg);
+      transform: translateY(-16px) translateX(-6px) translateZ(0) scale(0.48) rotate(4deg);
       border-radius: 62% 38% 48% 72%;
       filter: blur(2.8px);
     }
     25% {
       opacity: 0.52;
-      transform: translateY(-5px) translateX(-2px) scale(0.52) rotate(7deg);
+      transform: translateY(-5px) translateX(-2px) translateZ(0) scale(0.52) rotate(7deg);
       border-radius: 58% 42% 52% 68%;
       filter: blur(2.6px);
     }
     50% {
       opacity: 0.65;
-      transform: translateY(32px) translateX(10px) scale(0.68) rotate(15deg);
+      transform: translateY(32px) translateX(10px) translateZ(0) scale(0.68) rotate(15deg);
       border-radius: 48% 52% 62% 38%;
       filter: blur(1.8px);
     }
     75% {
       opacity: 0.52;
-      transform: translateY(-5px) translateX(-2px) scale(0.52) rotate(23deg);
+      transform: translateY(-5px) translateX(-2px) translateZ(0) scale(0.52) rotate(23deg);
       border-radius: 58% 42% 52% 68%;
       filter: blur(2.6px);
     }
     100% {
       opacity: 0.45;
-      transform: translateY(-16px) translateX(-6px) scale(0.48) rotate(31deg);
+      transform: translateY(-16px) translateX(-6px) translateZ(0) scale(0.48) rotate(31deg);
       border-radius: 62% 38% 48% 72%;
       filter: blur(2.8px);
     }
@@ -184,31 +187,31 @@
   @keyframes creativePaintFloat2 {
     0% {
       opacity: 0.42;
-      transform: translateX(22px) translateY(-15px) scale(0.42) rotate(-7deg);
+      transform: translateX(22px) translateY(-15px) translateZ(0) scale(0.42) rotate(-7deg);
       border-radius: 66% 34% 44% 56%;
       filter: blur(2.8px);
     }
     25% {
       opacity: 0.48;
-      transform: translateX(8px) translateY(-6px) scale(0.46) rotate(-9deg);
+      transform: translateX(8px) translateY(-6px) translateZ(0) scale(0.46) rotate(-9deg);
       border-radius: 62% 38% 48% 52%;
       filter: blur(2.6px);
     }
     50% {
       opacity: 0.58;
-      transform: translateX(-22px) translateY(26px) scale(0.58) rotate(-11deg);
+      transform: translateX(-22px) translateY(26px) translateZ(0) scale(0.58) rotate(-11deg);
       border-radius: 34% 66% 56% 44%;
       filter: blur(1.8px);
     }
     75% {
       opacity: 0.48;
-      transform: translateX(8px) translateY(-6px) scale(0.46) rotate(-20deg);
+      transform: translateX(8px) translateY(-6px) translateZ(0) scale(0.46) rotate(-20deg);
       border-radius: 62% 38% 48% 52%;
       filter: blur(2.6px);
     }
     100% {
       opacity: 0.42;
-      transform: translateX(22px) translateY(-15px) scale(0.42) rotate(-29deg);
+      transform: translateX(22px) translateY(-15px) translateZ(0) scale(0.42) rotate(-29deg);
       border-radius: 66% 34% 44% 56%;
       filter: blur(2.8px);
     }
@@ -217,12 +220,12 @@
   @keyframes enhancedColorBleed {
     0%, 100% {
       opacity: 0.32;
-      transform: scale(0.84) translateX(-3.5px);
+      transform: scale(0.84) translateX(-3.5px) translateZ(0);
       background-size: 100% 100%;
     }
     50% {
       opacity: 0.46;
-      transform: scale(1.05) translateX(2.5px);
+      transform: scale(1.05) translateX(2.5px) translateZ(0);
       background-size: 110% 110%;
     }
   }
@@ -230,12 +233,12 @@
   @keyframes enhancedColorBleed2 {
     0%, 100% {
       opacity: 0.28;
-      transform: scale(0.91) translateY(-2.5px);
+      transform: scale(0.91) translateY(-2.5px) translateZ(0);
       background-size: 100% 100%;
     }
     50% {
       opacity: 0.38;
-      transform: scale(1.03) translateY(1.5px);
+      transform: scale(1.03) translateY(1.5px) translateZ(0);
       background-size: 106% 106%;
     }
   }
@@ -243,27 +246,27 @@
   @keyframes elegantWatercolorFade {
     0% {
       opacity: 0.38;
-      transform: scale(0.82) rotate(2.5deg) translateX(4.5px);
+      transform: scale(0.82) rotate(2.5deg) translateX(4.5px) translateZ(0);
       filter: blur(2.8px) saturate(1.15);
     }
     25% {
       opacity: 0.44;
-      transform: scale(0.92) rotate(1deg) translateX(5.5px);
+      transform: scale(0.92) rotate(1deg) translateX(5.5px) translateZ(0);
       filter: blur(3.3px) saturate(1.08);
     }
     50% {
       opacity: 0.52;
-      transform: scale(1.02) rotate(-1.5deg) translateX(6.5px);
+      transform: scale(1.02) rotate(-1.5deg) translateX(6.5px) translateZ(0);
       filter: blur(3.8px) saturate(1.0);
     }
     75% {
       opacity: 0.42;
-      transform: scale(0.88) rotate(0.5deg) translateX(5.5px);
+      transform: scale(0.88) rotate(0.5deg) translateX(5.5px) translateZ(0);
       filter: blur(3.0px) saturate(1.12);
     }
     100% {
       opacity: 0.38;
-      transform: scale(0.82) rotate(2.5deg) translateX(4.5px);
+      transform: scale(0.82) rotate(2.5deg) translateX(4.5px) translateZ(0);
       filter: blur(2.8px) saturate(1.15);
     }
   }
@@ -271,22 +274,22 @@
   @keyframes elegantCornerFloat {
     0%, 100% {
       clip-path: ellipse(34% 46% at 16% 16%);
-      transform: rotate(0deg);
+      transform: rotate(0deg) translateZ(0);
       opacity: 0.35;
     }
     25% {
       clip-path: ellipse(46% 34% at 74% 20%);
-      transform: rotate(90deg);
+      transform: rotate(90deg) translateZ(0);
       opacity: 0.48;
     }
     50% {
       clip-path: ellipse(41% 51% at 80% 74%);
-      transform: rotate(180deg);
+      transform: rotate(180deg) translateZ(0);
       opacity: 0.42;
     }
     75% {
       clip-path: ellipse(51% 39% at 20% 80%);
-      transform: rotate(270deg);
+      transform: rotate(270deg) translateZ(0);
       opacity: 0.38;
     }
   }
@@ -358,8 +361,29 @@
     animation-play-state: running;
   }
 
-  .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
-  .scale-in { animation: scaleIn 0.8s ease-out forwards; }
+  /* Scroll animation classes - optimized with CSS */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .fade-in-up.animate-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scale-in {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .scale-in.animate-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
   .logo-float { animation: logoFloat 4s ease-in-out infinite; }
   .icon-float { animation: iconFloat 3s ease-in-out infinite; }
   .icon-pulse { animation: iconPulse 2s ease-in-out infinite; }
@@ -373,9 +397,14 @@
 
   /* Mobile Performance Optimization */
   @media (max-width: 768px) {
-    /* Reduce number of animated blobs on mobile for performance - keep more visible */
-    .paint-dreams > div:nth-child(n+10) {
-      display: none;
+    /* Reduce number of animated blobs on mobile for performance - hide elements 9+ */
+    .creative-paint-float-1:nth-of-type(n+3),
+    .creative-paint-float-2:nth-of-type(n+3),
+    .enhanced-color-bleed:nth-of-type(n+2),
+    .enhanced-color-bleed-2:nth-of-type(n+2),
+    .elegant-watercolor-fade:nth-of-type(n+2),
+    .elegant-corner-float:nth-of-type(n+2) {
+      display: none !important;
     }
 
     /* Reduce animation complexity on mobile */
