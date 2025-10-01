@@ -143,33 +143,33 @@ export function GenerationProgress({ job: initialJob, onComplete }: GenerationPr
 
   return (
     <div className="space-y-6" data-testid="generation-progress">
-      {/* Enhanced Lottie Animation Loading */}
+      {/* Enhanced Lottie Animation Loading - More compact and visually appealing */}
       <div className="text-center">
         <LottieLoader
           theme={config.theme}
           progress={config.progress}
           message={config.playfulMessage}
           size="lg"
-          showProgress={true}
-          className="mb-4"
+          showProgress={false}
+          className="mb-6"
         />
 
-        {/* Status Header */}
-        <div className="flex items-center justify-center gap-3 mb-2">
-          <div className={`p-2 rounded-full ${config.color} text-white`}>
-            <Icon className={`h-4 w-4 ${job.status === 'running' ? 'animate-spin' : ''}`} />
+        {/* Status Header - More prominent and better styled */}
+        <div className="flex items-center justify-center gap-3 mb-3">
+          <div className={`p-3 rounded-full ${config.color} text-white shadow-lg`}>
+            <Icon className={`h-5 w-5 ${job.status === 'running' ? 'animate-spin' : ''}`} />
           </div>
-          <div className="flex items-center gap-2">
-            <h3 className="font-medium text-lg" data-testid="job-status">
+          <div className="flex items-center gap-3">
+            <h3 className="font-semibold text-xl" data-testid="job-status">
               {config.label}
             </h3>
-            <Badge variant="outline" className="text-xs">
+            <Badge variant="outline" className="text-sm px-3 py-1">
               {formattedTime}s
             </Badge>
           </div>
         </div>
 
-        <p className="text-gray-600 mb-4">{config.description}</p>
+        <p className="text-gray-600 text-base mb-6">{config.description}</p>
       </div>
 
       {/* Job Details */}

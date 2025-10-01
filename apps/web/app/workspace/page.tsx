@@ -53,57 +53,57 @@ export default function WorkspacePage() {
 
       <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6">
         <div className="max-w-4xl mx-auto">
-          {/* Unified Header with Mode Toggle */}
-          <div className="text-center mb-6 sm:mb-8">
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3">
-              <span className="modern-sans">Create Your</span>{' '}
-              <span className="handwritten bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Coloring Page
-              </span>
-            </h1>
+          {/* Main Container Box - Similar to reference image */}
+          <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 p-6 sm:p-8 lg:p-12">
+            {/* Unified Header with Mode Toggle */}
+            <div className="text-center mb-8">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                <span className="modern-sans">Create Your</span>{' '}
+                <span className="handwritten bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Coloring Page
+                </span>
+              </h1>
 
-            {/* Mode Toggle - Integrated into header */}
-            <div className="flex justify-center mb-4">
-              <ModeToggle
-                mode={workspaceState.mode}
-                onModeChange={workspaceState.setMode}
-                canSwitchMode={workspaceState.canSwitchMode}
-              />
+              {/* Mode Toggle - Integrated into header */}
+              <div className="flex justify-center mb-6">
+                <ModeToggle
+                  mode={workspaceState.mode}
+                  onModeChange={workspaceState.setMode}
+                  canSwitchMode={workspaceState.canSwitchMode}
+                />
+              </div>
+
+              {/* Subtitle - contextual based on mode */}
+              {workspaceState.mode && (
+                <p className="text-gray-600 text-sm sm:text-base mb-6">
+                  {workspaceState.mode === 'upload'
+                    ? 'Upload an image and watch the magic happen!'
+                    : 'Describe your idea and watch the magic happen!'
+                  }
+                </p>
+              )}
+
+              {/* Timeline - More subtle, only when mode selected */}
+              {workspaceState.mode && (
+                <div className="mb-8">
+                  <WorkspaceTimeline
+                    mode={workspaceState.mode}
+                    step={workspaceState.step}
+                    hasInput={workspaceState.hasUploadedImage || workspaceState.hasTextPrompt}
+                  />
+                </div>
+              )}
             </div>
 
-            {/* Subtitle - contextual based on mode */}
-            {workspaceState.mode && (
-              <p className="text-gray-600 text-xs sm:text-sm">
-                {workspaceState.mode === 'upload'
-                  ? 'Upload an image and watch the magic happen!'
-                  : 'Describe your idea and watch the magic happen!'
-                }
-              </p>
-            )}
-          </div>
-
-          {/* Timeline - More subtle, only when mode selected */}
-          {workspaceState.mode && (
-            <div className="mb-6">
-              <WorkspaceTimeline
-                mode={workspaceState.mode}
-                step={workspaceState.step}
-                hasInput={workspaceState.hasUploadedImage || workspaceState.hasTextPrompt}
-              />
-            </div>
-          )}
-
-          {/* Single-Column Centered Workspace */}
-          <div className="space-y-6">
             {/* Main Content Area - Single Focus */}
-            <div>
+            <div className="space-y-6">
               <WorkspaceLeftPane workspaceState={workspaceState} />
             </div>
+          </div>
 
-            {/* Preview/Result Area - Below main content */}
-            <div>
-              <WorkspaceRightPane workspaceState={workspaceState} />
-            </div>
+          {/* Preview/Result Area - Below main container */}
+          <div className="mt-8">
+            <WorkspaceRightPane workspaceState={workspaceState} />
           </div>
         </div>
       </div>

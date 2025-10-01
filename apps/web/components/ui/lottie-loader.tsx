@@ -112,29 +112,41 @@ export function LottieLoader({
     const config = animatedIcons[theme]
 
     return (
-      <div className="flex flex-col items-center space-y-4">
-        {/* Animated Icon Container with Multiple Effects */}
+      <div className="flex flex-col items-center space-y-6">
+        {/* Enhanced Animated Icon Container with Better Visual Design */}
         <div className={`${sizeClasses[size]} relative flex items-center justify-center`}>
+          {/* Outer Glow Ring */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${config.pulseColors} rounded-full opacity-20 animate-pulse`} style={{ transform: 'scale(1.2)' }} />
+
           {/* Pulsing Background Ring */}
           <div className={`absolute inset-0 bg-gradient-to-br ${config.pulseColors} rounded-full opacity-30 animate-ping`} />
 
-          {/* Main Icon Container */}
-          <div className={`${sizeClasses[size]} flex items-center justify-center bg-gradient-to-br ${config.gradient} rounded-full border-2 border-white shadow-lg relative z-10`}>
-            <span className={`text-2xl ${config.animation}`} style={{ animationDuration: '2s' }}>
+          {/* Main Icon Container with Enhanced Styling */}
+          <div className={`${sizeClasses[size]} flex items-center justify-center bg-gradient-to-br ${config.gradient} rounded-full border-4 border-white shadow-2xl relative z-10`}>
+            <span className={`text-3xl ${config.animation}`} style={{ animationDuration: '2s' }}>
               {config.icon}
             </span>
           </div>
 
           {/* Rotating Ring for Generation Theme */}
           {theme === 'generation' && (
-            <div className="absolute inset-0 border-2 border-dashed border-purple-300 rounded-full animate-spin" style={{ animationDuration: '3s' }} />
+            <div className="absolute inset-0 border-4 border-dashed border-purple-300 rounded-full animate-spin" style={{ animationDuration: '3s' }} />
           )}
 
           {/* Floating Sparkles for Success Theme */}
           {theme === 'success' && (
             <>
-              <div className="absolute -top-2 -right-2 text-yellow-400 animate-bounce" style={{ animationDelay: '0.5s' }}>✨</div>
-              <div className="absolute -bottom-2 -left-2 text-yellow-400 animate-bounce" style={{ animationDelay: '1s' }}>⭐</div>
+              <div className="absolute -top-3 -right-3 text-yellow-400 animate-bounce text-2xl" style={{ animationDelay: '0.5s' }}>✨</div>
+              <div className="absolute -bottom-3 -left-3 text-yellow-400 animate-bounce text-2xl" style={{ animationDelay: '1s' }}>⭐</div>
+              <div className="absolute top-0 -left-2 text-yellow-400 animate-bounce text-xl" style={{ animationDelay: '1.5s' }}>🌟</div>
+            </>
+          )}
+
+          {/* Additional Sparkles for Generation Theme */}
+          {theme === 'generation' && (
+            <>
+              <div className="absolute -top-2 -right-2 text-purple-400 animate-bounce text-lg" style={{ animationDelay: '0.3s' }}>✨</div>
+              <div className="absolute -bottom-2 -left-2 text-pink-400 animate-bounce text-lg" style={{ animationDelay: '0.8s' }}>⭐</div>
             </>
           )}
         </div>

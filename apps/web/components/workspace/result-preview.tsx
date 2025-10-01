@@ -2,10 +2,9 @@
 
 import { useState, useCallback } from 'react'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { FileImage, FileText, RotateCcw, Share2, Printer, AlertCircle } from 'lucide-react'
+import { FileImage, FileText, RotateCcw, Share2, Printer, AlertCircle, Clock, Layers, LineChart } from 'lucide-react'
 import { toast } from '@/components/ui/use-toast'
 import type { Job } from '@coloringpage/types'
 import { EditInterface } from './edit-interface'
@@ -191,227 +190,208 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
 
   return (
     <div className="space-y-6" data-testid="result-preview">
-      {/* Header with Version Toggle - Always visible */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <h3 className="text-lg font-semibold">
-              {isEditedJob ? "Edited Coloring Page" : "Generated Coloring Page"}
-            </h3>
-            {isEditedJob && (
-              <Badge className="bg-blue-100 text-blue-800 border-blue-200">
-                ✨ Edited
-              </Badge>
-            )}
-            {hasMultipleVersions && (
-              <Badge
-                variant="outline"
-                className="cursor-pointer hover:bg-gray-50"
-                onClick={showTimeline ? handleHideTimeline : () => setShowTimeline(true)}
-              >
-                {showTimeline ? 'Hide' : 'Show'} Timeline
-              </Badge>
-            )}
-          </div>
-          <Badge variant="outline" className="text-green-600 border-green-200">
-            ✓ Complete
-          </Badge>
-        </div>
-      </div>
-
-      {!showTimeline && (
-        <div className="space-y-4">
-
-        <div className="bg-white p-4 rounded-lg border">
-          {imageError || !getImagePreviewUrl() ? (
-            <Alert>
-              <AlertCircle className="h-4 w-4" />
-              <AlertDescription>
-                {!getImagePreviewUrl()
-                  ? "Image preview is being generated. You can download the file below."
-                  : "Image preview temporarily unavailable. You can still download the file."
-                }
-                {/* Debug info for development */}
-                {process.env.NODE_ENV === 'development' && (
-                  <div className="text-xs mt-2 text-gray-500">
-                    Debug: Job ID: {currentDisplayJob.id.slice(0, 8)}...,
-                    Has URL: {!!getImagePreviewUrl()},
-                    Image Error: {imageError}
-                  </div>
-                )}
-              </AlertDescription>
-            </Alert>
-          ) : (
-            <div className="aspect-square bg-gray-50 rounded-lg overflow-hidden">
-              <img
-                src={getImagePreviewUrl()!}
-                alt="Generated coloring page"
-                className="w-full h-full object-contain"
-                onError={() => {
-                  console.log(`[DEBUG] Image load error for job ${currentDisplayJob.id}:`, {
-                    url: getImagePreviewUrl(),
-                    fallbackAvailable: !!originalJob.download_urls?.edge_map
-                  })
-                  handleImageError()
-                }}
-                onLoad={() => {
-                  console.log(`[DEBUG] Image loaded successfully for job ${currentDisplayJob.id}`)
-                }}
-                data-testid="generated-image"
-              />
-            </div>
+      {/* Clean Header */}
+      <div className="flex items-center justify-between mb-6 pb-3 border-b border-gray-200">
+        <div className="flex items-center gap-3">
+          <h1 className="text-xl font-light text-gray-900">
+            {isEditedJob ? "Edited" : "Your"} Coloring Page
+          </h1>
+          {isEditedJob && (
+            <span className="text-xs text-purple-600 bg-purple-50 px-2 py-1 rounded-full border border-purple-200">
+              ✨ Edited
+            </span>
           )}
         </div>
-      </div>
-
-      )}
-      {!showTimeline && (
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <h4 className="font-medium mb-3">{isEditedJob ? "Edit Details" : "Generation Details"}</h4>
-
-        {/* Edit Prompt (if this is an edited job) */}
-        {isEditedJob && currentDisplayJob.params_json?.edit_prompt && (
-          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-            <span className="text-blue-700 font-medium text-sm">Edit Request:</span>
-            <p className="text-blue-800 text-sm mt-1">"{currentDisplayJob.params_json.edit_prompt}"</p>
-          </div>
-        )}
-
-        <div className="grid grid-cols-2 gap-4 text-sm">
-          <div>
-            <span className="text-gray-600">Complexity:</span>
-            <br />
-            <span className="font-medium capitalize">{currentDisplayJob.params_json.complexity}</span>
-          </div>
-          <div>
-            <span className="text-gray-600">Line Thickness:</span>
-            <br />
-            <span className="font-medium capitalize">{currentDisplayJob.params_json.line_thickness}</span>
-          </div>
-          <div>
-            <span className="text-gray-600">Processing Time:</span>
-            <br />
-            <span className="font-medium">
-              {currentDisplayJob.started_at && currentDisplayJob.ended_at
-                ? `${Math.round((new Date(currentDisplayJob.ended_at).getTime() - new Date(currentDisplayJob.started_at).getTime()) / 1000)}s`
-                : 'N/A'
-              }
-            </span>
-          </div>
-          <div>
-            <span className="text-gray-600">Job ID:</span>
-            <br />
-            <span className="font-mono text-xs">{currentDisplayJob.id.slice(0, 8)}...</span>
-          </div>
+        <div className="flex items-center gap-3">
+          {hasMultipleVersions && (
+            <button
+              onClick={showTimeline ? handleHideTimeline : () => setShowTimeline(true)}
+              className="text-xs text-gray-600 hover:text-purple-600 transition-colors border border-gray-300 px-3 py-1 rounded-md hover:border-purple-400"
+            >
+              {showTimeline ? '← Back' : 'Timeline →'}
+            </button>
+          )}
+          <span className="text-xs text-green-600 bg-green-50 px-3 py-1 rounded-full border border-green-200">
+            ✓ Complete
+          </span>
         </div>
       </div>
 
-      )}
-      {/* Version Timeline */}
+      {/* Timeline (Full Width When Visible) */}
       {hasMultipleVersions && showTimeline && (
-        <VersionTimeline
-          jobId={job.id}
-          onVersionSelect={handleVersionSelect}
-          currentJobId={currentDisplayJob.id}
-        />
+        <div className="mb-6 bg-white rounded-lg border border-gray-200 p-6">
+          <VersionTimeline
+            jobId={job.id}
+            onVersionSelect={handleVersionSelect}
+            currentJobId={currentDisplayJob.id}
+          />
+        </div>
       )}
 
-      {/* Edit Interface */}
-      {onEditJobCreated && (
+      {!showTimeline && (
         <>
-          <Separator />
-          <EditInterface job={job} onEditJobCreated={onEditJobCreated} />
+          {/* Two-Column Layout: Image Left, Edit+Actions Right */}
+          <div className="grid lg:grid-cols-[1fr,1fr] gap-8">
+            {/* Left: Image */}
+            <div className="flex items-start justify-center">
+              <div className="w-full">
+                {imageError || !getImagePreviewUrl() ? (
+                  <Alert>
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertDescription>
+                      {!getImagePreviewUrl()
+                        ? "Image preview is being generated. You can download the file below."
+                        : "Image preview temporarily unavailable. You can still download the file."
+                      }
+                      {/* Debug info for development */}
+                      {process.env.NODE_ENV === 'development' && (
+                        <div className="text-xs mt-2 text-gray-500">
+                          Debug: Job ID: {currentDisplayJob.id.slice(0, 8)}...,
+                          Has URL: {!!getImagePreviewUrl()},
+                          Image Error: {imageError}
+                        </div>
+                      )}
+                    </AlertDescription>
+                  </Alert>
+                ) : (
+                  <div className="aspect-square bg-gray-50 rounded-lg overflow-hidden border border-gray-200 hover:border-purple-300 transition-colors">
+                    <img
+                      src={getImagePreviewUrl()!}
+                      alt="Coloring page"
+                      className="w-full h-full object-contain p-4"
+                      onError={() => {
+                        console.log(`[DEBUG] Image load error for job ${currentDisplayJob.id}:`, {
+                          url: getImagePreviewUrl(),
+                          fallbackAvailable: !!originalJob.download_urls?.edge_map
+                        })
+                        handleImageError()
+                      }}
+                      onLoad={() => {
+                        console.log(`[DEBUG] Image loaded successfully for job ${currentDisplayJob.id}`)
+                      }}
+                      data-testid="generated-image"
+                    />
+                  </div>
+                )}
+
+                {/* Edit Request Below Image */}
+                {isEditedJob && currentDisplayJob.params_json?.edit_prompt && (
+                  <div className="mt-4 border-l-2 border-purple-600 pl-3 bg-purple-50/30 py-2 rounded-r">
+                    <div className="text-xs uppercase tracking-wider text-purple-600 mb-1">Edit Request</div>
+                    <p className="text-sm text-gray-900">"{currentDisplayJob.params_json.edit_prompt}"</p>
+                  </div>
+                )}
+
+                {/* Details */}
+                <div className="mt-3 space-y-2 text-sm">
+                  <div className="flex items-center gap-2">
+                    <Layers className="h-3 w-3 text-gray-400" />
+                    <span className="text-gray-500">Complexity:</span>
+                    <span className="font-medium">{currentDisplayJob.params_json.complexity}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <LineChart className="h-3 w-3 text-gray-400" />
+                    <span className="text-gray-500">Line:</span>
+                    <span className="font-medium">{currentDisplayJob.params_json.line_thickness}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-3 w-3 text-gray-400" />
+                    <span className="text-gray-500">Time:</span>
+                    <span className="font-medium">
+                      {currentDisplayJob.started_at && currentDisplayJob.ended_at
+                        ? `${Math.round((new Date(currentDisplayJob.ended_at).getTime() - new Date(currentDisplayJob.started_at).getTime()) / 1000)}s`
+                        : 'N/A'
+                      }
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Edit Interface + Actions (PROMINENT) */}
+            <div className="flex flex-col gap-6">
+              {/* Edit Interface - Highlighted */}
+              {onEditJobCreated && (
+                <div className="bg-white rounded-lg border-2 border-orange-300 p-6 shadow-sm">
+                  <div className="mb-4 text-center">
+                    <h3 className="text-sm font-medium text-orange-600 mb-1">✨ Edit This Page</h3>
+                    <p className="text-xs text-gray-500">Make changes to your coloring page</p>
+                  </div>
+                  <EditInterface job={job} onEditJobCreated={onEditJobCreated} />
+                </div>
+              )}
+
+              <Separator />
+
+              {/* Download Actions */}
+              <div className="space-y-3">
+                <Button
+                  onClick={handleDownloadImage}
+                  disabled={downloading}
+                  className="w-full bg-purple-600 hover:bg-purple-700 text-white h-11"
+                  data-testid="download-image"
+                >
+                  {downloading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                      Downloading...
+                    </>
+                  ) : (
+                    <>
+                      <FileImage className="mr-2 h-4 w-4" />
+                      Download PNG
+                    </>
+                  )}
+                </Button>
+
+                <Button
+                  onClick={handleExportPDF}
+                  disabled={exporting}
+                  variant="outline"
+                  className="w-full border-orange-300 text-orange-700 hover:bg-orange-50 h-11"
+                  data-testid="export-pdf"
+                >
+                  {exporting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-orange-700 mr-2" />
+                      Exporting...
+                    </>
+                  ) : (
+                    <>
+                      <FileText className="mr-2 h-4 w-4" />
+                      Export PDF
+                    </>
+                  )}
+                </Button>
+              </div>
+
+              {/* Secondary Actions */}
+              <div className="grid grid-cols-3 gap-2">
+                <Button size="sm" variant="ghost" className="text-gray-500 hover:text-purple-600 hover:bg-purple-50">
+                  <Share2 className="h-4 w-4" />
+                </Button>
+                <Button size="sm" variant="ghost" className="text-gray-500 hover:text-purple-600 hover:bg-purple-50">
+                  <Printer className="h-4 w-4" />
+                </Button>
+                <Button 
+                  size="sm" 
+                  variant="ghost" 
+                  className="text-gray-500 hover:text-purple-600 hover:bg-purple-50"
+                  onClick={onReset}
+                  data-testid="create-another"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                </Button>
+              </div>
+
+              {/* Tip */}
+              <div className="text-xs text-gray-500 bg-amber-50 border border-amber-200 rounded p-3">
+                <strong className="text-amber-800">💡 Tip:</strong> Print at 300 DPI for best results. A4/Letter recommended.
+              </div>
+            </div>
+          </div>
         </>
       )}
-
-      <Separator />
-
-      {/* Action Buttons */}
-      <div className="space-y-4">
-        <h4 className="font-medium">Download & Share</h4>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {/* Download PNG */}
-          <Button
-            onClick={handleDownloadImage}
-            disabled={downloading}
-            className="bg-brand-soft-blue hover:bg-brand-soft-blue/90 text-white"
-            data-testid="download-image"
-          >
-            {downloading ? (
-              <>
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                Downloading...
-              </>
-            ) : (
-              <>
-                <FileImage className="mr-2 h-4 w-4" />
-                Download Image
-              </>
-            )}
-          </Button>
-
-          {/* Export PDF */}
-          <Button
-            onClick={handleExportPDF}
-            disabled={exporting}
-            variant="outline"
-            className="border-brand-warm-orange text-brand-warm-orange hover:bg-brand-warm-orange/10"
-            data-testid="export-pdf"
-          >
-            {exporting ? (
-              <>
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-brand-warm-orange mr-2" />
-                Exporting...
-              </>
-            ) : (
-              <>
-                <FileText className="mr-2 h-4 w-4" />
-                Export PDF
-              </>
-            )}
-          </Button>
-        </div>
-
-        {/* Additional Actions */}
-        <div className="flex flex-wrap gap-2">
-          <Button size="sm" variant="ghost" className="text-gray-600">
-            <Share2 className="mr-2 h-3 w-3" />
-            Share
-          </Button>
-          <Button size="sm" variant="ghost" className="text-gray-600">
-            <Printer className="mr-2 h-3 w-3" />
-            Print
-          </Button>
-        </div>
-      </div>
-
-      <Separator />
-
-      {/* Start Over */}
-      <div className="text-center">
-        <Button
-          onClick={onReset}
-          variant="outline"
-          size="lg"
-          className="w-full sm:w-auto"
-          data-testid="create-another"
-        >
-          <RotateCcw className="mr-2 h-4 w-4" />
-          Create Another Coloring Page
-        </Button>
-      </div>
-
-      {/* Tips */}
-      <div className="bg-blue-50 p-4 rounded-lg">
-        <h5 className="font-medium text-blue-900 mb-2">Printing Tips</h5>
-        <ul className="text-sm text-blue-800 space-y-1">
-          <li>• Print on white or light-colored paper for best results</li>
-          <li>• Use high-quality print settings (300 DPI or higher)</li>
-          <li>• A4 or Letter size paper works perfectly</li>
-          <li>• Consider heavier paper (cardstock) for younger children</li>
-        </ul>
-      </div>
     </div>
   )
 }
