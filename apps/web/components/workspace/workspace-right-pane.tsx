@@ -30,19 +30,7 @@ export function WorkspaceRightPane({ workspaceState }: WorkspaceRightPaneProps) 
   return (
     <div className="space-y-4 sm:space-y-6">
       {/* Input step - Show context based on mode */}
-      {step === 'input' && mode === 'upload' && data.uploadedImage && (
-        <Card className="p-4 sm:p-6">
-          <h2 className="text-lg sm:text-xl font-semibold mb-4">Original Image</h2>
-          <div className="aspect-square bg-gray-50 rounded-lg overflow-hidden">
-            <img
-              src={data.uploadedImage.url}
-              alt="Uploaded image"
-              className="w-full h-full object-contain"
-              data-testid="uploaded-image-preview"
-            />
-          </div>
-        </Card>
-      )}
+      {/* Removed large image preview - now shown compactly in left pane success indicator */}
 
       {step === 'input' && mode === 'prompt' && data.textPrompt && (
         <Card className="p-4 sm:p-6">

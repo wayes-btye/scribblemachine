@@ -61,17 +61,24 @@ export function WorkspaceLeftPane({ workspaceState }: WorkspaceLeftPaneProps) {
         {/* Step 2: Parameters (only show after upload) - Single Focus */}
         {data.uploadedImage && step === 'input' && (
           <div className="space-y-4">
-            {/* Compact Success Indicator */}
+            {/* Compact Success Indicator with Image Preview */}
             <div className="p-3 bg-green-50 border border-green-200 rounded-lg flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+              <div className="flex items-center space-x-3">
+                <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-green-600 text-xs font-semibold">✓</span>
                 </div>
-                <p className="text-sm text-green-800">Image uploaded</p>
+                <div className="flex items-center space-x-3">
+                  <img
+                    src={data.uploadedImage.url}
+                    alt="Uploaded image"
+                    className="w-12 h-12 object-cover rounded-lg border border-green-200"
+                  />
+                  <p className="text-sm text-green-800">Image uploaded</p>
+                </div>
               </div>
               <button
                 onClick={() => setUploadedImage('', '')}
-                className="text-xs text-green-600 hover:text-green-800 underline"
+                className="text-xs text-green-600 hover:text-green-800 underline flex-shrink-0"
               >
                 Change
               </button>
