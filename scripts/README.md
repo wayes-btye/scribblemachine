@@ -147,6 +147,9 @@ scripts/
 # Check if app is running
 netstat -ano | findstr ":3000"
 
+# Kill any existing processes (use organized scripts)
+scripts/dev-server-killer/kill-dev-servers.bat
+
 # Start the app if needed
 pnpm dev
 ```

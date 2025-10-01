@@ -72,15 +72,31 @@ pnpm dev  # Starts both frontend (3000) and worker (local)
 **NEVER USE `taskkill /F /IM node.exe`** - This will kill Claude Code itself!
 
 **Safe process management:**
+- Use the organized kill scripts in `scripts/dev-server-killer/` (recommended)
 - Use Ctrl+C to stop individual services
 - Use `pnpm dev` to restart cleanly
 - Use KillShell tool with shell ID for background processes
+
+### 🛠️ Quick Development Server Killer Scripts
+
+**Recommended approach - Use organized scripts:**
+
+```bash
+# Kill both development servers (ports 3000 and 3001)
+scripts/dev-server-killer/kill-dev-servers.bat
+
+# Kill individual servers
+scripts/dev-server-killer/kill-3000-fixed.bat    # Frontend only
+scripts/dev-server-killer/kill-3001-fixed.bat    # Worker only
+```
+
+**All kill scripts are organized in `scripts/dev-server-killer/` with detailed documentation.**
 
 ## 🔴 CRITICAL: Port 3000 Dependency & Process Management
 
 **Web app MUST run on port 3000** - Supabase auth hardcoded to this port.
 
-**To kill process using port 3000 (WORKING COMMANDS):**
+**To kill process using port 3000 (MANUAL METHOD):**
 
 ```bash
 # 1. Find process using port 3000
@@ -106,6 +122,8 @@ netstat -ano | findstr ":3000"        # Find PID (e.g., 31460)
 powershell "Stop-Process -Id 31460 -Force"    # Kill process
 pnpm dev                               # Start services
 ```
+
+💡 **Pro tip**: Use the organized scripts instead - they handle all these steps automatically!
 
 Port migration = authentication broken. Always verify `http://localhost:3000` responds.
 
