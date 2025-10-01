@@ -1,6 +1,5 @@
 'use client'
 
-import { Card } from '@/components/ui/card'
 import { FileUploader } from '@/components/workspace/file-uploader'
 import { ParameterForm } from '@/components/workspace/parameter-form'
 import { TextPromptForm } from '@/components/workspace/text-prompt-form'

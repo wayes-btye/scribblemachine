@@ -92,7 +92,7 @@ export function WorkspaceTimeline({ mode, step, hasInput }: WorkspaceTimelinePro
         />
 
         {/* Timeline steps */}
-        {steps.map((timelineStep, index) => (
+        {steps.map((timelineStep) => (
           <div key={timelineStep.id} className="relative flex flex-col items-center" style={{ zIndex: 2 }}>
             {/* Step circle */}
             <div
