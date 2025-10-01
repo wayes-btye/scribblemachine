@@ -23,9 +23,10 @@ interface ResultPreviewProps {
   job: JobWithDownloads
   onReset: () => void
   onEditJobCreated?: (editJob: Job) => void
+  onCreditsUpdated?: () => void
 }
 
-export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewProps) {
+export function ResultPreview({ job, onReset, onEditJobCreated, onCreditsUpdated }: ResultPreviewProps) {
   const [downloading, setDownloading] = useState(false)
   const [exporting, setExporting] = useState(false)
   const [imageError, setImageError] = useState(false)
@@ -317,7 +318,11 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
                     <h3 className="text-sm font-medium text-orange-600 mb-1">✨ Edit This Page</h3>
                     <p className="text-xs text-gray-500">Make changes to your coloring page</p>
                   </div>
-                  <EditInterface job={job} onEditJobCreated={onEditJobCreated} />
+                  <EditInterface
+                    job={job}
+                    onEditJobCreated={onEditJobCreated}
+                    onCreditsUpdated={onCreditsUpdated}
+                  />
                 </div>
               )}
 
@@ -373,9 +378,9 @@ export function ResultPreview({ job, onReset, onEditJobCreated }: ResultPreviewP
                 <Button size="sm" variant="ghost" className="text-gray-500 hover:text-purple-600 hover:bg-purple-50">
                   <Printer className="h-4 w-4" />
                 </Button>
-                <Button 
-                  size="sm" 
-                  variant="ghost" 
+                <Button
+                  size="sm"
+                  variant="ghost"
                   className="text-gray-500 hover:text-purple-600 hover:bg-purple-50"
                   onClick={onReset}
                   data-testid="create-another"

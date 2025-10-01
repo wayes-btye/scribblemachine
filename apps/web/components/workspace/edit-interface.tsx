@@ -9,6 +9,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 // import { Separator } from '@/components/ui/separator' // Available for future UI separation
 import { Pencil, Loader2, Clock, AlertCircle, CheckCircle2 } from 'lucide-react'
 import { toast } from '@/components/ui/use-toast'
+import { InsufficientCreditsButton } from '@/components/payments/get-credits-button'
 import type { Job } from '@coloringpage/types'
 
 interface EditHistory {
@@ -19,13 +20,15 @@ interface EditHistory {
 interface EditInterfaceProps {
   job: Job
   onEditJobCreated: (editJob: Job) => void
+  onCreditsUpdated?: () => void
 }
 
-export function EditInterface({ job, onEditJobCreated }: EditInterfaceProps) {
+export function EditInterface({ job, onEditJobCreated, onCreditsUpdated }: EditInterfaceProps) {
   const [editPrompt, setEditPrompt] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [editHistory, setEditHistory] = useState<EditHistory>({ edit_count: 0, edits_remaining: 2 })
   const [loadingHistory, setLoadingHistory] = useState(true)
+  const [showCreditExhaustion, setShowCreditExhaustion] = useState(false)
 
   // Load edit history for this job
   useEffect(() => {
@@ -89,6 +92,19 @@ export function EditInterface({ job, onEditJobCreated }: EditInterfaceProps) {
 
       if (!response.ok) {
         const error = await response.json()
+        
+        // Handle insufficient credits specifically
+        if (response.status === 402) {
+          setShowCreditExhaustion(true)
+          toast({
+            title: 'Insufficient Credits',
+            description: 'You need more credits to edit this coloring page. Purchase credits to continue.',
+            variant: 'destructive',
+            duration: 10000 // Longer duration for important message
+          })
+          return
+        }
+        
         throw new Error(error.error || 'Failed to create edit job')
       }
 
@@ -238,6 +254,41 @@ export function EditInterface({ job, onEditJobCreated }: EditInterfaceProps) {
             )}
           </Button>
         </div>
+      )}
+
+      {/* Credit Exhaustion Alert */}
+      {showCreditExhaustion && (
+        <Alert variant="destructive" className="border-red-200 bg-red-50">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>
+            <div className="space-y-3">
+              <div>
+                <p className="font-semibold text-red-800">Insufficient Credits</p>
+                <p className="text-sm text-red-700">
+                  You need 1 credit to edit this coloring page, but you don't have enough credits remaining.
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <InsufficientCreditsButton
+                  requiredCredits={1}
+                  onCreditsUpdated={() => {
+                    setShowCreditExhaustion(false)
+                    onCreditsUpdated?.()
+                  }}
+                  className="flex-1"
+                />
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowCreditExhaustion(false)}
+                  className="text-red-700 border-red-300 hover:bg-red-100"
+                >
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          </AlertDescription>
+        </Alert>
       )}
 
       {/* Edit History */}
