@@ -18,7 +18,7 @@ export function Header() {
     <header className="relative z-60 py-4 px-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Large Logo - Responsive sizing */}
-        <div className="flex items-center transition-all duration-300 hover:scale-105 hover:rotate-1 fade-in-up">
+        <div className="flex items-center transition-all duration-300 hover:scale-105 hover:rotate-1">
           <Link href="/">
             <Image
               src="/assets/ScribbleMachinecom.svg"
@@ -32,7 +32,7 @@ export function Header() {
         </div>
 
         {/* Auth Section */}
-        <div className="flex items-center space-x-3 sm:space-x-6 fade-in-up delay-200">
+        <div className="flex items-center space-x-3 sm:space-x-6">
           {loading ? (
             <div className="h-12 w-24 sm:w-32 bg-white/20 animate-pulse rounded-lg" />
           ) : user ? (

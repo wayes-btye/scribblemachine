@@ -9,13 +9,28 @@ import { WorkspaceModeHandler } from '@/components/workspace/workspace-mode-hand
 import { WorkspaceTimeline } from '@/components/workspace/workspace-timeline'
 import { useAuth } from '@/lib/auth/auth-provider'
 import { useRouter } from 'next/navigation'
-import { useEffect, Suspense } from 'react'
+import { useEffect, Suspense, useCallback } from 'react'
 import { BackgroundBlobs } from '@/components/ui/background-blobs'
+import type { WorkspaceMode } from '@/hooks/use-workspace-state'
 
 export default function WorkspacePage() {
   const { user, loading } = useAuth()
   const workspaceState = useWorkspaceState()
   const router = useRouter()
+
+  // Wrapped setMode that syncs with URL
+  const handleModeChange = useCallback((mode: WorkspaceMode) => {
+    // Update state
+    workspaceState.setMode(mode)
+
+    // Sync with URL
+    if (mode) {
+      router.push(`/workspace?mode=${mode}`, { scroll: false })
+    } else {
+      router.push('/workspace', { scroll: false })
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [workspaceState.setMode, router])
 
   // Redirect to home if not authenticated (but only after loading is complete)
   useEffect(() => {
@@ -68,7 +83,7 @@ export default function WorkspacePage() {
               <div className="flex justify-center mb-6">
                 <ModeToggle
                   mode={workspaceState.mode}
-                  onModeChange={workspaceState.setMode}
+                  onModeChange={handleModeChange}
                   canSwitchMode={workspaceState.canSwitchMode}
                 />
               </div>
