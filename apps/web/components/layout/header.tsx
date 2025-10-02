@@ -25,6 +25,7 @@ export function Header() {
               alt="ScribbleMachine.com"
               width={280}
               height={112}
+              priority
               className="w-auto"
               style={{ height: 'clamp(4rem, 8vw, 7rem)' }}
             />

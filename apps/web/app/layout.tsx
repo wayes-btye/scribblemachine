@@ -6,6 +6,10 @@ import { MainLayout } from '@/components/layout/main-layout';
 export const metadata: Metadata = {
   title: config.app.name,
   description: config.app.description,
+  icons: {
+    icon: '/assets/ScribbleIcon.svg',
+    apple: '/assets/ScribbleIcon.svg',
+  },
 };
 
 export const viewport: Viewport = {
