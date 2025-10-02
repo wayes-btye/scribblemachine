@@ -146,6 +146,37 @@ export interface UpdateProfileResponse {
   }
 }
 
+// Gallery API Types
+export interface GalleryQueryParams {
+  page?: number
+  limit?: number
+  sort_by?: 'created_at' | 'title'
+  sort_order?: 'asc' | 'desc'
+}
+
+export interface GalleryItemResponse {
+  job_id: string
+  title: string | null
+  image_url: string
+  thumbnail_url?: string | null
+  created_at: string
+  complexity: 'simple' | 'standard' | 'detailed'
+  line_thickness: 'thin' | 'medium' | 'thick'
+  has_pdf: boolean
+}
+
+export interface GalleryPaginationMeta {
+  page: number
+  limit: number
+  total_count: number
+  has_more: boolean
+}
+
+export interface GalleryResponse {
+  items: GalleryItemResponse[]
+  pagination: GalleryPaginationMeta
+}
+
 // Frontend Hook Types
 export interface UseJobPollingOptions {
   jobId: string

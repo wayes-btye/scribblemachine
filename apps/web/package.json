@@ -9,7 +9,8 @@
     "install:vercel": "cd ../.. && pnpm install",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test:gallery": "tsx test-gallery-api.ts"
   },
   "dependencies": {
     "@coloringpage/config": "workspace:*",
