@@ -18,19 +18,15 @@ export default function WorkspacePage() {
   const workspaceState = useWorkspaceState()
   const router = useRouter()
 
-  // Wrapped setMode that syncs with URL
+  // Update URL only - WorkspaceModeHandler will update state when URL changes
+  // This prevents race condition where state updates before URL, causing jitter
   const handleModeChange = useCallback((mode: WorkspaceMode) => {
-    // Update state
-    workspaceState.setMode(mode)
-
-    // Sync with URL
     if (mode) {
       router.push(`/workspace?mode=${mode}`, { scroll: false })
     } else {
       router.push('/workspace', { scroll: false })
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [workspaceState.setMode, router])
+  }, [router])
 
   // Redirect to home if not authenticated (but only after loading is complete)
   useEffect(() => {
