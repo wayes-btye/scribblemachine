@@ -47,10 +47,18 @@ export function useWorkspaceState(): WorkspaceState {
   }, [canSwitchMode])
 
   const setUploadedImage = useCallback((assetId: string, url: string) => {
-    setData(prev => ({
-      ...prev,
-      uploadedImage: { assetId, url }
-    }))
+    if (!assetId || !url) {
+      // Clear the uploaded image if empty values are passed
+      setData(prev => {
+        const { uploadedImage, ...rest } = prev
+        return rest
+      })
+    } else {
+      setData(prev => ({
+        ...prev,
+        uploadedImage: { assetId, url }
+      }))
+    }
   }, [])
 
   const setTextPrompt = useCallback((prompt: string) => {

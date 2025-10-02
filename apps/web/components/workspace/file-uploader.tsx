@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Upload, X, Image as ImageIcon, AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -26,6 +26,15 @@ export function FileUploader({ onUploadComplete, disabled }: FileUploaderProps) 
   const [uploadProgress, setUploadProgress] = useState(0)
   const [uploadError, setUploadError] = useState<string | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+
+  // Cleanup object URLs on unmount
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl)
+      }
+    }
+  }, [previewUrl])
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     const file = acceptedFiles[0]
@@ -62,8 +71,40 @@ export function FileUploader({ onUploadComplete, disabled }: FileUploaderProps) 
 
       // Upload file to Supabase Storage with progress tracking
       const xhr = new XMLHttpRequest()
+      let completed = false
 
-      return new Promise<void>((resolve, reject) => {
+      const uploadPromise = new Promise<void>((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          if (!completed) {
+            completed = true
+            reject(new Error('Upload timeout - please try again'))
+          }
+        }, 30000) // 30 second timeout
+
+        const handleCompletion = () => {
+          if (completed) return
+          completed = true
+          clearTimeout(timeout)
+
+          if (xhr.status === 200) {
+            toast({
+              title: 'Upload successful!',
+              description: 'Your image is ready for processing.'
+            })
+            onUploadComplete(assetId, preview) // Use preview URL for immediate display
+            resolve()
+          } else {
+            reject(new Error(`Upload failed with status ${xhr.status}`))
+          }
+        }
+
+        const handleError = () => {
+          if (completed) return
+          completed = true
+          clearTimeout(timeout)
+          reject(new Error('Upload failed'))
+        }
+
         xhr.upload.addEventListener('progress', (event) => {
           if (event.lengthComputable) {
             const progress = Math.round((event.loaded / event.total) * 100)
@@ -71,28 +112,32 @@ export function FileUploader({ onUploadComplete, disabled }: FileUploaderProps) 
           }
         })
 
-        xhr.addEventListener('load', async () => {
-          if (xhr.status === 200) {
-            toast({
-              title: 'Upload successful!',
-              description: 'Your image is ready for processing.'
-            })
+        // Primary completion handler
+        xhr.addEventListener('load', handleCompletion)
 
-            onUploadComplete(assetId, preview) // Use preview URL for immediate display
-            resolve()
-          } else {
-            reject(new Error(`Upload failed with status ${xhr.status}`))
+        // Fallback completion handlers for mobile browsers
+        xhr.addEventListener('loadend', () => {
+          if (xhr.readyState === 4 && xhr.status === 200 && !completed) {
+            handleCompletion()
           }
         })
 
-        xhr.addEventListener('error', () => {
-          reject(new Error('Upload failed'))
+        xhr.addEventListener('readystatechange', () => {
+          if (xhr.readyState === 4 && xhr.status === 200 && !completed) {
+            handleCompletion()
+          }
         })
+
+        xhr.addEventListener('error', handleError)
+        xhr.addEventListener('abort', handleError)
 
         xhr.open('PUT', uploadUrl)
         xhr.setRequestHeader('Content-Type', file.type)
         xhr.send(file)
       })
+
+      // Await the upload promise to ensure finally runs after completion
+      await uploadPromise
 
     } catch (error) {
       console.error('Upload error:', error)
@@ -183,8 +228,8 @@ export function FileUploader({ onUploadComplete, disabled }: FileUploaderProps) 
                 {uploading
                   ? 'Uploading your image...'
                   : isDragActive
-                  ? 'Drop your image here'
-                  : 'Drag & drop an image, or click to browse'
+                    ? 'Drop your image here'
+                    : 'Drag & drop an image, or click to browse'
                 }
               </p>
               <p className="text-sm text-gray-500 mt-2">
@@ -217,9 +262,9 @@ export function FileUploader({ onUploadComplete, disabled }: FileUploaderProps) 
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
             {uploadError ||
-             (fileRejectionError?.code === 'file-too-large' ? 'File too large. Please choose an image under 10MB.' :
-              fileRejectionError?.code === 'file-invalid-type' ? 'Invalid file type. Please choose a JPG, PNG, or WebP image.' :
-              fileRejectionError?.message || 'Upload failed')}
+              (fileRejectionError?.code === 'file-too-large' ? 'File too large. Please choose an image under 10MB.' :
+                fileRejectionError?.code === 'file-invalid-type' ? 'Invalid file type. Please choose a JPG, PNG, or WebP image.' :
+                  fileRejectionError?.message || 'Upload failed')}
           </AlertDescription>
         </Alert>
       )}
