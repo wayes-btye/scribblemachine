@@ -7,12 +7,14 @@ import { UserProfile } from '@/components/layout/user-profile'
 import { MagicLinkForm } from '@/components/auth/magic-link-form'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { AuthenticatedLink } from '@/components/auth/authenticated-link'
-import { Sparkles } from 'lucide-react'
+import { Sparkles, LayoutGrid } from 'lucide-react'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 export function Header() {
   const { user, loading } = useAuth()
   const [authDialogOpen, setAuthDialogOpen] = useState(false)
+  const pathname = usePathname()
 
   return (
     <header className="relative z-60 py-4 px-4">
@@ -32,8 +34,24 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Auth Section */}
+        {/* Navigation & Auth Section */}
         <div className="flex items-center space-x-3 sm:space-x-6">
+          {/* Gallery Link - Only show when authenticated */}
+          {user && (
+            <Link
+              href="/gallery"
+              className={`flex items-center text-base sm:text-lg font-medium px-4 py-2 rounded-lg transition-all duration-300 ${
+                pathname === '/gallery'
+                  ? 'bg-white/20 text-foreground'
+                  : 'hover:bg-white/10 text-foreground/80 hover:text-foreground'
+              }`}
+            >
+              <LayoutGrid className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+              <span className="hidden sm:inline">Gallery</span>
+            </Link>
+          )}
+
+          {/* Auth Section */}
           {loading ? (
             <div className="h-12 w-24 sm:w-32 bg-white/20 animate-pulse rounded-lg" />
           ) : user ? (
