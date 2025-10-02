@@ -1,42 +1,10 @@
-'use client'
-
 import { Upload, Sparkles, Camera, Lightbulb, Zap, Palette, Heart } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useEffect } from 'react'
 import { AuthenticatedLink } from '@/components/auth/authenticated-link'
 import { BackgroundBlobs } from '@/components/ui/background-blobs'
 
 export default function Home() {
-  useEffect(() => {
-    // Optimized intersection observer for scroll animations
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -100px 0px'
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const target = entry.target as HTMLElement
-          // Add class instead of inline styles to avoid layout thrashing
-          target.classList.add('animate-visible')
-          // Disconnect after animation to improve performance
-          observer.unobserve(target)
-        }
-      })
-    }, observerOptions)
-
-    // Batch DOM reads/writes to avoid layout thrashing
-    requestAnimationFrame(() => {
-      const elements = document.querySelectorAll('.fade-in-up, .scale-in')
-      elements.forEach((el) => {
-        observer.observe(el)
-      })
-    })
-
-    return () => observer.disconnect()
-  }, [])
 
   return (
     <>
@@ -143,7 +111,7 @@ export default function Home() {
         </section>
 
         {/* Icon-Focused How It Works Section */}
-        <section className="py-16">
+        <section className="py-16" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 800px' }}>
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-12 fade-in-up">
               <h2 className="text-4xl lg:text-5xl font-bold mb-6">

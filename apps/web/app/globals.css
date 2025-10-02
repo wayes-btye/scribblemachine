@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Architects+Daughter:wght@400&family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
+/* Optimized font loading: Only 3 families with font-display:swap for faster rendering */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Architects+Daughter&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -40,10 +41,10 @@
     --sidebar-border: oklch(0.92 0.03 45);
     --sidebar-ring: oklch(0.68 0.20 280);
 
-    /* Typography System */
-    --font-sans: 'Inter', sans-serif;
-    --font-serif: 'Architects Daughter', cursive;
-    --font-mono: 'DM Sans', sans-serif;
+    /* Typography System - System font fallbacks for instant rendering */
+    --font-sans: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-serif: 'Architects Daughter', 'Comic Sans MS', cursive;
+    --font-accent: 'Space Grotesk', system-ui, sans-serif;
 
     /* Enhanced Design Tokens */
     --radius: 0.75rem;
@@ -62,11 +63,8 @@
     --shadow-xl: 0 8px 28px 0px oklch(0.15 0.12 260 / 0.18), 0 6px 12px -1px oklch(0.15 0.12 260 / 0.10);
     --shadow-2xl: 0 12px 40px 0px oklch(0.15 0.12 260 / 0.25);
 
-    /* Artistic Gradient System */
-    --gradient-bg: radial-gradient(ellipse 150% 100% at 25% 15%, oklch(0.99 0.06 320 / 0.4), transparent 60%),
-                   radial-gradient(ellipse 120% 80% at 80% 30%, oklch(0.98 0.08 60 / 0.35), transparent 55%),
-                   radial-gradient(ellipse 100% 120% at 45% 85%, oklch(0.99 0.05 180 / 0.3), transparent 50%),
-                   radial-gradient(ellipse 110% 90% at 90% 80%, oklch(0.97 0.09 280 / 0.25), transparent 60%),
+    /* Artistic Gradient System - Simplified for better performance */
+    --gradient-bg: radial-gradient(ellipse 120% 100% at 30% 20%, oklch(0.99 0.06 320 / 0.35), transparent 65%),
                    linear-gradient(135deg, oklch(0.99 0.02 45), oklch(0.97 0.03 60));
 
     --gradient-card: linear-gradient(135deg,
@@ -118,34 +116,43 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-mono) !important;
-    background: var(--gradient-bg) !important;
-    min-height: 100vh !important;
+    font-family: var(--font-sans);
+    background: var(--gradient-bg);
+    background-attachment: fixed;
+    min-height: 100vh;
     position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern' 1, 'liga' 1;
   }
 
-  /* Typography Classes */
+  /* Mobile-specific optimizations */
+  @media (max-width: 768px) {
+    body {
+      /* Simpler gradient on mobile to reduce GPU load */
+      background: linear-gradient(135deg, oklch(0.99 0.02 45), oklch(0.97 0.03 60));
+      background-attachment: scroll;
+    }
+  }
+
+  /* Typography Classes - Removed !important for better performance */
   .handwritten {
-    font-family: var(--font-serif) !important;
+    font-family: var(--font-serif);
   }
 
-  .modern-sans {
-    font-family: 'Space Grotesk', sans-serif !important;
-    font-weight: 600 !important;
-  }
-
+  .modern-sans,
   .refined-sans {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
-    font-weight: 700 !important;
+    font-family: var(--font-accent);
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 
   h1, h2, h3 {
-    font-family: var(--font-sans) !important;
-    font-weight: 700 !important;
-    line-height: 1.2 !important;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
   }
 }
 
@@ -361,27 +368,15 @@
     animation-play-state: running;
   }
 
-  /* Scroll animation classes - optimized with CSS */
+  /* CSS-only scroll animations - No JavaScript needed for better performance */
   .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  }
-
-  .fade-in-up.animate-visible {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   .scale-in {
+    animation: scaleIn 0.8s ease-out forwards;
     opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  }
-
-  .scale-in.animate-visible {
-    opacity: 1;
-    transform: scale(1);
   }
 
   .logo-float { animation: logoFloat 4s ease-in-out infinite; }
@@ -487,6 +482,25 @@
     .drop-shadow-xl {
       filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15)) !important;
     }
+
+    /* CRITICAL: Disable will-change on mobile to reduce GPU memory */
+    * {
+      will-change: auto !important;
+    }
+
+    /* Disable all icon animations on mobile */
+    .icon-float,
+    .icon-pulse,
+    .icon-rotate,
+    .logo-float {
+      animation: none !important;
+    }
+
+    /* Simplify scroll animations */
+    .fade-in-up,
+    .scale-in {
+      transition-duration: 0.4s !important;
+    }
   }
 
   /* Staggered Animation Delays */
@@ -495,44 +509,57 @@
   .delay-300 { animation-delay: 0.3s; }
   .delay-400 { animation-delay: 0.4s; }
 
-  /* Enhanced Button Styles */
+  /* Enhanced Button Styles - Removed !important for better performance */
   .btn-primary {
-    background: var(--gradient-hero) !important;
-    color: white !important;
-    border-radius: var(--radius-lg) !important;
-    padding: 1rem 2rem !important;
-    font-weight: 600 !important;
-    font-size: 1.125rem !important;
-    font-family: var(--font-sans) !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: var(--shadow-lg) !important;
-    border: none !important;
-    position: relative !important;
-    overflow: hidden !important;
-    white-space: nowrap !important;
+    background: var(--gradient-hero);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 1rem 2rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    font-family: var(--font-sans);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-lg);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   .btn-primary:hover {
-    transform: translateY(-2px) scale(1.02) !important;
-    box-shadow: var(--shadow-xl) !important;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-xl);
   }
 
   .btn-secondary {
-    background: var(--gradient-accent) !important;
-    color: white !important;
-    border: 2px solid transparent !important;
-    border-radius: var(--radius-lg) !important;
-    padding: 1rem 2rem !important;
-    font-weight: 600 !important;
-    font-size: 1.125rem !important;
-    font-family: var(--font-sans) !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: var(--shadow) !important;
+    background: var(--gradient-accent);
+    color: white;
+    border: 2px solid transparent;
+    border-radius: var(--radius-lg);
+    padding: 1rem 2rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    font-family: var(--font-sans);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow);
   }
 
   .btn-secondary:hover {
-    transform: translateY(-2px) scale(1.02) !important;
-    box-shadow: var(--shadow-lg) !important;
-    background: var(--gradient-hero) !important;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+    background: var(--gradient-hero);
+  }
+
+  /* Mobile button optimizations */
+  @media (max-width: 768px) {
+    .btn-primary,
+    .btn-secondary {
+      transition-duration: 0.2s;
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover {
+      transform: none;
+    }
   }
 }
