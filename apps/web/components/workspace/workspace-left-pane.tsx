@@ -39,7 +39,7 @@ export function WorkspaceLeftPane({ workspaceState }: WorkspaceLeftPaneProps) {
       <div className="max-w-2xl mx-auto">
         {/* Step 1: Upload - Single Focus */}
         {!data.uploadedImage && (
-          <div className="transition-all duration-300 ease-out">
+          <div>
             <div className="text-center mb-4">
               <h3 className="text-lg font-semibold mb-1">Upload Your Image</h3>
               <p className="text-sm text-gray-600">Choose a photo to transform into a coloring page</p>
