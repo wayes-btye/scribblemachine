@@ -37,6 +37,40 @@ This is a Children's Coloring Page Generator web application that converts image
 - **Worker**: Cloud Run (`scribblemachine-worker`) in europe-west1, polling database every 5 seconds
 - **Architecture**: Simple polling worker (not pg-boss), processes jobs sequentially
 
+## 🚀 Deployment Architecture (CRITICAL FOR AI ASSISTANTS)
+
+**DO NOT attempt manual deployments** - the system uses automated GitHub App integrations:
+
+### **Web Frontend (Vercel)**
+- **Integration**: Vercel GitHub App (automatic deployment)
+- **Trigger**: Every push to `main` branch
+- **Status**: ✅ Fully automated - no manual intervention needed
+- **URL**: https://scribblemachineweb.vercel.app
+
+### **Worker Backend (Google Cloud Run)**
+- **Integration**: Google Cloud Build GitHub App (semi-automatic)
+- **Trigger**: Every push to `main` branch
+- **Process**: 
+  1. Cloud Build automatically builds Docker image
+  2. Image stored in Google Container Registry
+  3. **Manual step required**: Update Cloud Run service to use new image
+- **Status**: ⚠️ Semi-automatic (builds automatically, deployment requires manual step)
+
+### **GitHub Actions (CI Only)**
+- **Purpose**: Code quality checks (linting, type checking, building)
+- **Status**: ✅ Working (fixed with environment variables)
+- **Note**: Does NOT handle deployments - only code quality
+
+**IMPORTANT**: When an AI assistant needs to deploy worker changes:
+1. **Push code to GitHub** (triggers automatic build)
+2. **Wait for Cloud Build to complete** (check Google Cloud Console)
+3. **Run easy deployment script**:
+   ```bash
+   pnpm deploy:worker        # Linux/Mac
+   pnpm deploy:worker:win    # Windows
+   ```
+4. **Do NOT** try to use GitHub Actions for deployment - it's not connected to Cloud Run
+
 ### 🎯 **Development Modes**
 
 #### **Mode 1: Frontend-Only Development (DEFAULT)**

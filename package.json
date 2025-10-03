@@ -13,7 +13,9 @@
     "web:dev": "pnpm --filter @coloringpage/web run dev",
     "worker:dev": "pnpm --filter @coloringpage/worker run dev",
     "web:build": "pnpm --filter @coloringpage/web run build",
-    "worker:build": "pnpm --filter @coloringpage/worker run build"
+    "worker:build": "pnpm --filter @coloringpage/worker run build",
+    "deploy:worker": "scripts/deploy-worker.sh",
+    "deploy:worker:win": "scripts/deploy-worker.bat"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

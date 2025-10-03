@@ -53,12 +53,13 @@ This document provides comprehensive documentation of the current Google Cloud R
 5. **⚠️ NO AUTO-DEPLOY**: Cloud Build trigger does NOT automatically deploy to Cloud Run
 6. **Manual Update Required**: Must manually update Cloud Run to use new image
 
-### **GitHub Integration Issue Explained**
+### **GitHub Integration Explained**
 
-**The Problem**: The GitHub integration was **partially broken**:
+**How It Actually Works**: The GitHub integration uses a **GitHub App** (not webhooks):
+- **GitHub App**: "Google Cloud Build" app installed in your repository
 - **Cloud Build Trigger**: ✅ Successfully builds images on GitHub push
-- **Deployment Step**: ❌ Missing - trigger doesn't deploy images to Cloud Run
-- **Service Configuration**: ❌ Was using wrong/old image names
+- **Deployment Step**: ❌ Missing - trigger doesn't deploy images to Cloud Run automatically
+- **Service Configuration**: ✅ Now using correct image names
 
 **Cloud Build Trigger Configuration**:
 ```yaml
@@ -76,11 +77,42 @@ steps:
 
 **What Should Happen vs What Actually Happens**:
 - **Expected**: Push to GitHub → Build → Deploy to Cloud Run
-- **Reality**: Push to GitHub → Build → Image sits unused in registry
+- **Reality**: Push to GitHub → Build → Image sits unused in registry (requires manual Cloud Run update)
+
+### **GitHub App Integration Details**
+
+**How the Integration Works**:
+1. **GitHub App**: "Google Cloud Build" app is installed in your repository (visible in Settings → GitHub Apps)
+2. **Automatic Detection**: The app monitors your repository for pushes to `main` branch
+3. **Trigger Activation**: When a push is detected, the Cloud Build trigger automatically starts
+4. **Build Process**: Docker image is built and pushed to Google Container Registry
+5. **Manual Step**: Cloud Run service must be manually updated to use the new image
+
+**Why This Approach**:
+- **Standard Practice**: Google Cloud Build uses GitHub Apps, not webhooks
+- **Secure**: No webhook URLs or secrets to manage
+- **Reliable**: Google manages the integration automatically
+- **Scalable**: Works with any repository size or complexity
 
 ### **Current Deployment Methods**
 
-**Option 1: GitHub Push + Manual Cloud Run Update**
+**Option 1: GitHub Push + Easy Cloud Run Update (RECOMMENDED)**
+1. Push code to `main` branch
+2. Wait for Cloud Build to complete (builds image automatically)
+3. Run the easy deployment script:
+   ```bash
+   # Linux/Mac
+   pnpm deploy:worker
+   
+   # Windows
+   pnpm deploy:worker:win
+   
+   # Or run directly
+   scripts/deploy-worker.sh    # Linux/Mac
+   scripts/deploy-worker.bat   # Windows
+   ```
+
+**Option 2: Manual Cloud Run Update (Advanced)**
 1. Push code to `main` branch
 2. Wait for Cloud Build to complete (builds image automatically)
 3. Manually update Cloud Run service to use new image:
