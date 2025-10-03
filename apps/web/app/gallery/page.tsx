@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react'
 import { useAuth } from '@/lib/auth/auth-provider'
 import { useRouter } from 'next/navigation'
+import { BackgroundBlobs } from '@/components/ui/background-blobs'
 
 export default function GalleryPage() {
   const { user, loading: authLoading } = useAuth()
@@ -89,18 +90,20 @@ export default function GalleryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
-      <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="min-h-screen relative">
+      {/* Background blobs for visual appeal */}
+      <BackgroundBlobs intensity="subtle" />
+
+      <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            My Gallery
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 modern-sans tracking-tight">
+            My Coloring Pages
           </h1>
           <p className="text-gray-600 text-lg">
             {galleryData
-              ? `${galleryData.pagination.total_count} coloring page${
-                  galleryData.pagination.total_count === 1 ? '' : 's'
-                }`
+              ? `${galleryData.pagination.total_count} coloring page${galleryData.pagination.total_count === 1 ? '' : 's'
+              }`
               : 'Loading your creations...'}
           </p>
         </div>

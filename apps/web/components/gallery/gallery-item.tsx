@@ -46,9 +46,8 @@ export function GalleryItem({ item, onClick, priority = false }: GalleryItemProp
             src={item.image_url}
             alt={item.title || 'Coloring page'}
             loading={priority ? 'eager' : 'lazy'} // Priority images load immediately, others lazy load
-            className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-110 ${
-              imageLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-110 ${imageLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
             onLoad={() => setImageLoaded(true)}
             onError={() => setImageError(true)}
           />
@@ -72,18 +71,18 @@ export function GalleryItem({ item, onClick, priority = false }: GalleryItemProp
 
       {/* Content */}
       <div className="p-4">
-        <h3 className="font-semibold text-lg mb-2 line-clamp-1 text-gray-900">
+        <h3 className="font-semibold text-sm sm:text-base mb-2 line-clamp-2 text-gray-900 leading-tight">
           {item.title || 'Untitled Coloring Page'}
         </h3>
 
-        <div className="flex items-center justify-between text-sm text-gray-600">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm text-gray-600">
           <div className="flex items-center">
-            <Calendar className="w-4 h-4 mr-1" />
-            {formatDate(item.created_at)}
+            <Calendar className="w-4 h-4 mr-1 flex-shrink-0" />
+            <span className="truncate">{formatDate(item.created_at)}</span>
           </div>
 
           <div className="flex gap-1">
-            <Badge variant="outline" className="text-xs capitalize">
+            <Badge variant="outline" className="text-xs capitalize flex-shrink-0">
               {item.complexity}
             </Badge>
           </div>
