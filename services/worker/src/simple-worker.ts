@@ -466,6 +466,52 @@ async function processGenerationJob(job: ExtendedJob, supabase: ReturnType<typeo
 
     console.log(`  ✅ Created edge_map asset: ${edgeAssetId}`);
 
+    // Generate thumbnail (400x400px) from the edge map
+    console.log(`  🖼️  Generating thumbnail (400x400px)...`);
+    try {
+      const thumbnailBuffer = await sharp(edgeMapBuffer)
+        .resize(400, 400, {
+          fit: 'inside',
+          withoutEnlargement: false,
+          background: { r: 255, g: 255, b: 255, alpha: 1 }
+        })
+        .png()
+        .toBuffer();
+
+      const thumbnailPath = `${job.user_id}/${job.id}/thumbnail.png`;
+
+      // Upload thumbnail to intermediates bucket
+      const { error: thumbnailUploadError } = await supabase.storage
+        .from('intermediates')
+        .upload(thumbnailPath, thumbnailBuffer, {
+          contentType: 'image/png',
+          upsert: true,
+        });
+
+      if (thumbnailUploadError) {
+        console.warn(`⚠️ Thumbnail upload failed (non-blocking): ${thumbnailUploadError.message}`);
+      } else {
+        // Create thumbnail asset record
+        const thumbnailAssetId = uuidv4();
+        const { error: thumbnailInsertError } = await (supabase as any).from('assets').insert({
+          id: thumbnailAssetId,
+          user_id: job.user_id,
+          kind: 'thumbnail',
+          storage_path: thumbnailPath,
+          bytes: thumbnailBuffer.length,
+          created_at: new Date().toISOString()
+        });
+
+        if (thumbnailInsertError) {
+          console.warn(`⚠️ Thumbnail asset record failed (non-blocking): ${thumbnailInsertError.message}`);
+        } else {
+          console.log(`  ✅ Created thumbnail asset: ${thumbnailAssetId} (${Math.round(thumbnailBuffer.length / 1024)}KB)`);
+        }
+      }
+    } catch (thumbnailError: any) {
+      console.warn(`⚠️ Thumbnail generation failed (non-blocking): ${thumbnailError.message}`);
+    }
+
     // Generate PDF from the PNG coloring page
     console.log(`  📄 Generating PDF from coloring page...`);
     try {

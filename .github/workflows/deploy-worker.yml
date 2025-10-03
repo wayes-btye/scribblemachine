@@ -5,7 +5,9 @@ on:
     branches: [main]
     paths:
       - 'services/worker/**'
-      - 'packages/**'
+      - 'packages/types/**'
+      - 'packages/config/**'
+      - 'packages/database/**'
       - '.github/workflows/deploy-worker.yml'
 
 env:

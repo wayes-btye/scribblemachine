@@ -40,6 +40,8 @@ export async function GET(request: NextRequest) {
     const limit = Math.min(parseInt(searchParams.get('limit') || '12', 10), 50) // Max 50 items per page
     const sortBy = searchParams.get('sort_by') || 'created_at'
     const sortOrder = searchParams.get('sort_order') || 'desc'
+    const searchQuery = searchParams.get('search') || ''
+    const complexityFilter = searchParams.get('complexity') || ''
 
     // Validate pagination parameters
     if (page < 1 || limit < 1) {
@@ -67,12 +69,20 @@ export async function GET(request: NextRequest) {
     // Calculate offset for pagination
     const offset = (page - 1) * limit
 
-    // Get total count of succeeded jobs for pagination
-    const { count: totalCount, error: countError } = await supabase
+    // Build query for filtering
+    let countQuery = supabase
       .from('jobs')
       .select('*', { count: 'exact', head: true })
       .eq('user_id', user.id)
       .eq('status', 'succeeded')
+
+    // Apply complexity filter if provided
+    if (complexityFilter) {
+      countQuery = countQuery.eq('params_json->>complexity', complexityFilter)
+    }
+
+    // Get total count of filtered jobs for pagination
+    const { count: totalCount, error: countError } = await countQuery
 
     if (countError) {
       console.error('Gallery count error:', countError)
@@ -82,14 +92,23 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Fetch succeeded jobs with pagination
+    // Fetch succeeded jobs with pagination and filtering
     // Note: Sorting by title requires extracting from params_json
-    const jobsQuery = supabase
+    let jobsQuery = supabase
       .from('jobs')
       .select('id, status, params_json, created_at, ended_at')
       .eq('user_id', user.id)
       .eq('status', 'succeeded')
-      .range(offset, offset + limit - 1)
+
+    // Apply complexity filter if provided
+    if (complexityFilter) {
+      jobsQuery = jobsQuery.eq('params_json->>complexity', complexityFilter)
+    }
+
+    // For text search, we need to fetch more items and filter in memory
+    // since prompts are in different fields (text_prompt vs edit_prompt)
+    const fetchLimit = searchQuery ? Math.min(limit * 3, 150) : limit
+    jobsQuery = jobsQuery.range(offset, offset + fetchLimit - 1)
 
     // Apply sorting
     if (sortBy === 'created_at') {
@@ -101,14 +120,27 @@ export async function GET(request: NextRequest) {
       jobsQuery.order('created_at', { ascending: sortOrder === 'asc' }) // Fallback to created_at for now
     }
 
-    const { data: jobs, error: jobsError } = await jobsQuery
-
+    const { data: allJobs, error: jobsError } = await jobsQuery
     if (jobsError) {
       console.error('Gallery jobs fetch error:', jobsError)
       return NextResponse.json(
         { error: 'Failed to fetch gallery items' },
         { status: 500 }
       )
+    }
+
+    // Apply text search filter in memory if provided
+    let jobs = allJobs || []
+    if (searchQuery && jobs.length > 0) {
+      const searchLower = searchQuery.toLowerCase()
+      jobs = jobs.filter(job => {
+        const params = job.params_json as any
+        const textPrompt = params.text_prompt?.toLowerCase() || ''
+        const editPrompt = params.edit_prompt?.toLowerCase() || ''
+        return textPrompt.includes(searchLower) || editPrompt.includes(searchLower)
+      })
+      // Apply pagination to filtered results
+      jobs = jobs.slice(0, limit)
     }
 
     if (!jobs || jobs.length === 0) {
@@ -139,6 +171,17 @@ export async function GET(request: NextRequest) {
       console.error('Error fetching edge maps:', edgeMapsError)
     }
 
+    // Batch fetch all thumbnail assets for these jobs
+    const { data: allThumbnails, error: thumbnailsError } = await supabase
+      .from('assets')
+      .select('id, storage_path')
+      .eq('user_id', user.id)
+      .eq('kind', 'thumbnail')
+
+    if (thumbnailsError) {
+      console.error('Error fetching thumbnails:', thumbnailsError)
+    }
+
     // Batch fetch all PDF assets for these jobs
     const { data: allPdfs, error: pdfsError } = await supabase
       .from('assets')
@@ -152,6 +195,7 @@ export async function GET(request: NextRequest) {
 
     // Create lookup maps: job_id -> asset (filter by storage_path containing job_id)
     const edgeMapByJobId = new Map<string, any>()
+    const thumbnailByJobId = new Map<string, any>()
     const pdfByJobId = new Map<string, any>()
 
     // Match edge_maps to jobs
@@ -160,6 +204,16 @@ export async function GET(request: NextRequest) {
         const matchingJob = jobIds.find(jobId => edgeMap.storage_path?.includes(`/${jobId}/`))
         if (matchingJob) {
           edgeMapByJobId.set(matchingJob, edgeMap)
+        }
+      }
+    }
+
+    // Match thumbnails to jobs
+    if (allThumbnails) {
+      for (const thumbnail of allThumbnails) {
+        const matchingJob = jobIds.find(jobId => thumbnail.storage_path?.includes(`/${jobId}/`))
+        if (matchingJob) {
+          thumbnailByJobId.set(matchingJob, thumbnail)
         }
       }
     }
@@ -178,6 +232,7 @@ export async function GET(request: NextRequest) {
     const galleryItems: (GalleryItemResponse | null)[] = await Promise.all(
       jobs.map(async (job) => {
         const edgeMapAssets = edgeMapByJobId.get(job.id)
+        const thumbnailAssets = thumbnailByJobId.get(job.id)
         const pdfAssets = pdfByJobId.get(job.id)
 
         // If no edge_map found, skip this job
@@ -186,14 +241,43 @@ export async function GET(request: NextRequest) {
           return null
         }
 
-        // Generate signed URL for edge_map (1 hour expiry)
-        const { data: signedUrlData, error: signedUrlError } = await supabase.storage
-          .from('intermediates')
-          .createSignedUrl(edgeMapAssets.storage_path, 3600)
+        // Generate signed URL for thumbnail if it exists, otherwise use edge_map
+        let imageUrl: string
+        let thumbnailUrl: string | null = null
 
-        if (signedUrlError || !signedUrlData) {
-          console.error(`Failed to generate signed URL for job ${job.id}:`, signedUrlError)
-          return null
+        if (thumbnailAssets && thumbnailAssets.storage_path) {
+          // Use thumbnail as primary image
+          const { data: thumbnailUrlData, error: thumbnailUrlError } = await supabase.storage
+            .from('intermediates')
+            .createSignedUrl(thumbnailAssets.storage_path, 3600)
+
+          if (!thumbnailUrlError && thumbnailUrlData) {
+            imageUrl = thumbnailUrlData.signedUrl
+            thumbnailUrl = thumbnailUrlData.signedUrl
+          } else {
+            // Fallback to edge_map if thumbnail signed URL fails
+            console.warn(`Failed to generate thumbnail signed URL for job ${job.id}, using edge_map`)
+            const { data: signedUrlData, error: signedUrlError } = await supabase.storage
+              .from('intermediates')
+              .createSignedUrl(edgeMapAssets.storage_path, 3600)
+
+            if (signedUrlError || !signedUrlData) {
+              console.error(`Failed to generate signed URL for job ${job.id}:`, signedUrlError)
+              return null
+            }
+            imageUrl = signedUrlData.signedUrl
+          }
+        } else {
+          // No thumbnail exists, use edge_map
+          const { data: signedUrlData, error: signedUrlError } = await supabase.storage
+            .from('intermediates')
+            .createSignedUrl(edgeMapAssets.storage_path, 3600)
+
+          if (signedUrlError || !signedUrlData) {
+            console.error(`Failed to generate signed URL for job ${job.id}:`, signedUrlError)
+            return null
+          }
+          imageUrl = signedUrlData.signedUrl
         }
 
         // Generate signed URL for PDF if it exists
@@ -237,9 +321,9 @@ export async function GET(request: NextRequest) {
         return {
           job_id: job.id,
           title,
-          image_url: signedUrlData.signedUrl,
+          image_url: imageUrl,
           pdf_url: pdfSignedUrl,
-          thumbnail_url: null, // Future enhancement
+          thumbnail_url: thumbnailUrl,
           created_at: job.created_at,
           complexity,
           line_thickness: lineThickness,
