@@ -51,24 +51,23 @@ export function GalleryDetailModal({ item, isOpen, onClose }: GalleryDetailModal
   }
 
   const handleDownloadPDF = async () => {
+    if (!item.pdf_url) {
+      console.error('No PDF URL available')
+      return
+    }
+
     try {
       setDownloading(true)
-      const response = await fetch(`/api/jobs/${item.job_id}`)
-      const data = await response.json()
-
-      const pdfAsset = data.assets?.find((a: any) => a.kind === 'pdf')
-      if (pdfAsset?.signed_url) {
-        const pdfResponse = await fetch(pdfAsset.signed_url)
-        const blob = await pdfResponse.blob()
-        const url = window.URL.createObjectURL(blob)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = `${item.title || 'coloring-page'}-${item.job_id}.pdf`
-        document.body.appendChild(a)
-        a.click()
-        window.URL.revokeObjectURL(url)
-        document.body.removeChild(a)
-      }
+      const response = await fetch(item.pdf_url)
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `${item.title || 'coloring-page'}-${item.job_id}.pdf`
+      document.body.appendChild(a)
+      a.click()
+      window.URL.revokeObjectURL(url)
+      document.body.removeChild(a)
     } catch (error) {
       console.error('PDF download failed:', error)
     } finally {

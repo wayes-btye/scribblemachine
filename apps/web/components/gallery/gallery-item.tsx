@@ -9,9 +9,10 @@ import { useState } from 'react'
 interface GalleryItemProps {
   item: GalleryItemResponse
   onClick: () => void
+  priority?: boolean // For first 3 items to load faster
 }
 
-export function GalleryItem({ item, onClick }: GalleryItemProps) {
+export function GalleryItem({ item, onClick, priority = false }: GalleryItemProps) {
   const [imageLoaded, setImageLoaded] = useState(false)
   const [imageError, setImageError] = useState(false)
 
@@ -28,8 +29,10 @@ export function GalleryItem({ item, onClick }: GalleryItemProps) {
       {/* Image Container */}
       <div className="relative aspect-square bg-gray-100 overflow-hidden">
         {!imageLoaded && !imageError && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
+          <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 bg-[length:200%_100%]">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <FileText className="w-16 h-16 text-gray-400/50" />
+            </div>
           </div>
         )}
 
@@ -42,6 +45,7 @@ export function GalleryItem({ item, onClick }: GalleryItemProps) {
           <img
             src={item.image_url}
             alt={item.title || 'Coloring page'}
+            loading={priority ? 'eager' : 'lazy'} // Priority images load immediately, others lazy load
             className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-110 ${
               imageLoaded ? 'opacity-100' : 'opacity-0'
             }`}

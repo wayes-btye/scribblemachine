@@ -124,31 +124,64 @@ export async function GET(request: NextRequest) {
       } as GalleryResponse)
     }
 
-    // For each job, fetch associated assets and generate signed URLs
+    // PERFORMANCE OPTIMIZATION: Batch fetch all assets instead of querying per job
+    // Extract job IDs for batch querying
+    const jobIds = jobs.map(job => job.id)
+
+    // Batch fetch all edge_map assets for these jobs
+    const { data: allEdgeMaps, error: edgeMapsError } = await supabase
+      .from('assets')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('kind', 'edge_map')
+
+    if (edgeMapsError) {
+      console.error('Error fetching edge maps:', edgeMapsError)
+    }
+
+    // Batch fetch all PDF assets for these jobs
+    const { data: allPdfs, error: pdfsError } = await supabase
+      .from('assets')
+      .select('id, storage_path')
+      .eq('user_id', user.id)
+      .eq('kind', 'pdf')
+
+    if (pdfsError) {
+      console.error('Error fetching PDFs:', pdfsError)
+    }
+
+    // Create lookup maps: job_id -> asset (filter by storage_path containing job_id)
+    const edgeMapByJobId = new Map<string, any>()
+    const pdfByJobId = new Map<string, any>()
+
+    // Match edge_maps to jobs
+    if (allEdgeMaps) {
+      for (const edgeMap of allEdgeMaps) {
+        const matchingJob = jobIds.find(jobId => edgeMap.storage_path?.includes(`/${jobId}/`))
+        if (matchingJob) {
+          edgeMapByJobId.set(matchingJob, edgeMap)
+        }
+      }
+    }
+
+    // Match PDFs to jobs
+    if (allPdfs) {
+      for (const pdf of allPdfs) {
+        const matchingJob = jobIds.find(jobId => pdf.storage_path?.includes(`/${jobId}/`))
+        if (matchingJob) {
+          pdfByJobId.set(matchingJob, pdf)
+        }
+      }
+    }
+
+    // Build gallery items using the lookup maps
     const galleryItems: (GalleryItemResponse | null)[] = await Promise.all(
       jobs.map(async (job) => {
-        // Get edge_map asset for this job
-        const { data: edgeMapAssets, error: edgeMapError } = await supabase
-          .from('assets')
-          .select('*')
-          .eq('user_id', user.id)
-          .eq('kind', 'edge_map')
-          .like('storage_path', `%/${job.id}/%`)
-          .limit(1)
-          .single()
-
-        // Check if PDF exists
-        const { data: pdfAssets } = await supabase
-          .from('assets')
-          .select('id')
-          .eq('user_id', user.id)
-          .eq('kind', 'pdf')
-          .like('storage_path', `%/${job.id}/%`)
-          .limit(1)
-          .maybeSingle()
+        const edgeMapAssets = edgeMapByJobId.get(job.id)
+        const pdfAssets = pdfByJobId.get(job.id)
 
         // If no edge_map found, skip this job
-        if (edgeMapError || !edgeMapAssets) {
+        if (!edgeMapAssets) {
           console.warn(`No edge_map found for job ${job.id}`)
           return null
         }
@@ -163,9 +196,41 @@ export async function GET(request: NextRequest) {
           return null
         }
 
+        // Generate signed URL for PDF if it exists
+        let pdfSignedUrl: string | null = null
+        if (pdfAssets && pdfAssets.storage_path) {
+          const { data: pdfUrlData, error: pdfUrlError } = await supabase.storage
+            .from('artifacts')
+            .createSignedUrl(pdfAssets.storage_path, 3600)
+
+          if (!pdfUrlError && pdfUrlData) {
+            pdfSignedUrl = pdfUrlData.signedUrl
+          } else {
+            console.warn(`Failed to generate PDF signed URL for job ${job.id}:`, pdfUrlError)
+          }
+        }
+
         // Extract parameters from params_json
         const params = job.params_json as any
-        const title = params.title || null
+
+        // Generate smart title from prompts
+        let title: string | null = null
+        if (params.text_prompt) {
+          // Text-to-image job: use text_prompt
+          const prompt = params.text_prompt.trim()
+          title = prompt.length > 50 ? `${prompt.substring(0, 50)}...` : prompt
+        } else if (params.edit_prompt) {
+          // Edit job: use edit_prompt
+          const prompt = params.edit_prompt.trim()
+          title = prompt.length > 50 ? `${prompt.substring(0, 50)}...` : prompt
+        } else if (params.asset_id) {
+          // Upload job: generate date-based title
+          const date = new Date(job.created_at)
+          const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+          title = `Photo Upload - ${formattedDate}`
+        }
+        // If still no title, leave as null (will show "Untitled Coloring Page" in UI)
+
         const complexity = params.complexity || 'standard'
         const lineThickness = params.line_thickness || 'medium'
 
@@ -173,6 +238,7 @@ export async function GET(request: NextRequest) {
           job_id: job.id,
           title,
           image_url: signedUrlData.signedUrl,
+          pdf_url: pdfSignedUrl,
           thumbnail_url: null, // Future enhancement
           created_at: job.created_at,
           complexity,

@@ -58,12 +58,13 @@ export function GalleryGrid({ items }: GalleryGridProps) {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {items.map((item) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {items.map((item, index) => (
           <GalleryItem
             key={item.job_id}
             item={item}
             onClick={() => setSelectedItem(item)}
+            priority={index < 3} // First 3 images load with priority
           />
         ))}
       </div>

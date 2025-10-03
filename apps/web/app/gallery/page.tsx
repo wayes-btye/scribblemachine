@@ -15,7 +15,7 @@ export default function GalleryPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
-  const limit = 12
+  const limit = 9 // Reduced from 12 for better performance (3×3 grid)
 
   // Redirect if not authenticated
   useEffect(() => {
@@ -33,24 +33,39 @@ export default function GalleryPage() {
         setLoading(true)
         setError(null)
 
+        // Create abort controller for timeout
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), 15000) // 15 second timeout
+
         const response = await fetch(
           `/api/gallery?page=${currentPage}&limit=${limit}&sort_by=created_at&sort_order=desc`,
           {
             credentials: 'include',
+            signal: controller.signal,
           }
         )
+
+        clearTimeout(timeoutId)
 
         if (!response.ok) {
           if (response.status === 401) {
             throw new Error('Please sign in to view your gallery')
           }
-          throw new Error('Failed to load gallery')
+          throw new Error('Failed to load gallery. Please try again.')
         }
 
         const data: GalleryResponse = await response.json()
         setGalleryData(data)
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred')
+        if (err instanceof Error) {
+          if (err.name === 'AbortError') {
+            setError('Request timed out. Please check your connection and try again.')
+          } else {
+            setError(err.message)
+          }
+        } else {
+          setError('An unexpected error occurred. Please try again.')
+        }
       } finally {
         setLoading(false)
       }

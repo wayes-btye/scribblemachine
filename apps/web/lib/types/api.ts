@@ -158,6 +158,7 @@ export interface GalleryItemResponse {
   job_id: string
   title: string | null
   image_url: string
+  pdf_url: string | null
   thumbnail_url?: string | null
   created_at: string
   complexity: 'simple' | 'standard' | 'detailed'
