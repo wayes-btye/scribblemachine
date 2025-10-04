@@ -50,6 +50,11 @@ class WorkerLogger {
       this.lastJobState = currentState;
     }
 
+    // For active state: log what we found
+    if (currentState === 'active') {
+      console.log(`[${timestamp}] 📋 Found ${jobs.length} pending job(s) - processing now`);
+    }
+
     // For idle state: periodic summary logs
     if (currentState === 'idle') {
       this.consecutiveIdleCount++;
@@ -229,7 +234,6 @@ async function main() {
     setInterval(async () => {
       try {
         // Get pending jobs
-        console.log('🔍 Fetching pending jobs...');
         const { data: jobs, error } = await supabase
           .from('jobs')
           .select('*')
@@ -242,8 +246,6 @@ async function main() {
           console.error('Error details:', JSON.stringify(error, null, 2));
           return;
         }
-
-        console.log(`📋 Found ${jobs?.length || 0} pending jobs`);
 
         if (!jobs || jobs.length === 0) {
           // Get recent jobs for logging context

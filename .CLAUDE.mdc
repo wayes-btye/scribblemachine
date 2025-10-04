@@ -1,3 +1,7 @@
+---
+alwaysApply: true
+---
+
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -37,6 +41,40 @@ This is a Children's Coloring Page Generator web application that converts image
 - **Worker**: Cloud Run (`scribblemachine-worker`) in europe-west1, polling database every 5 seconds
 - **Architecture**: Simple polling worker (not pg-boss), processes jobs sequentially
 
+## 🚀 Deployment Architecture (CRITICAL FOR AI ASSISTANTS)
+
+**DO NOT attempt manual deployments** - the system uses automated GitHub App integrations:
+
+### **Web Frontend (Vercel)**
+- **Integration**: Vercel GitHub App (automatic deployment)
+- **Trigger**: Every push to `main` branch
+- **Status**: ✅ Fully automated - no manual intervention needed
+- **URL**: https://scribblemachineweb.vercel.app
+
+### **Worker Backend (Google Cloud Run)**
+- **Integration**: Google Cloud Build GitHub App (semi-automatic)
+- **Trigger**: Every push to `main` branch
+- **Process**: 
+  1. Cloud Build automatically builds Docker image
+  2. Image stored in Google Container Registry
+  3. **Manual step required**: Update Cloud Run service to use new image
+- **Status**: ⚠️ Semi-automatic (builds automatically, deployment requires manual step)
+
+### **GitHub Actions (CI Only)**
+- **Purpose**: Code quality checks (linting, type checking, building)
+- **Status**: ✅ Working (fixed with environment variables)
+- **Note**: Does NOT handle deployments - only code quality
+
+**IMPORTANT**: When an AI assistant needs to deploy worker changes:
+1. **Push code to GitHub** (triggers automatic build)
+2. **Wait for Cloud Build to complete** (check Google Cloud Console)
+3. **Run easy deployment script**:
+   ```bash
+   pnpm deploy:worker        # Linux/Mac
+   pnpm deploy:worker:win    # Windows
+   ```
+4. **Do NOT** try to use GitHub Actions for deployment - it's not connected to Cloud Run
+
 ### 🎯 **Development Modes**
 
 #### **Mode 1: Frontend-Only Development (DEFAULT)**
@@ -72,15 +110,31 @@ pnpm dev  # Starts both frontend (3000) and worker (local)
 **NEVER USE `taskkill /F /IM node.exe`** - This will kill Claude Code itself!
 
 **Safe process management:**
+- Use the organized kill scripts in `scripts/dev-server-killer/` (recommended)
 - Use Ctrl+C to stop individual services
 - Use `pnpm dev` to restart cleanly
 - Use KillShell tool with shell ID for background processes
+
+### 🛠️ Quick Development Server Killer Scripts
+
+**Recommended approach - Use organized scripts:**
+
+```bash
+# Kill both development servers (ports 3000 and 3001)
+scripts/dev-server-killer/kill-dev-servers.bat
+
+# Kill individual servers
+scripts/dev-server-killer/kill-3000-fixed.bat    # Frontend only
+scripts/dev-server-killer/kill-3001-fixed.bat    # Worker only
+```
+
+**All kill scripts are organized in `scripts/dev-server-killer/` with detailed documentation.**
 
 ## 🔴 CRITICAL: Port 3000 Dependency & Process Management
 
 **Web app MUST run on port 3000** - Supabase auth hardcoded to this port.
 
-**To kill process using port 3000 (WORKING COMMANDS):**
+**To kill process using port 3000 (MANUAL METHOD):**
 
 ```bash
 # 1. Find process using port 3000
@@ -106,6 +160,8 @@ netstat -ano | findstr ":3000"        # Find PID (e.g., 31460)
 powershell "Stop-Process -Id 31460 -Force"    # Kill process
 pnpm dev                               # Start services
 ```
+
+💡 **Pro tip**: Use the organized scripts instead - they handle all these steps automatically!
 
 Port migration = authentication broken. Always verify `http://localhost:3000` responds.
 
