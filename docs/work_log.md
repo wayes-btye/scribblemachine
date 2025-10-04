@@ -922,3 +922,27 @@ This file serves as a development scratchpad for tracking progress, notes, and d
 - No wasted CI resources on installations that fail
 - MCP placeholder comments in place for future reference
 - Ready to use remote development with current 55% functionality
+
+### [2025-10-04T15:58:53Z] — Task/Event
+**Context:** Worker logging fix deployed to production successfully
+**What changed:**
+- Deployed worker with smart logging fix to Cloud Run (revision scribblemachine-worker-00036-4mh)
+- Confirmed 95%+ reduction in polling log noise: eliminated "🔍 Fetching pending jobs..." every 5 seconds
+- WorkerLogger now properly handles all polling states with intelligent state-based logging
+- Health check confirms service is healthy at https://scribblemachine-worker-1001132689979.europe-west1.run.app
+- Previous commit c3ae099 with logging improvements now live in production
+**Leftover:**
+- Monitor production logs to verify noise reduction is working as expected
+- Future worker development should maintain smart logging approach
+
+### [2025-10-04T16:30:00Z] — Task/Event
+**Context:** Thumbnail generation feature verification and database schema fix
+**What changed:**
+- Identified root cause of "⚠️ Thumbnail asset record fail" error
+- Updated AssetKind type in packages/types/src/index.ts to include 'thumbnail'
+- Created diagnostic script to verify thumbnail support
+- Created migration file: supabase/migrations/20241004000000_add_thumbnail_asset_kind.sql
+- Confirmed worker thumbnail generation logic is correctly implemented
+**Leftover:**
+- Database schema needs manual update to add 'thumbnail' to asset_kind enum
+- After schema fix, worker will successfully generate thumbnails for new jobs

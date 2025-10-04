@@ -2,7 +2,7 @@ export type PaperSize = 'A4' | 'Letter';
 
 export type JobStatus = 'queued' | 'running' | 'succeeded' | 'failed';
 
-export type AssetKind = 'original' | 'preprocessed' | 'edge_map' | 'pdf';
+export type AssetKind = 'original' | 'preprocessed' | 'edge_map' | 'pdf' | 'thumbnail';
 
 export type Complexity = 'simple' | 'standard' | 'detailed';
 
