@@ -140,6 +140,50 @@ Enable a remote development workflow where you can:
 
 **Status**: Should work once MCP servers load
 
+### Fix #4: **Inline MCP Configuration** 🆕
+**Commit**: [Pending] - "fix: use inline MCP config instead of external file"
+
+**Problem Discovered**:
+- External `.mcp-github.json` file was being overridden by action's built-in config
+- Action passes `--mcp-config` twice, first inline config wins
+- Only built-in `github_comment` MCP was loading
+
+**Solution Found**:
+Research revealed `mcp_config` input parameter (merged in PR #96):
+```yaml
+with:
+  mcp_config: |
+    {
+      "mcpServers": {
+        "context7": { ... },
+        "playwright": { ... },
+        "shadcn": { ... }
+      }
+    }
+```
+
+**Changes Made**:
+1. **Removed** external MCP config reference: `--mcp-config ./.mcp-github.json`
+2. **Added** inline `mcp_config` parameter to both workflows:
+   - `claude.yml` - Main workflow
+   - `claude-code-review.yml` - PR review workflow
+3. **Configured** 3 pre-installed servers inline:
+   - Context7 (documentation lookup)
+   - Playwright (UI testing)
+   - Shadcn (component management)
+
+**Expected Result**:
+- ✅ MCP servers should load (bypasses override issue)
+- ✅ Uses pre-installed packages (fast startup)
+- ✅ Inline config has higher priority than action's defaults
+
+**Status**: ⏳ Ready for testing (Test #3)
+
+**Reference**:
+- [Issue #95](https://github.com/anthropics/claude-code-action/issues/95) - `mcp_config` parameter request
+- [PR #96](https://github.com/anthropics/claude-code-action/pull/96) - Implementation merged
+- Research: Web search found proven examples of inline MCP configuration
+
 ---
 
 ## 🧪 Testing Status

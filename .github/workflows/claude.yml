@@ -58,10 +58,33 @@ jobs:
           # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
           # prompt: 'Update the pull request description to include a summary of changes.'
 
-          # MCP configuration and auto-approve for CI
-          claude_args: >
-            --mcp-config ./.mcp-github.json
-            --permission-mode bypassPermissions
+          # Inline MCP configuration - pre-installed servers
+          mcp_config: |
+            {
+              "mcpServers": {
+                "context7": {
+                  "type": "stdio",
+                  "command": "npx",
+                  "args": ["@upstash/context7-mcp"],
+                  "env": {}
+                },
+                "playwright": {
+                  "type": "stdio",
+                  "command": "npx",
+                  "args": ["@playwright/mcp"],
+                  "env": {}
+                },
+                "shadcn": {
+                  "type": "stdio",
+                  "command": "npx",
+                  "args": ["shadcn", "mcp"],
+                  "env": {}
+                }
+              }
+            }
+
+          # Auto-approve for CI
+          claude_args: --permission-mode bypassPermissions
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
 
