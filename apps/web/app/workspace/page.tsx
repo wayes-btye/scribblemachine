@@ -11,6 +11,7 @@ import { useAuth } from '@/lib/auth/auth-provider'
 import { useRouter } from 'next/navigation'
 import { useEffect, Suspense, useCallback } from 'react'
 import { BackgroundBlobs } from '@/components/ui/background-blobs'
+import { DebugEnv } from '@/components/debug-env'
 import type { WorkspaceMode } from '@/hooks/use-workspace-state'
 
 export default function WorkspacePage() {
@@ -120,6 +121,9 @@ export default function WorkspacePage() {
           </div>
         </div>
       </div>
+      
+      {/* Debug Environment Info */}
+      <DebugEnv />
     </div>
   )
 }
