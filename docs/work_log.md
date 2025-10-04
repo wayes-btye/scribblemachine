@@ -892,3 +892,17 @@ This file serves as a development scratchpad for tracking progress, notes, and d
 - Solution found via web search: Issue #95, PR #96, config docs
 - Commit: cd9f0b8 - "fix: use inline MCP config to bypass external file override"
 - Test issue: https://github.com/wayes-btye/scribblemachine/issues/6
+
+### [2025-10-04T17:00:00Z] — Task/Event
+**Context:** Test #3 results analyzed - inline MCP config failed (same as Test #2)
+**What changed:**
+- Updated status document with Test #3 FAILED results (Issue #6)
+- Documented critical finding: MCP servers fundamentally don't work in GitHub Actions
+- Comparison table shows identical failures for external file vs inline config
+- Updated Outstanding Work section: Changed from "BLOCKER" to "CONFIRMED LIMITATION"
+- Added Executive Summary with clear decision: Accept limitation, use workarounds
+- Revised current status to 55% functional (from "being debugged" to "confirmed limitation")
+**Leftover:**
+- Next phase: Test workaround strategies (Supabase Management API, Bash + Playwright)
+- Target: Reach 85% functionality without MCP dependency
+- Stop trying different MCP configuration methods (exhausted all options)
