@@ -224,6 +224,25 @@ The claude-code-action passes its own inline MCP config that **overrides** `.mcp
 
 **Impact**: External MCP configs (`.mcp-github.json`) are ignored by the Action
 
+### Test #3: Inline MCP Configuration Verification
+- **Issue**: #6 - "Test #3: Verify Inline MCP Configuration"
+- **Created**: 2025-10-04 (after Fix #4)
+- **Status**: ⏳ **In Progress**
+- **Purpose**: Verify `mcp_config` input parameter successfully loads MCP servers
+- **Testing**:
+  - ✅ MCP server status check (context7, playwright, shadcn)
+  - ✅ Context7 MCP functionality (documentation lookup)
+  - ✅ Shadcn MCP functionality (component listing)
+  - ✅ Auto-approve functionality (no manual intervention)
+- **Expected Result**: MCP servers should connect (inline config has priority over external file)
+- **Report**: Will be created at `docs/2)_IN_WORK/inline-mcp-config-test-report.md`
+
+**Key Difference from Test #2**:
+- **Test #2**: Used external `.mcp-github.json` file → FAILED (overridden by action)
+- **Test #3**: Uses inline `mcp_config` parameter → Expected to SUCCEED
+
+**Monitoring**: Watch GitHub Actions workflow at https://github.com/wayes-btye/scribblemachine/actions
+
 ---
 
 ## 📋 Outstanding Work

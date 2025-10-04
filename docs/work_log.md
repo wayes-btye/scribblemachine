@@ -869,3 +869,26 @@ This file serves as a development scratchpad for tracking progress, notes, and d
 - Test file kept (valuable for future testing and CI/CD)
 - Authenticated testing still deferred (requires login flow)
 - Backend Phase 1 fully complete and tested
+### [2025-10-04T16:30:00Z] — Session Summary
+**Focus:** Inline MCP Configuration Implementation (Fix #4 - GitHub Actions)
+**Done:**
+- Implemented inline MCP configuration using `mcp_config` input parameter
+- Updated both GitHub Actions workflows (claude.yml, claude-code-review.yml)
+- Removed external `.mcp-github.json` file reference from claude_args
+- Configured 3 pre-installed MCP servers inline (context7, playwright, shadcn)
+- Created comprehensive Test #3 (Issue #6) to verify inline config works
+- Documented Fix #4 in status document with research references
+**Next:**
+- Monitor Issue #6 GitHub Actions workflow for test results
+- Update status based on Test #3 outcome (success/failure)
+- If successful: Document MCP server usage patterns
+- If failed: Investigate alternative approaches (workarounds documented)
+**Decisions:**
+- Used `mcp_config` input parameter (PR #96) instead of external file reference
+- Prioritized 3 working servers (excluded Supabase due to native deps)
+- Inline config should bypass the override issue found in Test #2
+**Notes:**
+- Root cause: Action's inline --mcp-config overrode external .mcp-github.json
+- Solution found via web search: Issue #95, PR #96, config docs
+- Commit: cd9f0b8 - "fix: use inline MCP config to bypass external file override"
+- Test issue: https://github.com/wayes-btye/scribblemachine/issues/6
