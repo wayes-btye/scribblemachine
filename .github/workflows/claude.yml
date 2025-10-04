@@ -36,15 +36,6 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install MCP servers
-        run: |
-          npm install -g @upstash/context7-mcp@latest
-          npm install -g @playwright/mcp@0.0.39
-          npm install -g shadcn@latest
-
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
-
       - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@v1
@@ -58,30 +49,21 @@ jobs:
           # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
           # prompt: 'Update the pull request description to include a summary of changes.'
 
-          # Inline MCP configuration - pre-installed servers
-          mcp_config: |
-            {
-              "mcpServers": {
-                "context7": {
-                  "type": "stdio",
-                  "command": "npx",
-                  "args": ["@upstash/context7-mcp"],
-                  "env": {}
-                },
-                "playwright": {
-                  "type": "stdio",
-                  "command": "npx",
-                  "args": ["@playwright/mcp"],
-                  "env": {}
-                },
-                "shadcn": {
-                  "type": "stdio",
-                  "command": "npx",
-                  "args": ["shadcn", "mcp"],
-                  "env": {}
-                }
-              }
-            }
+          # MCP Servers: NOT SUPPORTED in GitHub Actions
+          # ================================================
+          # Tested external file config (Test #2) and inline config (Test #3) - both failed.
+          # MCP servers do not initialize in GitHub Actions environment.
+          # Only built-in github_comment MCP works.
+          #
+          # Workarounds available for MCP functionality:
+          # - Documentation lookup: WebSearch + WebFetch (working)
+          # - Database ops: Bash + Supabase Management API (untested)
+          # - UI testing: Bash + Playwright CLI (untested)
+          #
+          # See: docs/CLAUDE_GITHUB_REMOTE_DEVELOPMENT_STATUS.md
+          # Tests: Issue #5 (external config), Issue #6 (inline config)
+          #
+          # Future: May revisit if GitHub Actions environment changes
 
           # Auto-approve for CI
           claude_args: --permission-mode bypassPermissions
