@@ -70,6 +70,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Development bypass for testing (only in dev mode)
   const devBypassAuth = async () => {
+    // Debug logging for environment variables
+    console.log('🔍 Dev Bypass Environment Check:', {
+      NODE_ENV: process.env.NODE_ENV,
+      NEXT_PUBLIC_ENABLE_DEV_BYPASS: process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS,
+      shouldShowBypass: (process.env.NODE_ENV === 'development' || 
+                        process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS === 'true'),
+      timestamp: new Date().toISOString()
+    })
+
     if (process.env.NODE_ENV !== 'development' &&
       process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS !== 'true') return
 
@@ -99,8 +108,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     loading,
     signOut,
     signInWithEmail,
-    devBypassAuth: (process.env.NODE_ENV === 'development' ||
-      process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS === 'true') ? devBypassAuth : undefined,
+    devBypassAuth: (() => {
+      const shouldEnable = (process.env.NODE_ENV === 'development' ||
+        process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS === 'true')
+      
+      console.log('🔍 Dev Bypass Context Check:', {
+        NODE_ENV: process.env.NODE_ENV,
+        NEXT_PUBLIC_ENABLE_DEV_BYPASS: process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS,
+        shouldEnable,
+        timestamp: new Date().toISOString()
+      })
+      
+      return shouldEnable ? devBypassAuth : undefined
+    })(),
   }
 
   return (
