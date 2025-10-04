@@ -155,7 +155,7 @@ export function MagicLinkForm({ onSuccess }: MagicLinkFormProps) {
         </div>
 
         {/* Development bypass button - only shown in development mode */}
-        {(process.env.NODE_ENV === 'development' || 
+        {(process.env.NODE_ENV === 'development' ||
           process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS === 'true') && devBypassAuth && (
             <div className="mt-4 border-t pt-4">
               <Button
