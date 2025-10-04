@@ -30,6 +30,18 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install MCP servers
+        run: |
+          npm install -g @upstash/context7-mcp@latest
+          npm install -g @playwright/mcp@0.0.39
+          npm install -g shadcn@latest
+
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 

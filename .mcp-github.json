@@ -3,42 +3,29 @@
     "context7": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp@latest"],
-      "env": {}
+      "args": ["@upstash/context7-mcp"],
+      "env": {},
+      "_comment": "Pre-installed globally for faster startup"
     },
     "playwright": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@playwright/mcp@0.0.39"],
-      "env": {}
+      "args": ["@playwright/mcp"],
+      "env": {},
+      "_comment": "Pre-installed globally for faster startup"
     },
     "shadcn": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "shadcn@latest", "mcp"],
-      "env": {}
-    },
-    "supabase": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@supabase/mcp-server-supabase@latest"],
-      "env": {
-        "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
-      }
-    },
-    "vercel": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@vercel/mcp@latest"],
-      "env": {}
-    },
-    "cloud-run": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@google-cloud/cloud-run-mcp"],
-      "env": {
-        "GOOGLE_CLOUD_PROJECT": "scribblemachine"
-      }
+      "args": ["shadcn", "mcp"],
+      "env": {},
+      "_comment": "Pre-installed globally for faster startup"
     }
+  },
+  "_disabled_servers": {
+    "_note": "Supabase, Vercel, and Cloud Run MCPs temporarily disabled",
+    "_reason": "Native dependency build issues in GitHub Actions CI",
+    "_supabase_issue": "libpg-query native addon fails to build",
+    "_todo": "Re-enable after resolving build issues or use alternative methods"
   }
 }
