@@ -23,7 +23,7 @@
       "command": "npx",
       "args": ["-y", "@supabase/mcp-server-supabase@latest"],
       "env": {
-        "SUPABASE_ACCESS_TOKEN": "sbp_b4a5743522d2092e75dd6adea5d5b01c101d6765"
+        "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
       }
     },
     "vercel": {

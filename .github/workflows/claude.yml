@@ -50,4 +50,6 @@ jobs:
           claude_args: >
             --mcp-config ./.mcp-github.json
             --permission-mode bypassPermissions
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
 
