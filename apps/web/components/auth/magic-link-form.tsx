@@ -155,7 +155,8 @@ export function MagicLinkForm({ onSuccess }: MagicLinkFormProps) {
         </div>
 
         {/* Development bypass button - only shown in development mode */}
-        {(process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview') && devBypassAuth && (
+        {(process.env.NODE_ENV === 'development' || 
+          (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app'))) && devBypassAuth && (
           <div className="mt-4 border-t pt-4">
             <Button
               type="button"
