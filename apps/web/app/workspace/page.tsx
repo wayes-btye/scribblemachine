@@ -85,14 +85,14 @@ export default function WorkspacePage() {
               </div>
 
               {/* Subtitle - contextual based on mode */}
-              {workspaceState.mode && (
-                <p className="text-gray-600 text-sm sm:text-base mb-6">
-                  {workspaceState.mode === 'upload'
+              <p className="text-gray-600 text-sm sm:text-base mb-6">
+                {workspaceState.mode
+                  ? workspaceState.mode === 'upload'
                     ? 'Upload an image and watch the magic happen!'
                     : 'Describe your idea and watch the magic happen!'
-                  }
-                </p>
-              )}
+                  : 'Select a mode above to get started'
+                }
+              </p>
 
               {/* Timeline - More subtle, only when mode selected */}
               {workspaceState.mode && (

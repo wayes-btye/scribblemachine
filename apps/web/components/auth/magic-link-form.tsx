@@ -155,36 +155,37 @@ export function MagicLinkForm({ onSuccess }: MagicLinkFormProps) {
         </div>
 
         {/* Development bypass button - only shown in development mode */}
-        {process.env.NODE_ENV === 'development' && devBypassAuth && (
-          <div className="mt-4 border-t pt-4">
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full text-xs"
-              onClick={async () => {
-                try {
-                  await devBypassAuth()
-                  toast({
-                    title: 'Development bypass activated',
-                    description: 'Signed in as test user for development.',
-                  })
-                  onSuccess?.()
-                } catch (error) {
-                  toast({
-                    title: 'Authentication failed',
-                    description: 'Could not sign in test user. Check console for details.',
-                    variant: 'destructive',
-                  })
-                }
-              }}
-            >
-              🧪 Dev Bypass (wayes.appsmate@gmail.com)
-            </Button>
-            <p className="text-xs text-muted-foreground mt-2 text-center">
-              Development only - bypasses magic link authentication
-            </p>
-          </div>
-        )}
+        {(process.env.NODE_ENV === 'development' ||
+          process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS === 'true') && devBypassAuth && (
+            <div className="mt-4 border-t pt-4">
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full text-xs"
+                onClick={async () => {
+                  try {
+                    await devBypassAuth()
+                    toast({
+                      title: 'Development bypass activated',
+                      description: 'Signed in as test user for development.',
+                    })
+                    onSuccess?.()
+                  } catch (error) {
+                    toast({
+                      title: 'Authentication failed',
+                      description: 'Could not sign in test user. Check console for details.',
+                      variant: 'destructive',
+                    })
+                  }
+                }}
+              >
+                🧪 Dev Bypass (wayes.appsmate@gmail.com)
+              </Button>
+              <p className="text-xs text-muted-foreground mt-2 text-center">
+                Development/Preview only - bypasses magic link authentication
+              </p>
+            </div>
+          )}
       </CardContent>
     </Card>
   )
