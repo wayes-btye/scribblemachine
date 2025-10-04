@@ -155,7 +155,7 @@ export function MagicLinkForm({ onSuccess }: MagicLinkFormProps) {
         </div>
 
         {/* Development bypass button - only shown in development mode */}
-        {process.env.NODE_ENV === 'development' && devBypassAuth && (
+        {(process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview') && devBypassAuth && (
           <div className="mt-4 border-t pt-4">
             <Button
               type="button"
@@ -181,7 +181,7 @@ export function MagicLinkForm({ onSuccess }: MagicLinkFormProps) {
               🧪 Dev Bypass (wayes.appsmate@gmail.com)
             </Button>
             <p className="text-xs text-muted-foreground mt-2 text-center">
-              Development only - bypasses magic link authentication
+              Development/Preview only - bypasses magic link authentication
             </p>
           </div>
         )}

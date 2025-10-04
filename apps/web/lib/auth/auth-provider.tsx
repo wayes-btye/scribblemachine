@@ -70,7 +70,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Development bypass for testing (only in dev mode)
   const devBypassAuth = async () => {
-    if (process.env.NODE_ENV !== 'development') return
+    if (process.env.NODE_ENV !== 'development' && process.env.VERCEL_ENV !== 'preview') return
 
     try {
       // Use real authentication with actual credentials
@@ -98,7 +98,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     loading,
     signOut,
     signInWithEmail,
-    devBypassAuth: process.env.NODE_ENV === 'development' ? devBypassAuth : undefined,
+    devBypassAuth: (process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview') ? devBypassAuth : undefined,
   }
 
   return (
