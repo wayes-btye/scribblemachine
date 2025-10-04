@@ -71,8 +71,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Development bypass for testing (only in dev mode)
   const devBypassAuth = async () => {
     if (process.env.NODE_ENV !== 'development' && 
-        typeof window !== 'undefined' && 
-        !window.location.hostname.includes('vercel.app')) return
+        process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS !== 'true') return
 
     try {
       // Use real authentication with actual credentials
@@ -101,7 +100,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signOut,
     signInWithEmail,
     devBypassAuth: (process.env.NODE_ENV === 'development' || 
-                   (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app'))) ? devBypassAuth : undefined,
+                   process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS === 'true') ? devBypassAuth : undefined,
   }
 
   return (
