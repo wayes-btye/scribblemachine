@@ -906,3 +906,19 @@ This file serves as a development scratchpad for tracking progress, notes, and d
 - Next phase: Test workaround strategies (Supabase Management API, Bash + Playwright)
 - Target: Reach 85% functionality without MCP dependency
 - Stop trying different MCP configuration methods (exhausted all options)
+
+### [2025-10-04T17:15:00Z] — Task/Event
+**Context:** MCP cleanup - remove non-functional config per user request
+**What changed:**
+- Removed all MCP server installation steps from both workflows
+- Removed inline mcp_config parameter (doesn't work in GitHub Actions)
+- Removed Playwright browser installation (not needed without MCP)
+- Added clear placeholder comments explaining MCP limitation
+- Referenced status document (docs/CLAUDE_GITHUB_REMOTE_DEVELOPMENT_STATUS.md)
+- Noted workarounds (WebSearch, Bash + APIs) and future revisit option
+- Commit: ebdbed8 - "chore: remove non-functional MCP config, add placeholder comments"
+**Leftover:**
+- Workflows now clean and focused on what actually works
+- No wasted CI resources on installations that fail
+- MCP placeholder comments in place for future reference
+- Ready to use remote development with current 55% functionality
