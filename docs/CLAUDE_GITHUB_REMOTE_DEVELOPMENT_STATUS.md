@@ -160,14 +160,25 @@ Enable a remote development workflow where you can:
 ### Test #2: MCP Server Connectivity Test
 - **Issue**: #5 - "Test Working MCP Servers (Context7, Playwright, Shadcn)"
 - **Created**: 2025-10-04 11:38 UTC
-- **Status**: 🔄 **In Progress** (waiting for results)
-- **Purpose**: Verify pre-installation fix works
-- **Expected Tests**:
-  - Context7: Look up Next.js docs
-  - Playwright: Screenshot Vercel app
-  - Shadcn: Search button components
+- **Completed**: 2025-10-04 11:43 UTC (5m21s)
+- **Result**: ❌ **Failed** - MCP servers still not loading
+- **Branch**: `claude/issue-5-20251004-1141`
+- **Report**: `docs/2)_IN_WORK/mcp-servers-test-report.md`
 
-**Next Steps**: Await results to determine if fix successful
+**Key Findings**:
+- ✅ NPM packages installed successfully (context7, playwright, shadcn)
+- ❌ MCP servers failed to connect despite installation
+- ❌ All 3 servers status: "failed"
+- ✅ Only `github_comment` (built-in) connected
+
+**Root Cause Discovered**:
+The claude-code-action passes its own inline MCP config that **overrides** `.mcp-github.json`:
+```bash
+--mcp-config '{ "mcpServers": { "github_comment": {...} } }' \
+--mcp-config ./.mcp-github.json  # <-- This gets overridden!
+```
+
+**Impact**: External MCP configs (`.mcp-github.json`) are ignored by the Action
 
 ---
 
@@ -175,30 +186,46 @@ Enable a remote development workflow where you can:
 
 ### High Priority (Blocking Remote Development)
 
-#### 1. **Verify MCP Server Fix** 🔴
-- **Task**: Wait for Issue #5 results
-- **If Successful**: 3 working MCP servers (Context7, Playwright, Shadcn)
-- **If Failed**: Investigate alternative MCP loading strategies
-- **Timeline**: Immediate (test running now)
-
-#### 2. **Resolve Supabase MCP Issue** 🔴
-- **Problem**: Native dependency `libpg-query` won't build
+#### 1. **MCP Servers in GitHub Actions** 🔴 **BLOCKER**
+- **Status**: ❌ Failed (Test #2 completed)
+- **Problem**: claude-code-action's inline MCP config overrides external `.mcp-github.json`
+- **Root Cause**: Action passes `--mcp-config` twice, first one wins
+- **Impact**: Cannot use external MCP servers in GitHub Actions
 - **Options**:
-  - **A**: Find alternative Supabase MCP without native deps
-  - **B**: Use direct SQL via Bash + `psql` (workaround)
-  - **C**: Create custom lightweight Supabase MCP
-  - **D**: Wait for Supabase team to fix build issues
-- **Impact**: Critical for database operations
-- **Recommendation**: Try option B as interim solution
+  - **A**: Contact Anthropic to support merging MCP configs (upstream fix)
+  - **B**: Fork claude-code-action and modify MCP handling
+  - **C**: Accept limitation - MCP servers only work locally
+  - **D**: Use alternative tools (WebFetch, Bash, direct APIs)
+- **Recommendation**: **Option D** (workaround) + **Option A** (long-term)
+- **Timeline**: Immediate workaround, upstream fix = weeks/months
 
-#### 3. **SDK Documentation Injection Method** 🟡
-- **Problem**: No standard way to provide SDK docs to Claude in issues
-- **From Research**: YouTube transcript mentions this as common fix
-- **Solution Options**:
-  - **A**: Add SDK docs as code blocks in issue body
-  - **B**: Create `docs/SDK_REFERENCES.md` and reference in issues
-  - **C**: Use Context7 MCP to fetch docs automatically
-- **Next Step**: Test option A with Issue #6
+#### 2. **Database Operations Without Supabase MCP** 🔴
+- **Problem**: Supabase MCP unavailable in GitHub Actions (see #1)
+- **Workaround Options**:
+  - **A**: Use Bash + `curl` for Supabase Management API
+  - **B**: Use Bash + `psql` for direct PostgreSQL access (requires connection string)
+  - **C**: Pre-create SQL scripts, execute via Bash
+  - **D**: Use Supabase CLI in workflow
+- **Impact**: Critical for database operations, migrations, schema changes
+- **Recommendation**: **Option A** (Management API) for most tasks
+- **Next Step**: Create test issue with Management API approach
+
+#### 3. **Playwright UI Testing Without MCP** 🟡
+- **Problem**: Playwright MCP unavailable (see #1)
+- **Workaround Options**:
+  - **A**: Use WebFetch to verify pages load
+  - **B**: Install Playwright in workflow, use Bash to run tests
+  - **C**: Skip UI testing in GitHub Actions, test locally only
+- **Impact**: Medium - nice to have for automated UI verification
+- **Recommendation**: **Option B** for critical flows, **Option C** otherwise
+- **Next Step**: Document Bash + Playwright approach
+
+#### 4. **Documentation Lookup Without Context7 MCP** 🟡
+- **Problem**: Context7 MCP unavailable (see #1)
+- **Workaround**: ✅ **Already have it** - WebSearch + WebFetch
+- **Impact**: Low - WebSearch works great (proven in Issues #4 and #5)
+- **Recommendation**: Continue using WebSearch
+- **Status**: ✅ Solved (no action needed)
 
 ### Medium Priority (Improving Experience)
 
@@ -260,31 +287,57 @@ Enable a remote development workflow where you can:
 
 ## 🎯 Roadmap to Goal
 
-### Phase 1: **Core Functionality** (Current)
+### ⚠️ **Critical Finding: MCP Limitation**
+
+**Discovery (Issue #5)**: claude-code-action **does not support external MCP servers**
+- Action passes inline MCP config that overrides `.mcp-github.json`
+- Only built-in `github_comment` MCP works
+- External MCPs (Supabase, Playwright, Context7, Shadcn) cannot be loaded
+
+**Implication**: We must achieve remote development goals **without** MCP servers
+
+**Strategy**: Use alternative tools (Bash, WebFetch, WebSearch, APIs)
+
+---
+
+### Phase 1: **Core Functionality** (Current) ✅ COMPLETE
 - [x] Auto-approve working
 - [x] WebSearch working
+- [x] WebFetch working
 - [x] File operations working
 - [x] GitHub integration working
-- [ ] MCP servers loading (testing now - Issue #5)
-- [ ] Supabase MCP or alternative working
+- [x] MCP limitation identified and documented
 
-**ETA**: 1-2 days (pending test results)
+**Status**: ✅ **Complete** - 100% of achievable core features working
 
-### Phase 2: **Enhanced Capabilities**
-- [ ] SDK documentation injection method
-- [ ] Issue templates created
-- [ ] Mobile usage guide documented
-- [ ] Workflow optimized for speed
+### Phase 2: **Workarounds for MCP-Less Development** (Next 3-5 days)
+- [ ] Document Supabase Management API approach (replaces Supabase MCP)
+- [ ] Create Bash + Playwright testing guide (replaces Playwright MCP)
+- [ ] Test database operations via curl + Management API
+- [ ] Create issue templates for common tasks
+- [ ] Mobile usage guide
+- [ ] Workflow optimization (caching, speed)
 
 **ETA**: 3-5 days
+**Target**: 85% goal progress
 
-### Phase 3: **Production Ready**
-- [ ] All MCP servers stable
-- [ ] Custom slash commands
-- [ ] Enhanced logging
+### Phase 3: **Production Ready** (1-2 weeks)
+- [ ] Comprehensive API workaround library
+- [ ] Custom slash commands (if possible without MCPs)
+- [ ] Enhanced logging and debugging
 - [ ] Notification setup
+- [ ] Complete mobile development guide
 
 **ETA**: 1-2 weeks
+**Target**: 85-90% goal progress (without MCPs)
+
+### Phase 4: **MCP Support** (Long-term / Optional)
+- [ ] Submit feature request to Anthropic for MCP config merging
+- [ ] Fork claude-code-action if needed
+- [ ] Re-enable MCP servers once supported
+
+**ETA**: Weeks to months (depends on Anthropic)
+**Target**: 95%+ goal progress (with MCPs)
 
 ---
 
@@ -299,6 +352,18 @@ Enable a remote development workflow where you can:
 3. **WebSearch is Powerful**: Successfully fetched current best practices, proving real-time research capability
 
 4. **File Ops Solid**: Created comprehensive 600+ line report with proper markdown formatting
+
+### From Issue #5 Test (CRITICAL)
+
+1. **MCP Servers Don't Work in GitHub Actions**: claude-code-action's inline MCP config overrides external `.mcp-github.json` files
+
+2. **Only Built-in MCPs Work**: The `github_comment` MCP is built-in and works, but external MCPs cannot be added
+
+3. **Workarounds Are Required**: Must use Bash + APIs instead of MCPs for database ops, UI testing, etc.
+
+4. **Pre-Installation Worked**: NPM packages installed successfully, but MCP connection still failed
+
+5. **Action Override Issue**: Passing `--mcp-config` twice causes first config to win, blocking external configs
 
 ### From Web Research
 
@@ -323,13 +388,14 @@ Enable a remote development workflow where you can:
 - [Database Analysis](./2)_IN_WORK/database-schema-analysis.md) - Issue #4 output
 
 ### GitHub Issues
-- [Issue #4](https://github.com/wayes-btye/scribblemachine/issues/4) - Initial test (completed)
-- [Issue #5](https://github.com/wayes-btye/scribblemachine/issues/5) - MCP server test (in progress)
+- [Issue #4](https://github.com/wayes-btye/scribblemachine/issues/4) - Initial test (✅ completed)
+- [Issue #5](https://github.com/wayes-btye/scribblemachine/issues/5) - MCP server test (✅ completed - blocker found)
 
 ### Commits
 - `1dbd404` - Initial MCP + auto-approve setup
 - `0d1d7e0` - Security improvements (token to secrets)
-- `706d0c5` - MCP pre-installation fix
+- `706d0c5` - MCP pre-installation fix (didn't solve the issue)
+- `1bd5f41` - Added status report document
 
 ### External Resources
 - [Claude Code GitHub Actions Docs](https://docs.claude.com/en/docs/claude-code/github-actions)
@@ -361,21 +427,29 @@ Enable a remote development workflow where you can:
 
 ## 📊 Success Metrics
 
-### Current State (2025-10-04)
+### Current State (2025-10-04 - Post Test #2)
 - **Auto-Approve**: ✅ 100% working
 - **File Operations**: ✅ 100% working
 - **WebSearch**: ✅ 100% working
+- **WebFetch**: ✅ 100% working (verified in tests)
 - **GitHub Integration**: ✅ 100% working
-- **MCP Servers**: ⚠️ 0% working (testing fix now)
-- **Overall Goal Progress**: 🟡 **60%** (4 of 6 core features working)
+- **MCP Servers in GitHub Actions**: ❌ 0% working (fundamental blocker found)
+- **Overall Goal Progress**: 🟡 **55%** (5 of 9 desired features working)
 
-### Target State (Week 1)
+### Revised Target State (Week 1) - Without MCP Servers
 - **Auto-Approve**: ✅ 100%
 - **File Operations**: ✅ 100%
-- **WebSearch**: ✅ 100%
+- **WebSearch/WebFetch**: ✅ 100%
 - **GitHub Integration**: ✅ 100%
-- **MCP Servers**: ✅ 100% (at least 3 working)
-- **Overall Goal Progress**: 🟢 **90%** (remote development fully functional)
+- **Database Operations** (via Supabase API): 🎯 80% (target)
+- **UI Testing** (via Bash + Playwright): 🎯 70% (target)
+- **Issue Templates**: 🎯 100% (target)
+- **Mobile Docs**: 🎯 100% (target)
+- **Overall Goal Progress**: 🟢 **85%** (practical remote development functional)
+
+### Long-Term Target (If MCP Support Added)
+- **MCP Servers in GitHub Actions**: 🎯 100% (requires upstream fix)
+- **Overall Goal Progress**: 🟢 **95%** (ideal state)
 
 ---
 
@@ -420,6 +494,7 @@ Enable a remote development workflow where you can:
 
 ---
 
-**Last Updated**: 2025-10-04 11:45 UTC
-**Next Review**: After Issue #5 completes
-**Status**: 🟡 Waiting for MCP server test results
+**Last Updated**: 2025-10-04 12:00 UTC
+**Last Test**: Issue #5 completed - MCP blocker identified
+**Status**: 🟡 **Phase 1 Complete** - Moving to Phase 2 (MCP workarounds)
+**Next Steps**: Document Supabase Management API approach
